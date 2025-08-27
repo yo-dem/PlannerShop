@@ -152,10 +152,10 @@ namespace PlannerShop.Forms
                     idFornitore,
                     txtNome.Text.ToUpper(),
                     txtIndirizzo.Text.ToUpper(),
-                    txtTelefonoFisso.Text.ToUpper(),
-                    txtTelefonoMobile.Text.ToUpper(),
-                    txtEmail.Text.ToUpper(),
-                    txtNote.Text.ToUpper());
+                    txtTelefonoFisso.Text,
+                    txtTelefonoMobile.Text,
+                    txtEmail.Text.ToLower(),
+                    txtNote.Text);
                 this.Close();
             }
         }

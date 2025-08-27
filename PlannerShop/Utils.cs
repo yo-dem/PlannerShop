@@ -17,9 +17,9 @@ namespace PlannerShop
             // Imposta l'altezza dell'header delle colonne
             dgvData.ColumnHeadersHeight = 40;
             // Imposta l'altezza delle singole righe
-            dgvData.RowTemplate.Height = 40;
+            dgvData.RowTemplate.Height = 50;
             // Imposta il font per l'header delle colonne
-            dgvData.ColumnHeadersDefaultCellStyle.Font = new Font("Corbel", 10, System.Drawing.FontStyle.Bold);
+            dgvData.ColumnHeadersDefaultCellStyle.Font = new Font("Corbel", 8, System.Drawing.FontStyle.Bold);
             // Impedisce all'utente di modificare la dimensione delle righe
             dgvData.AllowUserToResizeRows = false;
             // Impedisce all'utente di modificare la dimensione delle colonne

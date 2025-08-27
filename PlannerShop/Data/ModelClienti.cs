@@ -20,10 +20,10 @@ namespace PlannerShop.Data
             string nome,
             string cognome,
             string datanascita,
+            string indirizzo,
             string telefonoFisso,
             string telefonoMobile,
             string email,
-            string indirizzo,
             string note)
         {
             nome = nome.Replace("'", "''");

@@ -46,6 +46,8 @@
             nudQnt = new NumericUpDown();
             lblAliquota = new Label();
             nudAliquota = new NumericUpDown();
+            rdbPrezzoIvato = new RadioButton();
+            rdbPrezzoNetto = new RadioButton();
             ((System.ComponentModel.ISupportInitialize)nudQnt).BeginInit();
             ((System.ComponentModel.ISupportInitialize)nudAliquota).BeginInit();
             SuspendLayout();
@@ -126,7 +128,7 @@
             // 
             txtPrezzoNetto.Location = new Point(14, 351);
             txtPrezzoNetto.Name = "txtPrezzoNetto";
-            txtPrezzoNetto.Size = new Size(202, 27);
+            txtPrezzoNetto.Size = new Size(180, 27);
             txtPrezzoNetto.TabIndex = 5;
             txtPrezzoNetto.TextAlign = HorizontalAlignment.Right;
             txtPrezzoNetto.TextChanged += txtPrezzoNetto_TextChanged;
@@ -145,11 +147,11 @@
             // 
             txtPrezzoIvato.Location = new Point(14, 407);
             txtPrezzoIvato.Name = "txtPrezzoIvato";
-            txtPrezzoIvato.ReadOnly = true;
-            txtPrezzoIvato.Size = new Size(202, 27);
+            txtPrezzoIvato.Size = new Size(180, 27);
             txtPrezzoIvato.TabIndex = 0;
             txtPrezzoIvato.TabStop = false;
             txtPrezzoIvato.TextAlign = HorizontalAlignment.Right;
+            txtPrezzoIvato.TextChanged += txtPrezzoIvato_TextChanged;
             // 
             // btnOk
             // 
@@ -222,12 +224,36 @@
             nudAliquota.Value = new decimal(new int[] { 22, 0, 0, 0 });
             nudAliquota.KeyPress += nudAliquota_KeyPress;
             // 
+            // rdbPrezzoIvato
+            // 
+            rdbPrezzoIvato.AutoSize = true;
+            rdbPrezzoIvato.Location = new Point(200, 412);
+            rdbPrezzoIvato.Name = "rdbPrezzoIvato";
+            rdbPrezzoIvato.Size = new Size(17, 16);
+            rdbPrezzoIvato.TabIndex = 14;
+            rdbPrezzoIvato.UseVisualStyleBackColor = true;
+            rdbPrezzoIvato.CheckedChanged += rdbPrezzoIvato_CheckedChanged;
+            // 
+            // rdbPrezzoNetto
+            // 
+            rdbPrezzoNetto.AutoSize = true;
+            rdbPrezzoNetto.Checked = true;
+            rdbPrezzoNetto.Location = new Point(200, 356);
+            rdbPrezzoNetto.Name = "rdbPrezzoNetto";
+            rdbPrezzoNetto.Size = new Size(17, 16);
+            rdbPrezzoNetto.TabIndex = 13;
+            rdbPrezzoNetto.TabStop = true;
+            rdbPrezzoNetto.UseVisualStyleBackColor = true;
+            rdbPrezzoNetto.CheckedChanged += rdbPrezzoNetto_CheckedChanged;
+            // 
             // ProductInsertForm
             // 
             AcceptButton = btnOk;
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(885, 548);
+            Controls.Add(rdbPrezzoIvato);
+            Controls.Add(rdbPrezzoNetto);
             Controls.Add(nudAliquota);
             Controls.Add(lblAliquota);
             Controls.Add(nudQnt);
@@ -275,5 +301,7 @@
         private NumericUpDown nudQnt;
         private Label lblAliquota;
         private NumericUpDown nudAliquota;
+        private RadioButton rdbPrezzoIvato;
+        private RadioButton rdbPrezzoNetto;
     }
 }

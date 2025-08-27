@@ -46,12 +46,15 @@
             lblMarca = new Label();
             txtMarca = new TextBox();
             btnDelete = new Button();
+            rdbPrezzoNetto = new RadioButton();
+            rdbPrezzoIvato = new RadioButton();
             ((System.ComponentModel.ISupportInitialize)nudAliquota).BeginInit();
             ((System.ComponentModel.ISupportInitialize)nudQnt).BeginInit();
             SuspendLayout();
             // 
             // nudAliquota
             // 
+            nudAliquota.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             nudAliquota.Location = new Point(592, 76);
             nudAliquota.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             nudAliquota.Name = "nudAliquota";
@@ -64,6 +67,7 @@
             // 
             // lblAliquota
             // 
+            lblAliquota.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             lblAliquota.AutoSize = true;
             lblAliquota.Location = new Point(650, 53);
             lblAliquota.Name = "lblAliquota";
@@ -73,6 +77,7 @@
             // 
             // nudQnt
             // 
+            nudQnt.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             nudQnt.Location = new Point(734, 76);
             nudQnt.Maximum = new decimal(new int[] { 9999, 0, 0, 0 });
             nudQnt.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
@@ -85,6 +90,7 @@
             // 
             // lblQnt
             // 
+            lblQnt.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             lblQnt.AutoSize = true;
             lblQnt.Location = new Point(787, 53);
             lblQnt.Name = "lblQnt";
@@ -120,11 +126,11 @@
             // 
             txtPrezzoIvato.Location = new Point(14, 407);
             txtPrezzoIvato.Name = "txtPrezzoIvato";
-            txtPrezzoIvato.ReadOnly = true;
-            txtPrezzoIvato.Size = new Size(201, 27);
+            txtPrezzoIvato.Size = new Size(178, 27);
             txtPrezzoIvato.TabIndex = 0;
             txtPrezzoIvato.TabStop = false;
             txtPrezzoIvato.TextAlign = HorizontalAlignment.Right;
+            txtPrezzoIvato.TextChanged += txtPrezzoIvato_TextChanged;
             // 
             // lblPrezzoNetto
             // 
@@ -139,7 +145,7 @@
             // 
             txtPrezzoNetto.Location = new Point(14, 351);
             txtPrezzoNetto.Name = "txtPrezzoNetto";
-            txtPrezzoNetto.Size = new Size(201, 27);
+            txtPrezzoNetto.Size = new Size(178, 27);
             txtPrezzoNetto.TabIndex = 5;
             txtPrezzoNetto.TextAlign = HorizontalAlignment.Right;
             txtPrezzoNetto.TextChanged += txtPrezzoNetto_TextChanged;
@@ -226,12 +232,36 @@
             btnDelete.UseVisualStyleBackColor = true;
             btnDelete.Click += btnDelete_Click;
             // 
+            // rdbPrezzoNetto
+            // 
+            rdbPrezzoNetto.AutoSize = true;
+            rdbPrezzoNetto.Checked = true;
+            rdbPrezzoNetto.Location = new Point(198, 356);
+            rdbPrezzoNetto.Name = "rdbPrezzoNetto";
+            rdbPrezzoNetto.Size = new Size(17, 16);
+            rdbPrezzoNetto.TabIndex = 11;
+            rdbPrezzoNetto.TabStop = true;
+            rdbPrezzoNetto.UseVisualStyleBackColor = true;
+            rdbPrezzoNetto.CheckedChanged += rdbPrezzoNetto_CheckedChanged;
+            // 
+            // rdbPrezzoIvato
+            // 
+            rdbPrezzoIvato.AutoSize = true;
+            rdbPrezzoIvato.Location = new Point(198, 412);
+            rdbPrezzoIvato.Name = "rdbPrezzoIvato";
+            rdbPrezzoIvato.Size = new Size(17, 16);
+            rdbPrezzoIvato.TabIndex = 12;
+            rdbPrezzoIvato.UseVisualStyleBackColor = true;
+            rdbPrezzoIvato.CheckedChanged += rdbPrezzoIvato_CheckedChanged;
+            // 
             // ProductEditForm
             // 
             AcceptButton = btnOk;
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(885, 548);
+            Controls.Add(rdbPrezzoIvato);
+            Controls.Add(rdbPrezzoNetto);
             Controls.Add(btnDelete);
             Controls.Add(nudAliquota);
             Controls.Add(lblAliquota);
@@ -280,5 +310,7 @@
         private TextBox txtMarca;
         private Button btnDelete;
         public TextBox txtDescrizione;
+        private RadioButton rdbPrezzoNetto;
+        private RadioButton rdbPrezzoIvato;
     }
 }

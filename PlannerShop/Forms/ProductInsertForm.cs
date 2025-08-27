@@ -11,6 +11,9 @@ namespace PlannerShop.Forms
 
             txtNote.GotFocus += TxtNote_GotFocus;
             txtNote.LostFocus += TxtNote_LostFocus;
+
+            txtPrezzoIvato.ReadOnly = !rdbPrezzoIvato.Checked;
+            txtPrezzoNetto.ReadOnly = !rdbPrezzoNetto.Checked;
         }
 
         private void TxtMarca_TextChanged(object? sender, EventArgs e)
@@ -33,21 +36,50 @@ namespace PlannerShop.Forms
 
         private void txtPrezzoNetto_TextChanged(object? sender, EventArgs e)
         {
-            lblPrezzoNetto.ForeColor = Color.Black;
-            lblPrezzoIvato.ForeColor = Color.Black;
-
-            if (txtPrezzoNetto.Text != String.Empty)
+            if (rdbPrezzoNetto.Checked)
             {
-                double value = double.Parse(txtPrezzoNetto.Text);
-                double res = value + (value * int.Parse(nudAliquota.Value.ToString()) / 100);
+                lblPrezzoNetto.ForeColor = Color.Black;
+                lblPrezzoIvato.ForeColor = Color.Black;
 
-                var prezzoIvato = Math.Round(res, 2, MidpointRounding.AwayFromZero).ToString();
+                if (txtPrezzoNetto.Text != String.Empty)
+                {
+                    double value = double.Parse(txtPrezzoNetto.Text);
+                    double res = value + (value * int.Parse(nudAliquota.Value.ToString()) / 100);
 
-                txtPrezzoIvato.Text = prezzoIvato;
+                    double prezzoIvato = Math.Ceiling(res * 100) / 100;
+
+                    txtPrezzoIvato.Text = prezzoIvato.ToString("F2");
+                }
+                else
+                {
+                    txtPrezzoIvato.Text = String.Empty;
+                }
             }
-            else
+        }
+
+        private void txtPrezzoIvato_TextChanged(object sender, EventArgs e)
+        {
+            if (rdbPrezzoIvato.Checked)
             {
-                txtPrezzoIvato.Text = String.Empty;
+                lblPrezzoNetto.ForeColor = Color.Black;
+                lblPrezzoIvato.ForeColor = Color.Black;
+
+                if (txtPrezzoIvato.Text != String.Empty)
+                {
+                    double value = double.Parse(txtPrezzoIvato.Text);
+                    double aliquota = (double)nudAliquota.Value;
+
+                    double res = value / (1 + aliquota / 100);
+
+                    var prezzoNetto = Math.Ceiling(res * 100) / 100;
+
+
+                    txtPrezzoNetto.Text = prezzoNetto.ToString("F2"); ;
+                }
+                else
+                {
+                    txtPrezzoNetto.Text = String.Empty;
+                }
             }
         }
 
@@ -122,9 +154,9 @@ namespace PlannerShop.Forms
                     txtDescrizione.Text.ToUpper(),
                     nudAliquota.Value.ToString(),
                     nudQnt.Value.ToString(),
-                    prezzoNetto.ToString(),
-                    txtPrezzoIvato.Text,
-                    txtNote.Text.ToUpper());
+                    prezzoNetto.ToString() + " €",
+                    txtPrezzoIvato.Text + " €",
+                    txtNote.Text);
                 if (chkRipeti.Checked)
                 {
                     dtpData.Value = DateTime.Now;
@@ -146,5 +178,18 @@ namespace PlannerShop.Forms
                 }
             }
         }
+
+        private void rdbPrezzoNetto_CheckedChanged(object sender, EventArgs e)
+        {
+            txtPrezzoIvato.ReadOnly = !rdbPrezzoIvato.Checked;
+            txtPrezzoNetto.ReadOnly = !rdbPrezzoNetto.Checked;
+        }
+
+        private void rdbPrezzoIvato_CheckedChanged(object sender, EventArgs e)
+        {
+            txtPrezzoIvato.ReadOnly = !rdbPrezzoIvato.Checked;
+            txtPrezzoNetto.ReadOnly = !rdbPrezzoNetto.Checked;
+        }
+
     }
 }

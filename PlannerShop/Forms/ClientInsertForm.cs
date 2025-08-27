@@ -1,9 +1,11 @@
 ﻿using PlannerShop.Data;
+using System.Text.RegularExpressions;
 
 namespace PlannerShop.Forms
 {
     public partial class ClientInsertForm : Form
     {
+        bool emailNotValid = false;
         public bool isDone = false;
         public ClientInsertForm()
         {
@@ -55,8 +57,6 @@ namespace PlannerShop.Forms
             bool res2 = true;
             bool res3 = true;
             bool res4 = true;
-            bool res5 = true;
-            bool res6 = true;
 
             if (String.IsNullOrEmpty(txtNome.Text))
             {
@@ -83,7 +83,7 @@ namespace PlannerShop.Forms
                 lblDataNascita.ForeColor = Color.Red;
                 res4 = false;
             }
-            return res0 && res1 && res2 && res3 && res4;
+            return !emailNotValid && res0 && res1 && res2 && res3 && res4;
         }
 
         private void btnOk_Click(object sender, EventArgs e)
@@ -91,13 +91,13 @@ namespace PlannerShop.Forms
             if (InputCheck())
             {
                 ModelClienti.addCliente(
-                    txtNome.Text.ToUpper(),
-                    txtCognome.Text.ToUpper(),
-                    dtpDataNascita.Text.ToUpper(),
-                    txtTelefonoFisso.Text.ToUpper(),
-                    txtTelefonoMobile.Text.ToUpper(),
-                    txtEmail.Text.ToUpper(),
+                    txtNome.Text,
+                    txtCognome.Text,
+                    dtpDataNascita.Text,
                     txtIndirizzo.Text.ToUpper(),
+                    txtTelefonoFisso.Text,
+                    txtTelefonoMobile.Text,
+                    txtEmail.Text.ToLower(),
                     txtNote.Text);
                 if (chkRipeti.Checked)
                 {
@@ -118,6 +118,22 @@ namespace PlannerShop.Forms
             }
         }
 
-        
+        private void txtEmail_TextChanged(object sender, EventArgs e)
+        {
+            lblEmail.ForeColor = Color.Black;
+            string emailPattern = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
+            if (Regex.IsMatch(txtEmail.Text, emailPattern))
+            {
+                lblEmail.ForeColor = Color.Black;
+                txtEmail.ForeColor = Color.Black;
+                emailNotValid = false;
+            }
+            else
+            {
+                lblEmail.ForeColor = Color.Red;
+                txtEmail.ForeColor = Color.Red;
+                emailNotValid = true;
+            }
+        }
     }
 }

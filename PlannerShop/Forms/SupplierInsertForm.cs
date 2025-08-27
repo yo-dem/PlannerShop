@@ -124,10 +124,10 @@ namespace PlannerShop.Forms
                 ModelFornitori.addFornitore(
                     txtNome.Text.ToUpper(),
                     txtIndirizzo.Text.ToUpper(),
-                    txtTelefonoFisso.Text.ToUpper(),
-                    txtTelefonoMobile.Text.ToUpper(),
-                    txtEmail.Text.ToUpper(),
-                    txtNote.Text.ToUpper());
+                    txtTelefonoFisso.Text,
+                    txtTelefonoMobile.Text,
+                    txtEmail.Text.ToLower(),
+                    txtNote.Text);
                 if (chkRipeti.Checked)
                 {
                     txtNome.Text = String.Empty;

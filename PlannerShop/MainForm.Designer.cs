@@ -45,19 +45,16 @@
             txtSearch = new TextBox();
             pnlTop = new Panel();
             btnClienti = new Button();
-            grpDGV = new GroupBox();
             ((System.ComponentModel.ISupportInitialize)dgvData).BeginInit();
             pnlSearch.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)searchImage).BeginInit();
-            grpDGV.SuspendLayout();
             SuspendLayout();
             // 
             // dgvData
             // 
+            dgvData.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dgvData.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvData.Dock = DockStyle.Fill;
-            dgvData.Location = new Point(3, 19);
-            dgvData.Margin = new Padding(3, 2, 3, 2);
+            dgvData.Location = new Point(14, 162);
             dgvData.Name = "dgvData";
             dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = SystemColors.Control;
@@ -68,7 +65,7 @@
             dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
             dgvData.RowHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dgvData.RowHeadersWidth = 51;
-            dgvData.Size = new Size(1050, 450);
+            dgvData.Size = new Size(1211, 469);
             dgvData.TabIndex = 5;
             dgvData.KeyDown += dgvData_KeyDown;
             dgvData.MouseClick += dgvData_MouseClick;
@@ -79,10 +76,9 @@
             btnDelete.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             btnDelete.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             btnDelete.Image = Properties.Resources.trashImage;
-            btnDelete.Location = new Point(286, 599);
-            btnDelete.Margin = new Padding(3, 2, 3, 2);
+            btnDelete.Location = new Point(327, 637);
             btnDelete.Name = "btnDelete";
-            btnDelete.Size = new Size(131, 52);
+            btnDelete.Size = new Size(150, 69);
             btnDelete.TabIndex = 8;
             btnDelete.Text = "ELIMINA";
             btnDelete.TextAlign = ContentAlignment.BottomCenter;
@@ -95,10 +91,9 @@
             btnLogout.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             btnLogout.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             btnLogout.Image = Properties.Resources.shutdown_orange;
-            btnLogout.Location = new Point(560, 599);
-            btnLogout.Margin = new Padding(3, 2, 3, 2);
+            btnLogout.Location = new Point(640, 637);
             btnLogout.Name = "btnLogout";
-            btnLogout.Size = new Size(511, 52);
+            btnLogout.Size = new Size(584, 69);
             btnLogout.TabIndex = 9;
             btnLogout.Text = "LOGOUT";
             btnLogout.TextAlign = ContentAlignment.BottomCenter;
@@ -111,10 +106,9 @@
             btnEdit.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             btnEdit.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             btnEdit.Image = Properties.Resources.editPageImage;
-            btnEdit.Location = new Point(149, 599);
-            btnEdit.Margin = new Padding(3, 2, 3, 2);
+            btnEdit.Location = new Point(170, 637);
             btnEdit.Name = "btnEdit";
-            btnEdit.Size = new Size(131, 52);
+            btnEdit.Size = new Size(150, 69);
             btnEdit.TabIndex = 7;
             btnEdit.Text = "MODIFICA";
             btnEdit.TextAlign = ContentAlignment.BottomCenter;
@@ -127,10 +121,9 @@
             btnInsert.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             btnInsert.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             btnInsert.Image = Properties.Resources.addLiteImage;
-            btnInsert.Location = new Point(12, 599);
-            btnInsert.Margin = new Padding(3, 2, 3, 2);
+            btnInsert.Location = new Point(14, 637);
             btnInsert.Name = "btnInsert";
-            btnInsert.Size = new Size(131, 52);
+            btnInsert.Size = new Size(150, 69);
             btnInsert.TabIndex = 6;
             btnInsert.Text = "INSERISCI";
             btnInsert.TextAlign = ContentAlignment.BottomCenter;
@@ -142,10 +135,9 @@
             // 
             btnProdotti.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             btnProdotti.Image = Properties.Resources.prodotti_24;
-            btnProdotti.Location = new Point(286, 65);
-            btnProdotti.Margin = new Padding(3, 2, 3, 2);
+            btnProdotti.Location = new Point(327, 87);
             btnProdotti.Name = "btnProdotti";
-            btnProdotti.Size = new Size(131, 52);
+            btnProdotti.Size = new Size(150, 69);
             btnProdotti.TabIndex = 2;
             btnProdotti.Text = "PRODOTTI";
             btnProdotti.TextAlign = ContentAlignment.BottomCenter;
@@ -157,10 +149,9 @@
             // 
             btnFornitori.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             btnFornitori.Image = Properties.Resources.fornitore_24;
-            btnFornitori.Location = new Point(149, 65);
-            btnFornitori.Margin = new Padding(3, 2, 3, 2);
+            btnFornitori.Location = new Point(170, 87);
             btnFornitori.Name = "btnFornitori";
-            btnFornitori.Size = new Size(131, 52);
+            btnFornitori.Size = new Size(150, 69);
             btnFornitori.TabIndex = 1;
             btnFornitori.Text = "FORNITORI";
             btnFornitori.TextAlign = ContentAlignment.BottomCenter;
@@ -172,10 +163,9 @@
             // 
             btnStatistiche.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             btnStatistiche.Image = Properties.Resources.statistiche_24;
-            btnStatistiche.Location = new Point(423, 65);
-            btnStatistiche.Margin = new Padding(3, 2, 3, 2);
+            btnStatistiche.Location = new Point(483, 87);
             btnStatistiche.Name = "btnStatistiche";
-            btnStatistiche.Size = new Size(131, 52);
+            btnStatistiche.Size = new Size(150, 69);
             btnStatistiche.TabIndex = 3;
             btnStatistiche.Text = "STATISTICHE";
             btnStatistiche.TextAlign = ContentAlignment.BottomCenter;
@@ -187,10 +177,9 @@
             // 
             btnStampa.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             btnStampa.Image = Properties.Resources.printerImage;
-            btnStampa.Location = new Point(560, 65);
-            btnStampa.Margin = new Padding(3, 2, 3, 2);
+            btnStampa.Location = new Point(640, 87);
             btnStampa.Name = "btnStampa";
-            btnStampa.Size = new Size(131, 52);
+            btnStampa.Size = new Size(150, 69);
             btnStampa.TabIndex = 4;
             btnStampa.Text = "STAMPE";
             btnStampa.TextAlign = ContentAlignment.BottomCenter;
@@ -202,10 +191,9 @@
             btnOpzioni.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             btnOpzioni.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             btnOpzioni.Image = Properties.Resources.settingsImage;
-            btnOpzioni.Location = new Point(423, 599);
-            btnOpzioni.Margin = new Padding(3, 2, 3, 2);
+            btnOpzioni.Location = new Point(483, 637);
             btnOpzioni.Name = "btnOpzioni";
-            btnOpzioni.Size = new Size(131, 52);
+            btnOpzioni.Size = new Size(150, 69);
             btnOpzioni.TabIndex = 5;
             btnOpzioni.Text = "OPZIONI";
             btnOpzioni.TextAlign = ContentAlignment.BottomCenter;
@@ -220,17 +208,17 @@
             pnlSearch.BorderStyle = BorderStyle.FixedSingle;
             pnlSearch.Controls.Add(searchImage);
             pnlSearch.Controls.Add(txtSearch);
-            pnlSearch.Location = new Point(12, 16);
+            pnlSearch.Location = new Point(14, 21);
+            pnlSearch.Margin = new Padding(3, 4, 3, 4);
             pnlSearch.Name = "pnlSearch";
-            pnlSearch.Size = new Size(1060, 44);
+            pnlSearch.Size = new Size(1211, 58);
             pnlSearch.TabIndex = 22;
             // 
             // searchImage
             // 
             searchImage.BackColor = Color.White;
             searchImage.Image = Properties.Resources.searchWhiteImage;
-            searchImage.Location = new Point(8, 13);
-            searchImage.Margin = new Padding(3, 2, 3, 2);
+            searchImage.Location = new Point(9, 17);
             searchImage.Name = "searchImage";
             searchImage.Size = new Size(24, 24);
             searchImage.SizeMode = PictureBoxSizeMode.AutoSize;
@@ -242,10 +230,9 @@
             txtSearch.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             txtSearch.BorderStyle = BorderStyle.None;
             txtSearch.Font = new Font("Corbel", 14F);
-            txtSearch.Location = new Point(33, 10);
-            txtSearch.Margin = new Padding(3, 2, 3, 2);
+            txtSearch.Location = new Point(38, 13);
             txtSearch.Name = "txtSearch";
-            txtSearch.Size = new Size(1022, 23);
+            txtSearch.Size = new Size(1168, 29);
             txtSearch.TabIndex = 1;
             txtSearch.TabStop = false;
             txtSearch.TextAlign = HorizontalAlignment.Center;
@@ -259,18 +246,18 @@
             pnlTop.BackColor = Color.FromArgb(192, 192, 255);
             pnlTop.Dock = DockStyle.Top;
             pnlTop.Location = new Point(0, 0);
+            pnlTop.Margin = new Padding(3, 4, 3, 4);
             pnlTop.Name = "pnlTop";
-            pnlTop.Size = new Size(1084, 10);
+            pnlTop.Size = new Size(1239, 13);
             pnlTop.TabIndex = 23;
             // 
             // btnClienti
             // 
             btnClienti.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             btnClienti.Image = Properties.Resources.fornitore_24;
-            btnClienti.Location = new Point(12, 65);
-            btnClienti.Margin = new Padding(3, 2, 3, 2);
+            btnClienti.Location = new Point(14, 87);
             btnClienti.Name = "btnClienti";
-            btnClienti.Size = new Size(131, 52);
+            btnClienti.Size = new Size(150, 69);
             btnClienti.TabIndex = 0;
             btnClienti.Text = "CLIENTI";
             btnClienti.TextAlign = ContentAlignment.BottomCenter;
@@ -278,22 +265,12 @@
             btnClienti.UseVisualStyleBackColor = true;
             btnClienti.Click += btnClienti_Click;
             // 
-            // grpDGV
-            // 
-            grpDGV.Controls.Add(dgvData);
-            grpDGV.Location = new Point(12, 122);
-            grpDGV.Name = "grpDGV";
-            grpDGV.Size = new Size(1056, 472);
-            grpDGV.TabIndex = 24;
-            grpDGV.TabStop = false;
-            grpDGV.Text = "Grid";
-            // 
             // MainForm
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1084, 661);
-            Controls.Add(grpDGV);
+            ClientSize = new Size(1239, 719);
+            Controls.Add(dgvData);
             Controls.Add(btnClienti);
             Controls.Add(pnlTop);
             Controls.Add(pnlSearch);
@@ -307,8 +284,7 @@
             Controls.Add(btnEdit);
             Controls.Add(btnInsert);
             Icon = (Icon)resources.GetObject("$this.Icon");
-            Margin = new Padding(3, 2, 3, 2);
-            MinimumSize = new Size(1100, 398);
+            MinimumSize = new Size(1255, 515);
             Name = "MainForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "PlannerShop 1.0";
@@ -316,7 +292,6 @@
             pnlSearch.ResumeLayout(false);
             pnlSearch.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)searchImage).EndInit();
-            grpDGV.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -336,6 +311,5 @@
         private TextBox txtSearch;
         private Panel pnlTop;
         private Button btnClienti;
-        private GroupBox grpDGV;
     }
 }
