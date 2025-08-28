@@ -122,8 +122,8 @@ namespace PlannerShop.Forms
             if (InputCheck())
             {
                 ModelFornitori.addFornitore(
-                    txtNome.Text.ToUpper(),
-                    txtIndirizzo.Text.ToUpper(),
+                    txtNome.Text,
+                    txtIndirizzo.Text,
                     txtTelefonoFisso.Text,
                     txtTelefonoMobile.Text,
                     txtEmail.Text.ToLower(),

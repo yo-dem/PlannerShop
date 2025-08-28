@@ -150,8 +150,8 @@ namespace PlannerShop.Forms
             {
                 ModelFornitori.editFornitore(
                     idFornitore,
-                    txtNome.Text.ToUpper(),
-                    txtIndirizzo.Text.ToUpper(),
+                    txtNome.Text,
+                    txtIndirizzo.Text,
                     txtTelefonoFisso.Text,
                     txtTelefonoMobile.Text,
                     txtEmail.Text.ToLower(),
