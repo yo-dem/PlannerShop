@@ -367,12 +367,12 @@ namespace PlannerShop
 
             int selected = dgvData.SelectedRows[0].Index;
             int displayPos = dgvData.FirstDisplayedScrollingRowIndex;
-            string? selectedId = null;
+            String? selectedId = null;
 
             if (isClienteSelected)
             {
                 selectedId = dgvData.SelectedRows[0].Cells["IDCLIENTE"].Value?.ToString();
-                if (!string.IsNullOrEmpty(selectedId))
+                if (!String.IsNullOrEmpty(selectedId))
                 {
                     ClientEditForm clientiEditForm = new ClientEditForm(selectedId);
                     clientiEditForm.ShowDialog();
@@ -392,7 +392,7 @@ namespace PlannerShop
             else if (isProdottoSelected)
             {
                 selectedId = dgvData.SelectedRows[0].Cells["IDPRODOTTO"].Value?.ToString();
-                if (!string.IsNullOrEmpty(selectedId))
+                if (!String.IsNullOrEmpty(selectedId))
                 {
                     ProductEditForm productEditForm = new ProductEditForm(selectedId);
                     productEditForm.ShowDialog();
@@ -412,7 +412,7 @@ namespace PlannerShop
             else if (isFornitoreSelected)
             {
                 selectedId = dgvData.SelectedRows[0].Cells["IDFORNITORE"].Value?.ToString();
-                if (!string.IsNullOrEmpty(selectedId))
+                if (!String.IsNullOrEmpty(selectedId))
                 {
                     SupplierEditForm supplierEditForm = new SupplierEditForm(selectedId);
                     supplierEditForm.ShowDialog();
@@ -434,14 +434,14 @@ namespace PlannerShop
         private void btnDelete_Click(object sender, EventArgs e)
         {
             if(dgvData.Rows.Count==0) { return; }
-            List<string> idsToDelete = new List<string>();
+            List<String> idsToDelete = new List<String>();
             int firstSelectedIndex = dgvData.SelectedRows[0].Index;
             int displayPos = dgvData.FirstDisplayedScrollingRowIndex;
 
             foreach (DataGridViewRow row in dgvData.SelectedRows)
             {
-                string? id = row.Cells[0].Value?.ToString();
-                if (!string.IsNullOrEmpty(id))
+                String? id = row.Cells[0].Value?.ToString();
+                if (!String.IsNullOrEmpty(id))
                 {
                     idsToDelete.Add(id);
                 }
@@ -449,7 +449,7 @@ namespace PlannerShop
 
             if (idsToDelete.Count == 0) return;
 
-            string message = idsToDelete.Count == 1
+            String message = idsToDelete.Count == 1
                 ? $"Sei sicuro di voler eliminare l'elemento selezionato?"
                 : $"Sei sicuro di voler eliminare i {idsToDelete.Count} elementi selezionati?";
 
@@ -458,7 +458,7 @@ namespace PlannerShop
 
             if (dltFrm.result)
             {
-                foreach (string id in idsToDelete)
+                foreach (String id in idsToDelete)
                 {
                     if (isClienteSelected)
                     {
@@ -494,27 +494,90 @@ namespace PlannerShop
         {
             if (txtSearch.Text != String.Empty && dgvData.Rows.Count > 0)
             {
-                foreach (DataGridViewRow dgvr in dgvData.Rows)
+                if (isClienteSelected)
                 {
-                    try
+                    foreach (DataGridViewRow dgvr in dgvData.Rows)
                     {
-                        string data = dgvr.Cells["DATA"]?.Value?.ToString()?.ToLower() ?? string.Empty;
-                        string marca = dgvr.Cells["MARCA"].Value?.ToString()?.ToLower() ?? string.Empty;
-                        string descrizione = dgvr.Cells["DESCRIZIONE"].Value?.ToString()?.ToLower() ?? string.Empty;
-
-                        if (data.Contains(txtSearch.Text.ToLower())
-                            || marca.Contains(txtSearch.Text.ToLower())
-                            || descrizione.Contains(txtSearch.Text.ToLower()))
+                        try
                         {
-                            dgvData.ClearSelection();
-                            dgvData.Rows[dgvr.Index].Selected = true;
-                            dgvData.FirstDisplayedScrollingRowIndex = dgvData.SelectedRows[0].Index;
+                            String nome = dgvr.Cells["NOME"]?.Value?.ToString()?.ToLower() ?? String.Empty;
+                            String cognome = dgvr.Cells["COGNOME"].Value?.ToString()?.ToLower() ?? String.Empty;
+                            String indirizzo = dgvr.Cells["INDIRIZZO"].Value?.ToString()?.ToLower() ?? String.Empty;
+                            String telefonoMobile = dgvr.Cells["TELEFONO_MOBILE"].Value?.ToString()?.ToLower() ?? String.Empty;
+                            String email = dgvr.Cells["EMAIL"].Value?.ToString()?.ToLower() ?? String.Empty;
+
+                            if (nome.Contains(txtSearch.Text.ToLower())
+                                || cognome.Contains(txtSearch.Text.ToLower())
+                                || indirizzo.Contains(txtSearch.Text.ToLower())
+                                || telefonoMobile.Contains(txtSearch.Text.ToLower())
+                                || email.Contains(txtSearch.Text.ToLower())
+                                )
+                            {
+                                dgvData.ClearSelection();
+                                dgvData.Rows[dgvr.Index].Selected = true;
+                                dgvData.FirstDisplayedScrollingRowIndex = dgvData.SelectedRows[0].Index;
+                                return;
+                            }
+                        }
+                        catch
+                        {
                             return;
                         }
                     }
-                    catch
+                }
+                if (isFornitoreSelected)
+                {
+                    foreach (DataGridViewRow dgvr in dgvData.Rows)
                     {
-                        return;
+                        try
+                        {
+                            String nome = dgvr.Cells["NOME"]?.Value?.ToString()?.ToLower() ?? String.Empty;
+                            String indirizzo = dgvr.Cells["INDIRIZZO"].Value?.ToString()?.ToLower() ?? String.Empty;
+                            String telefonoMobile = dgvr.Cells["TELEFONO_MOBILE"].Value?.ToString()?.ToLower() ?? String.Empty;
+                            String email = dgvr.Cells["EMAIL"].Value?.ToString()?.ToLower() ?? String.Empty;
+
+                            if (nome.Contains(txtSearch.Text.ToLower())
+                                || indirizzo.Contains(txtSearch.Text.ToLower())
+                                || telefonoMobile.Contains(txtSearch.Text.ToLower())
+                                || email.Contains(txtSearch.Text.ToLower())
+                                )
+                            {
+                                dgvData.ClearSelection();
+                                dgvData.Rows[dgvr.Index].Selected = true;
+                                dgvData.FirstDisplayedScrollingRowIndex = dgvData.SelectedRows[0].Index;
+                                return;
+                            }
+                        }
+                        catch
+                        {
+                            return;
+                        }
+                    }
+                }
+                if (isProdottoSelected)
+                {
+                    foreach (DataGridViewRow dgvr in dgvData.Rows)
+                    {
+                        try
+                        {
+                            String data = dgvr.Cells["DATA"]?.Value?.ToString()?.ToLower() ?? String.Empty;
+                            String marca = dgvr.Cells["MARCA"].Value?.ToString()?.ToLower() ?? String.Empty;
+                            String descrizione = dgvr.Cells["DESCRIZIONE"].Value?.ToString()?.ToLower() ?? String.Empty;
+
+                            if (data.Contains(txtSearch.Text.ToLower())
+                                || marca.Contains(txtSearch.Text.ToLower())
+                                || descrizione.Contains(txtSearch.Text.ToLower()))
+                            {
+                                dgvData.ClearSelection();
+                                dgvData.Rows[dgvr.Index].Selected = true;
+                                dgvData.FirstDisplayedScrollingRowIndex = dgvData.SelectedRows[0].Index;
+                                return;
+                            }
+                        }
+                        catch
+                        {
+                            return;
+                        }
                     }
                 }
             }
@@ -563,7 +626,7 @@ namespace PlannerShop
             }
         }
 
-        private void SelectRowById(string id, string colonnaId, int displayPos)
+        private void SelectRowById(String id, String colonnaId, int displayPos)
         {
             dgvData.ClearSelection();
 
