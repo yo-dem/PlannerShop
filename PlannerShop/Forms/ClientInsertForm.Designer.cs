@@ -36,7 +36,6 @@
             lblNote = new Label();
             txtNote = new TextBox();
             btnOk = new Button();
-            chkRipeti = new CheckBox();
             txtCognome = new TextBox();
             lblDataNascita = new Label();
             txtTelefonoFisso = new TextBox();
@@ -47,6 +46,7 @@
             txtEmail = new TextBox();
             lblIndirizzo = new Label();
             txtIndirizzo = new TextBox();
+            chkRipeti = new CheckBox();
             SuspendLayout();
             // 
             // lblNome
@@ -119,19 +119,6 @@
             btnOk.TextImageRelation = TextImageRelation.ImageAboveText;
             btnOk.UseVisualStyleBackColor = true;
             btnOk.Click += btnOk_Click;
-            // 
-            // chkRipeti
-            // 
-            chkRipeti.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            chkRipeti.AutoSize = true;
-            chkRipeti.CheckAlign = ContentAlignment.MiddleRight;
-            chkRipeti.Location = new Point(704, 12);
-            chkRipeti.Name = "chkRipeti";
-            chkRipeti.Size = new Size(170, 24);
-            chkRipeti.TabIndex = 0;
-            chkRipeti.TabStop = false;
-            chkRipeti.Text = "RIPETI INSERIMENTO";
-            chkRipeti.UseVisualStyleBackColor = true;
             // 
             // txtCognome
             // 
@@ -218,6 +205,19 @@
             txtIndirizzo.TabIndex = 6;
             txtIndirizzo.TextChanged += txtIndirizzo_TextChanged;
             // 
+            // chkRipeti
+            // 
+            chkRipeti.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            chkRipeti.AutoSize = true;
+            chkRipeti.CheckAlign = ContentAlignment.MiddleRight;
+            chkRipeti.Location = new Point(704, 12);
+            chkRipeti.Name = "chkRipeti";
+            chkRipeti.Size = new Size(170, 24);
+            chkRipeti.TabIndex = 0;
+            chkRipeti.TabStop = false;
+            chkRipeti.Text = "RIPETI INSERIMENTO";
+            chkRipeti.UseVisualStyleBackColor = true;
+            // 
             // ClientInsertForm
             // 
             AcceptButton = btnOk;
@@ -260,7 +260,6 @@
         private Label lblNote;
         private TextBox txtNote;
         private Button btnOk;
-        private CheckBox chkRipeti;
         private TextBox txtCognome;
         private Label lblDataNascita;
         private TextBox txtTelefonoFisso;
@@ -271,5 +270,6 @@
         private TextBox txtEmail;
         private Label lblIndirizzo;
         private TextBox txtIndirizzo;
+        private CheckBox chkRipeti;
     }
 }

@@ -15,7 +15,7 @@ namespace PlannerShop
             // Impedisce al controllo di scegliere autonomamente l'altezza dell'header delle colonne
             dgvData.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             // Imposta l'altezza dell'header delle colonne
-            dgvData.ColumnHeadersHeight = 40;
+            dgvData.ColumnHeadersHeight = 70;
             // Imposta l'altezza delle singole righe
             dgvData.RowTemplate.Height = 50;
             // Imposta il font per l'header delle colonne

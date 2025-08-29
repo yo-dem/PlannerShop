@@ -97,16 +97,14 @@ namespace PlannerShop
             emailSupplierColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
             emailSupplierColumn.DefaultCellStyle.Font = new Font("Corbel", 12, FontStyle.Regular);
 
-
-
-            var noteProductionColumn = dgvData.Columns["NOTE"];
-            noteProductionColumn.DisplayIndex = 8;
-            noteProductionColumn.Visible = true;
-            noteProductionColumn.HeaderText = "NOTE";
-            noteProductionColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            noteProductionColumn.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            noteProductionColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            noteProductionColumn.DefaultCellStyle.Font = new Font("Corbel", 12, FontStyle.Bold);
+            var noteProductColumn = dgvData.Columns["NOTE"];
+            noteProductColumn.DisplayIndex = 8;
+            noteProductColumn.Visible = true;
+            noteProductColumn.HeaderText = "NOTE";
+            noteProductColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            noteProductColumn.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            noteProductColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            noteProductColumn.DefaultCellStyle.Font = new Font("Corbel", 12, FontStyle.Bold);
         }
 
         void SetProductDataGridStructure()
