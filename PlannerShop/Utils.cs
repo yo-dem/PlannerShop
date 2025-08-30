@@ -8,7 +8,7 @@ namespace PlannerShop
 {
     struct Utils
     {
-        public static void SetDataGridStyle(DataGridView dgvData)
+        public static void SetDataGridStyle(DataGridView dgvData, Boolean isMultiSelect)
         {
             // Elimina i tooltips dalle celle
             dgvData.ShowCellToolTips = true;
@@ -37,7 +37,7 @@ namespace PlannerShop
             // Impone la selezione dell'intera riga e non della singola cella
             dgvData.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             // Impedisce la selezione di più righe contemporaneamente
-            dgvData.MultiSelect = true;
+            dgvData.MultiSelect = isMultiSelect;
             // Aggiunge un offset per distanziare i contenuti delle celle dai bordi
             dgvData.DefaultCellStyle.Padding = new Padding(5);
             // Disabilita l'ordinamento automatico di ogni colonna, escluse le prime 4

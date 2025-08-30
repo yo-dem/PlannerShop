@@ -22,7 +22,24 @@ namespace PlannerShop.Forms
             dgvData.DataSource = ModelProdotti.getProdotti();
             SetProductDataGridStructure();
 
-            Utils.SetDataGridStyle(dgvData);
+
+            Utils.SetDataGridStyle(dgvDataAcquisto, false);
+            Utils.SetDataGridStyle(dgvData, false);
+            loadClienteData();
+
+            foreach (DataGridViewColumn col in dgvData.Columns)
+            {
+                dgvDataAcquisto.Columns.Add((DataGridViewColumn)col.Clone());
+            }
+        }
+
+        private void loadClienteData()
+        {
+            DataTable dtCliente = ModelClienti.getClienteById(idCliente);
+            lblName.Text = dtCliente.Rows[0]["NOME"].ToString().ToUpper() + " " + dtCliente.Rows[0]["COGNOME"].ToString().ToUpper();
+            lblIndirizzo.Text = dtCliente.Rows[0]["INDIRIZZO"].ToString();
+            lblTelefono.Text = "Tel. " + dtCliente.Rows[0]["TELEFONO_MOBILE"].ToString();
+            lblEmail.Text = dtCliente.Rows[0]["EMAIL"].ToString();
         }
 
         void SetProductDataGridStructure()
@@ -40,7 +57,7 @@ namespace PlannerShop.Forms
 
             var dataProductColumn = dgvData.Columns["DATA"];
             dataProductColumn.DisplayIndex = 1;
-            dataProductColumn.Visible = true;
+            dataProductColumn.Visible = false;
             dataProductColumn.HeaderText = "DATA";
             dataProductColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             dataProductColumn.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
@@ -67,7 +84,7 @@ namespace PlannerShop.Forms
 
             var aliquotaProductColumn = dgvData.Columns["ALIQUOTA"];
             aliquotaProductColumn.DisplayIndex = 4;
-            aliquotaProductColumn.Visible = true;
+            aliquotaProductColumn.Visible = false;
             aliquotaProductColumn.HeaderText = "IVA";
             aliquotaProductColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             aliquotaProductColumn.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
@@ -103,7 +120,7 @@ namespace PlannerShop.Forms
 
             var noteProductionColumn = dgvData.Columns["NOTE"];
             noteProductionColumn.DisplayIndex = 8;
-            noteProductionColumn.Visible = true;
+            noteProductionColumn.Visible = false;
             noteProductionColumn.HeaderText = "NOTE";
             noteProductionColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             noteProductionColumn.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
@@ -141,6 +158,32 @@ namespace PlannerShop.Forms
                     }
                 }
             }
+        }
+
+        private void dgvData_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            // Verifica che l'indice sia valido
+            if (e.RowIndex < 0 || e.RowIndex >= dgvData.Rows.Count)
+                return;
+
+            // Verifica che il numero di colonne sia compatibile
+            int colCount = Math.Min(dgvData.Columns.Count, dgvDataAcquisto.Columns.Count);
+
+            // Crea una nuova riga per dgvDataAcquisto
+            DataGridViewRow newRow = new DataGridViewRow();
+
+            newRow.Height = 40;
+
+            newRow.CreateCells(dgvDataAcquisto);
+
+            // Copia i valori dalla riga selezionata
+            for (int i = 0; i < colCount; i++)
+            {
+                newRow.Cells[i].Value = dgvData.Rows[e.RowIndex].Cells[i].Value;
+            }
+
+            // Aggiungi la riga al secondo DataGridView
+            dgvDataAcquisto.Rows.Add(newRow);
         }
     }
 }
