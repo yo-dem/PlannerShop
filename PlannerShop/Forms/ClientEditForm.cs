@@ -141,6 +141,12 @@ namespace PlannerShop.Forms
             catch { }
         }
 
+        private void btnPurchase_Click(object sender, EventArgs e)
+        {
+            PurchaseEditForm purchaseEditForm = new PurchaseEditForm(idCliente);
+            purchaseEditForm.ShowDialog();
+        }
+
         private void txtEmail_TextChanged(object sender, EventArgs e)
         {
             lblEmail.ForeColor = Color.Black;
@@ -158,6 +164,7 @@ namespace PlannerShop.Forms
                 emailNotValid = true;
             }
         }
+
     }
 }
 

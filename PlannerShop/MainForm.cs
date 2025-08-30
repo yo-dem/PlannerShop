@@ -25,6 +25,7 @@ namespace PlannerShop
                 btnLogout.Visible = false;
 
             btnDefaultColor = Color.White;
+            btnClienti.BackColor = Color.FromArgb(90, 192, 192, 255);
         }
 
         void SetClientDataGridStructure()

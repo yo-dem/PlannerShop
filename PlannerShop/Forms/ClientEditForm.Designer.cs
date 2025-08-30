@@ -238,6 +238,7 @@
             btnPurchase.TextAlign = ContentAlignment.MiddleRight;
             btnPurchase.TextImageRelation = TextImageRelation.ImageBeforeText;
             btnPurchase.UseVisualStyleBackColor = true;
+            btnPurchase.Click += btnPurchase_Click;
             // 
             // button1
             // 

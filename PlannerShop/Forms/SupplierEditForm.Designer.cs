@@ -212,7 +212,6 @@
             Name = "SupplierEditForm";
             StartPosition = FormStartPosition.CenterParent;
             Text = "MODIFICA FORNITORE";
-            WindowState = FormWindowState.Maximized;
             ResumeLayout(false);
             PerformLayout();
 
