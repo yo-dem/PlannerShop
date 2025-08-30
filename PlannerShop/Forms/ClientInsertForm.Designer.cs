@@ -247,7 +247,6 @@
             Name = "ClientInsertForm";
             StartPosition = FormStartPosition.CenterParent;
             Text = "INSERIMENTO CLIENTE";
-            WindowState = FormWindowState.Maximized;
             ResumeLayout(false);
             PerformLayout();
 

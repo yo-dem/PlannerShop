@@ -47,6 +47,8 @@
             lblIndirizzo = new Label();
             txtIndirizzo = new TextBox();
             btnDelete = new Button();
+            btnPurchase = new Button();
+            button1 = new Button();
             SuspendLayout();
             // 
             // lblNome
@@ -102,7 +104,7 @@
             txtNote.Location = new Point(223, 109);
             txtNote.Multiline = true;
             txtNote.Name = "txtNote";
-            txtNote.Size = new Size(647, 460);
+            txtNote.Size = new Size(647, 403);
             txtNote.TabIndex = 8;
             // 
             // btnOk
@@ -222,12 +224,44 @@
             btnDelete.UseVisualStyleBackColor = true;
             btnDelete.Click += btnDelete_Click;
             // 
+            // btnPurchase
+            // 
+            btnPurchase.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            btnPurchase.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
+            btnPurchase.ForeColor = SystemColors.ControlText;
+            btnPurchase.Image = Properties.Resources.prodotti_24;
+            btnPurchase.Location = new Point(223, 518);
+            btnPurchase.Name = "btnPurchase";
+            btnPurchase.Size = new Size(391, 52);
+            btnPurchase.TabIndex = 21;
+            btnPurchase.Text = "EFFETTUA ACQUISTO";
+            btnPurchase.TextAlign = ContentAlignment.MiddleRight;
+            btnPurchase.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btnPurchase.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            button1.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            button1.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
+            button1.ForeColor = SystemColors.ControlText;
+            button1.Image = Properties.Resources.statistiche_24;
+            button1.Location = new Point(620, 518);
+            button1.Name = "button1";
+            button1.Size = new Size(250, 52);
+            button1.TabIndex = 22;
+            button1.Text = "VISUALIZZA ACQUISTI";
+            button1.TextAlign = ContentAlignment.MiddleRight;
+            button1.TextImageRelation = TextImageRelation.ImageBeforeText;
+            button1.UseVisualStyleBackColor = true;
+            // 
             // ClientEditForm
             // 
             AcceptButton = btnOk;
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(887, 681);
+            Controls.Add(button1);
+            Controls.Add(btnPurchase);
             Controls.Add(btnDelete);
             Controls.Add(lblIndirizzo);
             Controls.Add(txtIndirizzo);
@@ -247,7 +281,7 @@
             Controls.Add(lblNome);
             Controls.Add(txtNome);
             Icon = (Icon)resources.GetObject("$this.Icon");
-            MinimumSize = new Size(903, 718);
+            MinimumSize = new Size(905, 728);
             Name = "ClientEditForm";
             StartPosition = FormStartPosition.CenterParent;
             Text = "MODIFICA CLIENTE";
@@ -275,5 +309,7 @@
         private Label lblIndirizzo;
         private TextBox txtIndirizzo;
         private Button btnDelete;
+        private Button btnPurchase;
+        private Button button1;
     }
 }

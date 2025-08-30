@@ -152,9 +152,10 @@
             // 
             // btnStatistiche
             // 
+            btnStatistiche.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btnStatistiche.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             btnStatistiche.Image = Properties.Resources.statistiche_24;
-            btnStatistiche.Location = new Point(483, 87);
+            btnStatistiche.Location = new Point(917, 86);
             btnStatistiche.Name = "btnStatistiche";
             btnStatistiche.Size = new Size(150, 69);
             btnStatistiche.TabIndex = 3;
@@ -166,9 +167,10 @@
             // 
             // btnStampa
             // 
+            btnStampa.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btnStampa.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             btnStampa.Image = Properties.Resources.printerImage;
-            btnStampa.Location = new Point(640, 87);
+            btnStampa.Location = new Point(1074, 86);
             btnStampa.Name = "btnStampa";
             btnStampa.Size = new Size(150, 69);
             btnStampa.TabIndex = 4;
