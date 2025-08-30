@@ -276,6 +276,7 @@
             Name = "ProductInsertForm";
             StartPosition = FormStartPosition.CenterParent;
             Text = "INSERIMENTO PRODOTTO";
+            WindowState = FormWindowState.Maximized;
             ((System.ComponentModel.ISupportInitialize)nudQnt).EndInit();
             ((System.ComponentModel.ISupportInitialize)nudAliquota).EndInit();
             ResumeLayout(false);

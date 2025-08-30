@@ -279,6 +279,7 @@
             Name = "MainForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "PlannerShop 1.0";
+            WindowState = FormWindowState.Maximized;
             ((System.ComponentModel.ISupportInitialize)dgvData).EndInit();
             pnlSearch.ResumeLayout(false);
             pnlSearch.PerformLayout();

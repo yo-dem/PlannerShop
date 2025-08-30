@@ -284,6 +284,7 @@
             Name = "ProductEditForm";
             StartPosition = FormStartPosition.CenterParent;
             Text = "MODIFICA PRODOTTO";
+            WindowState = FormWindowState.Maximized;
             ((System.ComponentModel.ISupportInitialize)nudAliquota).EndInit();
             ((System.ComponentModel.ISupportInitialize)nudQnt).EndInit();
             ResumeLayout(false);

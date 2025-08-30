@@ -207,6 +207,7 @@
             Name = "SupplierInsertForm";
             StartPosition = FormStartPosition.CenterParent;
             Text = "INSERIMENTO FORNITORE";
+            WindowState = FormWindowState.Maximized;
             ResumeLayout(false);
             PerformLayout();
 
