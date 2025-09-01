@@ -162,28 +162,84 @@ namespace PlannerShop.Forms
 
         private void dgvData_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            // Verifica che l'indice sia valido
-            if (e.RowIndex < 0 || e.RowIndex >= dgvData.Rows.Count)
-                return;
+            //if (e.RowIndex < 0 || e.RowIndex >= dgvData.Rows.Count)
+            //    return;
 
-            // Verifica che il numero di colonne sia compatibile
-            int colCount = Math.Min(dgvData.Columns.Count, dgvDataAcquisto.Columns.Count);
+            //int colCount = Math.Min(dgvData.Columns.Count, dgvDataAcquisto.Columns.Count);
 
-            // Crea una nuova riga per dgvDataAcquisto
-            DataGridViewRow newRow = new DataGridViewRow();
+            //DataGridViewRow newRow = new DataGridViewRow();
 
-            newRow.Height = 40;
+            //newRow.Height = 40;
 
-            newRow.CreateCells(dgvDataAcquisto);
+            //newRow.CreateCells(dgvDataAcquisto);
 
-            // Copia i valori dalla riga selezionata
-            for (int i = 0; i < colCount; i++)
+            //for (int i = 0; i < colCount; i++)
+            //{
+            //    newRow.Cells[i].Value = dgvData.Rows[e.RowIndex].Cells[i].Value;
+            //}
+
+
+            String idProdotto = dgvData.Rows[e.RowIndex].Cells[0].Value.ToString();
+
+            DataTable productRow = ModelProdotti.getProdottoById(idProdotto);
+
+            String qnt = productRow.Rows[0]["QNT"].ToString();
+            int intQnt = int.Parse(qnt);
+
+            if (intQnt > 1)
             {
-                newRow.Cells[i].Value = dgvData.Rows[e.RowIndex].Cells[i].Value;
+                int firstSelectedIndex = dgvData.SelectedRows[0].Index;
+                int displayPos = dgvData.FirstDisplayedScrollingRowIndex;
+
+                ModelProdotti.editProdotto(idProdotto, productRow.Rows[0]["DATA"].ToString(), productRow.Rows[0]["MARCA"].ToString(),
+                    productRow.Rows[0]["DESCRIZIONE"].ToString(), productRow.Rows[0]["ALIQUOTA"].ToString(), (intQnt - 1).ToString(),
+                    productRow.Rows[0]["PREZZO_NETTO"].ToString(), productRow.Rows[0]["PREZZO_IVATO"].ToString(),
+                    productRow.Rows[0]["NOTE"].ToString());
+
+                dgvData.DataSource = ModelProdotti.getProdotti();
+                SelectAfterDelete(firstSelectedIndex, displayPos, 1);
+            }
+            else
+            {
+                ModelProdotti.deleteProdotto(idProdotto);
+                int firstSelectedIndex = dgvData.SelectedRows[0].Index;
+                int displayPos = dgvData.FirstDisplayedScrollingRowIndex;
+
+                dgvData.DataSource = ModelProdotti.getProdotti();
+
+                SelectAfterDelete(firstSelectedIndex, displayPos, 1);
             }
 
-            // Aggiungi la riga al secondo DataGridView
-            dgvDataAcquisto.Rows.Add(newRow);
+            //dgvDataAcquisto.Rows.Add(newRow);
+        }
+
+        private void SelectAfterDelete(int previousIndex, int displayPos, int numberOfDeletions)
+        {
+            dgvData.ClearSelection();
+
+            if (dgvData.Rows.Count == 0) return;
+
+            int lastSelectedIndex = previousIndex;
+            if (dgvData.SelectedRows.Count > 0)
+            {
+                lastSelectedIndex = dgvData.SelectedRows.Cast<DataGridViewRow>().Max(row => row.Index);
+            }
+
+            int newIndex = lastSelectedIndex - (numberOfDeletions - 1);
+
+            if (newIndex >= dgvData.Rows.Count) newIndex = dgvData.Rows.Count - 1;
+            if (newIndex < 0) newIndex = 0;
+
+            if (newIndex >= 0 && newIndex < dgvData.Rows.Count)
+            {
+                dgvData.Rows[newIndex].Selected = true;
+            }
+
+            if (displayPos >= 0 && displayPos < dgvData.RowCount)
+            {
+                dgvData.FirstDisplayedScrollingRowIndex = displayPos;
+            }
         }
     }
 }
+
