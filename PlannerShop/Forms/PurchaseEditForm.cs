@@ -162,55 +162,46 @@ namespace PlannerShop.Forms
 
         private void dgvData_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            //if (e.RowIndex < 0 || e.RowIndex >= dgvData.Rows.Count)
-            //    return;
+            if (e.RowIndex < 0) return;
 
-            //int colCount = Math.Min(dgvData.Columns.Count, dgvDataAcquisto.Columns.Count);
+            String? idProdotto = dgvData.Rows[e.RowIndex].Cells[0].Value.ToString();
 
-            //DataGridViewRow newRow = new DataGridViewRow();
-
-            //newRow.Height = 40;
-
-            //newRow.CreateCells(dgvDataAcquisto);
-
-            //for (int i = 0; i < colCount; i++)
-            //{
-            //    newRow.Cells[i].Value = dgvData.Rows[e.RowIndex].Cells[i].Value;
-            //}
-
-
-            String idProdotto = dgvData.Rows[e.RowIndex].Cells[0].Value.ToString();
-
-            DataTable productRow = ModelProdotti.getProdottoById(idProdotto);
-
-            String qnt = productRow.Rows[0]["QNT"].ToString();
-            int intQnt = int.Parse(qnt);
-
-            if (intQnt > 1)
+            if (idProdotto != null)
             {
-                int firstSelectedIndex = dgvData.SelectedRows[0].Index;
-                int displayPos = dgvData.FirstDisplayedScrollingRowIndex;
+                DataTable productRow = ModelProdotti.getProdottoById(idProdotto);
+                if (productRow.Rows.Count == 0) return;
 
-                ModelProdotti.editProdotto(idProdotto, productRow.Rows[0]["DATA"].ToString(), productRow.Rows[0]["MARCA"].ToString(),
-                    productRow.Rows[0]["DESCRIZIONE"].ToString(), productRow.Rows[0]["ALIQUOTA"].ToString(), (intQnt - 1).ToString(),
-                    productRow.Rows[0]["PREZZO_NETTO"].ToString(), productRow.Rows[0]["PREZZO_IVATO"].ToString(),
-                    productRow.Rows[0]["NOTE"].ToString());
+                String? qnt = productRow.Rows[0]["QNT"].ToString();
+                if (qnt != null)
+                {
+                    int firstSelectedIndex = dgvData.SelectedRows[0].Index;
+                    int displayPos = dgvData.FirstDisplayedScrollingRowIndex;
 
-                dgvData.DataSource = ModelProdotti.getProdotti();
-                SelectAfterDelete(firstSelectedIndex, displayPos, 1);
+                    if (!int.TryParse(qnt, out int intQnt)) return;
+
+                    if (intQnt > 1)
+                    {
+                        ModelProdotti.editProdotto(idProdotto, 
+                            productRow.Rows[0]["DATA"].ToString(), 
+                            productRow.Rows[0]["MARCA"].ToString(),
+                            productRow.Rows[0]["DESCRIZIONE"].ToString(), 
+                            productRow.Rows[0]["ALIQUOTA"].ToString(), 
+                            (intQnt - 1).ToString(),
+                            productRow.Rows[0]["PREZZO_NETTO"].ToString(), 
+                            productRow.Rows[0]["PREZZO_IVATO"].ToString(),
+                            productRow.Rows[0]["NOTE"].ToString());
+                    }
+                    else
+                    {
+                        ModelProdotti.deleteProdotto(idProdotto);
+                    }
+
+                    dgvData.DataSource = ModelProdotti.getProdotti();
+                    SelectAfterDelete(firstSelectedIndex, displayPos, 1);
+
+                    dgvDataAcquisto.Rows.Add(productRow);
+                }
             }
-            else
-            {
-                ModelProdotti.deleteProdotto(idProdotto);
-                int firstSelectedIndex = dgvData.SelectedRows[0].Index;
-                int displayPos = dgvData.FirstDisplayedScrollingRowIndex;
-
-                dgvData.DataSource = ModelProdotti.getProdotti();
-
-                SelectAfterDelete(firstSelectedIndex, displayPos, 1);
-            }
-
-            //dgvDataAcquisto.Rows.Add(newRow);
         }
 
         private void SelectAfterDelete(int previousIndex, int displayPos, int numberOfDeletions)
