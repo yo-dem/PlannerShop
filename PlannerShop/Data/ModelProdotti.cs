@@ -1,4 +1,7 @@
 ﻿using System.Data;
+using static System.Runtime.InteropServices.JavaScript.JSType;
+using System.Text.RegularExpressions;
+using System.Data.SQLite;
 
 namespace PlannerShop.Data
 {
@@ -9,13 +12,13 @@ namespace PlannerShop.Data
             DataTable dt = DBUtility.getDBData("SELECT * FROM 'TPRODOTTI' WHERE IDPRODOTTO='" + idProdotto + "'");
             return dt;
         }
-        
+
         public static DataTable getProdotti()
         {
             DataTable dt = DBUtility.getDBData("SELECT * FROM 'TPRODOTTI' ORDER BY IDPRODOTTO DESC");
             return dt;
         }
-        
+
         public static void addProdotto(
             string data,
             string marca,
@@ -46,7 +49,7 @@ namespace PlannerShop.Data
                 + note + "')";
             DBUtility.setDBData(sqlComm);
         }
-        
+
         public static void editProdotto(
             string idProdotto,
             string data,
@@ -78,7 +81,16 @@ namespace PlannerShop.Data
                 + "' WHERE IDPRODOTTO='" + idProdotto + "'";
             DBUtility.setDBData(sqlComm);
         }
-        
+
+        public static void updateQuantity(string idProdotto, int newQnt)
+        {
+            string sqlComm = @"UPDATE TPRODOTTI 
+                       SET QNT = '" + newQnt + @"' 
+                       WHERE IDPRODOTTO = '" + idProdotto + "'";
+
+            DBUtility.setDBData(sqlComm);
+        }
+
         public static void deleteProdotto(string? idProdotto)
         {
             string sqlComm = @"DELETE FROM TPRODOTTI WHERE IDPRODOTTO='" + idProdotto + "'";

@@ -164,45 +164,49 @@ namespace PlannerShop.Forms
         {
             if (e.RowIndex < 0) return;
 
-            String? idProdotto = dgvData.Rows[e.RowIndex].Cells[0].Value.ToString();
+            var cellIdProdottoValue = dgvData.Rows[e.RowIndex].Cells[0].Value;
 
-            if (idProdotto != null)
+            if (cellIdProdottoValue == null) return;
+
+            string idProdotto = cellIdProdottoValue.ToString()!;
+
+            DataTable productRow = ModelProdotti.getProdottoById(idProdotto);
+
+            if (productRow.Rows.Count == 0) return;
+
+            object? qntObj = productRow.Rows[0]["QNT"];
+
+            if (qntObj == DBNull.Value) return;
+
+            if (!int.TryParse(qntObj.ToString(), out int intQnt)) return;
+
+            int firstSelectedIndex = dgvData.SelectedRows[0].Index;
+            int displayPos = dgvData.FirstDisplayedScrollingRowIndex;
+
+            if (intQnt > 1)
             {
-                DataTable productRow = ModelProdotti.getProdottoById(idProdotto);
-                if (productRow.Rows.Count == 0) return;
-
-                String? qnt = productRow.Rows[0]["QNT"].ToString();
-                if (qnt != null)
-                {
-                    int firstSelectedIndex = dgvData.SelectedRows[0].Index;
-                    int displayPos = dgvData.FirstDisplayedScrollingRowIndex;
-
-                    if (!int.TryParse(qnt, out int intQnt)) return;
-
-                    if (intQnt > 1)
-                    {
-                        ModelProdotti.editProdotto(idProdotto, 
-                            productRow.Rows[0]["DATA"].ToString(), 
-                            productRow.Rows[0]["MARCA"].ToString(),
-                            productRow.Rows[0]["DESCRIZIONE"].ToString(), 
-                            productRow.Rows[0]["ALIQUOTA"].ToString(), 
-                            (intQnt - 1).ToString(),
-                            productRow.Rows[0]["PREZZO_NETTO"].ToString(), 
-                            productRow.Rows[0]["PREZZO_IVATO"].ToString(),
-                            productRow.Rows[0]["NOTE"].ToString());
-                    }
-                    else
-                    {
-                        ModelProdotti.deleteProdotto(idProdotto);
-                    }
-
-                    dgvData.DataSource = ModelProdotti.getProdotti();
-                    SelectAfterDelete(firstSelectedIndex, displayPos, 1);
-
-                    dgvDataAcquisto.Rows.Add(productRow);
-                }
+                ModelProdotti.updateQuantity(idProdotto, intQnt - 1);
             }
+            else
+            {
+                ModelProdotti.deleteProdotto(idProdotto);
+            }
+
+            dgvData.DataSource = ModelProdotti.getProdotti();
+            SelectAfterDelete(firstSelectedIndex, displayPos, 1);
+
+            dgvDataAcquisto.Rows.Add(
+                productRow.Rows[0]["IDPRODOTTO"],
+                productRow.Rows[0]["DATA"],
+                productRow.Rows[0]["MARCA"],
+                productRow.Rows[0]["DESCRIZIONE"],
+                productRow.Rows[0]["ALIQUOTA"],
+                1,
+                productRow.Rows[0]["PREZZO_NETTO"],
+                productRow.Rows[0]["PREZZO_IVATO"]);
+
         }
+
 
         private void SelectAfterDelete(int previousIndex, int displayPos, int numberOfDeletions)
         {
