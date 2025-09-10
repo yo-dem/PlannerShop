@@ -52,26 +52,27 @@
             // lblNome
             // 
             lblNome.AutoSize = true;
-            lblNome.Location = new Point(14, 87);
+            lblNome.Location = new Point(12, 65);
             lblNome.Name = "lblNome";
-            lblNome.Size = new Size(58, 20);
+            lblNome.Size = new Size(47, 15);
             lblNome.TabIndex = 0;
             lblNome.Text = "NOME*";
             // 
             // txtNome
             // 
-            txtNome.Location = new Point(14, 109);
+            txtNome.Location = new Point(12, 82);
+            txtNome.Margin = new Padding(3, 2, 3, 2);
             txtNome.Name = "txtNome";
-            txtNome.Size = new Size(202, 27);
+            txtNome.Size = new Size(177, 23);
             txtNome.TabIndex = 1;
             txtNome.TextChanged += txtNome_TextChanged;
             // 
             // lblCognome
             // 
             lblCognome.AutoSize = true;
-            lblCognome.Location = new Point(14, 143);
+            lblCognome.Location = new Point(12, 107);
             lblCognome.Name = "lblCognome";
-            lblCognome.Size = new Size(88, 20);
+            lblCognome.Size = new Size(72, 15);
             lblCognome.TabIndex = 0;
             lblCognome.Text = "COGNOME*";
             // 
@@ -79,9 +80,10 @@
             // 
             dtpDataNascita.CustomFormat = " ";
             dtpDataNascita.Format = DateTimePickerFormat.Short;
-            dtpDataNascita.Location = new Point(14, 540);
+            dtpDataNascita.Location = new Point(12, 405);
+            dtpDataNascita.Margin = new Padding(3, 2, 3, 2);
             dtpDataNascita.Name = "dtpDataNascita";
-            dtpDataNascita.Size = new Size(202, 27);
+            dtpDataNascita.Size = new Size(177, 23);
             dtpDataNascita.TabIndex = 7;
             dtpDataNascita.TabStop = false;
             dtpDataNascita.Value = new DateTime(1990, 5, 30, 0, 0, 0, 0);
@@ -90,19 +92,20 @@
             // lblNote
             // 
             lblNote.AutoSize = true;
-            lblNote.Location = new Point(223, 87);
+            lblNote.Location = new Point(195, 65);
             lblNote.Name = "lblNote";
-            lblNote.Size = new Size(46, 20);
+            lblNote.Size = new Size(37, 15);
             lblNote.TabIndex = 0;
             lblNote.Text = "NOTE";
             // 
             // txtNote
             // 
             txtNote.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            txtNote.Location = new Point(223, 109);
+            txtNote.Location = new Point(195, 82);
+            txtNote.Margin = new Padding(3, 2, 3, 2);
             txtNote.Multiline = true;
             txtNote.Name = "txtNote";
-            txtNote.Size = new Size(647, 460);
+            txtNote.Size = new Size(567, 346);
             txtNote.TabIndex = 8;
             // 
             // btnOk
@@ -110,9 +113,10 @@
             btnOk.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             btnOk.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             btnOk.Image = Properties.Resources.okImage;
-            btnOk.Location = new Point(14, 576);
+            btnOk.Location = new Point(12, 432);
+            btnOk.Margin = new Padding(3, 2, 3, 2);
             btnOk.Name = "btnOk";
-            btnOk.Size = new Size(857, 91);
+            btnOk.Size = new Size(750, 68);
             btnOk.TabIndex = 10;
             btnOk.Text = "CARICA CLIENTE";
             btnOk.TextAlign = ContentAlignment.BottomCenter;
@@ -122,86 +126,91 @@
             // 
             // txtCognome
             // 
-            txtCognome.Location = new Point(14, 165);
+            txtCognome.Location = new Point(12, 124);
+            txtCognome.Margin = new Padding(3, 2, 3, 2);
             txtCognome.Name = "txtCognome";
-            txtCognome.Size = new Size(202, 27);
+            txtCognome.Size = new Size(177, 23);
             txtCognome.TabIndex = 2;
             txtCognome.TextChanged += txtCognome_TextChanged;
             // 
             // lblDataNascita
             // 
             lblDataNascita.AutoSize = true;
-            lblDataNascita.Location = new Point(14, 516);
+            lblDataNascita.Location = new Point(12, 387);
             lblDataNascita.Name = "lblDataNascita";
-            lblDataNascita.Size = new Size(134, 20);
+            lblDataNascita.Size = new Size(106, 15);
             lblDataNascita.TabIndex = 12;
             lblDataNascita.Text = "DATA DI NASCITA*";
             // 
             // txtTelefonoFisso
             // 
-            txtTelefonoFisso.Location = new Point(14, 219);
+            txtTelefonoFisso.Location = new Point(12, 164);
+            txtTelefonoFisso.Margin = new Padding(3, 2, 3, 2);
             txtTelefonoFisso.Name = "txtTelefonoFisso";
-            txtTelefonoFisso.Size = new Size(202, 27);
+            txtTelefonoFisso.Size = new Size(177, 23);
             txtTelefonoFisso.TabIndex = 3;
             // 
             // lblTelefonoFisso
             // 
             lblTelefonoFisso.AutoSize = true;
-            lblTelefonoFisso.Location = new Point(14, 196);
+            lblTelefonoFisso.Location = new Point(12, 147);
             lblTelefonoFisso.Name = "lblTelefonoFisso";
-            lblTelefonoFisso.Size = new Size(122, 20);
+            lblTelefonoFisso.Size = new Size(98, 15);
             lblTelefonoFisso.TabIndex = 13;
             lblTelefonoFisso.Text = "TELEFONO FISSO";
             // 
             // txtTelefonoMobile
             // 
-            txtTelefonoMobile.Location = new Point(14, 272);
+            txtTelefonoMobile.Location = new Point(12, 204);
+            txtTelefonoMobile.Margin = new Padding(3, 2, 3, 2);
             txtTelefonoMobile.Name = "txtTelefonoMobile";
-            txtTelefonoMobile.Size = new Size(202, 27);
+            txtTelefonoMobile.Size = new Size(177, 23);
             txtTelefonoMobile.TabIndex = 4;
             txtTelefonoMobile.TextChanged += txtTelefonoMobile_TextChanged;
             // 
             // lblTelefonoMobile
             // 
             lblTelefonoMobile.AutoSize = true;
-            lblTelefonoMobile.Location = new Point(14, 249);
+            lblTelefonoMobile.Location = new Point(12, 187);
             lblTelefonoMobile.Name = "lblTelefonoMobile";
-            lblTelefonoMobile.Size = new Size(90, 20);
+            lblTelefonoMobile.Size = new Size(73, 15);
             lblTelefonoMobile.TabIndex = 15;
             lblTelefonoMobile.Text = "CELLULARE*";
             // 
             // lblEmail
             // 
             lblEmail.AutoSize = true;
-            lblEmail.Location = new Point(14, 305);
+            lblEmail.Location = new Point(12, 229);
             lblEmail.Name = "lblEmail";
-            lblEmail.Size = new Size(51, 20);
+            lblEmail.Size = new Size(41, 15);
             lblEmail.TabIndex = 17;
             lblEmail.Text = "EMAIL";
             // 
             // txtEmail
             // 
-            txtEmail.Location = new Point(14, 329);
+            txtEmail.Location = new Point(12, 247);
+            txtEmail.Margin = new Padding(3, 2, 3, 2);
             txtEmail.Name = "txtEmail";
-            txtEmail.Size = new Size(202, 27);
+            txtEmail.Size = new Size(177, 23);
             txtEmail.TabIndex = 5;
             txtEmail.TextChanged += txtEmail_TextChanged;
             // 
             // lblIndirizzo
             // 
             lblIndirizzo.AutoSize = true;
-            lblIndirizzo.Location = new Point(14, 363);
+            lblIndirizzo.Location = new Point(12, 272);
             lblIndirizzo.Name = "lblIndirizzo";
-            lblIndirizzo.Size = new Size(87, 20);
+            lblIndirizzo.Size = new Size(68, 15);
             lblIndirizzo.TabIndex = 19;
             lblIndirizzo.Text = "INDIRIZZO*";
             // 
             // txtIndirizzo
             // 
-            txtIndirizzo.Location = new Point(14, 385);
+            txtIndirizzo.Location = new Point(12, 289);
+            txtIndirizzo.Margin = new Padding(3, 2, 3, 2);
             txtIndirizzo.Multiline = true;
             txtIndirizzo.Name = "txtIndirizzo";
-            txtIndirizzo.Size = new Size(202, 127);
+            txtIndirizzo.Size = new Size(177, 96);
             txtIndirizzo.TabIndex = 6;
             txtIndirizzo.TextChanged += txtIndirizzo_TextChanged;
             // 
@@ -210,9 +219,10 @@
             chkRipeti.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             chkRipeti.AutoSize = true;
             chkRipeti.CheckAlign = ContentAlignment.MiddleRight;
-            chkRipeti.Location = new Point(704, 12);
+            chkRipeti.Location = new Point(628, 9);
+            chkRipeti.Margin = new Padding(3, 2, 3, 2);
             chkRipeti.Name = "chkRipeti";
-            chkRipeti.Size = new Size(170, 24);
+            chkRipeti.Size = new Size(137, 19);
             chkRipeti.TabIndex = 0;
             chkRipeti.TabStop = false;
             chkRipeti.Text = "RIPETI INSERIMENTO";
@@ -221,9 +231,9 @@
             // ClientInsertForm
             // 
             AcceptButton = btnOk;
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(887, 681);
+            ClientSize = new Size(776, 511);
             Controls.Add(lblIndirizzo);
             Controls.Add(txtIndirizzo);
             Controls.Add(lblEmail);
@@ -243,10 +253,12 @@
             Controls.Add(lblNome);
             Controls.Add(txtNome);
             Icon = (Icon)resources.GetObject("$this.Icon");
-            MinimumSize = new Size(903, 718);
+            Margin = new Padding(3, 2, 3, 2);
+            MinimumSize = new Size(792, 548);
             Name = "ClientInsertForm";
             StartPosition = FormStartPosition.CenterParent;
             Text = "INSERIMENTO CLIENTE";
+            WindowState = FormWindowState.Maximized;
             ResumeLayout(false);
             PerformLayout();
 

@@ -10,13 +10,25 @@ namespace PlannerShop.Data
             DataTable dt = DBUtility.getDBData("SELECT * FROM 'TACQUISTI' WHERE IDACQUISTO='" + idAcquisto + "'");
             return dt;
         }
-        
+
         public static DataTable getAcquisti()
         {
             DataTable dt = DBUtility.getDBData("SELECT * FROM 'TACQUISTI' ORDER BY IDACQUISTO DESC");
             return dt;
         }
-        
+
+        public static DataTable getAcquistiByIdCliente(string idCliente)
+        {
+            DataTable dt = DBUtility.getDBData("SELECT * FROM 'TACQUISTI' WHERE IDCLIENTE='" + idCliente + "' ORDER BY IDACQUISTO DESC");
+            return dt;
+        }
+
+        public static DataTable getAcquistiByIdClienteAndProductId(string idCliente, string idProdotto)
+        {
+            DataTable dt = DBUtility.getDBData("SELECT * FROM 'TACQUISTI' WHERE IDCLIENTE='" + idCliente + "' AND IDPRODOTTO='" + idProdotto + "' ORDER BY IDACQUISTO DESC");
+            return dt;
+        }
+
         public static void addAcquisto(
             string marca,
             string descrizione,
@@ -24,7 +36,8 @@ namespace PlannerShop.Data
             string prezzoNetto,
             string prezzoIvato,
             string dataAcquisto,
-            string idCliente)
+            string idCliente,
+            string idProdotto)
         {
             dataAcquisto = dataAcquisto.Replace("'", "''");
             marca = marca.Replace("'", "''");
@@ -33,51 +46,29 @@ namespace PlannerShop.Data
             prezzoNetto = prezzoNetto.Replace("'", "''");
             prezzoIvato = prezzoIvato.Replace("'", "''");
             idCliente = idCliente.Replace("'", "''");
+            idProdotto = idProdotto.Replace("'", "''");
 
-            string sqlComm = @"INSERT INTO TACQUISTI (MARCA,DESCRIZIONE,QNT,PREZZO_NETTO,PREZZO_IVATO,DATA_ACQUISTO,IDCLIENTE)VALUES('"
+            string sqlComm = @"INSERT INTO TACQUISTI (MARCA,DESCRIZIONE,QNT,PREZZO_NETTO,PREZZO_IVATO,DATA_ACQUISTO,IDCLIENTE,IDPRODOTTO)VALUES('"
                 + marca + "','"
                 + descrizione + "','"
                 + qnt + "','"
                 + prezzoNetto + "','"
                 + prezzoIvato + "','"
                 + dataAcquisto + "','"
-                + int.Parse(idCliente) + "')";
+                + int.Parse(idCliente) + "','"
+                + int.Parse(idProdotto) + "')";
             DBUtility.setDBData(sqlComm);
         }
-        
-        public static void editAcquisto(
-            string idAcquisto,
-            string marca,
-            string descrizione,
-            string aliquota,
-            string qnt,
-            string prezzoNetto,
-            string prezzoIvato,
-            string dataAcquisto,
-            string idCliente)
-        {
-            marca = marca.Replace("'", "''");
-            descrizione = descrizione.Replace("'", "''");
-            aliquota = aliquota.Replace("'", "''");
-            qnt = qnt.Replace("'", "''");
-            prezzoNetto = prezzoNetto.Replace("'", "''");
-            prezzoIvato = prezzoIvato.Replace("'", "''");
-            dataAcquisto = dataAcquisto.Replace("'", "''");
-            idCliente = idCliente.Replace("'", "''");
 
-            string sqlComm = @"UPDATE TPRODOTTI SET MARCA='" + marca
-                + "', DESCRIZIONE='" + descrizione
-                + "', ALIQUOTA='" + aliquota
-                + "', QNT='" + qnt
-                + "', PREZZO_NETTO='" + prezzoNetto
-                + "', PREZZO_IVATO='" + prezzoIvato
-                + "', DATA_ACQUISTO='" + dataAcquisto
-                + "', IDCLIENTE='" + int.Parse(idCliente)
-                + "', DATA = '" + dataAcquisto
-                + "' WHERE IDACQUISTO='" + idAcquisto + "'";
+        public static void updateQuantity(string idProdotto, string idCliente, int newQnt)
+        {
+            string sqlComm = @"UPDATE TACQUISTI 
+                       SET QNT = '" + newQnt + @"' 
+                       WHERE IDPRODOTTO = '" + idProdotto + "' AND IDCLIENTE = '" + idCliente + "'";
+
             DBUtility.setDBData(sqlComm);
         }
-        
+
         public static void deleteAcquisto(string? idAcquisto)
         {
             string sqlComm = @"DELETE FROM TACQUISTO WHERE IDACQUISTO='" + idAcquisto + "'";
