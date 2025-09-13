@@ -209,7 +209,7 @@ namespace PlannerShop.Forms
 
             var idProducrColumn = dgvDataAcquisto.Columns["IDPRODOTTO"];
             idProducrColumn.DisplayIndex = 8;
-            idProducrColumn.Visible = true;
+            idProducrColumn.Visible = false;
             idProducrColumn.HeaderText = "IDPRODOTTO";
             idProducrColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             idProducrColumn.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
@@ -253,21 +253,12 @@ namespace PlannerShop.Forms
         {
             if (e.RowIndex < 0) return;
 
-            var cellIdProdottoValue = dgvData.Rows[e.RowIndex].Cells[0].Value;
-
-            if (cellIdProdottoValue == null) return;
-
-            string idProdotto = cellIdProdottoValue.ToString()!;
+            if (dgvData.Rows[e.RowIndex].Cells[0].Value == null) return;
+            String idProdotto = dgvData.Rows[e.RowIndex].Cells[0].Value.ToString()!;
 
             DataTable productRow = ModelProdotti.getProdottoById(idProdotto);
 
-            if (productRow.Rows.Count == 0) return;
-
-            object? qntObj = productRow.Rows[0]["QNT"];
-
-            if (qntObj == DBNull.Value) return;
-
-            if (!int.TryParse(qntObj.ToString(), out int intQnt)) return;
+            if (!int.TryParse(productRow.Rows[0]["QNT"].ToString(), out int intQnt)) return;
 
             int firstSelectedIndex = dgvData.SelectedRows[0].Index;
             int displayPos = dgvData.FirstDisplayedScrollingRowIndex;
@@ -288,18 +279,18 @@ namespace PlannerShop.Forms
             if (dt.Rows.Count == 0)
             {
                 ModelAcquisti.addAcquisto(
-                    productRow.Rows[0]["MARCA"].ToString(),
-                    productRow.Rows[0]["DESCRIZIONE"].ToString(),
+                    productRow.Rows[0]["MARCA"].ToString()!,
+                    productRow.Rows[0]["DESCRIZIONE"].ToString()!,
                     1.ToString(),
-                    productRow.Rows[0]["PREZZO_NETTO"].ToString(),
-                    productRow.Rows[0]["PREZZO_IVATO"].ToString(),
-                    productRow.Rows[0]["DATA"].ToString(),
+                    productRow.Rows[0]["PREZZO_NETTO"].ToString()!,
+                    productRow.Rows[0]["PREZZO_IVATO"].ToString()!,
+                    productRow.Rows[0]["DATA"].ToString()!,
                     idCliente,
                     idProdotto);
             }
             else
             {
-                int qnt = int.Parse(dt.Rows[0]["QNT"].ToString());
+                if(!int.TryParse(dt.Rows[0]["QNT"].ToString(), out int qnt)) return;
                 ModelAcquisti.updateQuantity(idProdotto, idCliente, ++qnt);
             }
 
