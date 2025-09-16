@@ -39,7 +39,7 @@ namespace PlannerShop.Forms
         private void loadClienteData()
         {
             DataTable dtCliente = ModelClienti.getClienteById(idCliente);
-            lblName.Text = dtCliente.Rows[0]["NOME"].ToString().ToUpper() + " " + dtCliente.Rows[0]["COGNOME"].ToString().ToUpper();
+            lblName.Text = dtCliente.Rows[0]["NOME"].ToString()!.ToUpper() + " " + dtCliente.Rows[0]["COGNOME"].ToString()!.ToUpper();
             lblIndirizzo.Text = dtCliente.Rows[0]["INDIRIZZO"].ToString();
             lblTelefono.Text = "Tel. " + dtCliente.Rows[0]["TELEFONO_MOBILE"].ToString();
             lblEmail.Text = dtCliente.Rows[0]["EMAIL"].ToString();
@@ -145,7 +145,7 @@ namespace PlannerShop.Forms
             idPurchaseColumn.DefaultCellStyle.Font = new Font("Corbel", fontSize, FontStyle.Regular);
 
             var marcaProductColumn = dgvDataAcquisto.Columns["MARCA"];
-            marcaProductColumn.DisplayIndex = 2;
+            marcaProductColumn.DisplayIndex = 1;
             marcaProductColumn.Visible = true;
             marcaProductColumn.HeaderText = "MARCA";
             marcaProductColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
@@ -154,7 +154,7 @@ namespace PlannerShop.Forms
             marcaProductColumn.DefaultCellStyle.Font = new Font("Corbel", fontSize, FontStyle.Regular);
 
             var descrizioneProductColumn = dgvDataAcquisto.Columns["DESCRIZIONE"];
-            descrizioneProductColumn.DisplayIndex = 3;
+            descrizioneProductColumn.DisplayIndex = 2;
             descrizioneProductColumn.Visible = true;
             descrizioneProductColumn.HeaderText = "DESCRIZIONE";
             descrizioneProductColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
@@ -163,7 +163,7 @@ namespace PlannerShop.Forms
             descrizioneProductColumn.DefaultCellStyle.Font = new Font("Corbel", fontSize, FontStyle.Bold);
 
             var qntProductColumn = dgvDataAcquisto.Columns["QNT"];
-            qntProductColumn.DisplayIndex = 4;
+            qntProductColumn.DisplayIndex = 3;
             qntProductColumn.Visible = true;
             qntProductColumn.HeaderText = "QNT";
             qntProductColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
@@ -172,7 +172,7 @@ namespace PlannerShop.Forms
             qntProductColumn.DefaultCellStyle.Font = new Font("Corbel", fontSize, FontStyle.Regular);
 
             var prezzoNettoProductColumn = dgvDataAcquisto.Columns["PREZZO_NETTO"];
-            prezzoNettoProductColumn.DisplayIndex = 5;
+            prezzoNettoProductColumn.DisplayIndex = 4;
             prezzoNettoProductColumn.Visible = true;
             prezzoNettoProductColumn.HeaderText = "PREZZO NETTO";
             prezzoNettoProductColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
@@ -181,7 +181,7 @@ namespace PlannerShop.Forms
             prezzoNettoProductColumn.DefaultCellStyle.Font = new Font("Corbel", fontSize, FontStyle.Regular);
 
             var prezzoIvatoProductColumn = dgvDataAcquisto.Columns["PREZZO_IVATO"];
-            prezzoIvatoProductColumn.DisplayIndex = 6;
+            prezzoIvatoProductColumn.DisplayIndex = 5;
             prezzoIvatoProductColumn.Visible = true;
             prezzoIvatoProductColumn.HeaderText = "PREZZO IVATO";
             prezzoIvatoProductColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
@@ -189,8 +189,8 @@ namespace PlannerShop.Forms
             prezzoIvatoProductColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             prezzoIvatoProductColumn.DefaultCellStyle.Font = new Font("Corbel", fontSize, FontStyle.Regular);
 
-            var dataProductColumn = dgvDataAcquisto.Columns["DATA_ACQUISTO"];
-            dataProductColumn.DisplayIndex = 7;
+            var dataProductColumn = dgvDataAcquisto.Columns["DATA"];
+            dataProductColumn.DisplayIndex = 6;
             dataProductColumn.Visible = false;
             dataProductColumn.HeaderText = "DATA";
             dataProductColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
@@ -199,7 +199,7 @@ namespace PlannerShop.Forms
             dataProductColumn.DefaultCellStyle.Font = new Font("Corbel", fontSize, FontStyle.Regular);
 
             var idClientColumn = dgvDataAcquisto.Columns["IDCLIENTE"];
-            idClientColumn.DisplayIndex = 8;
+            idClientColumn.DisplayIndex = 7;
             idClientColumn.Visible = false;
             idClientColumn.HeaderText = "IDCLIENTE";
             idClientColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
@@ -215,6 +215,24 @@ namespace PlannerShop.Forms
             idProducrColumn.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
             idProducrColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             idProducrColumn.DefaultCellStyle.Font = new Font("Corbel", fontSize, FontStyle.Regular);
+
+            var aliquotaProductColumn = dgvDataAcquisto.Columns["ALIQUOTA"];
+            aliquotaProductColumn.DisplayIndex = 9;
+            aliquotaProductColumn.Visible = false;
+            aliquotaProductColumn.HeaderText = "IVA";
+            aliquotaProductColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            aliquotaProductColumn.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            aliquotaProductColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            aliquotaProductColumn.DefaultCellStyle.Font = new Font("Corbel", fontSize, FontStyle.Regular);
+
+            var noteProductionColumn = dgvDataAcquisto.Columns["NOTE"];
+            noteProductionColumn.DisplayIndex = 10;
+            noteProductionColumn.Visible = false;
+            noteProductionColumn.HeaderText = "NOTE";
+            noteProductionColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            noteProductionColumn.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            noteProductionColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            noteProductionColumn.DefaultCellStyle.Font = new Font("Corbel", fontSize, FontStyle.Bold);
         }
 
         private void txtSearch_TextChanged(object sender, EventArgs e)
@@ -254,11 +272,11 @@ namespace PlannerShop.Forms
             if (e.RowIndex < 0) return;
 
             if (dgvData.Rows[e.RowIndex].Cells[0].Value == null) return;
-            String idProdotto = dgvData.Rows[e.RowIndex].Cells[0].Value.ToString()!;
+            String idProdotto = dgvData.Rows[e.RowIndex].Cells["IDPRODOTTO"].Value.ToString()!;
 
-            DataTable productRow = ModelProdotti.getProdottoById(idProdotto);
+            DataTable DTproductRow = ModelProdotti.getProdottoById(idProdotto);
 
-            if (!int.TryParse(productRow.Rows[0]["QNT"].ToString(), out int intQnt)) return;
+            if (!int.TryParse(DTproductRow.Rows[0]["QNT"].ToString(), out int intQnt)) return;
 
             int firstSelectedIndex = dgvData.SelectedRows[0].Index;
             int displayPos = dgvData.FirstDisplayedScrollingRowIndex;
@@ -279,24 +297,75 @@ namespace PlannerShop.Forms
             if (dt.Rows.Count == 0)
             {
                 ModelAcquisti.addAcquisto(
-                    productRow.Rows[0]["MARCA"].ToString()!,
-                    productRow.Rows[0]["DESCRIZIONE"].ToString()!,
+                    DTproductRow.Rows[0]["MARCA"].ToString()!,
+                    DTproductRow.Rows[0]["DESCRIZIONE"].ToString()!,
                     1.ToString(),
-                    productRow.Rows[0]["PREZZO_NETTO"].ToString()!,
-                    productRow.Rows[0]["PREZZO_IVATO"].ToString()!,
-                    productRow.Rows[0]["DATA"].ToString()!,
+                    DTproductRow.Rows[0]["PREZZO_NETTO"].ToString()!,
+                    DTproductRow.Rows[0]["PREZZO_IVATO"].ToString()!,
+                    DTproductRow.Rows[0]["DATA"].ToString()!,
                     idCliente,
-                    idProdotto);
+                    idProdotto,
+                    DTproductRow.Rows[0]["ALIQUOTA"].ToString()!,
+                    DTproductRow.Rows[0]["NOTE"].ToString()!
+                    );
             }
             else
             {
-                if(!int.TryParse(dt.Rows[0]["QNT"].ToString(), out int qnt)) return;
+                if (!int.TryParse(dt.Rows[0]["QNT"].ToString(), out int qnt)) return;
                 ModelAcquisti.updateQuantity(idProdotto, idCliente, ++qnt);
             }
 
             dgvDataAcquisto.DataSource = ModelAcquisti.getAcquistiByIdCliente(idCliente);
         }
 
+        private void dgvDataAcquisto_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0) return;
+
+            if (dgvDataAcquisto.Rows[e.RowIndex].Cells[8].Value == null) return;
+            String idProdotto = dgvDataAcquisto.Rows[e.RowIndex].Cells["IDPRODOTTO"].Value.ToString()!;
+
+            DataTable DTacquistoRow = ModelAcquisti.getAcquistiByIdClienteAndProductId(idCliente, idProdotto);
+            if (!int.TryParse(DTacquistoRow.Rows[0]["QNT"].ToString(), out int intQnt)) return;
+
+            DataTable DTproductRow = ModelProdotti.getProdottoById(idProdotto);
+
+            if (DTproductRow.Rows.Count == 0)
+            {
+                ModelProdotti.addProdotto(
+                    DTacquistoRow.Rows[0]["DATA"].ToString()!,
+                    DTacquistoRow.Rows[0]["MARCA"].ToString()!,
+                    DTacquistoRow.Rows[0]["DESCRIZIONE"].ToString()!,
+                    DTacquistoRow.Rows[0]["ALIQUOTA"].ToString()!,
+                    1.ToString(),
+                    DTacquistoRow.Rows[0]["PREZZO_NETTO"].ToString()!,
+                    DTacquistoRow.Rows[0]["PREZZO_IVATO"].ToString()!,
+                    DTacquistoRow.Rows[0]["NOTE"].ToString()!
+                    );
+            }
+            else
+            {
+                if (!int.TryParse(DTproductRow.Rows[0]["QNT"].ToString(), out int intQntPrd)) return;
+                ModelProdotti.updateQuantity(idProdotto, ++intQntPrd);
+            }
+
+            dgvData.DataSource = ModelProdotti.getProdotti();
+
+            int firstSelectedIndex = dgvData.SelectedRows[0].Index;
+            int displayPos = dgvData.FirstDisplayedScrollingRowIndex;
+
+            if (intQnt > 1)
+            {
+                ModelAcquisti.updateQuantity(idProdotto, idCliente, intQnt - 1);
+            }
+            else
+            {
+                ModelAcquisti.deleteAcquisto(idProdotto, idCliente);
+            }
+
+            dgvDataAcquisto.DataSource = ModelAcquisti.getAcquisti();
+            SelectAfterDelete(firstSelectedIndex, displayPos, 1);
+        }
 
         private void SelectAfterDelete(int previousIndex, int displayPos, int numberOfDeletions)
         {

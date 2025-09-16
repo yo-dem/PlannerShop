@@ -37,7 +37,9 @@ namespace PlannerShop.Data
             string prezzoIvato,
             string dataAcquisto,
             string idCliente,
-            string idProdotto)
+            string idProdotto,
+            string aliquota,
+            string note)
         {
             dataAcquisto = dataAcquisto.Replace("'", "''");
             marca = marca.Replace("'", "''");
@@ -47,8 +49,10 @@ namespace PlannerShop.Data
             prezzoIvato = prezzoIvato.Replace("'", "''");
             idCliente = idCliente.Replace("'", "''");
             idProdotto = idProdotto.Replace("'", "''");
+            aliquota = aliquota.Replace("'", "''");
+            note = note.Replace("'", "''");
 
-            string sqlComm = @"INSERT INTO TACQUISTI (MARCA,DESCRIZIONE,QNT,PREZZO_NETTO,PREZZO_IVATO,DATA_ACQUISTO,IDCLIENTE,IDPRODOTTO)VALUES('"
+            string sqlComm = @"INSERT INTO TACQUISTI (MARCA,DESCRIZIONE,QNT,PREZZO_NETTO,PREZZO_IVATO,DATA,IDCLIENTE,IDPRODOTTO,ALIQUOTA,NOTE)VALUES('"
                 + marca + "','"
                 + descrizione + "','"
                 + qnt + "','"
@@ -56,7 +60,9 @@ namespace PlannerShop.Data
                 + prezzoIvato + "','"
                 + dataAcquisto + "','"
                 + int.Parse(idCliente) + "','"
-                + int.Parse(idProdotto) + "')";
+                + int.Parse(idProdotto) + "','"
+                + aliquota + "','"
+                + note + "')";
             DBUtility.setDBData(sqlComm);
         }
 
@@ -69,9 +75,9 @@ namespace PlannerShop.Data
             DBUtility.setDBData(sqlComm);
         }
 
-        public static void deleteAcquisto(string? idAcquisto)
+        public static void deleteAcquisto(string? idProdotto, string? idCliente)
         {
-            string sqlComm = @"DELETE FROM TACQUISTO WHERE IDACQUISTO='" + idAcquisto + "'";
+            string sqlComm = @"DELETE FROM TACQUISTO WHERE IDPRODOTTO='" + idProdotto + "' AND IDCLIENTE='" + idCliente + "'";
             DBUtility.setDBData(sqlComm);
         }
     }
