@@ -92,7 +92,7 @@
             // lblNote
             // 
             lblNote.AutoSize = true;
-            lblNote.Location = new Point(223, 87);
+            lblNote.Location = new Point(222, 87);
             lblNote.Name = "lblNote";
             lblNote.Size = new Size(46, 20);
             lblNote.TabIndex = 0;
@@ -104,7 +104,7 @@
             txtNote.Location = new Point(223, 109);
             txtNote.Multiline = true;
             txtNote.Name = "txtNote";
-            txtNote.Size = new Size(647, 362);
+            txtNote.Size = new Size(647, 458);
             txtNote.TabIndex = 8;
             // 
             // btnOk
@@ -226,13 +226,13 @@
             // 
             // btnPurchase
             // 
-            btnPurchase.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            btnPurchase.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             btnPurchase.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             btnPurchase.ForeColor = SystemColors.ControlText;
             btnPurchase.Image = Properties.Resources.prodotti_24;
-            btnPurchase.Location = new Point(223, 477);
+            btnPurchase.Location = new Point(223, 12);
             btnPurchase.Name = "btnPurchase";
-            btnPurchase.Size = new Size(391, 90);
+            btnPurchase.Size = new Size(391, 51);
             btnPurchase.TabIndex = 21;
             btnPurchase.Text = "EFFETTUA ACQUISTO";
             btnPurchase.TextAlign = ContentAlignment.MiddleRight;
@@ -242,13 +242,13 @@
             // 
             // button1
             // 
-            button1.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            button1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             button1.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             button1.ForeColor = SystemColors.ControlText;
             button1.Image = Properties.Resources.statistiche_24;
-            button1.Location = new Point(620, 477);
+            button1.Location = new Point(620, 12);
             button1.Name = "button1";
-            button1.Size = new Size(250, 90);
+            button1.Size = new Size(250, 51);
             button1.TabIndex = 22;
             button1.Text = "VISUALIZZA ACQUISTI";
             button1.TextAlign = ContentAlignment.MiddleRight;

@@ -27,7 +27,8 @@ namespace PlannerShop.Data
             string qnt,
             string prezzoNetto,
             string prezzoIvato,
-            string note)
+            string note,
+            string? idProdotto = null)
         {
             data = data.Replace("'", "''");
             marca = marca.Replace("'", "''");
@@ -37,8 +38,12 @@ namespace PlannerShop.Data
             prezzoNetto = prezzoNetto.Replace("'", "''");
             prezzoIvato = prezzoIvato.Replace("'", "''");
             note = note.Replace("'", "''");
+            if (idProdotto != null)
+                idProdotto = idProdotto.Replace("'", "''");
 
-            string sqlComm = @"INSERT INTO TPRODOTTI (DATA,MARCA,DESCRIZIONE,ALIQUOTA,QNT,PREZZO_NETTO,PREZZO_IVATO,NOTE)VALUES('"
+            string idValue = idProdotto != null ? $"'{idProdotto}'" : "NULL";
+
+            string sqlComm = @"INSERT INTO TPRODOTTI (DATA,MARCA,DESCRIZIONE,ALIQUOTA,QNT,PREZZO_NETTO,PREZZO_IVATO,NOTE,IDPRODOTTO)VALUES('"
                 + data + "','"
                 + marca + "','"
                 + descrizione + "','"
@@ -46,9 +51,12 @@ namespace PlannerShop.Data
                 + qnt + "','"
                 + prezzoNetto + "','"
                 + prezzoIvato + "','"
-                + note + "')";
+                + note + "',"
+                + idValue + ")";
+
             DBUtility.setDBData(sqlComm);
         }
+
 
         public static void editProdotto(
             string idProdotto,

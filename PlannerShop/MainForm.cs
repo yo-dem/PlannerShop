@@ -16,7 +16,7 @@ namespace PlannerShop
         {
             InitializeComponent();
 
-            Utils.SetDataGridStyle(dgvData, true);
+            Utils.SetDataGridStyle(dgvData, true, 50, 40);
             LoadClienti();
 
             if (ModelPwd.IsEnabled())

@@ -54,10 +54,10 @@
             // 
             dgvData.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dgvData.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvData.Location = new Point(362, 149);
+            dgvData.Location = new Point(17, 245);
             dgvData.Name = "dgvData";
             dgvData.RowHeadersWidth = 51;
-            dgvData.Size = new Size(1013, 292);
+            dgvData.Size = new Size(1358, 196);
             dgvData.TabIndex = 6;
             dgvData.CellDoubleClick += dgvData_CellDoubleClick;
             // 
@@ -79,10 +79,10 @@
             pnlSearch.BorderStyle = BorderStyle.FixedSingle;
             pnlSearch.Controls.Add(searchImage);
             pnlSearch.Controls.Add(txtSearch);
-            pnlSearch.Location = new Point(362, 99);
+            pnlSearch.Location = new Point(17, 193);
             pnlSearch.Margin = new Padding(3, 4, 3, 4);
             pnlSearch.Name = "pnlSearch";
-            pnlSearch.Size = new Size(1012, 45);
+            pnlSearch.Size = new Size(1357, 45);
             pnlSearch.TabIndex = 23;
             // 
             // txtSearch
@@ -92,7 +92,7 @@
             txtSearch.Font = new Font("Corbel", 14F);
             txtSearch.Location = new Point(43, 7);
             txtSearch.Name = "txtSearch";
-            txtSearch.Size = new Size(888, 29);
+            txtSearch.Size = new Size(1309, 29);
             txtSearch.TabIndex = 1;
             txtSearch.TabStop = false;
             txtSearch.TextAlign = HorizontalAlignment.Center;
@@ -100,13 +100,14 @@
             // 
             // grpCliente
             // 
+            grpCliente.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             grpCliente.Controls.Add(lblEmail);
             grpCliente.Controls.Add(lblTelefono);
             grpCliente.Controls.Add(lblIndirizzo);
             grpCliente.Controls.Add(lblName);
-            grpCliente.Location = new Point(11, 65);
+            grpCliente.Location = new Point(17, 20);
             grpCliente.Name = "grpCliente";
-            grpCliente.Size = new Size(338, 148);
+            grpCliente.Size = new Size(1365, 141);
             grpCliente.TabIndex = 24;
             grpCliente.TabStop = false;
             grpCliente.Text = "CLIENTE";
@@ -151,9 +152,9 @@
             // grpProdotti
             // 
             grpProdotti.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            grpProdotti.Location = new Point(357, 65);
+            grpProdotti.Location = new Point(11, 167);
             grpProdotti.Name = "grpProdotti";
-            grpProdotti.Size = new Size(1025, 383);
+            grpProdotti.Size = new Size(1371, 281);
             grpProdotti.TabIndex = 25;
             grpProdotti.TabStop = false;
             grpProdotti.Text = "PRODOTTI";

@@ -8,16 +8,16 @@ namespace PlannerShop
 {
     struct Utils
     {
-        public static void SetDataGridStyle(DataGridView dgvData, Boolean isMultiSelect)
+        public static void SetDataGridStyle(DataGridView dgvData, Boolean isMultiSelect, int headerColumnHeight, int rowHeight)
         {
             // Elimina i tooltips dalle celle
             dgvData.ShowCellToolTips = true;
             // Impedisce al controllo di scegliere autonomamente l'altezza dell'header delle colonne
             dgvData.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             // Imposta l'altezza dell'header delle colonne
-            dgvData.ColumnHeadersHeight = 50;
+            dgvData.ColumnHeadersHeight = headerColumnHeight;//50;
             // Imposta l'altezza delle singole righe
-            dgvData.RowTemplate.Height = 40;
+            dgvData.RowTemplate.Height = rowHeight; //40;
             // Imposta il font per l'header delle colonne
             dgvData.ColumnHeadersDefaultCellStyle.Font = new Font("Corbel", 9, FontStyle.Bold);
             // Impedisce all'utente di modificare la dimensione delle righe

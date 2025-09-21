@@ -77,7 +77,7 @@ namespace PlannerShop.Data
 
         public static void deleteAcquisto(string? idProdotto, string? idCliente)
         {
-            string sqlComm = @"DELETE FROM TACQUISTO WHERE IDPRODOTTO='" + idProdotto + "' AND IDCLIENTE='" + idCliente + "'";
+            string sqlComm = @"DELETE FROM TACQUISTI WHERE IDPRODOTTO='" + idProdotto + "' AND IDCLIENTE='" + idCliente + "'";
             DBUtility.setDBData(sqlComm);
         }
     }

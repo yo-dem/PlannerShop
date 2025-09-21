@@ -22,15 +22,9 @@ namespace PlannerShop.Forms
             dgvData.DataSource = ModelProdotti.getProdotti();
             SetProductDataGridStructure();
 
-
-            Utils.SetDataGridStyle(dgvDataAcquisto, false);
-            Utils.SetDataGridStyle(dgvData, false);
+            Utils.SetDataGridStyle(dgvData, false, 40, 30);
+            Utils.SetDataGridStyle(dgvDataAcquisto, false, 40, 40);
             loadClienteData();
-
-            foreach (DataGridViewColumn col in dgvData.Columns)
-            {
-                dgvDataAcquisto.Columns.Add((DataGridViewColumn)col.Clone());
-            }
 
             dgvDataAcquisto.DataSource = ModelAcquisti.getAcquistiByIdCliente(idCliente);
             SetPurchaseDataGridStructure();
@@ -47,7 +41,7 @@ namespace PlannerShop.Forms
 
         void SetProductDataGridStructure()
         {
-            int fontSize = 10;
+            int fontSize = 8;
 
             var idProductColumn = dgvData.Columns["IDPRODOTTO"];
             idProductColumn.DisplayIndex = 0;
@@ -133,7 +127,7 @@ namespace PlannerShop.Forms
 
         void SetPurchaseDataGridStructure()
         {
-            int fontSize = 10;
+            int fontSize = 13;
 
             var idPurchaseColumn = dgvDataAcquisto.Columns["IDACQUISTO"];
             idPurchaseColumn.DisplayIndex = 0;
@@ -322,7 +316,7 @@ namespace PlannerShop.Forms
         {
             if (e.RowIndex < 0) return;
 
-            if (dgvDataAcquisto.Rows[e.RowIndex].Cells[8].Value == null) return;
+            if (dgvDataAcquisto.Rows[e.RowIndex].Cells["IDPRODOTTO"].Value == null) return;
             String idProdotto = dgvDataAcquisto.Rows[e.RowIndex].Cells["IDPRODOTTO"].Value.ToString()!;
 
             DataTable DTacquistoRow = ModelAcquisti.getAcquistiByIdClienteAndProductId(idCliente, idProdotto);
@@ -340,7 +334,8 @@ namespace PlannerShop.Forms
                     1.ToString(),
                     DTacquistoRow.Rows[0]["PREZZO_NETTO"].ToString()!,
                     DTacquistoRow.Rows[0]["PREZZO_IVATO"].ToString()!,
-                    DTacquistoRow.Rows[0]["NOTE"].ToString()!
+                    DTacquistoRow.Rows[0]["NOTE"].ToString()!,
+                    DTacquistoRow.Rows[0]["IDPRODOTTO"].ToString()!
                     );
             }
             else
