@@ -285,7 +285,7 @@ namespace PlannerShop.Forms
             }
 
             dgvData.DataSource = ModelProdotti.getProdotti();
-            SelectAfterDelete(firstSelectedIndex, displayPos, 1);
+            SelectAfterDelete(dgvData, firstSelectedIndex, displayPos, 1);
 
             DataTable dt = ModelAcquisti.getAcquistiByIdClienteAndProductId(idCliente, idProdotto);
             if (dt.Rows.Count == 0)
@@ -346,8 +346,8 @@ namespace PlannerShop.Forms
 
             dgvData.DataSource = ModelProdotti.getProdotti();
 
-            int firstSelectedIndex = dgvData.SelectedRows[0].Index;
-            int displayPos = dgvData.FirstDisplayedScrollingRowIndex;
+            int firstSelectedIndex = dgvDataAcquisto.SelectedRows[0].Index;
+            int displayPos = dgvDataAcquisto.FirstDisplayedScrollingRowIndex;
 
             if (intQnt > 1)
             {
@@ -359,10 +359,10 @@ namespace PlannerShop.Forms
             }
 
             dgvDataAcquisto.DataSource = ModelAcquisti.getAcquisti();
-            SelectAfterDelete(firstSelectedIndex, displayPos, 1);
+            SelectAfterDelete(dgvDataAcquisto, firstSelectedIndex, displayPos, 1);
         }
 
-        private void SelectAfterDelete(int previousIndex, int displayPos, int numberOfDeletions)
+        private void SelectAfterDelete(DataGridView dgvData, int previousIndex, int displayPos, int numberOfDeletions)
         {
             dgvData.ClearSelection();
 
