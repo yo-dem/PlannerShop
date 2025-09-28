@@ -112,7 +112,7 @@
             txtNote.Location = new Point(223, 109);
             txtNote.Multiline = true;
             txtNote.Name = "txtNote";
-            txtNote.Size = new Size(647, 327);
+            txtNote.Size = new Size(842, 450);
             txtNote.TabIndex = 9;
             // 
             // lblPrezzoNetto
@@ -158,9 +158,9 @@
             btnOk.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             btnOk.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             btnOk.Image = Properties.Resources.okImage;
-            btnOk.Location = new Point(14, 443);
+            btnOk.Location = new Point(14, 566);
             btnOk.Name = "btnOk";
-            btnOk.Size = new Size(857, 91);
+            btnOk.Size = new Size(1052, 91);
             btnOk.TabIndex = 10;
             btnOk.Text = "CARICA PRODOTTO";
             btnOk.TextAlign = ContentAlignment.BottomCenter;
@@ -173,7 +173,7 @@
             chkRipeti.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             chkRipeti.AutoSize = true;
             chkRipeti.CheckAlign = ContentAlignment.MiddleRight;
-            chkRipeti.Location = new Point(704, 12);
+            chkRipeti.Location = new Point(899, 12);
             chkRipeti.Name = "chkRipeti";
             chkRipeti.Size = new Size(170, 24);
             chkRipeti.TabIndex = 0;
@@ -186,7 +186,7 @@
             lblQnt.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             lblQnt.AutoSize = true;
             lblQnt.LiveSetting = System.Windows.Forms.Automation.AutomationLiveSetting.Polite;
-            lblQnt.Location = new Point(787, 53);
+            lblQnt.Location = new Point(982, 53);
             lblQnt.Name = "lblQnt";
             lblQnt.Size = new Size(83, 20);
             lblQnt.TabIndex = 0;
@@ -195,7 +195,7 @@
             // nudQnt
             // 
             nudQnt.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            nudQnt.Location = new Point(734, 76);
+            nudQnt.Location = new Point(929, 76);
             nudQnt.Maximum = new decimal(new int[] { 9999, 0, 0, 0 });
             nudQnt.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             nudQnt.Name = "nudQnt";
@@ -209,7 +209,7 @@
             // 
             lblAliquota.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             lblAliquota.AutoSize = true;
-            lblAliquota.Location = new Point(650, 53);
+            lblAliquota.Location = new Point(845, 53);
             lblAliquota.Name = "lblAliquota";
             lblAliquota.Size = new Size(78, 20);
             lblAliquota.TabIndex = 0;
@@ -218,7 +218,7 @@
             // nudAliquota
             // 
             nudAliquota.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            nudAliquota.Location = new Point(592, 76);
+            nudAliquota.Location = new Point(787, 76);
             nudAliquota.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             nudAliquota.Name = "nudAliquota";
             nudAliquota.Size = new Size(136, 27);
@@ -226,6 +226,7 @@
             nudAliquota.TabStop = false;
             nudAliquota.TextAlign = HorizontalAlignment.Right;
             nudAliquota.Value = new decimal(new int[] { 22, 0, 0, 0 });
+            nudAliquota.ValueChanged += nudAliquota_ValueChanged;
             nudAliquota.KeyPress += nudAliquota_KeyPress;
             // 
             // rdbPrezzoIvato
@@ -255,7 +256,7 @@
             AcceptButton = btnOk;
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(887, 556);
+            ClientSize = new Size(1082, 679);
             Controls.Add(rdbPrezzoIvato);
             Controls.Add(rdbPrezzoNetto);
             Controls.Add(nudAliquota);
@@ -276,11 +277,10 @@
             Controls.Add(lblMarca);
             Controls.Add(txtMarca);
             Icon = (Icon)resources.GetObject("$this.Icon");
-            MinimumSize = new Size(903, 592);
+            MinimumSize = new Size(1100, 726);
             Name = "ProductInsertForm";
             StartPosition = FormStartPosition.CenterParent;
             Text = "INSERIMENTO PRODOTTO";
-            WindowState = FormWindowState.Maximized;
             ((System.ComponentModel.ISupportInitialize)nudQnt).EndInit();
             ((System.ComponentModel.ISupportInitialize)nudAliquota).EndInit();
             ResumeLayout(false);

@@ -50,7 +50,8 @@ namespace PlannerShop.Forms
 
         private void txtPrezzoNetto_TextChanged(object? sender, EventArgs e)
         {
-            if (rdbPrezzoNetto.Checked) {
+            if (rdbPrezzoNetto.Checked)
+            {
                 lblPrezzoNetto.ForeColor = Color.Black;
                 lblPrezzoIvato.ForeColor = Color.Black;
 
@@ -107,6 +108,12 @@ namespace PlannerShop.Forms
                 lblAliquota.ForeColor = Color.Black;
                 txtPrezzoNetto.Text = String.Empty;
             }
+        }
+
+        private void nudAliquota_ValueChanged(object sender, EventArgs e)
+        {
+            txtPrezzoNetto.Text = string.Empty;
+            txtPrezzoIvato.Text = string.Empty;
         }
 
         private void txtNote_GotFocus(object? sender, EventArgs e)
@@ -228,5 +235,6 @@ namespace PlannerShop.Forms
             txtPrezzoIvato.ReadOnly = !rdbPrezzoIvato.Checked;
             txtPrezzoNetto.ReadOnly = !rdbPrezzoNetto.Checked;
         }
+
     }
 }

@@ -104,7 +104,7 @@
             txtNote.Location = new Point(223, 109);
             txtNote.Multiline = true;
             txtNote.Name = "txtNote";
-            txtNote.Size = new Size(647, 458);
+            txtNote.Size = new Size(840, 458);
             txtNote.TabIndex = 8;
             // 
             // btnOk
@@ -114,7 +114,7 @@
             btnOk.Image = Properties.Resources.okImage;
             btnOk.Location = new Point(223, 576);
             btnOk.Name = "btnOk";
-            btnOk.Size = new Size(648, 91);
+            btnOk.Size = new Size(841, 91);
             btnOk.TabIndex = 10;
             btnOk.Text = "SALVA MODIFICHE";
             btnOk.TextAlign = ContentAlignment.BottomCenter;
@@ -230,7 +230,7 @@
             btnPurchase.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             btnPurchase.ForeColor = SystemColors.ControlText;
             btnPurchase.Image = Properties.Resources.prodotti_24;
-            btnPurchase.Location = new Point(364, 12);
+            btnPurchase.Location = new Point(557, 12);
             btnPurchase.Name = "btnPurchase";
             btnPurchase.Size = new Size(250, 72);
             btnPurchase.TabIndex = 21;
@@ -246,7 +246,7 @@
             button1.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             button1.ForeColor = SystemColors.ControlText;
             button1.Image = Properties.Resources.statistiche_24;
-            button1.Location = new Point(620, 12);
+            button1.Location = new Point(813, 12);
             button1.Name = "button1";
             button1.Size = new Size(250, 72);
             button1.TabIndex = 22;
@@ -260,7 +260,7 @@
             AcceptButton = btnOk;
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(889, 689);
+            ClientSize = new Size(1082, 689);
             Controls.Add(button1);
             Controls.Add(btnPurchase);
             Controls.Add(btnDelete);
@@ -282,11 +282,10 @@
             Controls.Add(lblNome);
             Controls.Add(txtNome);
             Icon = (Icon)resources.GetObject("$this.Icon");
-            MinimumSize = new Size(905, 726);
+            MinimumSize = new Size(1100, 726);
             Name = "ClientEditForm";
             StartPosition = FormStartPosition.CenterParent;
             Text = "MODIFICA CLIENTE";
-            WindowState = FormWindowState.Maximized;
             ResumeLayout(false);
             PerformLayout();
 

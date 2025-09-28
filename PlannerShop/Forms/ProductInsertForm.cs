@@ -96,6 +96,12 @@ namespace PlannerShop.Forms
             }
         }
 
+        private void nudAliquota_ValueChanged(object sender, EventArgs e)
+        {
+            txtPrezzoNetto.Text = string.Empty;
+            txtPrezzoIvato.Text = string.Empty;
+        }
+
         private void TxtNote_GotFocus(object? sender, EventArgs e)
         {
             this.AcceptButton = null;

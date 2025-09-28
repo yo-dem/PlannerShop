@@ -102,7 +102,7 @@
             txtNote.Location = new Point(223, 109);
             txtNote.Multiline = true;
             txtNote.Name = "txtNote";
-            txtNote.Size = new Size(647, 460);
+            txtNote.Size = new Size(842, 460);
             txtNote.TabIndex = 8;
             // 
             // btnOk
@@ -112,7 +112,7 @@
             btnOk.Image = Properties.Resources.okImage;
             btnOk.Location = new Point(14, 576);
             btnOk.Name = "btnOk";
-            btnOk.Size = new Size(857, 91);
+            btnOk.Size = new Size(1052, 91);
             btnOk.TabIndex = 10;
             btnOk.Text = "CARICA CLIENTE";
             btnOk.TextAlign = ContentAlignment.BottomCenter;
@@ -210,7 +210,7 @@
             chkRipeti.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             chkRipeti.AutoSize = true;
             chkRipeti.CheckAlign = ContentAlignment.MiddleRight;
-            chkRipeti.Location = new Point(705, 12);
+            chkRipeti.Location = new Point(900, 12);
             chkRipeti.Name = "chkRipeti";
             chkRipeti.Size = new Size(170, 24);
             chkRipeti.TabIndex = 0;
@@ -223,7 +223,7 @@
             AcceptButton = btnOk;
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(887, 681);
+            ClientSize = new Size(1082, 681);
             Controls.Add(lblIndirizzo);
             Controls.Add(txtIndirizzo);
             Controls.Add(lblEmail);
@@ -243,11 +243,10 @@
             Controls.Add(lblNome);
             Controls.Add(txtNome);
             Icon = (Icon)resources.GetObject("$this.Icon");
-            MinimumSize = new Size(903, 715);
+            MinimumSize = new Size(1100, 726);
             Name = "ClientInsertForm";
             StartPosition = FormStartPosition.CenterParent;
             Text = "INSERIMENTO CLIENTE";
-            WindowState = FormWindowState.Maximized;
             ResumeLayout(false);
             PerformLayout();
 

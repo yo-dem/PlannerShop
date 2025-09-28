@@ -57,7 +57,7 @@
             dgvData.Location = new Point(17, 245);
             dgvData.Name = "dgvData";
             dgvData.RowHeadersWidth = 51;
-            dgvData.Size = new Size(1358, 196);
+            dgvData.Size = new Size(1055, 104);
             dgvData.TabIndex = 6;
             dgvData.CellDoubleClick += dgvData_CellDoubleClick;
             // 
@@ -82,7 +82,7 @@
             pnlSearch.Location = new Point(17, 193);
             pnlSearch.Margin = new Padding(3, 4, 3, 4);
             pnlSearch.Name = "pnlSearch";
-            pnlSearch.Size = new Size(1357, 45);
+            pnlSearch.Size = new Size(1054, 45);
             pnlSearch.TabIndex = 23;
             // 
             // txtSearch
@@ -92,7 +92,7 @@
             txtSearch.Font = new Font("Corbel", 14F);
             txtSearch.Location = new Point(43, 7);
             txtSearch.Name = "txtSearch";
-            txtSearch.Size = new Size(1309, 29);
+            txtSearch.Size = new Size(1006, 29);
             txtSearch.TabIndex = 1;
             txtSearch.TabStop = false;
             txtSearch.TextAlign = HorizontalAlignment.Center;
@@ -107,7 +107,7 @@
             grpCliente.Controls.Add(lblName);
             grpCliente.Location = new Point(17, 20);
             grpCliente.Name = "grpCliente";
-            grpCliente.Size = new Size(1365, 141);
+            grpCliente.Size = new Size(1062, 141);
             grpCliente.TabIndex = 24;
             grpCliente.TabStop = false;
             grpCliente.Text = "CLIENTE";
@@ -154,7 +154,7 @@
             grpProdotti.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             grpProdotti.Location = new Point(11, 167);
             grpProdotti.Name = "grpProdotti";
-            grpProdotti.Size = new Size(1371, 281);
+            grpProdotti.Size = new Size(1068, 189);
             grpProdotti.TabIndex = 25;
             grpProdotti.TabStop = false;
             grpProdotti.Text = "PRODOTTI";
@@ -163,9 +163,9 @@
             // 
             grpAcquisti.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             grpAcquisti.Controls.Add(dgvDataAcquisto);
-            grpAcquisti.Location = new Point(11, 453);
+            grpAcquisti.Location = new Point(11, 361);
             grpAcquisti.Name = "grpAcquisti";
-            grpAcquisti.Size = new Size(1368, 297);
+            grpAcquisti.Size = new Size(1065, 297);
             grpAcquisti.TabIndex = 25;
             grpAcquisti.TabStop = false;
             grpAcquisti.Text = "ACQUISTO";
@@ -177,7 +177,7 @@
             dgvDataAcquisto.Location = new Point(6, 27);
             dgvDataAcquisto.Name = "dgvDataAcquisto";
             dgvDataAcquisto.RowHeadersWidth = 51;
-            dgvDataAcquisto.Size = new Size(1357, 265);
+            dgvDataAcquisto.Size = new Size(1054, 265);
             dgvDataAcquisto.TabIndex = 7;
             dgvDataAcquisto.CellDoubleClick += dgvDataAcquisto_CellDoubleClick;
             // 
@@ -188,14 +188,14 @@
             pnlTop.Location = new Point(0, 0);
             pnlTop.Margin = new Padding(3, 4, 3, 4);
             pnlTop.Name = "pnlTop";
-            pnlTop.Size = new Size(1394, 13);
+            pnlTop.Size = new Size(1091, 13);
             pnlTop.TabIndex = 26;
             // 
             // PurchaseEditForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1394, 771);
+            ClientSize = new Size(1091, 679);
             Controls.Add(pnlTop);
             Controls.Add(grpAcquisti);
             Controls.Add(grpCliente);
@@ -207,7 +207,6 @@
             Name = "PurchaseEditForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "GESTIONE ACQUISTI";
-            WindowState = FormWindowState.Maximized;
             ((System.ComponentModel.ISupportInitialize)dgvData).EndInit();
             ((System.ComponentModel.ISupportInitialize)searchImage).EndInit();
             pnlSearch.ResumeLayout(false);
