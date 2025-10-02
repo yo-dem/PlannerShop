@@ -39,13 +39,16 @@
             lblIndirizzo = new Label();
             lblName = new Label();
             grpProdotti = new GroupBox();
+            pnlCollapseProdotti = new Panel();
             grpAcquisti = new GroupBox();
+            pnlCollapseAcquisti = new Panel();
             dgvDataAcquisto = new DataGridView();
             pnlTop = new Panel();
             ((System.ComponentModel.ISupportInitialize)dgvData).BeginInit();
             ((System.ComponentModel.ISupportInitialize)searchImage).BeginInit();
             pnlSearch.SuspendLayout();
             grpCliente.SuspendLayout();
+            grpProdotti.SuspendLayout();
             grpAcquisti.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvDataAcquisto).BeginInit();
             SuspendLayout();
@@ -57,7 +60,7 @@
             dgvData.Location = new Point(17, 245);
             dgvData.Name = "dgvData";
             dgvData.RowHeadersWidth = 51;
-            dgvData.Size = new Size(1055, 104);
+            dgvData.Size = new Size(1055, 171);
             dgvData.TabIndex = 6;
             dgvData.CellDoubleClick += dgvData_CellDoubleClick;
             // 
@@ -152,23 +155,43 @@
             // grpProdotti
             // 
             grpProdotti.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            grpProdotti.Controls.Add(pnlCollapseProdotti);
             grpProdotti.Location = new Point(11, 167);
             grpProdotti.Name = "grpProdotti";
-            grpProdotti.Size = new Size(1068, 189);
+            grpProdotti.Size = new Size(1068, 255);
             grpProdotti.TabIndex = 25;
             grpProdotti.TabStop = false;
-            grpProdotti.Text = "PRODOTTI";
+            grpProdotti.Text = "[ - ] PRODOTTI";
+            // 
+            // pnlCollapseProdotti
+            // 
+            pnlCollapseProdotti.BackColor = Color.Transparent;
+            pnlCollapseProdotti.Location = new Point(1, 0);
+            pnlCollapseProdotti.Name = "pnlCollapseProdotti";
+            pnlCollapseProdotti.Size = new Size(130, 20);
+            pnlCollapseProdotti.TabIndex = 5;
+            pnlCollapseProdotti.MouseClick += pnlCollapseProdotti_MouseClick;
             // 
             // grpAcquisti
             // 
             grpAcquisti.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            grpAcquisti.Controls.Add(pnlCollapseAcquisti);
             grpAcquisti.Controls.Add(dgvDataAcquisto);
-            grpAcquisti.Location = new Point(11, 361);
+            grpAcquisti.Location = new Point(11, 428);
             grpAcquisti.Name = "grpAcquisti";
-            grpAcquisti.Size = new Size(1065, 297);
+            grpAcquisti.Size = new Size(1068, 230);
             grpAcquisti.TabIndex = 25;
             grpAcquisti.TabStop = false;
-            grpAcquisti.Text = "ACQUISTO";
+            grpAcquisti.Text = "[ - ] ACQUISTI";
+            // 
+            // pnlCollapseAcquisti
+            // 
+            pnlCollapseAcquisti.BackColor = Color.Transparent;
+            pnlCollapseAcquisti.Location = new Point(1, 0);
+            pnlCollapseAcquisti.Name = "pnlCollapseAcquisti";
+            pnlCollapseAcquisti.Size = new Size(130, 20);
+            pnlCollapseAcquisti.TabIndex = 6;
+            pnlCollapseAcquisti.MouseClick += pnlCollapseAcquisti_MouseClick;
             // 
             // dgvDataAcquisto
             // 
@@ -177,7 +200,7 @@
             dgvDataAcquisto.Location = new Point(6, 27);
             dgvDataAcquisto.Name = "dgvDataAcquisto";
             dgvDataAcquisto.RowHeadersWidth = 51;
-            dgvDataAcquisto.Size = new Size(1054, 265);
+            dgvDataAcquisto.Size = new Size(1057, 198);
             dgvDataAcquisto.TabIndex = 7;
             dgvDataAcquisto.CellDoubleClick += dgvDataAcquisto_CellDoubleClick;
             // 
@@ -202,17 +225,21 @@
             Controls.Add(pnlSearch);
             Controls.Add(dgvData);
             Controls.Add(grpProdotti);
+            FormBorderStyle = FormBorderStyle.FixedDialog;
             Icon = (Icon)resources.GetObject("$this.Icon");
+            MaximizeBox = false;
             MinimumSize = new Size(1109, 647);
             Name = "PurchaseEditForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "GESTIONE ACQUISTI";
+            WindowState = FormWindowState.Maximized;
             ((System.ComponentModel.ISupportInitialize)dgvData).EndInit();
             ((System.ComponentModel.ISupportInitialize)searchImage).EndInit();
             pnlSearch.ResumeLayout(false);
             pnlSearch.PerformLayout();
             grpCliente.ResumeLayout(false);
             grpCliente.PerformLayout();
+            grpProdotti.ResumeLayout(false);
             grpAcquisti.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dgvDataAcquisto).EndInit();
             ResumeLayout(false);
@@ -233,5 +260,7 @@
         private Label lblTelefono;
         private Label lblEmail;
         private Panel pnlTop;
+        private Panel pnlCollapseProdotti;
+        private Panel pnlCollapseAcquisti;
     }
 }

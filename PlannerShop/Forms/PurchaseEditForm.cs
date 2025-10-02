@@ -8,12 +8,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
 
 namespace PlannerShop.Forms
 {
     public partial class PurchaseEditForm : Form
     {
         String idCliente;
+        bool isGrpProdottiCollapsed = false;
+        bool isGrpAcquistiCollapsed = false;
+
+        int originalGrpProdottiHeight;
+        int originalGrpAcquistiHeight;
+
+        Point originalGrpAcquistiLocation;
+
         public PurchaseEditForm(String IdCliente)
         {
             InitializeComponent();
@@ -389,6 +398,52 @@ namespace PlannerShop.Forms
                 dgvData.FirstDisplayedScrollingRowIndex = displayPos;
             }
         }
+
+        private void pnlCollapseProdotti_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (!isGrpProdottiCollapsed)
+            {
+                originalGrpProdottiHeight = grpProdotti.Height;
+                grpProdotti.Height = 40;
+                grpProdotti.Text = "[ + ] PRODOTTI";
+                isGrpProdottiCollapsed = true;
+                pnlSearch.Visible = false;
+                dgvData.Visible = false;
+
+                originalGrpAcquistiLocation = grpAcquisti.Location;
+                grpAcquisti.Location = new Point(grpProdotti.Location.X, grpProdotti.Location.Y + 50);
+            }
+            else
+            {
+                grpProdotti.Height = originalGrpProdottiHeight;
+                grpProdotti.Text = "[ - ] PRODOTTI";
+                isGrpProdottiCollapsed = false;
+                pnlSearch.Visible = true;
+                dgvData.Visible = true;
+
+                grpAcquisti.Location = originalGrpAcquistiLocation;
+            }
+        }
+
+        private void pnlCollapseAcquisti_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (!isGrpAcquistiCollapsed)
+            {
+                originalGrpAcquistiHeight = grpAcquisti.Height;
+                grpAcquisti.Height = 40;
+                grpAcquisti.Text = "[ + ] ACQUISTI";
+                isGrpAcquistiCollapsed = true;
+                dgvDataAcquisto.Visible = false;
+            }
+            else
+            {
+                grpAcquisti.Height = originalGrpAcquistiHeight;
+                grpAcquisti.Text = "[ - ] ACQUISTI";
+                isGrpAcquistiCollapsed = false;
+                dgvDataAcquisto.Visible = true;
+            }
+        }
+
     }
 }
 

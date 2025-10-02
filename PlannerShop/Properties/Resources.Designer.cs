@@ -83,6 +83,16 @@ namespace PlannerShop.Properties {
         /// <summary>
         ///   Cerca una risorsa localizzata di tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap clienti {
+            get {
+                object obj = ResourceManager.GetObject("clienti", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una risorsa localizzata di tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap editPageImage {
             get {
                 object obj = ResourceManager.GetObject("editPageImage", resourceCulture);
@@ -136,6 +146,26 @@ namespace PlannerShop.Properties {
         internal static System.Drawing.Bitmap searchWhiteImage {
             get {
                 object obj = ResourceManager.GetObject("searchWhiteImage", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una risorsa localizzata di tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap servizi {
+            get {
+                object obj = ResourceManager.GetObject("servizi", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una risorsa localizzata di tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap serviziEstetici {
+            get {
+                object obj = ResourceManager.GetObject("serviziEstetici", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

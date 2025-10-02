@@ -44,6 +44,7 @@
             txtSearch = new TextBox();
             pnlTop = new Panel();
             btnClienti = new Button();
+            btnServizi = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvData).BeginInit();
             pnlSearch.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)searchImage).BeginInit();
@@ -247,7 +248,7 @@
             // btnClienti
             // 
             btnClienti.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
-            btnClienti.Image = Properties.Resources.fornitore_24;
+            btnClienti.Image = Properties.Resources.clienti;
             btnClienti.Location = new Point(14, 87);
             btnClienti.Name = "btnClienti";
             btnClienti.Size = new Size(150, 69);
@@ -258,11 +259,25 @@
             btnClienti.UseVisualStyleBackColor = true;
             btnClienti.Click += btnClienti_Click;
             // 
+            // btnServizi
+            // 
+            btnServizi.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
+            btnServizi.Image = Properties.Resources.serviziEstetici;
+            btnServizi.Location = new Point(483, 86);
+            btnServizi.Name = "btnServizi";
+            btnServizi.Size = new Size(150, 69);
+            btnServizi.TabIndex = 24;
+            btnServizi.Text = "SERVIZI";
+            btnServizi.TextAlign = ContentAlignment.BottomCenter;
+            btnServizi.TextImageRelation = TextImageRelation.ImageAboveText;
+            btnServizi.UseVisualStyleBackColor = true;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1239, 719);
+            Controls.Add(btnServizi);
             Controls.Add(dgvData);
             Controls.Add(btnClienti);
             Controls.Add(pnlTop);
@@ -305,5 +320,6 @@
         private TextBox txtSearch;
         private Panel pnlTop;
         private Button btnClienti;
+        private Button btnServizi;
     }
 }
