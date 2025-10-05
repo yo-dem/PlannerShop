@@ -15,24 +15,19 @@ namespace PlannerShop.Forms
     public partial class PurchaseEditForm : Form
     {
         String idCliente;
-        bool isGrpProdottiCollapsed = false;
-        bool isGrpAcquistiCollapsed = false;
+        ClientEditForm parent;
 
-        int originalGrpProdottiHeight;
-        int originalGrpAcquistiHeight;
-
-        Point originalGrpAcquistiLocation;
-
-        public PurchaseEditForm(String IdCliente)
+        public PurchaseEditForm(String IdCliente, ClientEditForm parent)
         {
             InitializeComponent();
             this.idCliente = IdCliente;
+            this.parent = parent;
 
             dgvData.DataSource = ModelProdotti.getProdotti();
             SetProductDataGridStructure();
 
             Utils.SetDataGridStyle(dgvData, false, 40, 30);
-            Utils.SetDataGridStyle(dgvDataAcquisto, false, 40, 40);
+            Utils.SetDataGridStyle(dgvDataAcquisto, false, 40, 30);
             loadClienteData();
 
             dgvDataAcquisto.DataSource = ModelAcquisti.getAcquistiByIdCliente(idCliente);
@@ -136,7 +131,7 @@ namespace PlannerShop.Forms
 
         void SetPurchaseDataGridStructure()
         {
-            int fontSize = 13;
+            int fontSize = 8;
 
             var idPurchaseColumn = dgvDataAcquisto.Columns["IDACQUISTO"];
             idPurchaseColumn.DisplayIndex = 0;
@@ -399,51 +394,10 @@ namespace PlannerShop.Forms
             }
         }
 
-        private void pnlCollapseProdotti_MouseClick(object sender, MouseEventArgs e)
+        private void PurchaseEditForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            if (!isGrpProdottiCollapsed)
-            {
-                originalGrpProdottiHeight = grpProdotti.Height;
-                grpProdotti.Height = 40;
-                grpProdotti.Text = "[ + ] PRODOTTI";
-                isGrpProdottiCollapsed = true;
-                pnlSearch.Visible = false;
-                dgvData.Visible = false;
-
-                originalGrpAcquistiLocation = grpAcquisti.Location;
-                grpAcquisti.Location = new Point(grpProdotti.Location.X, grpProdotti.Location.Y + 50);
-            }
-            else
-            {
-                grpProdotti.Height = originalGrpProdottiHeight;
-                grpProdotti.Text = "[ - ] PRODOTTI";
-                isGrpProdottiCollapsed = false;
-                pnlSearch.Visible = true;
-                dgvData.Visible = true;
-
-                grpAcquisti.Location = originalGrpAcquistiLocation;
-            }
+            parent.Show();
         }
-
-        private void pnlCollapseAcquisti_MouseClick(object sender, MouseEventArgs e)
-        {
-            if (!isGrpAcquistiCollapsed)
-            {
-                originalGrpAcquistiHeight = grpAcquisti.Height;
-                grpAcquisti.Height = 40;
-                grpAcquisti.Text = "[ + ] ACQUISTI";
-                isGrpAcquistiCollapsed = true;
-                dgvDataAcquisto.Visible = false;
-            }
-            else
-            {
-                grpAcquisti.Height = originalGrpAcquistiHeight;
-                grpAcquisti.Text = "[ - ] ACQUISTI";
-                isGrpAcquistiCollapsed = false;
-                dgvDataAcquisto.Visible = true;
-            }
-        }
-
     }
 }
 

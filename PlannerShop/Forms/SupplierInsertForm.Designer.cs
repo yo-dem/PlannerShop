@@ -95,7 +95,7 @@
             txtNote.Location = new Point(223, 109);
             txtNote.Multiline = true;
             txtNote.Name = "txtNote";
-            txtNote.Size = new Size(842, 450);
+            txtNote.Size = new Size(842, 460);
             txtNote.TabIndex = 6;
             // 
             // lblTelefonoMobile
@@ -130,7 +130,7 @@
             btnOk.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             btnOk.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             btnOk.Image = Properties.Resources.okImage;
-            btnOk.Location = new Point(14, 566);
+            btnOk.Location = new Point(14, 576);
             btnOk.Name = "btnOk";
             btnOk.Size = new Size(1052, 91);
             btnOk.TabIndex = 10;
@@ -187,7 +187,7 @@
             AcceptButton = btnOk;
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1082, 679);
+            ClientSize = new Size(1082, 689);
             Controls.Add(txtTelefonoMobile);
             Controls.Add(lblTelefonoFisso);
             Controls.Add(txtTelefonoFisso);
@@ -203,7 +203,7 @@
             Controls.Add(lblNome);
             Controls.Add(txtNome);
             Icon = (Icon)resources.GetObject("$this.Icon");
-            MinimumSize = new Size(1100, 726);
+            MinimumSize = new Size(1100, 736);
             Name = "SupplierInsertForm";
             StartPosition = FormStartPosition.CenterParent;
             Text = "INSERIMENTO FORNITORE";

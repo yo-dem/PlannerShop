@@ -143,7 +143,8 @@ namespace PlannerShop.Forms
 
         private void btnPurchase_Click(object sender, EventArgs e)
         {
-            PurchaseEditForm purchaseEditForm = new PurchaseEditForm(idCliente);
+            this.Hide();
+            PurchaseEditForm purchaseEditForm = new PurchaseEditForm(idCliente, this);
             purchaseEditForm.ShowDialog();
         }
 

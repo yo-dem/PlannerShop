@@ -282,7 +282,7 @@
             Controls.Add(lblNome);
             Controls.Add(txtNome);
             Icon = (Icon)resources.GetObject("$this.Icon");
-            MinimumSize = new Size(1100, 726);
+            MinimumSize = new Size(1100, 736);
             Name = "ClientEditForm";
             StartPosition = FormStartPosition.CenterParent;
             Text = "MODIFICA CLIENTE";
