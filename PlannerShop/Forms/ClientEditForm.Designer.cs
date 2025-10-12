@@ -84,7 +84,7 @@
             dtpDataNascita.Location = new Point(14, 540);
             dtpDataNascita.Name = "dtpDataNascita";
             dtpDataNascita.Size = new Size(202, 27);
-            dtpDataNascita.TabIndex = 7;
+            dtpDataNascita.TabIndex = 0;
             dtpDataNascita.TabStop = false;
             dtpDataNascita.Value = new DateTime(1990, 5, 30, 0, 0, 0, 0);
             dtpDataNascita.ValueChanged += dtpDataNascita_ValueChanged;
@@ -104,8 +104,8 @@
             txtNote.Location = new Point(223, 109);
             txtNote.Multiline = true;
             txtNote.Name = "txtNote";
-            txtNote.Size = new Size(840, 458);
-            txtNote.TabIndex = 8;
+            txtNote.Size = new Size(840, 403);
+            txtNote.TabIndex = 7;
             // 
             // btnOk
             // 
@@ -216,7 +216,7 @@
             btnDelete.Location = new Point(14, 576);
             btnDelete.Name = "btnDelete";
             btnDelete.Size = new Size(201, 91);
-            btnDelete.TabIndex = 20;
+            btnDelete.TabIndex = 0;
             btnDelete.TabStop = false;
             btnDelete.Text = "ELIMINA IL CLIENTE";
             btnDelete.TextAlign = ContentAlignment.BottomCenter;
@@ -226,14 +226,14 @@
             // 
             // btnPurchase
             // 
-            btnPurchase.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnPurchase.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             btnPurchase.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             btnPurchase.ForeColor = SystemColors.ControlText;
             btnPurchase.Image = Properties.Resources.prodotti_24;
-            btnPurchase.Location = new Point(557, 12);
+            btnPurchase.Location = new Point(223, 521);
             btnPurchase.Name = "btnPurchase";
-            btnPurchase.Size = new Size(250, 72);
-            btnPurchase.TabIndex = 21;
+            btnPurchase.Size = new Size(584, 49);
+            btnPurchase.TabIndex = 8;
             btnPurchase.Text = "EFFETTUA ACQUISTO";
             btnPurchase.TextAlign = ContentAlignment.MiddleRight;
             btnPurchase.TextImageRelation = TextImageRelation.ImageBeforeText;
@@ -242,14 +242,14 @@
             // 
             // button1
             // 
-            button1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            button1.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             button1.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             button1.ForeColor = SystemColors.ControlText;
             button1.Image = Properties.Resources.statistiche_24;
-            button1.Location = new Point(813, 12);
+            button1.Location = new Point(813, 521);
             button1.Name = "button1";
-            button1.Size = new Size(250, 72);
-            button1.TabIndex = 22;
+            button1.Size = new Size(251, 49);
+            button1.TabIndex = 9;
             button1.Text = "VISUALIZZA ACQUISTI";
             button1.TextAlign = ContentAlignment.MiddleRight;
             button1.TextImageRelation = TextImageRelation.ImageBeforeText;

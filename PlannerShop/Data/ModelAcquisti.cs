@@ -11,15 +11,9 @@ namespace PlannerShop.Data
             return dt;
         }
 
-        public static DataTable getAcquisti()
+        public static DataTable getAcquistiByIdCliente(string idCliente, string timeStamp)
         {
-            DataTable dt = DBUtility.getDBData("SELECT * FROM 'TACQUISTI' ORDER BY IDACQUISTO DESC");
-            return dt;
-        }
-
-        public static DataTable getAcquistiByIdCliente(string idCliente)
-        {
-            DataTable dt = DBUtility.getDBData("SELECT * FROM 'TACQUISTI' WHERE IDCLIENTE='" + idCliente + "' ORDER BY IDACQUISTO DESC");
+            DataTable dt = DBUtility.getDBData("SELECT * FROM 'TACQUISTI' WHERE IDCLIENTE='" + idCliente + "' AND TIMESTAMP='" + timeStamp + "' ORDER BY IDACQUISTO DESC");
             return dt;
         }
 
@@ -39,7 +33,8 @@ namespace PlannerShop.Data
             string idCliente,
             string idProdotto,
             string aliquota,
-            string note)
+            string note,
+            string timeStamp)
         {
             dataAcquisto = dataAcquisto.Replace("'", "''");
             marca = marca.Replace("'", "''");
@@ -51,8 +46,9 @@ namespace PlannerShop.Data
             idProdotto = idProdotto.Replace("'", "''");
             aliquota = aliquota.Replace("'", "''");
             note = note.Replace("'", "''");
+            timeStamp = timeStamp.Replace("'", "''");
 
-            string sqlComm = @"INSERT INTO TACQUISTI (MARCA,DESCRIZIONE,QNT,PREZZO_NETTO,PREZZO_IVATO,DATA,IDCLIENTE,IDPRODOTTO,ALIQUOTA,NOTE)VALUES('"
+            string sqlComm = @"INSERT INTO TACQUISTI (MARCA,DESCRIZIONE,QNT,PREZZO_NETTO,PREZZO_IVATO,DATA,IDCLIENTE,IDPRODOTTO,ALIQUOTA,NOTE,TIMESTAMP)VALUES('"
                 + marca + "','"
                 + descrizione + "','"
                 + qnt + "','"
@@ -62,7 +58,8 @@ namespace PlannerShop.Data
                 + int.Parse(idCliente) + "','"
                 + int.Parse(idProdotto) + "','"
                 + aliquota + "','"
-                + note + "')";
+                + note + "','"
+                + timeStamp + "')";
             DBUtility.setDBData(sqlComm);
         }
 

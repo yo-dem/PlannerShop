@@ -82,7 +82,7 @@
             dtpDataNascita.Location = new Point(14, 540);
             dtpDataNascita.Name = "dtpDataNascita";
             dtpDataNascita.Size = new Size(202, 27);
-            dtpDataNascita.TabIndex = 7;
+            dtpDataNascita.TabIndex = 0;
             dtpDataNascita.TabStop = false;
             dtpDataNascita.Value = new DateTime(1990, 5, 30, 0, 0, 0, 0);
             dtpDataNascita.ValueChanged += dtpDataNascita_ValueChanged;
@@ -103,7 +103,7 @@
             txtNote.Multiline = true;
             txtNote.Name = "txtNote";
             txtNote.Size = new Size(842, 468);
-            txtNote.TabIndex = 8;
+            txtNote.TabIndex = 7;
             // 
             // btnOk
             // 
@@ -113,7 +113,7 @@
             btnOk.Location = new Point(14, 584);
             btnOk.Name = "btnOk";
             btnOk.Size = new Size(1052, 91);
-            btnOk.TabIndex = 10;
+            btnOk.TabIndex = 8;
             btnOk.Text = "CARICA CLIENTE";
             btnOk.TextAlign = ContentAlignment.BottomCenter;
             btnOk.TextImageRelation = TextImageRelation.ImageAboveText;

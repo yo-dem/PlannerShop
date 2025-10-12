@@ -1,26 +1,22 @@
 ﻿using PlannerShop.Data;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
+
 
 namespace PlannerShop.Forms
 {
     public partial class PurchaseEditForm : Form
     {
-        String idCliente;
+        DateTime timeStamp;
+        string idCliente;
         ClientEditForm parent;
 
-        public PurchaseEditForm(String IdCliente, ClientEditForm parent)
+        public PurchaseEditForm(string IdCliente, ClientEditForm parent)
         {
             InitializeComponent();
-            this.idCliente = IdCliente;
+
+            timeStamp = DateTime.Now;
+
+            idCliente = IdCliente;
             this.parent = parent;
 
             dgvData.DataSource = ModelProdotti.getProdotti();
@@ -30,7 +26,7 @@ namespace PlannerShop.Forms
             Utils.SetDataGridStyle(dgvDataAcquisto, false, 40, 30);
             loadClienteData();
 
-            dgvDataAcquisto.DataSource = ModelAcquisti.getAcquistiByIdCliente(idCliente);
+            dgvDataAcquisto.DataSource = ModelAcquisti.getAcquistiByIdCliente(idCliente, timeStamp.ToString());
             SetPurchaseDataGridStructure();
         }
 
@@ -276,9 +272,6 @@ namespace PlannerShop.Forms
 
             if (!int.TryParse(DTproductRow.Rows[0]["QNT"].ToString(), out int intQnt)) return;
 
-            int firstSelectedIndex = dgvData.SelectedRows[0].Index;
-            int displayPos = dgvData.FirstDisplayedScrollingRowIndex;
-
             if (intQnt > 1)
             {
                 ModelProdotti.updateQuantity(idProdotto, intQnt - 1);
@@ -289,8 +282,7 @@ namespace PlannerShop.Forms
             }
 
             dgvData.DataSource = ModelProdotti.getProdotti();
-            SelectAfterDelete(dgvData, firstSelectedIndex, displayPos, 1);
-
+            
             DataTable dt = ModelAcquisti.getAcquistiByIdClienteAndProductId(idCliente, idProdotto);
             if (dt.Rows.Count == 0)
             {
@@ -304,7 +296,8 @@ namespace PlannerShop.Forms
                     idCliente,
                     idProdotto,
                     DTproductRow.Rows[0]["ALIQUOTA"].ToString()!,
-                    DTproductRow.Rows[0]["NOTE"].ToString()!
+                    DTproductRow.Rows[0]["NOTE"].ToString()!,
+                    timeStamp.ToString()
                     );
             }
             else
@@ -313,7 +306,10 @@ namespace PlannerShop.Forms
                 ModelAcquisti.updateQuantity(idProdotto, idCliente, ++qnt);
             }
 
-            dgvDataAcquisto.DataSource = ModelAcquisti.getAcquistiByIdCliente(idCliente);
+            dgvDataAcquisto.DataSource = ModelAcquisti.getAcquistiByIdCliente(idCliente, timeStamp.ToString());
+
+            dgvDataAcquisto.ClearSelection();
+            dgvData.ClearSelection();
         }
 
         private void dgvDataAcquisto_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -350,9 +346,7 @@ namespace PlannerShop.Forms
 
             dgvData.DataSource = ModelProdotti.getProdotti();
 
-            int firstSelectedIndex = dgvDataAcquisto.SelectedRows[0].Index;
-            int displayPos = dgvDataAcquisto.FirstDisplayedScrollingRowIndex;
-
+            
             if (intQnt > 1)
             {
                 ModelAcquisti.updateQuantity(idProdotto, idCliente, intQnt - 1);
@@ -362,36 +356,10 @@ namespace PlannerShop.Forms
                 ModelAcquisti.deleteAcquisto(idProdotto, idCliente);
             }
 
-            dgvDataAcquisto.DataSource = ModelAcquisti.getAcquisti();
-            SelectAfterDelete(dgvDataAcquisto, firstSelectedIndex, displayPos, 1);
-        }
+            dgvDataAcquisto.DataSource = ModelAcquisti.getAcquistiByIdCliente(idCliente, timeStamp.ToString());
 
-        private void SelectAfterDelete(DataGridView dgvData, int previousIndex, int displayPos, int numberOfDeletions)
-        {
             dgvData.ClearSelection();
-
-            if (dgvData.Rows.Count == 0) return;
-
-            int lastSelectedIndex = previousIndex;
-            if (dgvData.SelectedRows.Count > 0)
-            {
-                lastSelectedIndex = dgvData.SelectedRows.Cast<DataGridViewRow>().Max(row => row.Index);
-            }
-
-            int newIndex = lastSelectedIndex - (numberOfDeletions - 1);
-
-            if (newIndex >= dgvData.Rows.Count) newIndex = dgvData.Rows.Count - 1;
-            if (newIndex < 0) newIndex = 0;
-
-            if (newIndex >= 0 && newIndex < dgvData.Rows.Count)
-            {
-                dgvData.Rows[newIndex].Selected = true;
-            }
-
-            if (displayPos >= 0 && displayPos < dgvData.RowCount)
-            {
-                dgvData.FirstDisplayedScrollingRowIndex = displayPos;
-            }
+            dgvDataAcquisto.ClearSelection();
         }
 
         private void PurchaseEditForm_FormClosed(object sender, FormClosedEventArgs e)
