@@ -8,16 +8,14 @@ namespace PlannerShop.Forms
     {
         DateTime timeStamp;
         string idCliente;
-        ClientEditForm parent;
 
-        public PurchaseEditForm(string IdCliente, ClientEditForm parent)
+        public PurchaseEditForm(string IdCliente)
         {
             InitializeComponent();
 
             timeStamp = DateTime.Now;
 
             idCliente = IdCliente;
-            this.parent = parent;
 
             dgvData.DataSource = ModelProdotti.getProdotti();
             SetProductDataGridStructure();
@@ -362,10 +360,6 @@ namespace PlannerShop.Forms
             dgvDataAcquisto.ClearSelection();
         }
 
-        private void PurchaseEditForm_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            parent.Show();
-        }
     }
 }
 
