@@ -20,8 +20,8 @@ namespace PlannerShop.Forms
             dgvData.DataSource = ModelProdotti.getProdotti();
             SetProductDataGridStructure();
 
-            Utils.SetDataGridStyle(dgvData, false, 40, 30);
-            Utils.SetDataGridStyle(dgvDataAcquisto, false, 40, 30);
+            Utils.SetDataGridStyle(dgvData, false, 40, 40);
+            Utils.SetDataGridStyle(dgvDataAcquisto, false, 40, 40);
             loadClienteData();
 
             dgvDataAcquisto.DataSource = ModelAcquisti.getAcquistiByIdCliente(idCliente, timeStamp.ToString());
