@@ -6,33 +6,22 @@ namespace PlannerShop.Data
     {
         public static bool GetAccess(string data)
         {
-            DataTable dt = DBUtility.getDBData("SELECT * FROM 'TPWD' WHERE PASSWORD ='" + data + "'");
-            if (dt.Rows.Count > 0)
-                return true;
-            else
-                return false;
+            DataTable dt = DBUtility.getDBData("SELECT * FROM TPWD WHERE PASSWORD = @pwd", new Dictionary<string, object?> { { "@pwd", data } });
+            return dt.Rows.Count > 0;
         }
         public static void ChangePwd(string newPin)
         {
-            string sqlComm = @"UPDATE TPwd SET Password='" + newPin + "' WHERE idPwd='1'";
-            DBUtility.setDBData(sqlComm);
+            DBUtility.setDBData("UPDATE TPwd SET Password=@pwd WHERE idPwd='1'", new Dictionary<string, object?> { { "@pwd", newPin } });
         }
         public static bool IsEnabled()
         {
-            DataTable dt = DBUtility.getDBData("SELECT ENABLED FROM 'TPWD'");
-            if (dt.Rows[0][0].ToString() == "TRUE")
-                return true;
-            else
-                return false;
+            DataTable dt = DBUtility.getDBData("SELECT ENABLED FROM TPWD");
+            if (dt.Rows.Count == 0) return false;
+            return dt.Rows[0][0].ToString()?.ToUpper() == "TRUE";
         }
         public static void SetEnabled(bool b)
         {
-            string sqlComm = String.Empty;
-            if (b)             
-                sqlComm = @"UPDATE TPwd SET ENABLED='TRUE'";
-            else
-                sqlComm = @"UPDATE TPwd SET ENABLED='FALSE'";
-            DBUtility.setDBData(sqlComm);
+            DBUtility.setDBData("UPDATE TPwd SET ENABLED=@val", new Dictionary<string, object?> { { "@val", b ? "TRUE" : "FALSE" } });
         }
     }
 }

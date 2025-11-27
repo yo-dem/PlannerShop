@@ -1,22 +1,32 @@
 ﻿using System.Data;
-using static System.Runtime.InteropServices.JavaScript.JSType;
-using System.Text.RegularExpressions;
-using System.Data.SQLite;
+using System.Globalization;
 
 namespace PlannerShop.Data
 {
     internal struct ModelProdotti
     {
+        static double ParsePriceToDouble(string? price)
+        {
+            if (string.IsNullOrWhiteSpace(price)) return 0.0;
+            var cleaned = price.Replace("€", "").Trim();
+            cleaned = cleaned.Replace(" ", "");
+            // Try italian style
+            if (double.TryParse(cleaned, NumberStyles.Any, CultureInfo.GetCultureInfo("it-IT"), out double v))
+                return v;
+            // Try invariant with dot
+            cleaned = cleaned.Replace(",", ".");
+            double.TryParse(cleaned, NumberStyles.Any, CultureInfo.InvariantCulture, out v);
+            return v;
+        }
+
         public static DataTable getProdottoById(string idProdotto)
         {
-            DataTable dt = DBUtility.getDBData("SELECT * FROM 'TPRODOTTI' WHERE IDPRODOTTO='" + idProdotto + "'");
-            return dt;
+            return DBUtility.getDBData("SELECT * FROM TPRODOTTI WHERE IDPRODOTTO=@id", new Dictionary<string, object?> { { "@id", idProdotto } });
         }
 
         public static DataTable getProdotti()
         {
-            DataTable dt = DBUtility.getDBData("SELECT * FROM 'TPRODOTTI' ORDER BY IDPRODOTTO DESC");
-            return dt;
+            return DBUtility.getDBData("SELECT * FROM TPRODOTTI ORDER BY IDPRODOTTO DESC");
         }
 
         public static void addProdotto(
@@ -30,33 +40,27 @@ namespace PlannerShop.Data
             string note,
             string? idProdotto = null)
         {
-            data = data.Replace("'", "''");
-            marca = marca.Replace("'", "''");
-            descrizione = descrizione.Replace("'", "''");
-            aliquota = aliquota.Replace("'", "''");
-            qnt = qnt.Replace("'", "''");
-            prezzoNetto = prezzoNetto.Replace("'", "''");
-            prezzoIvato = prezzoIvato.Replace("'", "''");
-            note = note.Replace("'", "''");
-            if (idProdotto != null)
-                idProdotto = idProdotto.Replace("'", "''");
+            double pn = ParsePriceToDouble(prezzoNetto);
+            double pi = ParsePriceToDouble(prezzoIvato);
 
-            string idValue = idProdotto != null ? $"'{idProdotto}'" : "NULL";
+            string sql = @"INSERT INTO TPRODOTTI (DATA,MARCA,DESCRIZIONE,ALIQUOTA,QNT,PREZZO_NETTO,PREZZO_IVATO,NOTE,IDPRODOTTO)
+                           VALUES(@data,@marca,@descr,@aliq,@qnt,@pn,@pi,@note,@idProd)";
 
-            string sqlComm = @"INSERT INTO TPRODOTTI (DATA,MARCA,DESCRIZIONE,ALIQUOTA,QNT,PREZZO_NETTO,PREZZO_IVATO,NOTE,IDPRODOTTO)VALUES('"
-                + data + "','"
-                + marca + "','"
-                + descrizione + "','"
-                + aliquota + "','"
-                + qnt + "','"
-                + prezzoNetto + "','"
-                + prezzoIvato + "','"
-                + note + "',"
-                + idValue + ")";
+            var parameters = new Dictionary<string, object?>()
+            {
+                { "@data", data },
+                { "@marca", marca },
+                { "@descr", descrizione },
+                { "@aliq", aliquota },
+                { "@qnt", qnt },
+                { "@pn", pn },
+                { "@pi", pi },
+                { "@note", note },
+                { "@idProd", idProdotto ?? (object?)DBNull.Value }
+            };
 
-            DBUtility.setDBData(sqlComm);
+            DBUtility.setDBData(sql, parameters);
         }
-
 
         public static void editProdotto(
             string idProdotto,
@@ -69,40 +73,38 @@ namespace PlannerShop.Data
             string prezzoIvato,
             string note)
         {
-            data = data.Replace("'", "''");
-            marca = marca.Replace("'", "''");
-            descrizione = descrizione.Replace("'", "''");
-            aliquota = aliquota.Replace("'", "''");
-            qnt = qnt.Replace("'", "''");
-            prezzoNetto = prezzoNetto.Replace("'", "''");
-            prezzoIvato = prezzoIvato.Replace("'", "''");
-            note = note.Replace("'", "''");
+            double pn = ParsePriceToDouble(prezzoNetto);
+            double pi = ParsePriceToDouble(prezzoIvato);
 
-            string sqlComm = @"UPDATE TPRODOTTI SET DATA ='" + data
-                + "', MARCA='" + marca
-                + "', DESCRIZIONE='" + descrizione
-                + "', ALIQUOTA='" + aliquota
-                + "', QNT='" + qnt
-                + "', PREZZO_NETTO='" + prezzoNetto
-                + "', PREZZO_IVATO='" + prezzoIvato
-                + "', NOTE='" + note
-                + "' WHERE IDPRODOTTO='" + idProdotto + "'";
-            DBUtility.setDBData(sqlComm);
+            string sql = @"UPDATE TPRODOTTI SET DATA=@data, MARCA=@marca, DESCRIZIONE=@descr, ALIQUOTA=@aliq, QNT=@qnt, PREZZO_NETTO=@pn, PREZZO_IVATO=@pi, NOTE=@note
+                           WHERE IDPRODOTTO=@idProd";
+
+            var parameters = new Dictionary<string, object?>()
+            {
+                { "@data", data },
+                { "@marca", marca },
+                { "@descr", descrizione },
+                { "@aliq", aliquota },
+                { "@qnt", qnt },
+                { "@pn", pn },
+                { "@pi", pi },
+                { "@note", note },
+                { "@idProd", idProdotto }
+            };
+
+            DBUtility.setDBData(sql, parameters);
         }
 
         public static void updateQuantity(string idProdotto, int newQnt)
         {
-            string sqlComm = @"UPDATE TPRODOTTI 
-                       SET QNT = '" + newQnt + @"' 
-                       WHERE IDPRODOTTO = '" + idProdotto + "'";
-
-            DBUtility.setDBData(sqlComm);
+            string sql = @"UPDATE TPRODOTTI SET QNT = @newQnt WHERE IDPRODOTTO = @id";
+            DBUtility.setDBData(sql, new Dictionary<string, object?> { { "@newQnt", newQnt }, { "@id", idProdotto } });
         }
 
         public static void deleteProdotto(string? idProdotto)
         {
-            string sqlComm = @"DELETE FROM TPRODOTTI WHERE IDPRODOTTO='" + idProdotto + "'";
-            DBUtility.setDBData(sqlComm);
+            string sql = @"DELETE FROM TPRODOTTI WHERE IDPRODOTTO=@id";
+            DBUtility.setDBData(sql, new Dictionary<string, object?> { { "@id", idProdotto } });
         }
     }
 }

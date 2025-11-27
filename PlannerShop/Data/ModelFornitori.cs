@@ -6,16 +6,14 @@ namespace PlannerShop.Data
     {
         public static DataTable getFornitoreById(string idFornitore)
         {
-            DataTable dt = DBUtility.getDBData("SELECT * FROM 'TFORNITORI' WHERE IDFORNITORE='" + idFornitore + "'");
-            return dt;
+            return DBUtility.getDBData("SELECT * FROM TFORNITORI WHERE IDFORNITORE=@id", new Dictionary<string, object?> { { "@id", idFornitore } });
         }
-        
+
         public static DataTable getFornitori()
         {
-            DataTable dt = DBUtility.getDBData("SELECT * FROM 'TFORNITORI' ORDER BY IDFORNITORE DESC");
-            return dt;
+            return DBUtility.getDBData("SELECT * FROM TFORNITORI ORDER BY IDFORNITORE DESC");
         }
-        
+
         public static void addFornitore(
             string nome,
             string indirizzo,
@@ -24,23 +22,22 @@ namespace PlannerShop.Data
             string email,
             string note)
         {
-            nome = nome.Replace("'", "''");
-            indirizzo = indirizzo.Replace("'", "''");
-            telefonoFisso = telefonoFisso.Replace("'", "''");
-            telefonoMobile = telefonoMobile.Replace("'", "''");
-            email = email.Replace("'", "''");
-            note = note.Replace("'", "''");
+            string sql = @"INSERT INTO TFORNITORI (NOME,INDIRIZZO,TELEFONO_FISSO,TELEFONO_MOBILE,EMAIL,NOTE)
+                           VALUES(@nome,@indirizzo,@telF,@telM,@email,@note)";
 
-            string sqlComm = @"INSERT INTO TFORNITORI (NOME,INDIRIZZO,TELEFONO_FISSO,TELEFONO_MOBILE,EMAIL,NOTE)VALUES('"
-                + nome + "','"
-                + indirizzo + "','"
-                + telefonoFisso + "','"
-                + telefonoMobile + "','"
-                + email + "','"
-                + note + "')";
-            DBUtility.setDBData(sqlComm);
+            var parameters = new Dictionary<string, object?>()
+            {
+                { "@nome", nome },
+                { "@indirizzo", indirizzo },
+                { "@telF", telefonoFisso },
+                { "@telM", telefonoMobile },
+                { "@email", email },
+                { "@note", note }
+            };
+
+            DBUtility.setDBData(sql, parameters);
         }
-        
+
         public static void editFornitore(
             string idFornitore,
             string nome,
@@ -50,27 +47,26 @@ namespace PlannerShop.Data
             string email,
             string note)
         {
-            nome = nome.Replace("'", "''");
-            indirizzo = indirizzo.Replace("'", "''");
-            telefonoFisso = telefonoFisso.Replace("'", "''");
-            telefonoMobile = telefonoMobile.Replace("'", "''");
-            email = email.Replace("'", "''");
-            note = note.Replace("'", "''");
+            string sql = @"UPDATE TFORNITORI SET NOME=@nome, INDIRIZZO=@indirizzo, TELEFONO_FISSO=@telF, TELEFONO_MOBILE=@telM, EMAIL=@email, NOTE=@note
+                           WHERE IDFORNITORE=@id";
 
-            string sqlComm = @"UPDATE TFORNITORI SET NOME ='" + nome
-                + "', INDIRIZZO='" + indirizzo
-                + "', TELEFONO_FISSO='" + telefonoFisso
-                + "', TELEFONO_MOBILE='" + telefonoMobile
-                + "', EMAIL='" + email
-                + "', NOTE='" + note
-                + "' WHERE IDFORNITORE='" + idFornitore + "'";
-            DBUtility.setDBData(sqlComm);
+            var parameters = new Dictionary<string, object?>()
+            {
+                { "@nome", nome },
+                { "@indirizzo", indirizzo },
+                { "@telF", telefonoFisso },
+                { "@telM", telefonoMobile },
+                { "@email", email },
+                { "@note", note },
+                { "@id", idFornitore }
+            };
+
+            DBUtility.setDBData(sql, parameters);
         }
-        
+
         public static void deleteFornitore(string? idFornitore)
         {
-            string sqlComm = @"DELETE FROM TFORNITORI WHERE IDFORNITORE='" + idFornitore + "'";
-            DBUtility.setDBData(sqlComm);
+            DBUtility.setDBData("DELETE FROM TFORNITORI WHERE IDFORNITORE=@id", new Dictionary<string, object?> { { "@id", idFornitore } });
         }
     }
 }

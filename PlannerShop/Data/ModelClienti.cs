@@ -6,16 +6,14 @@ namespace PlannerShop.Data
     {
         public static DataTable getClienteById(string idCliente)
         {
-            DataTable dt = DBUtility.getDBData("SELECT * FROM 'TCLIENTI' WHERE IDCLIENTE='" + idCliente + "'");
-            return dt;
+            return DBUtility.getDBData("SELECT * FROM TCLIENTI WHERE IDCLIENTE=@id", new Dictionary<string, object?> { { "@id", idCliente } });
         }
-        
+
         public static DataTable getClienti()
         {
-            DataTable dt = DBUtility.getDBData("SELECT * FROM 'TCLIENTI' ORDER BY IDCLIENTE DESC");
-            return dt;
+            return DBUtility.getDBData("SELECT * FROM TCLIENTI ORDER BY IDCLIENTE DESC");
         }
-        
+
         public static void addCliente(
             string nome,
             string cognome,
@@ -26,51 +24,22 @@ namespace PlannerShop.Data
             string email,
             string note)
         {
-            nome = nome.Replace("'", "''");
-            cognome = cognome.Replace("'", "''");
-            datanascita = datanascita.Replace("'", "''");
-            telefonoFisso = telefonoFisso.Replace("'", "''");
-            telefonoMobile = telefonoMobile.Replace("'", "''");
-            email = email.Replace("'", "''");
-            indirizzo = indirizzo.Replace("'", "''");
-            note = note.Replace("'", "''");
+            string sql = @"INSERT INTO TCLIENTI (NOME, COGNOME, DATA_NASCITA, INDIRIZZO, TELEFONO_FISSO, TELEFONO_MOBILE, EMAIL, NOTE)
+                           VALUES (@nome,@cognome,@data,@indirizzo,@telF,@telM,@email,@note)";
 
-            string sqlComm = @"INSERT INTO TCLIENTI (NOME, COGNOME, DATA_NASCITA, INDIRIZZO, TELEFONO_FISSO, TELEFONO_MOBILE, EMAIL, NOTE) VALUES ('"
-                + nome + "', '"
-                + cognome + "', '"
-                + datanascita + "', '"
-                + indirizzo + "', '"
-                + telefonoFisso + "', '"
-                + telefonoMobile + "', '"
-                + email + "', '"
-                + note + "')";
-            DBUtility.setDBData(sqlComm);
-        }
-        
-        public static void editFornitore(
-            string idFornitore,
-            string nome,
-            string indirizzo,
-            string telefonoFisso,
-            string telefonoMobile,
-            string email,
-            string note)
-        {
-            nome = nome.Replace("'", "''");
-            indirizzo = indirizzo.Replace("'", "''");
-            telefonoFisso = telefonoFisso.Replace("'", "''");
-            telefonoMobile = telefonoMobile.Replace("'", "''");
-            email = email.Replace("'", "''");
-            note = note.Replace("'", "''");
+            var parameters = new Dictionary<string, object?>()
+            {
+                { "@nome", nome },
+                { "@cognome", cognome },
+                { "@data", datanascita },
+                { "@indirizzo", indirizzo },
+                { "@telF", telefonoFisso },
+                { "@telM", telefonoMobile },
+                { "@email", email },
+                { "@note", note }
+            };
 
-            string sqlComm = @"UPDATE TFORNITORI SET NOME ='" + nome
-                + "', INDIRIZZO='" + indirizzo
-                + "', TELEFONO_FISSO='" + telefonoFisso
-                + "', TELEFONO_MOBILE='" + telefonoMobile
-                + "', EMAIL='" + email
-                + "', NOTE='" + note
-                + "' WHERE IDFORNITORE='" + idFornitore + "'";
-            DBUtility.setDBData(sqlComm);
+            DBUtility.setDBData(sql, parameters);
         }
 
         public static void editCliente(
@@ -84,33 +53,29 @@ namespace PlannerShop.Data
             string email,
             string note)
         {
-            nome = nome.Replace("'", "''");
-            cognome = cognome.Replace("'", "''");
-            datanascita = datanascita.Replace("'", "''");
-            indirizzo = indirizzo.Replace("'", "''");
-            telefonoFisso = telefonoFisso.Replace("'", "''");
-            telefonoMobile = telefonoMobile.Replace("'", "''");
-            email = email.Replace("'", "''");
-            note = note.Replace("'", "''");
+            string sql = @"UPDATE TCLIENTI SET NOME=@nome, COGNOME=@cognome, DATA_NASCITA=@data, INDIRIZZO=@indirizzo,
+                           TELEFONO_FISSO=@telF, TELEFONO_MOBILE=@telM, EMAIL=@email, NOTE=@note
+                           WHERE IDCLIENTE=@id";
 
-            string sqlComm = @"UPDATE TCLIENTI SET "
-                + "NOME = '" + nome + "', "
-                + "COGNOME = '" + cognome + "', "
-                + "DATA_NASCITA = '" + datanascita + "', "
-                + "INDIRIZZO = '" + indirizzo + "', "
-                + "TELEFONO_FISSO = '" + telefonoFisso + "', "
-                + "TELEFONO_MOBILE = '" + telefonoMobile + "', "
-                + "EMAIL = '" + email + "', "
-                + "NOTE = '" + note + "' "
-                + "WHERE IDCLIENTE = '" + idCliente + "'";
+            var parameters = new Dictionary<string, object?>()
+            {
+                { "@nome", nome },
+                { "@cognome", cognome },
+                { "@data", datanascita },
+                { "@indirizzo", indirizzo },
+                { "@telF", telefonoFisso },
+                { "@telM", telefonoMobile },
+                { "@email", email },
+                { "@note", note },
+                { "@id", idCliente }
+            };
 
-            DBUtility.setDBData(sqlComm);
+            DBUtility.setDBData(sql, parameters);
         }
 
         public static void deleteCliente(string? idCliente)
         {
-            string sqlComm = @"DELETE FROM TCLIENTI WHERE IDCLIENTE='" + idCliente + "'";
-            DBUtility.setDBData(sqlComm);
+            DBUtility.setDBData("DELETE FROM TCLIENTI WHERE IDCLIENTE=@id", new Dictionary<string, object?> { { "@id", idCliente } });
         }
     }
 }

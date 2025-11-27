@@ -1,26 +1,37 @@
 ﻿using System.Data;
-using static System.Runtime.InteropServices.JavaScript.JSType;
+using System.Globalization;
 
 namespace PlannerShop.Data
 {
     internal struct ModelAcquisti
     {
+        static double ParsePriceToDouble(string? price)
+        {
+            if (string.IsNullOrWhiteSpace(price)) return 0.0;
+            var cleaned = price.Replace("€", "").Trim();
+            cleaned = cleaned.Replace(" ", "");
+            if (double.TryParse(cleaned, NumberStyles.Any, CultureInfo.GetCultureInfo("it-IT"), out double v))
+                return v;
+            cleaned = cleaned.Replace(",", ".");
+            double.TryParse(cleaned, NumberStyles.Any, CultureInfo.InvariantCulture, out v);
+            return v;
+        }
+
         public static DataTable getAcquistoById(string idAcquisto)
         {
-            DataTable dt = DBUtility.getDBData("SELECT * FROM 'TACQUISTI' WHERE IDACQUISTO='" + idAcquisto + "'");
-            return dt;
+            return DBUtility.getDBData("SELECT * FROM TACQUISTI WHERE IDACQUISTO=@id", new Dictionary<string, object?> { { "@id", idAcquisto } });
         }
 
         public static DataTable getAcquistiByIdCliente(string idCliente, string timeStamp)
         {
-            DataTable dt = DBUtility.getDBData("SELECT * FROM 'TACQUISTI' WHERE IDCLIENTE='" + idCliente + "' AND TIMESTAMP='" + timeStamp + "' ORDER BY IDACQUISTO DESC");
-            return dt;
+            return DBUtility.getDBData("SELECT * FROM TACQUISTI WHERE IDCLIENTE=@idCliente AND TIMESTAMP=@ts ORDER BY IDACQUISTO DESC",
+                new Dictionary<string, object?> { { "@idCliente", idCliente }, { "@ts", timeStamp } });
         }
 
         public static DataTable getAcquistiByIdClienteAndProductId(string idCliente, string idProdotto)
         {
-            DataTable dt = DBUtility.getDBData("SELECT * FROM 'TACQUISTI' WHERE IDCLIENTE='" + idCliente + "' AND IDPRODOTTO='" + idProdotto + "' ORDER BY IDACQUISTO DESC");
-            return dt;
+            return DBUtility.getDBData("SELECT * FROM TACQUISTI WHERE IDCLIENTE=@idCliente AND IDPRODOTTO=@idProdotto ORDER BY IDACQUISTO DESC",
+                new Dictionary<string, object?> { { "@idCliente", idCliente }, { "@idProdotto", idProdotto } });
         }
 
         public static void addAcquisto(
@@ -36,46 +47,40 @@ namespace PlannerShop.Data
             string note,
             string timeStamp)
         {
-            dataAcquisto = dataAcquisto.Replace("'", "''");
-            marca = marca.Replace("'", "''");
-            descrizione = descrizione.Replace("'", "''");
-            qnt = qnt.Replace("'", "''");
-            prezzoNetto = prezzoNetto.Replace("'", "''");
-            prezzoIvato = prezzoIvato.Replace("'", "''");
-            idCliente = idCliente.Replace("'", "''");
-            idProdotto = idProdotto.Replace("'", "''");
-            aliquota = aliquota.Replace("'", "''");
-            note = note.Replace("'", "''");
-            timeStamp = timeStamp.Replace("'", "''");
+            double pn = ParsePriceToDouble(prezzoNetto);
+            double pi = ParsePriceToDouble(prezzoIvato);
 
-            string sqlComm = @"INSERT INTO TACQUISTI (MARCA,DESCRIZIONE,QNT,PREZZO_NETTO,PREZZO_IVATO,DATA,IDCLIENTE,IDPRODOTTO,ALIQUOTA,NOTE,TIMESTAMP)VALUES('"
-                + marca + "','"
-                + descrizione + "','"
-                + qnt + "','"
-                + prezzoNetto + "','"
-                + prezzoIvato + "','"
-                + dataAcquisto + "','"
-                + int.Parse(idCliente) + "','"
-                + int.Parse(idProdotto) + "','"
-                + aliquota + "','"
-                + note + "','"
-                + timeStamp + "')";
-            DBUtility.setDBData(sqlComm);
+            string sql = @"INSERT INTO TACQUISTI (MARCA,DESCRIZIONE,QNT,PREZZO_NETTO,PREZZO_IVATO,DATA,IDCLIENTE,IDPRODOTTO,ALIQUOTA,NOTE,TIMESTAMP)
+                           VALUES(@marca,@descr,@qnt,@pn,@pi,@data,@idCliente,@idProd,@aliq,@note,@ts)";
+
+            var parameters = new Dictionary<string, object?>()
+            {
+                { "@marca", marca },
+                { "@descr", descrizione },
+                { "@qnt", qnt },
+                { "@pn", pn },
+                { "@pi", pi },
+                { "@data", dataAcquisto },
+                { "@idCliente", int.Parse(idCliente) },
+                { "@idProd", int.Parse(idProdotto) },
+                { "@aliq", aliquota },
+                { "@note", note },
+                { "@ts", timeStamp }
+            };
+
+            DBUtility.setDBData(sql, parameters);
         }
 
         public static void updateQuantity(string idProdotto, string idCliente, int newQnt)
         {
-            string sqlComm = @"UPDATE TACQUISTI 
-                       SET QNT = '" + newQnt + @"' 
-                       WHERE IDPRODOTTO = '" + idProdotto + "' AND IDCLIENTE = '" + idCliente + "'";
-
-            DBUtility.setDBData(sqlComm);
+            string sql = @"UPDATE TACQUISTI SET QNT = @newQnt WHERE IDPRODOTTO = @idProd AND IDCLIENTE = @idClient";
+            DBUtility.setDBData(sql, new Dictionary<string, object?> { { "@newQnt", newQnt }, { "@idProd", idProdotto }, { "@idClient", idCliente } });
         }
 
         public static void deleteAcquisto(string? idProdotto, string? idCliente)
         {
-            string sqlComm = @"DELETE FROM TACQUISTI WHERE IDPRODOTTO='" + idProdotto + "' AND IDCLIENTE='" + idCliente + "'";
-            DBUtility.setDBData(sqlComm);
+            string sql = @"DELETE FROM TACQUISTI WHERE IDPRODOTTO=@idProd AND IDCLIENTE=@idClient";
+            DBUtility.setDBData(sql, new Dictionary<string, object?> { { "@idProd", idProdotto }, { "@idClient", idCliente } });
         }
     }
 }
