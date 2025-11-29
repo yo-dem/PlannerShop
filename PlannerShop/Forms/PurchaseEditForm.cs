@@ -33,7 +33,7 @@ namespace PlannerShop.Forms
             DataTable dtCliente = ModelClienti.getClienteById(idCliente);
             lblName.Text = dtCliente.Rows[0]["NOME"].ToString()!.ToUpper() + " " + dtCliente.Rows[0]["COGNOME"].ToString()!.ToUpper();
             lblIndirizzo.Text = dtCliente.Rows[0]["INDIRIZZO"].ToString();
-            lblTelefono.Text = "Tel. " + dtCliente.Rows[0]["TELEFONO_MOBILE"].ToString();
+            lblTelefono.Text = "Tel. " + dtCliente.Rows[0]["TELEFONO"].ToString();
             lblEmail.Text = dtCliente.Rows[0]["EMAIL"].ToString();
         }
 

@@ -30,19 +30,14 @@ namespace PlannerShop.Forms
             lblCognome.ForeColor = Color.Black;
         }
 
-        private void txtTelefonoMobile_TextChanged(object sender, EventArgs e)
+        private void txtTelefono_TextChanged(object sender, EventArgs e)
         {
-            lblTelefonoMobile.ForeColor = Color.Black;
-        }
-
-        private void txtIndirizzo_TextChanged(object sender, EventArgs e)
-        {
-            lblIndirizzo.ForeColor = Color.Black;
+            lblTelefono.ForeColor = Color.Black;
         }
 
         private void dtpDataNascita_ValueChanged(object sender, EventArgs e)
         {
-            lblDataNascita.ForeColor = Color.Black;
+            lblCompleanno.ForeColor = Color.Black;
         }
 
         private void TxtNote_GotFocus(object? sender, EventArgs e)
@@ -62,11 +57,10 @@ namespace PlannerShop.Forms
             {
                 txtNome.Text = dt.Rows[0]["NOME"].ToString();
                 txtCognome.Text = dt.Rows[0]["COGNOME"].ToString();
-                txtTelefonoFisso.Text = dt.Rows[0]["TELEFONO_FISSO"].ToString();
-                txtTelefonoMobile.Text = dt.Rows[0]["TELEFONO_MOBILE"].ToString();
+                txtTelefono.Text = dt.Rows[0]["TELEFONO"].ToString();
                 txtEmail.Text = dt.Rows[0]["EMAIL"].ToString();
                 txtIndirizzo.Text = dt.Rows[0]["INDIRIZZO"].ToString();
-                dtpDataNascita.Text = dt.Rows[0]["DATA_NASCITA"].ToString();
+                dtpCompleanno.Text = dt.Rows[0]["COMPLEANNO"].ToString() + "-2000";
                 txtNote.Text = dt.Rows[0]["NOTE"].ToString();
             }
         }
@@ -77,7 +71,6 @@ namespace PlannerShop.Forms
             bool res1 = true;
             bool res2 = true;
             bool res3 = true;
-            bool res4 = true;
 
             if (String.IsNullOrEmpty(txtNome.Text))
             {
@@ -89,22 +82,17 @@ namespace PlannerShop.Forms
                 lblCognome.ForeColor = Color.Red;
                 res1 = false;
             }
-            if (String.IsNullOrEmpty(txtTelefonoMobile.Text))
+            if (String.IsNullOrEmpty(txtTelefono.Text))
             {
-                lblTelefonoMobile.ForeColor = Color.Red;
+                lblTelefono.ForeColor = Color.Red;
                 res2 = false;
             }
-            if (String.IsNullOrEmpty(txtIndirizzo.Text))
+            if (String.IsNullOrEmpty(txtEmail.Text))
             {
-                lblIndirizzo.ForeColor = Color.Red;
+                lblEmail.ForeColor = Color.Red;
                 res3 = false;
             }
-            if (String.IsNullOrWhiteSpace(dtpDataNascita.Text))
-            {
-                lblDataNascita.ForeColor = Color.Red;
-                res4 = false;
-            }
-            return !emailNotValid && res0 && res1 && res2 && res3 && res4;
+            return !emailNotValid && res0 && res1 && res2 && res3;
         }
 
         private void btnOk_Click(object sender, EventArgs e)
@@ -115,10 +103,9 @@ namespace PlannerShop.Forms
                     idCliente,
                     txtNome.Text,
                     txtCognome.Text,
-                    dtpDataNascita.Text,
+                    dtpCompleanno.Text,
                     txtIndirizzo.Text.ToUpper(),
-                    txtTelefonoFisso.Text,
-                    txtTelefonoMobile.Text,
+                    txtTelefono.Text,
                     txtEmail.Text.ToLower(),
                     txtNote.Text);
                 this.Close();

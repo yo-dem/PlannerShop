@@ -17,24 +17,22 @@ namespace PlannerShop.Data
         public static void addCliente(
             string nome,
             string cognome,
-            string datanascita,
+            string compleanno,
             string indirizzo,
-            string telefonoFisso,
-            string telefonoMobile,
+            string telefono,
             string email,
             string note)
         {
-            string sql = @"INSERT INTO TCLIENTI (NOME, COGNOME, DATA_NASCITA, INDIRIZZO, TELEFONO_FISSO, TELEFONO_MOBILE, EMAIL, NOTE)
-                           VALUES (@nome,@cognome,@data,@indirizzo,@telF,@telM,@email,@note)";
+            string sql = @"INSERT INTO TCLIENTI (NOME, COGNOME, COMPLEANNO, INDIRIZZO, TELEFONO, EMAIL, NOTE)
+                           VALUES (@nome,@cognome,@data,@indirizzo,@tel,@email,@note)";
 
             var parameters = new Dictionary<string, object?>()
             {
                 { "@nome", nome },
                 { "@cognome", cognome },
-                { "@data", datanascita },
+                { "@data", compleanno },
                 { "@indirizzo", indirizzo },
-                { "@telF", telefonoFisso },
-                { "@telM", telefonoMobile },
+                { "@tel", telefono },
                 { "@email", email },
                 { "@note", note }
             };
@@ -46,25 +44,23 @@ namespace PlannerShop.Data
             string idCliente,
             string nome,
             string cognome,
-            string datanascita,
+            string compleanno,
             string indirizzo,
-            string telefonoFisso,
-            string telefonoMobile,
+            string telefono,
             string email,
             string note)
         {
-            string sql = @"UPDATE TCLIENTI SET NOME=@nome, COGNOME=@cognome, DATA_NASCITA=@data, INDIRIZZO=@indirizzo,
-                           TELEFONO_FISSO=@telF, TELEFONO_MOBILE=@telM, EMAIL=@email, NOTE=@note
+            string sql = @"UPDATE TCLIENTI SET NOME=@nome, COGNOME=@cognome, COMPLEANNO=@data, INDIRIZZO=@indirizzo,
+                           TELEFONO=@tel, EMAIL=@email, NOTE=@note
                            WHERE IDCLIENTE=@id";
 
             var parameters = new Dictionary<string, object?>()
             {
                 { "@nome", nome },
                 { "@cognome", cognome },
-                { "@data", datanascita },
+                { "@data", compleanno },
                 { "@indirizzo", indirizzo },
-                { "@telF", telefonoFisso },
-                { "@telM", telefonoMobile },
+                { "@tel", telefono },
                 { "@email", email },
                 { "@note", note },
                 { "@id", idCliente }

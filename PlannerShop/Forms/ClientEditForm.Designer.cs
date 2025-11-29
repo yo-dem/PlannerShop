@@ -32,16 +32,14 @@
             lblNome = new Label();
             txtNome = new TextBox();
             lblCognome = new Label();
-            dtpDataNascita = new DateTimePicker();
+            dtpCompleanno = new DateTimePicker();
             lblNote = new Label();
             txtNote = new TextBox();
             btnOk = new Button();
             txtCognome = new TextBox();
-            lblDataNascita = new Label();
-            txtTelefonoFisso = new TextBox();
-            lblTelefonoFisso = new Label();
-            txtTelefonoMobile = new TextBox();
-            lblTelefonoMobile = new Label();
+            lblCompleanno = new Label();
+            txtTelefono = new TextBox();
+            lblTelefono = new Label();
             lblEmail = new Label();
             txtEmail = new TextBox();
             lblIndirizzo = new Label();
@@ -77,17 +75,21 @@
             lblCognome.TabIndex = 0;
             lblCognome.Text = "COGNOME*";
             // 
-            // dtpDataNascita
+            // dtpCompleanno
             // 
-            dtpDataNascita.CustomFormat = " ";
-            dtpDataNascita.Format = DateTimePickerFormat.Short;
-            dtpDataNascita.Location = new Point(14, 540);
-            dtpDataNascita.Name = "dtpDataNascita";
-            dtpDataNascita.Size = new Size(202, 27);
-            dtpDataNascita.TabIndex = 0;
-            dtpDataNascita.TabStop = false;
-            dtpDataNascita.Value = new DateTime(1990, 5, 30, 0, 0, 0, 0);
-            dtpDataNascita.ValueChanged += dtpDataNascita_ValueChanged;
+            dtpCompleanno.CustomFormat = " dd-MM";
+            dtpCompleanno.Format = DateTimePickerFormat.Custom;
+            dtpCompleanno.Location = new Point(14, 540);
+            dtpCompleanno.MaxDate = new DateTime(2000, 12, 31, 0, 0, 0, 0);
+            dtpCompleanno.MinDate = new DateTime(2000, 1, 1, 0, 0, 0, 0);
+            dtpCompleanno.Name = "dtpCompleanno";
+            dtpCompleanno.RightToLeft = RightToLeft.No;
+            dtpCompleanno.ShowUpDown = true;
+            dtpCompleanno.Size = new Size(202, 27);
+            dtpCompleanno.TabIndex = 0;
+            dtpCompleanno.TabStop = false;
+            dtpCompleanno.Value = new DateTime(2000, 1, 1, 0, 0, 0, 0);
+            dtpCompleanno.ValueChanged += dtpDataNascita_ValueChanged;
             // 
             // lblNote
             // 
@@ -130,52 +132,36 @@
             txtCognome.TabIndex = 2;
             txtCognome.TextChanged += txtCognome_TextChanged;
             // 
-            // lblDataNascita
+            // lblCompleanno
             // 
-            lblDataNascita.AutoSize = true;
-            lblDataNascita.Location = new Point(14, 516);
-            lblDataNascita.Name = "lblDataNascita";
-            lblDataNascita.Size = new Size(134, 20);
-            lblDataNascita.TabIndex = 12;
-            lblDataNascita.Text = "DATA DI NASCITA*";
+            lblCompleanno.AutoSize = true;
+            lblCompleanno.Location = new Point(14, 516);
+            lblCompleanno.Name = "lblCompleanno";
+            lblCompleanno.Size = new Size(108, 20);
+            lblCompleanno.TabIndex = 12;
+            lblCompleanno.Text = "COMPLEANNO";
             // 
-            // txtTelefonoFisso
+            // txtTelefono
             // 
-            txtTelefonoFisso.Location = new Point(14, 219);
-            txtTelefonoFisso.Name = "txtTelefonoFisso";
-            txtTelefonoFisso.Size = new Size(202, 27);
-            txtTelefonoFisso.TabIndex = 3;
+            txtTelefono.Location = new Point(14, 219);
+            txtTelefono.Name = "txtTelefono";
+            txtTelefono.Size = new Size(202, 27);
+            txtTelefono.TabIndex = 3;
+            txtTelefono.TextChanged += txtTelefono_TextChanged;
             // 
-            // lblTelefonoFisso
+            // lblTelefono
             // 
-            lblTelefonoFisso.AutoSize = true;
-            lblTelefonoFisso.Location = new Point(14, 196);
-            lblTelefonoFisso.Name = "lblTelefonoFisso";
-            lblTelefonoFisso.Size = new Size(122, 20);
-            lblTelefonoFisso.TabIndex = 13;
-            lblTelefonoFisso.Text = "TELEFONO FISSO";
-            // 
-            // txtTelefonoMobile
-            // 
-            txtTelefonoMobile.Location = new Point(14, 272);
-            txtTelefonoMobile.Name = "txtTelefonoMobile";
-            txtTelefonoMobile.Size = new Size(202, 27);
-            txtTelefonoMobile.TabIndex = 4;
-            txtTelefonoMobile.TextChanged += txtTelefonoMobile_TextChanged;
-            // 
-            // lblTelefonoMobile
-            // 
-            lblTelefonoMobile.AutoSize = true;
-            lblTelefonoMobile.Location = new Point(14, 249);
-            lblTelefonoMobile.Name = "lblTelefonoMobile";
-            lblTelefonoMobile.Size = new Size(90, 20);
-            lblTelefonoMobile.TabIndex = 15;
-            lblTelefonoMobile.Text = "CELLULARE*";
+            lblTelefono.AutoSize = true;
+            lblTelefono.Location = new Point(14, 196);
+            lblTelefono.Name = "lblTelefono";
+            lblTelefono.Size = new Size(169, 20);
+            lblTelefono.TabIndex = 13;
+            lblTelefono.Text = "RECAPITO TELEFONICO*";
             // 
             // lblEmail
             // 
             lblEmail.AutoSize = true;
-            lblEmail.Location = new Point(14, 305);
+            lblEmail.Location = new Point(14, 249);
             lblEmail.Name = "lblEmail";
             lblEmail.Size = new Size(57, 20);
             lblEmail.TabIndex = 17;
@@ -183,7 +169,7 @@
             // 
             // txtEmail
             // 
-            txtEmail.Location = new Point(14, 329);
+            txtEmail.Location = new Point(14, 273);
             txtEmail.Name = "txtEmail";
             txtEmail.Size = new Size(202, 27);
             txtEmail.TabIndex = 5;
@@ -192,20 +178,19 @@
             // lblIndirizzo
             // 
             lblIndirizzo.AutoSize = true;
-            lblIndirizzo.Location = new Point(14, 363);
+            lblIndirizzo.Location = new Point(14, 303);
             lblIndirizzo.Name = "lblIndirizzo";
-            lblIndirizzo.Size = new Size(87, 20);
+            lblIndirizzo.Size = new Size(81, 20);
             lblIndirizzo.TabIndex = 19;
-            lblIndirizzo.Text = "INDIRIZZO*";
+            lblIndirizzo.Text = "INDIRIZZO";
             // 
             // txtIndirizzo
             // 
-            txtIndirizzo.Location = new Point(14, 385);
+            txtIndirizzo.Location = new Point(14, 326);
             txtIndirizzo.Multiline = true;
             txtIndirizzo.Name = "txtIndirizzo";
-            txtIndirizzo.Size = new Size(202, 127);
+            txtIndirizzo.Size = new Size(202, 186);
             txtIndirizzo.TabIndex = 6;
-            txtIndirizzo.TextChanged += txtIndirizzo_TextChanged;
             // 
             // btnDelete
             // 
@@ -268,16 +253,14 @@
             Controls.Add(txtIndirizzo);
             Controls.Add(lblEmail);
             Controls.Add(txtEmail);
-            Controls.Add(txtTelefonoMobile);
-            Controls.Add(lblTelefonoMobile);
-            Controls.Add(txtTelefonoFisso);
-            Controls.Add(lblTelefonoFisso);
-            Controls.Add(lblDataNascita);
+            Controls.Add(txtTelefono);
+            Controls.Add(lblTelefono);
+            Controls.Add(lblCompleanno);
             Controls.Add(txtCognome);
             Controls.Add(btnOk);
             Controls.Add(lblNote);
             Controls.Add(txtNote);
-            Controls.Add(dtpDataNascita);
+            Controls.Add(dtpCompleanno);
             Controls.Add(lblCognome);
             Controls.Add(lblNome);
             Controls.Add(txtNome);
@@ -295,16 +278,14 @@
         private Label lblNome;
         private TextBox txtNome;
         private Label lblCognome;
-        private DateTimePicker dtpDataNascita;
+        private DateTimePicker dtpCompleanno;
         private Label lblNote;
         private TextBox txtNote;
         private Button btnOk;
         private TextBox txtCognome;
-        private Label lblDataNascita;
-        private TextBox txtTelefonoFisso;
-        private Label lblTelefonoFisso;
-        private TextBox txtTelefonoMobile;
-        private Label lblTelefonoMobile;
+        private Label lblCompleanno;
+        private TextBox txtTelefono;
+        private Label lblTelefono;
         private Label lblEmail;
         private TextBox txtEmail;
         private Label lblIndirizzo;

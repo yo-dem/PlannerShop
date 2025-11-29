@@ -59,10 +59,10 @@ namespace PlannerShop
             cognomeClientColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
             cognomeClientColumn.DefaultCellStyle.Font = new Font("Corbel", fontSize, FontStyle.Regular);
 
-            var dataNascitaClientColumn = dgvData.Columns["DATA_NASCITA"];
+            var dataNascitaClientColumn = dgvData.Columns["COMPLEANNO"];
             dataNascitaClientColumn.DisplayIndex = 3;
             dataNascitaClientColumn.Visible = true;
-            dataNascitaClientColumn.HeaderText = "DATA DI NASCITA";
+            dataNascitaClientColumn.HeaderText = "COMPLEANNO";
             dataNascitaClientColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             dataNascitaClientColumn.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dataNascitaClientColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
@@ -77,26 +77,18 @@ namespace PlannerShop
             indirizzoSupplierColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
             indirizzoSupplierColumn.DefaultCellStyle.Font = new Font("Corbel", fontSize, FontStyle.Regular);
 
-            var telefonoFissoSupplierColumn = dgvData.Columns["TELEFONO_FISSO"];
+            var telefonoFissoSupplierColumn = dgvData.Columns["TELEFONO"];
             telefonoFissoSupplierColumn.DisplayIndex = 5;
             telefonoFissoSupplierColumn.Visible = true;
-            telefonoFissoSupplierColumn.HeaderText = "TEL. FISSO";
+            telefonoFissoSupplierColumn.HeaderText = "RECAPITO TELEFONICO";
             telefonoFissoSupplierColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             telefonoFissoSupplierColumn.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
             telefonoFissoSupplierColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             telefonoFissoSupplierColumn.DefaultCellStyle.Font = new Font("Corbel", fontSize, FontStyle.Regular);
 
-            var telefonoMobileSupplierColumn = dgvData.Columns["TELEFONO_MOBILE"];
-            telefonoMobileSupplierColumn.DisplayIndex = 6;
-            telefonoMobileSupplierColumn.Visible = true;
-            telefonoMobileSupplierColumn.HeaderText = "TEL. CELLULARE";
-            telefonoMobileSupplierColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            telefonoMobileSupplierColumn.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            telefonoMobileSupplierColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            telefonoMobileSupplierColumn.DefaultCellStyle.Font = new Font("Corbel", fontSize, FontStyle.Regular);
-
+            
             var emailSupplierColumn = dgvData.Columns["EMAIL"];
-            emailSupplierColumn.DisplayIndex = 7;
+            emailSupplierColumn.DisplayIndex = 6;
             emailSupplierColumn.Visible = true;
             emailSupplierColumn.HeaderText = "EMAIL";
             emailSupplierColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
@@ -105,7 +97,7 @@ namespace PlannerShop
             emailSupplierColumn.DefaultCellStyle.Font = new Font("Corbel", fontSize, FontStyle.Regular);
 
             var noteProductColumn = dgvData.Columns["NOTE"];
-            noteProductColumn.DisplayIndex = 8;
+            noteProductColumn.DisplayIndex = 7;
             noteProductColumn.Visible = true;
             noteProductColumn.HeaderText = "NOTE";
             noteProductColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
