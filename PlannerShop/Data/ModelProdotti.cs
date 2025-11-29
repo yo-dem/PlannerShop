@@ -5,20 +5,7 @@ namespace PlannerShop.Data
 {
     internal struct ModelProdotti
     {
-        static double ParsePriceToDouble(string? price)
-        {
-            if (string.IsNullOrWhiteSpace(price)) return 0.0;
-            var cleaned = price.Replace("€", "").Trim();
-            cleaned = cleaned.Replace(" ", "");
-            // Try italian style
-            if (double.TryParse(cleaned, NumberStyles.Any, CultureInfo.GetCultureInfo("it-IT"), out double v))
-                return v;
-            // Try invariant with dot
-            cleaned = cleaned.Replace(",", ".");
-            double.TryParse(cleaned, NumberStyles.Any, CultureInfo.InvariantCulture, out v);
-            return v;
-        }
-
+        
         public static DataTable getProdottoById(string idProdotto)
         {
             return DBUtility.getDBData("SELECT * FROM TPRODOTTI WHERE IDPRODOTTO=@id", new Dictionary<string, object?> { { "@id", idProdotto } });
@@ -40,8 +27,6 @@ namespace PlannerShop.Data
             string note,
             string? idProdotto = null)
         {
-            double pn = ParsePriceToDouble(prezzoNetto);
-            double pi = ParsePriceToDouble(prezzoIvato);
 
             string sql = @"INSERT INTO TPRODOTTI (DATA,MARCA,DESCRIZIONE,ALIQUOTA,QNT,PREZZO_NETTO,PREZZO_IVATO,NOTE,IDPRODOTTO)
                            VALUES(@data,@marca,@descr,@aliq,@qnt,@pn,@pi,@note,@idProd)";
@@ -53,8 +38,8 @@ namespace PlannerShop.Data
                 { "@descr", descrizione },
                 { "@aliq", aliquota },
                 { "@qnt", qnt },
-                { "@pn", pn },
-                { "@pi", pi },
+                { "@pn", prezzoNetto },
+                { "@pi", prezzoIvato },
                 { "@note", note },
                 { "@idProd", idProdotto ?? (object?)DBNull.Value }
             };
@@ -73,9 +58,7 @@ namespace PlannerShop.Data
             string prezzoIvato,
             string note)
         {
-            double pn = ParsePriceToDouble(prezzoNetto);
-            double pi = ParsePriceToDouble(prezzoIvato);
-
+            
             string sql = @"UPDATE TPRODOTTI SET DATA=@data, MARCA=@marca, DESCRIZIONE=@descr, ALIQUOTA=@aliq, QNT=@qnt, PREZZO_NETTO=@pn, PREZZO_IVATO=@pi, NOTE=@note
                            WHERE IDPRODOTTO=@idProd";
 
@@ -86,8 +69,8 @@ namespace PlannerShop.Data
                 { "@descr", descrizione },
                 { "@aliq", aliquota },
                 { "@qnt", qnt },
-                { "@pn", pn },
-                { "@pi", pi },
+                { "@pn", prezzoNetto },
+                { "@pi", prezzoIvato },
                 { "@note", note },
                 { "@idProd", idProdotto }
             };
