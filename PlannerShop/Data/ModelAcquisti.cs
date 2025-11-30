@@ -5,18 +5,6 @@ namespace PlannerShop.Data
 {
     internal struct ModelAcquisti
     {
-        static double ParsePriceToDouble(string? price)
-        {
-            if (string.IsNullOrWhiteSpace(price)) return 0.0;
-            var cleaned = price.Replace("€", "").Trim();
-            cleaned = cleaned.Replace(" ", "");
-            if (double.TryParse(cleaned, NumberStyles.Any, CultureInfo.GetCultureInfo("it-IT"), out double v))
-                return v;
-            cleaned = cleaned.Replace(",", ".");
-            double.TryParse(cleaned, NumberStyles.Any, CultureInfo.InvariantCulture, out v);
-            return v;
-        }
-
         public static DataTable getAcquistoById(string idAcquisto)
         {
             return DBUtility.getDBData("SELECT * FROM TACQUISTI WHERE IDACQUISTO=@id", new Dictionary<string, object?> { { "@id", idAcquisto } });
@@ -47,8 +35,6 @@ namespace PlannerShop.Data
             string note,
             string timeStamp)
         {
-            double pn = ParsePriceToDouble(prezzoNetto);
-            double pi = ParsePriceToDouble(prezzoIvato);
 
             string sql = @"INSERT INTO TACQUISTI (MARCA,DESCRIZIONE,QNT,PREZZO_NETTO,PREZZO_IVATO,DATA,IDCLIENTE,IDPRODOTTO,ALIQUOTA,NOTE,TIMESTAMP)
                            VALUES(@marca,@descr,@qnt,@pn,@pi,@data,@idCliente,@idProd,@aliq,@note,@ts)";
@@ -58,8 +44,8 @@ namespace PlannerShop.Data
                 { "@marca", marca },
                 { "@descr", descrizione },
                 { "@qnt", qnt },
-                { "@pn", pn },
-                { "@pi", pi },
+                { "@pn", prezzoNetto },
+                { "@pi", prezzoIvato },
                 { "@data", dataAcquisto },
                 { "@idCliente", int.Parse(idCliente) },
                 { "@idProd", int.Parse(idProdotto) },
