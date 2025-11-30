@@ -43,7 +43,7 @@ namespace PlannerShop.Forms
             this.Close();
         }
 
-        private void btnSaveData_Click(object sender, EventArgs e)
+        private void btnBackup_Click(object sender, EventArgs e)
         {
             try
             {
@@ -61,11 +61,13 @@ namespace PlannerShop.Forms
 
                     File.Copy(sourceFile, destFile, true);
                     MessageBox.Show("Backup eseguito correttamente");
+                    this.Close();
                 }
             }
             catch
             {
                 MessageBox.Show("Errore nel salvataggio del backup. Procedere a un salvataggio manuale");
+                this.Close();
             }
         }
     }

@@ -160,7 +160,7 @@
             btnDelete.Size = new Size(201, 91);
             btnDelete.TabIndex = 12;
             btnDelete.TabStop = false;
-            btnDelete.Text = "ELIMINA IL PRODOTTO";
+            btnDelete.Text = "ELIMINA IL FORNITORE";
             btnDelete.TextAlign = ContentAlignment.BottomCenter;
             btnDelete.TextImageRelation = TextImageRelation.ImageAboveText;
             btnDelete.UseVisualStyleBackColor = true;

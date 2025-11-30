@@ -164,6 +164,7 @@
             btnStatistiche.TextAlign = ContentAlignment.BottomCenter;
             btnStatistiche.TextImageRelation = TextImageRelation.ImageAboveText;
             btnStatistiche.UseVisualStyleBackColor = true;
+            btnStatistiche.Visible = false;
             btnStatistiche.Click += btnStatistiche_Click;
             // 
             // btnStampa
@@ -179,6 +180,7 @@
             btnStampa.TextAlign = ContentAlignment.BottomCenter;
             btnStampa.TextImageRelation = TextImageRelation.ImageAboveText;
             btnStampa.UseVisualStyleBackColor = true;
+            btnStampa.Visible = false;
             // 
             // btnOpzioni
             // 

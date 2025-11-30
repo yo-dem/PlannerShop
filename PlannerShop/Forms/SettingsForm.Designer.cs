@@ -40,16 +40,19 @@
             chkAccessMode = new CheckBox();
             btnOk = new Button();
             pnlTop = new Panel();
+            groupBox2 = new GroupBox();
+            btnBackup = new Button();
             Password.SuspendLayout();
             groupBox1.SuspendLayout();
+            groupBox2.SuspendLayout();
             SuspendLayout();
             // 
             // lblOldPassword
             // 
             lblOldPassword.AutoSize = true;
-            lblOldPassword.Location = new Point(6, 18);
+            lblOldPassword.Location = new Point(7, 24);
             lblOldPassword.Name = "lblOldPassword";
-            lblOldPassword.Size = new Size(120, 15);
+            lblOldPassword.Size = new Size(151, 20);
             lblOldPassword.TabIndex = 0;
             lblOldPassword.Text = "PASSWORD ATTUALE";
             // 
@@ -62,29 +65,26 @@
             Password.Controls.Add(lblNewPassword);
             Password.Controls.Add(txtOldPassword);
             Password.Controls.Add(lblOldPassword);
-            Password.Location = new Point(10, 26);
-            Password.Margin = new Padding(3, 2, 3, 2);
+            Password.Location = new Point(12, 35);
             Password.Name = "Password";
-            Password.Padding = new Padding(3, 2, 3, 2);
-            Password.Size = new Size(403, 241);
+            Password.Size = new Size(462, 283);
             Password.TabIndex = 0;
             Password.TabStop = false;
             Password.Text = "CAMBIO PASSWORD";
             // 
             // lblPasswordResult
             // 
-            lblPasswordResult.Location = new Point(6, 137);
+            lblPasswordResult.Location = new Point(6, 133);
             lblPasswordResult.Name = "lblPasswordResult";
-            lblPasswordResult.Size = new Size(391, 24);
+            lblPasswordResult.Size = new Size(447, 32);
             lblPasswordResult.TabIndex = 0;
             lblPasswordResult.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // btnPasswordReset
             // 
-            btnPasswordReset.Location = new Point(6, 202);
-            btnPasswordReset.Margin = new Padding(3, 2, 3, 2);
+            btnPasswordReset.Location = new Point(6, 221);
             btnPasswordReset.Name = "btnPasswordReset";
-            btnPasswordReset.Size = new Size(391, 35);
+            btnPasswordReset.Size = new Size(449, 47);
             btnPasswordReset.TabIndex = 3;
             btnPasswordReset.Text = "RESET";
             btnPasswordReset.UseVisualStyleBackColor = true;
@@ -92,10 +92,9 @@
             // 
             // btnPasswordChange
             // 
-            btnPasswordChange.Location = new Point(6, 163);
-            btnPasswordChange.Margin = new Padding(3, 2, 3, 2);
+            btnPasswordChange.Location = new Point(6, 168);
             btnPasswordChange.Name = "btnPasswordChange";
-            btnPasswordChange.Size = new Size(391, 35);
+            btnPasswordChange.Size = new Size(449, 47);
             btnPasswordChange.TabIndex = 2;
             btnPasswordChange.Text = "CAMBIA PASSWORD";
             btnPasswordChange.UseVisualStyleBackColor = true;
@@ -103,52 +102,47 @@
             // 
             // txtNewPassword
             // 
-            txtNewPassword.Location = new Point(6, 77);
-            txtNewPassword.Margin = new Padding(3, 2, 3, 2);
+            txtNewPassword.Location = new Point(7, 103);
             txtNewPassword.Name = "txtNewPassword";
             txtNewPassword.PasswordChar = '*';
-            txtNewPassword.Size = new Size(391, 23);
+            txtNewPassword.Size = new Size(448, 27);
             txtNewPassword.TabIndex = 1;
             // 
             // lblNewPassword
             // 
             lblNewPassword.AutoSize = true;
-            lblNewPassword.Location = new Point(6, 60);
+            lblNewPassword.Location = new Point(7, 80);
             lblNewPassword.Name = "lblNewPassword";
-            lblNewPassword.Size = new Size(111, 15);
+            lblNewPassword.Size = new Size(141, 20);
             lblNewPassword.TabIndex = 0;
             lblNewPassword.Text = "NUOVA PASSWORD";
             // 
             // txtOldPassword
             // 
-            txtOldPassword.Location = new Point(6, 35);
-            txtOldPassword.Margin = new Padding(3, 2, 3, 2);
+            txtOldPassword.Location = new Point(7, 47);
             txtOldPassword.Name = "txtOldPassword";
             txtOldPassword.PasswordChar = '*';
-            txtOldPassword.Size = new Size(391, 23);
+            txtOldPassword.Size = new Size(448, 27);
             txtOldPassword.TabIndex = 0;
             // 
             // groupBox1
             // 
             groupBox1.Controls.Add(chkAccessMode);
-            groupBox1.Location = new Point(10, 271);
-            groupBox1.Margin = new Padding(3, 2, 3, 2);
+            groupBox1.Location = new Point(12, 424);
             groupBox1.Name = "groupBox1";
-            groupBox1.Padding = new Padding(3, 2, 3, 2);
-            groupBox1.Size = new Size(403, 48);
+            groupBox1.Size = new Size(462, 64);
             groupBox1.TabIndex = 1;
             groupBox1.TabStop = false;
-            groupBox1.Text = "Accesso";
+            groupBox1.Text = "ACCESSO";
             // 
             // chkAccessMode
             // 
             chkAccessMode.AutoSize = true;
             chkAccessMode.Checked = true;
             chkAccessMode.CheckState = CheckState.Checked;
-            chkAccessMode.Location = new Point(6, 20);
-            chkAccessMode.Margin = new Padding(3, 2, 3, 2);
+            chkAccessMode.Location = new Point(7, 27);
             chkAccessMode.Name = "chkAccessMode";
-            chkAccessMode.Size = new Size(155, 19);
+            chkAccessMode.Size = new Size(194, 24);
             chkAccessMode.TabIndex = 0;
             chkAccessMode.Text = "ABILITA INS. PASSWORD";
             chkAccessMode.UseVisualStyleBackColor = true;
@@ -158,10 +152,9 @@
             // 
             btnOk.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             btnOk.Image = Properties.Resources.okImage;
-            btnOk.Location = new Point(11, 323);
-            btnOk.Margin = new Padding(3, 2, 3, 2);
+            btnOk.Location = new Point(12, 494);
             btnOk.Name = "btnOk";
-            btnOk.Size = new Size(404, 51);
+            btnOk.Size = new Size(462, 68);
             btnOk.TabIndex = 4;
             btnOk.Text = "OK";
             btnOk.TextAlign = ContentAlignment.BottomCenter;
@@ -174,21 +167,42 @@
             pnlTop.BackColor = Color.FromArgb(192, 192, 255);
             pnlTop.Dock = DockStyle.Top;
             pnlTop.Location = new Point(0, 0);
+            pnlTop.Margin = new Padding(3, 4, 3, 4);
             pnlTop.Name = "pnlTop";
-            pnlTop.Size = new Size(425, 10);
+            pnlTop.Size = new Size(486, 13);
             pnlTop.TabIndex = 24;
+            // 
+            // groupBox2
+            // 
+            groupBox2.Controls.Add(btnBackup);
+            groupBox2.Location = new Point(12, 324);
+            groupBox2.Name = "groupBox2";
+            groupBox2.Size = new Size(462, 94);
+            groupBox2.TabIndex = 25;
+            groupBox2.TabStop = false;
+            groupBox2.Text = "BACKUP ARCHIVIO";
+            // 
+            // btnBackup
+            // 
+            btnBackup.Location = new Point(6, 31);
+            btnBackup.Name = "btnBackup";
+            btnBackup.Size = new Size(450, 47);
+            btnBackup.TabIndex = 4;
+            btnBackup.Text = "BACKUP";
+            btnBackup.UseVisualStyleBackColor = true;
+            btnBackup.Click += btnBackup_Click;
             // 
             // SettingsForm
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(425, 385);
+            ClientSize = new Size(486, 574);
+            Controls.Add(groupBox2);
             Controls.Add(pnlTop);
             Controls.Add(btnOk);
             Controls.Add(groupBox1);
             Controls.Add(Password);
             FormBorderStyle = FormBorderStyle.FixedToolWindow;
-            Margin = new Padding(3, 2, 3, 2);
             Name = "SettingsForm";
             StartPosition = FormStartPosition.CenterParent;
             Text = "SETTINGS";
@@ -196,6 +210,7 @@
             Password.PerformLayout();
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
+            groupBox2.ResumeLayout(false);
             ResumeLayout(false);
 
         }
@@ -214,5 +229,7 @@
         private Button btnOk;
         private Button btnPasswordReset;
         private Panel pnlTop;
+        private GroupBox groupBox2;
+        private Button btnBackup;
     }
 }
