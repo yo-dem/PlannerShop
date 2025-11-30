@@ -35,14 +35,12 @@
             txtIndirizzo = new TextBox();
             lblNote = new Label();
             txtNote = new TextBox();
-            lblTelefonoMobile = new Label();
+            lblTelefono = new Label();
             lblEmail = new Label();
             txtEmail = new TextBox();
             btnOk = new Button();
             chkRipeti = new CheckBox();
-            lblTelefonoFisso = new Label();
-            txtTelefonoFisso = new TextBox();
-            txtTelefonoMobile = new TextBox();
+            txtTelefono = new TextBox();
             SuspendLayout();
             // 
             // lblNome
@@ -98,19 +96,19 @@
             txtNote.Size = new Size(842, 460);
             txtNote.TabIndex = 6;
             // 
-            // lblTelefonoMobile
+            // lblTelefono
             // 
-            lblTelefonoMobile.AutoSize = true;
-            lblTelefonoMobile.Location = new Point(14, 328);
-            lblTelefonoMobile.Name = "lblTelefonoMobile";
-            lblTelefonoMobile.Size = new Size(90, 20);
-            lblTelefonoMobile.TabIndex = 0;
-            lblTelefonoMobile.Text = "CELLULARE*";
+            lblTelefono.AutoSize = true;
+            lblTelefono.Location = new Point(14, 271);
+            lblTelefono.Name = "lblTelefono";
+            lblTelefono.Size = new Size(169, 20);
+            lblTelefono.TabIndex = 0;
+            lblTelefono.Text = "RECAPITO TELEFONICO*";
             // 
             // lblEmail
             // 
             lblEmail.AutoSize = true;
-            lblEmail.Location = new Point(14, 384);
+            lblEmail.Location = new Point(14, 327);
             lblEmail.Name = "lblEmail";
             lblEmail.Size = new Size(57, 20);
             lblEmail.TabIndex = 0;
@@ -118,7 +116,7 @@
             // 
             // txtEmail
             // 
-            txtEmail.Location = new Point(14, 407);
+            txtEmail.Location = new Point(14, 350);
             txtEmail.Name = "txtEmail";
             txtEmail.Size = new Size(202, 27);
             txtEmail.TabIndex = 5;
@@ -153,34 +151,14 @@
             chkRipeti.Text = "RIPETI INSERIMENTO";
             chkRipeti.UseVisualStyleBackColor = true;
             // 
-            // lblTelefonoFisso
+            // txtTelefono
             // 
-            lblTelefonoFisso.AutoSize = true;
-            lblTelefonoFisso.Location = new Point(14, 272);
-            lblTelefonoFisso.Name = "lblTelefonoFisso";
-            lblTelefonoFisso.Size = new Size(128, 20);
-            lblTelefonoFisso.TabIndex = 11;
-            lblTelefonoFisso.Text = "TELEFONO FISSO*";
-            // 
-            // txtTelefonoFisso
-            // 
-            txtTelefonoFisso.Location = new Point(14, 295);
-            txtTelefonoFisso.Name = "txtTelefonoFisso";
-            txtTelefonoFisso.Size = new Size(202, 27);
-            txtTelefonoFisso.TabIndex = 3;
-            txtTelefonoFisso.TextAlign = HorizontalAlignment.Right;
-            txtTelefonoFisso.TextChanged += TxtTelefonoFisso_TextChanged;
-            txtTelefonoFisso.KeyPress += txtTelefonoFisso_KeyPress;
-            // 
-            // txtTelefonoMobile
-            // 
-            txtTelefonoMobile.Location = new Point(14, 351);
-            txtTelefonoMobile.Name = "txtTelefonoMobile";
-            txtTelefonoMobile.Size = new Size(202, 27);
-            txtTelefonoMobile.TabIndex = 4;
-            txtTelefonoMobile.TextAlign = HorizontalAlignment.Right;
-            txtTelefonoMobile.TextChanged += TxtTelefonoMobile_TextChanged;
-            txtTelefonoMobile.KeyPress += txtTelefonoMobile_KeyPress;
+            txtTelefono.Location = new Point(14, 294);
+            txtTelefono.Name = "txtTelefono";
+            txtTelefono.Size = new Size(202, 27);
+            txtTelefono.TabIndex = 4;
+            txtTelefono.TextAlign = HorizontalAlignment.Right;
+            txtTelefono.KeyPress += txtTelefonoMobile_KeyPress;
             // 
             // SupplierInsertForm
             // 
@@ -188,14 +166,12 @@
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1082, 689);
-            Controls.Add(txtTelefonoMobile);
-            Controls.Add(lblTelefonoFisso);
-            Controls.Add(txtTelefonoFisso);
+            Controls.Add(txtTelefono);
             Controls.Add(chkRipeti);
             Controls.Add(btnOk);
             Controls.Add(lblEmail);
             Controls.Add(txtEmail);
-            Controls.Add(lblTelefonoMobile);
+            Controls.Add(lblTelefono);
             Controls.Add(lblNote);
             Controls.Add(txtNote);
             Controls.Add(lblIndirizzo);
@@ -219,13 +195,11 @@
         private TextBox txtIndirizzo;
         private Label lblNote;
         private TextBox txtNote;
-        private Label lblTelefonoMobile;
+        private Label lblTelefono;
         private Label lblEmail;
         private TextBox txtEmail;
         private Button btnOk;
         private CheckBox chkRipeti;
-        private Label lblTelefonoFisso;
-        private TextBox txtTelefonoFisso;
-        private TextBox txtTelefonoMobile;
+        private TextBox txtTelefono;
     }
 }

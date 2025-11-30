@@ -223,7 +223,7 @@ namespace PlannerShop
             indirizzoSupplierColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
             indirizzoSupplierColumn.DefaultCellStyle.Font = new Font("Corbel", fontSize, FontStyle.Regular);
 
-            var telefonoFissoSupplierColumn = dgvData.Columns["TELEFONO_FISSO"];
+            var telefonoFissoSupplierColumn = dgvData.Columns["TELEFONO"];
             telefonoFissoSupplierColumn.DisplayIndex = 3;
             telefonoFissoSupplierColumn.Visible = true;
             telefonoFissoSupplierColumn.HeaderText = "TEL. FISSO";
@@ -232,17 +232,8 @@ namespace PlannerShop
             telefonoFissoSupplierColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             telefonoFissoSupplierColumn.DefaultCellStyle.Font = new Font("Corbel", fontSize, FontStyle.Regular);
 
-            var telefonoMobileSupplierColumn = dgvData.Columns["TELEFONO_MOBILE"];
-            telefonoMobileSupplierColumn.DisplayIndex = 4;
-            telefonoMobileSupplierColumn.Visible = true;
-            telefonoMobileSupplierColumn.HeaderText = "TEL. CELLULARE";
-            telefonoMobileSupplierColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            telefonoMobileSupplierColumn.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            telefonoMobileSupplierColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            telefonoMobileSupplierColumn.DefaultCellStyle.Font = new Font("Corbel", fontSize, FontStyle.Regular);
-
             var emailSupplierColumn = dgvData.Columns["EMAIL"];
-            emailSupplierColumn.DisplayIndex = 5;
+            emailSupplierColumn.DisplayIndex = 4;
             emailSupplierColumn.Visible = true;
             emailSupplierColumn.HeaderText = "EMAIL";
             emailSupplierColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
@@ -251,9 +242,8 @@ namespace PlannerShop
             emailSupplierColumn.DefaultCellStyle.Font = new Font("Corbel", fontSize, FontStyle.Regular);
 
 
-
             var noteProductionColumn = dgvData.Columns["NOTE"];
-            noteProductionColumn.DisplayIndex = 6;
+            noteProductionColumn.DisplayIndex = 5;
             noteProductionColumn.Visible = true;
             noteProductionColumn.HeaderText = "NOTE";
             noteProductionColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;

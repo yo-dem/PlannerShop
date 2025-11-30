@@ -34,11 +34,6 @@ namespace PlannerShop.Forms
             }
         }
 
-        private void TxtTelefonoFisso_TextChanged(object? sender, EventArgs e)
-        {
-            lblTelefonoFisso.ForeColor = Color.Black;
-        }
-
         private void txtTelefonoMobile_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsDigit(e.KeyChar) && e.KeyChar != (char)Keys.Back)
@@ -47,9 +42,9 @@ namespace PlannerShop.Forms
             }
         }
 
-        private void TxtTelefonoMobile_TextChanged(object? sender, EventArgs e)
+        private void TxtTelefono_TextChanged(object? sender, EventArgs e)
         {
-            lblTelefonoMobile.ForeColor = Color.Black;
+            lblTelefono.ForeColor = Color.Black;
         }
 
         private void TxtEmail_TextChanged(object? sender, EventArgs e)
@@ -98,23 +93,18 @@ namespace PlannerShop.Forms
                 lblIndirizzo.ForeColor = Color.Red;
                 res1 = false;
             }
-            if (String.IsNullOrEmpty(txtTelefonoFisso.Text))
+            if (String.IsNullOrEmpty(txtTelefono.Text))
             {
-                lblTelefonoFisso.ForeColor = Color.Red;
+                lblTelefono.ForeColor = Color.Red;
                 res2 = false;
-            }
-            if (String.IsNullOrEmpty(txtTelefonoMobile.Text))
-            {
-                lblTelefonoMobile.ForeColor = Color.Red;
-                res3 = false;
             }
             if (String.IsNullOrEmpty(txtEmail.Text))
             {
                 lblEmail.ForeColor = Color.Red;
-                res4 = false;
+                res3 = false;
             }
 
-            return res0 && res1 && res2 && res3 && res4 && !emailNotValid;
+            return res0 && res1 && res2 && res3 && !emailNotValid;
         }
 
         private void btnOk_Click(object sender, EventArgs e)
@@ -124,16 +114,14 @@ namespace PlannerShop.Forms
                 ModelFornitori.addFornitore(
                     txtNome.Text,
                     txtIndirizzo.Text,
-                    txtTelefonoFisso.Text,
-                    txtTelefonoMobile.Text,
+                    txtTelefono.Text,
                     txtEmail.Text.ToLower(),
                     txtNote.Text);
                 if (chkRipeti.Checked)
                 {
                     txtNome.Text = String.Empty;
                     txtIndirizzo.Text = String.Empty;
-                    txtTelefonoFisso.Text = String.Empty;
-                    txtTelefonoMobile.Text = String.Empty;
+                    txtTelefono.Text = String.Empty;
                     txtEmail.Text = String.Empty;
                     txtNote.Text = String.Empty;
                 }

@@ -17,20 +17,18 @@ namespace PlannerShop.Data
         public static void addFornitore(
             string nome,
             string indirizzo,
-            string telefonoFisso,
-            string telefonoMobile,
+            string telefono,
             string email,
             string note)
         {
-            string sql = @"INSERT INTO TFORNITORI (NOME,INDIRIZZO,TELEFONO_FISSO,TELEFONO_MOBILE,EMAIL,NOTE)
-                           VALUES(@nome,@indirizzo,@telF,@telM,@email,@note)";
+            string sql = @"INSERT INTO TFORNITORI (NOME,INDIRIZZO,TELEFONO,EMAIL,NOTE)
+                           VALUES(@nome,@indirizzo,@tel,@email,@note)";
 
             var parameters = new Dictionary<string, object?>()
             {
                 { "@nome", nome },
                 { "@indirizzo", indirizzo },
-                { "@telF", telefonoFisso },
-                { "@telM", telefonoMobile },
+                { "@tel", telefono },
                 { "@email", email },
                 { "@note", note }
             };
@@ -42,20 +40,18 @@ namespace PlannerShop.Data
             string idFornitore,
             string nome,
             string indirizzo,
-            string telefonoFisso,
-            string telefonoMobile,
+            string telefono,
             string email,
             string note)
         {
-            string sql = @"UPDATE TFORNITORI SET NOME=@nome, INDIRIZZO=@indirizzo, TELEFONO_FISSO=@telF, TELEFONO_MOBILE=@telM, EMAIL=@email, NOTE=@note
+            string sql = @"UPDATE TFORNITORI SET NOME=@nome, INDIRIZZO=@indirizzo, TELEFONO=@tel, EMAIL=@email, NOTE=@note
                            WHERE IDFORNITORE=@id";
 
             var parameters = new Dictionary<string, object?>()
             {
                 { "@nome", nome },
                 { "@indirizzo", indirizzo },
-                { "@telF", telefonoFisso },
-                { "@telM", telefonoMobile },
+                { "@tel", telefono },
                 { "@email", email },
                 { "@note", note },
                 { "@id", idFornitore }

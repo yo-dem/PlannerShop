@@ -39,7 +39,7 @@ namespace PlannerShop.Forms
             lblIndirizzo.ForeColor = Color.Black;
         }
 
-        private void txtTelefonoFisso_KeyPress(object sender, KeyPressEventArgs e)
+        private void txtTelefono_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsDigit(e.KeyChar) && e.KeyChar != (char)Keys.Back)
             {
@@ -47,9 +47,9 @@ namespace PlannerShop.Forms
             }
         }
 
-        private void TxtTelefonoFisso_TextChanged(object? sender, EventArgs e)
+        private void TxtTelefono_TextChanged(object? sender, EventArgs e)
         {
-            lblTelefonoFisso.ForeColor = Color.Black;
+            lblTelefono.ForeColor = Color.Black;
         }
 
         private void txtTelefonoMobile_KeyPress(object sender, KeyPressEventArgs e)
@@ -62,7 +62,7 @@ namespace PlannerShop.Forms
 
         private void TxtTelefonoMobile_TextChanged(object? sender, EventArgs e)
         {
-            lblTelefonoMobile.ForeColor = Color.Black;
+            lblTelefono.ForeColor = Color.Black;
         }
 
         private void TxtEmail_TextChanged(object? sender, EventArgs e)
@@ -100,8 +100,7 @@ namespace PlannerShop.Forms
             {
                 txtNome.Text = dt.Rows[0]["NOME"].ToString();
                 txtIndirizzo.Text = dt.Rows[0]["INDIRIZZO"].ToString();
-                txtTelefonoFisso.Text = dt.Rows[0]["TELEFONO_FISSO"].ToString();
-                txtTelefonoMobile.Text = dt.Rows[0]["TELEFONO_MOBILE"].ToString();
+                txtTelefono.Text = dt.Rows[0]["TELEFONO"].ToString();
                 txtEmail.Text = dt.Rows[0]["EMAIL"].ToString();
                 txtNote.Text = dt.Rows[0]["NOTE"].ToString();
             }
@@ -125,14 +124,14 @@ namespace PlannerShop.Forms
                 lblIndirizzo.ForeColor = Color.Red;
                 res1 = false;
             }
-            if (String.IsNullOrEmpty(txtTelefonoFisso.Text))
+            if (String.IsNullOrEmpty(txtTelefono.Text))
             {
-                lblTelefonoFisso.ForeColor = Color.Red;
+                lblTelefono.ForeColor = Color.Red;
                 res2 = false;
             }
-            if (String.IsNullOrEmpty(txtTelefonoMobile.Text))
+            if (String.IsNullOrEmpty(txtTelefono.Text))
             {
-                lblTelefonoMobile.ForeColor = Color.Red;
+                lblTelefono.ForeColor = Color.Red;
                 res3 = false;
             }
             if (String.IsNullOrEmpty(txtEmail.Text))
@@ -152,8 +151,7 @@ namespace PlannerShop.Forms
                     idFornitore,
                     txtNome.Text,
                     txtIndirizzo.Text,
-                    txtTelefonoFisso.Text,
-                    txtTelefonoMobile.Text,
+                    txtTelefono.Text,
                     txtEmail.Text.ToLower(),
                     txtNote.Text);
                 this.Close();
