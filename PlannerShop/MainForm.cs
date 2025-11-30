@@ -503,13 +503,13 @@ namespace PlannerShop
                             String nome = dgvr.Cells["NOME"]?.Value?.ToString()?.ToLower() ?? String.Empty;
                             String cognome = dgvr.Cells["COGNOME"].Value?.ToString()?.ToLower() ?? String.Empty;
                             String indirizzo = dgvr.Cells["INDIRIZZO"].Value?.ToString()?.ToLower() ?? String.Empty;
-                            String telefonoMobile = dgvr.Cells["TELEFONO_MOBILE"].Value?.ToString()?.ToLower() ?? String.Empty;
+                            String telefono = dgvr.Cells["TELEFONO"].Value?.ToString()?.ToLower() ?? String.Empty;
                             String email = dgvr.Cells["EMAIL"].Value?.ToString()?.ToLower() ?? String.Empty;
 
                             if (nome.Contains(txtSearch.Text.ToLower())
                                 || cognome.Contains(txtSearch.Text.ToLower())
                                 || indirizzo.Contains(txtSearch.Text.ToLower())
-                                || telefonoMobile.Contains(txtSearch.Text.ToLower())
+                                || telefono.Contains(txtSearch.Text.ToLower())
                                 || email.Contains(txtSearch.Text.ToLower())
                                 )
                             {
@@ -533,12 +533,12 @@ namespace PlannerShop
                         {
                             String nome = dgvr.Cells["NOME"]?.Value?.ToString()?.ToLower() ?? String.Empty;
                             String indirizzo = dgvr.Cells["INDIRIZZO"].Value?.ToString()?.ToLower() ?? String.Empty;
-                            String telefonoMobile = dgvr.Cells["TELEFONO_MOBILE"].Value?.ToString()?.ToLower() ?? String.Empty;
+                            String telefono = dgvr.Cells["TELEFONO"].Value?.ToString()?.ToLower() ?? String.Empty;
                             String email = dgvr.Cells["EMAIL"].Value?.ToString()?.ToLower() ?? String.Empty;
 
                             if (nome.Contains(txtSearch.Text.ToLower())
                                 || indirizzo.Contains(txtSearch.Text.ToLower())
-                                || telefonoMobile.Contains(txtSearch.Text.ToLower())
+                                || telefono.Contains(txtSearch.Text.ToLower())
                                 || email.Contains(txtSearch.Text.ToLower())
                                 )
                             {

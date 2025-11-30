@@ -39,15 +39,15 @@ namespace PlannerShop.Forms
 
         void SetProductDataGridStructure()
         {
-            int fontSize = 8;
+            int fontSize = 10;
 
             var idProductColumn = dgvData.Columns["IDPRODOTTO"];
             idProductColumn.DisplayIndex = 0;
             idProductColumn.Visible = false;
             idProductColumn.HeaderText = "IDPRODOTTO";
             idProductColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            idProductColumn.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            idProductColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            idProductColumn.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            idProductColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
             idProductColumn.DefaultCellStyle.Font = new Font("Corbel", fontSize, FontStyle.Regular);
 
             var dataProductColumn = dgvData.Columns["DATA"];
@@ -55,7 +55,7 @@ namespace PlannerShop.Forms
             dataProductColumn.Visible = false;
             dataProductColumn.HeaderText = "DATA";
             dataProductColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataProductColumn.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataProductColumn.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataProductColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataProductColumn.DefaultCellStyle.Font = new Font("Corbel", fontSize, FontStyle.Regular);
 
@@ -64,7 +64,7 @@ namespace PlannerShop.Forms
             marcaProductColumn.Visible = true;
             marcaProductColumn.HeaderText = "MARCA";
             marcaProductColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            marcaProductColumn.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            marcaProductColumn.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft;
             marcaProductColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
             marcaProductColumn.DefaultCellStyle.Font = new Font("Corbel", fontSize, FontStyle.Regular);
 
@@ -73,7 +73,7 @@ namespace PlannerShop.Forms
             descrizioneProductColumn.Visible = true;
             descrizioneProductColumn.HeaderText = "DESCRIZIONE";
             descrizioneProductColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            descrizioneProductColumn.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            descrizioneProductColumn.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft;
             descrizioneProductColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
             descrizioneProductColumn.DefaultCellStyle.Font = new Font("Corbel", fontSize, FontStyle.Bold);
 
@@ -82,7 +82,7 @@ namespace PlannerShop.Forms
             aliquotaProductColumn.Visible = false;
             aliquotaProductColumn.HeaderText = "IVA";
             aliquotaProductColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            aliquotaProductColumn.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            aliquotaProductColumn.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft;
             aliquotaProductColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             aliquotaProductColumn.DefaultCellStyle.Font = new Font("Corbel", fontSize, FontStyle.Regular);
 
@@ -90,26 +90,26 @@ namespace PlannerShop.Forms
             qntProductColumn.DisplayIndex = 5;
             qntProductColumn.Visible = true;
             qntProductColumn.HeaderText = "QNT";
-            qntProductColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            qntProductColumn.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            qntProductColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            qntProductColumn.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft;
             qntProductColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             qntProductColumn.DefaultCellStyle.Font = new Font("Corbel", fontSize, FontStyle.Regular);
 
             var prezzoNettoProductColumn = dgvData.Columns["PREZZO_NETTO"];
             prezzoNettoProductColumn.DisplayIndex = 6;
             prezzoNettoProductColumn.Visible = true;
-            prezzoNettoProductColumn.HeaderText = "PREZZO NETTO";
+            prezzoNettoProductColumn.HeaderText = "NETTO";
             prezzoNettoProductColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            prezzoNettoProductColumn.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            prezzoNettoProductColumn.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft;
             prezzoNettoProductColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             prezzoNettoProductColumn.DefaultCellStyle.Font = new Font("Corbel", fontSize, FontStyle.Regular);
 
             var prezzoIvatoProductColumn = dgvData.Columns["PREZZO_IVATO"];
             prezzoIvatoProductColumn.DisplayIndex = 7;
             prezzoIvatoProductColumn.Visible = true;
-            prezzoIvatoProductColumn.HeaderText = "PREZZO IVATO";
+            prezzoIvatoProductColumn.HeaderText = "IVATO";
             prezzoIvatoProductColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            prezzoIvatoProductColumn.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            prezzoIvatoProductColumn.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft;
             prezzoIvatoProductColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             prezzoIvatoProductColumn.DefaultCellStyle.Font = new Font("Corbel", fontSize, FontStyle.Regular);
 
@@ -118,7 +118,7 @@ namespace PlannerShop.Forms
             noteProductionColumn.Visible = false;
             noteProductionColumn.HeaderText = "NOTE";
             noteProductionColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            noteProductionColumn.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            noteProductionColumn.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft;
             noteProductionColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             noteProductionColumn.DefaultCellStyle.Font = new Font("Corbel", fontSize, FontStyle.Bold);
         }
@@ -225,6 +225,15 @@ namespace PlannerShop.Forms
             noteProductionColumn.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
             noteProductionColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             noteProductionColumn.DefaultCellStyle.Font = new Font("Corbel", fontSize, FontStyle.Bold);
+
+            var timestampProductionColumn = dgvDataAcquisto.Columns["TIMESTAMP"];
+            timestampProductionColumn.DisplayIndex = 11;
+            timestampProductionColumn.Visible = false;
+            timestampProductionColumn.HeaderText = "TIMESTAMP";
+            timestampProductionColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            timestampProductionColumn.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            timestampProductionColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            timestampProductionColumn.DefaultCellStyle.Font = new Font("Corbel", fontSize, FontStyle.Bold);
         }
 
         private void txtSearch_TextChanged(object sender, EventArgs e)
