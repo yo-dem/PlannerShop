@@ -42,6 +42,8 @@
             grpAcquisti = new GroupBox();
             dgvDataAcquisto = new DataGridView();
             pnlTop = new Panel();
+            btnCancel = new Button();
+            btnOk = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvData).BeginInit();
             ((System.ComponentModel.ISupportInitialize)searchImage).BeginInit();
             pnlSearch.SuspendLayout();
@@ -57,7 +59,7 @@
             dgvData.Location = new Point(17, 245);
             dgvData.Name = "dgvData";
             dgvData.RowHeadersWidth = 51;
-            dgvData.Size = new Size(1045, 173);
+            dgvData.Size = new Size(1045, 293);
             dgvData.TabIndex = 6;
             dgvData.CellDoubleClick += dgvData_CellDoubleClick;
             // 
@@ -154,7 +156,7 @@
             grpProdotti.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             grpProdotti.Location = new Point(11, 167);
             grpProdotti.Name = "grpProdotti";
-            grpProdotti.Size = new Size(1058, 257);
+            grpProdotti.Size = new Size(1058, 377);
             grpProdotti.TabIndex = 25;
             grpProdotti.TabStop = false;
             grpProdotti.Text = "PRODOTTI";
@@ -163,9 +165,9 @@
             // 
             grpAcquisti.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             grpAcquisti.Controls.Add(dgvDataAcquisto);
-            grpAcquisti.Location = new Point(11, 429);
+            grpAcquisti.Location = new Point(11, 550);
             grpAcquisti.Name = "grpAcquisti";
-            grpAcquisti.Size = new Size(1058, 229);
+            grpAcquisti.Size = new Size(1058, 185);
             grpAcquisti.TabIndex = 25;
             grpAcquisti.TabStop = false;
             grpAcquisti.Text = "ACQUISTI";
@@ -177,7 +179,7 @@
             dgvDataAcquisto.Location = new Point(6, 27);
             dgvDataAcquisto.Name = "dgvDataAcquisto";
             dgvDataAcquisto.RowHeadersWidth = 51;
-            dgvDataAcquisto.Size = new Size(1047, 197);
+            dgvDataAcquisto.Size = new Size(1047, 152);
             dgvDataAcquisto.TabIndex = 7;
             dgvDataAcquisto.CellDoubleClick += dgvDataAcquisto_CellDoubleClick;
             // 
@@ -191,11 +193,43 @@
             pnlTop.Size = new Size(1082, 13);
             pnlTop.TabIndex = 26;
             // 
+            // btnCancel
+            // 
+            btnCancel.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            btnCancel.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
+            btnCancel.ForeColor = Color.Red;
+            btnCancel.Location = new Point(11, 750);
+            btnCancel.Name = "btnCancel";
+            btnCancel.Size = new Size(212, 91);
+            btnCancel.TabIndex = 27;
+            btnCancel.TabStop = false;
+            btnCancel.Text = "ANNULLA";
+            btnCancel.TextImageRelation = TextImageRelation.ImageAboveText;
+            btnCancel.UseVisualStyleBackColor = true;
+            btnCancel.Click += btnCancel_Click;
+            // 
+            // btnOk
+            // 
+            btnOk.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            btnOk.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
+            btnOk.Image = Properties.Resources.okImage;
+            btnOk.Location = new Point(229, 750);
+            btnOk.Name = "btnOk";
+            btnOk.Size = new Size(841, 91);
+            btnOk.TabIndex = 28;
+            btnOk.Text = "SALVA MODIFICHE";
+            btnOk.TextAlign = ContentAlignment.BottomCenter;
+            btnOk.TextImageRelation = TextImageRelation.ImageAboveText;
+            btnOk.UseVisualStyleBackColor = true;
+            btnOk.Click += btnOk_Click;
+            // 
             // PurchaseEditForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1082, 689);
+            ClientSize = new Size(1082, 853);
+            Controls.Add(btnCancel);
+            Controls.Add(btnOk);
             Controls.Add(pnlTop);
             Controls.Add(grpAcquisti);
             Controls.Add(grpCliente);
@@ -207,6 +241,7 @@
             Name = "PurchaseEditForm";
             StartPosition = FormStartPosition.CenterParent;
             Text = "GESTIONE ACQUISTI";
+            WindowState = FormWindowState.Maximized;
             ((System.ComponentModel.ISupportInitialize)dgvData).EndInit();
             ((System.ComponentModel.ISupportInitialize)searchImage).EndInit();
             pnlSearch.ResumeLayout(false);
@@ -233,5 +268,7 @@
         private Label lblTelefono;
         private Label lblEmail;
         private Panel pnlTop;
+        private Button btnCancel;
+        private Button btnOk;
     }
 }

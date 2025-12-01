@@ -6,6 +6,9 @@ namespace PlannerShop.Forms
 {
     public partial class PurchaseEditForm : Form
     {
+        private DataTable dtProdottiTemp;
+        private DataTable dtAcquistiTemp;
+
         DateTime timeStamp;
         string idCliente;
 
@@ -13,18 +16,21 @@ namespace PlannerShop.Forms
         {
             InitializeComponent();
 
+            idCliente = IdCliente;
             timeStamp = DateTime.Now;
 
-            idCliente = IdCliente;
+            // Copie locali
+            dtProdottiTemp = ModelProdotti.getProdotti().Copy();
+            dtAcquistiTemp = ModelAcquisti.getAcquistiByIdCliente(idCliente, timeStamp.ToString()).Copy();
 
-            dgvData.DataSource = ModelProdotti.getProdotti();
+            dgvData.DataSource = dtProdottiTemp;
             SetProductDataGridStructure();
 
             Utils.SetDataGridStyle(dgvData, false, 40, 40);
             Utils.SetDataGridStyle(dgvDataAcquisto, false, 40, 40);
             loadClienteData();
 
-            dgvDataAcquisto.DataSource = ModelAcquisti.getAcquistiByIdCliente(idCliente, timeStamp.ToString());
+            dgvDataAcquisto.DataSource = dtAcquistiTemp;
             SetPurchaseDataGridStructure();
         }
 
@@ -272,103 +278,231 @@ namespace PlannerShop.Forms
         {
             if (e.RowIndex < 0) return;
 
-            if (dgvData.Rows[e.RowIndex].Cells[0].Value == null) return;
-            String idProdotto = dgvData.Rows[e.RowIndex].Cells["IDPRODOTTO"].Value.ToString()!;
+            DataRow row = dtProdottiTemp.Rows[e.RowIndex];
+            string idProdotto = row["IDPRODOTTO"]?.ToString() ?? string.Empty;
 
-            DataTable DTproductRow = ModelProdotti.getProdottoById(idProdotto);
+            string marca = row["MARCA"]?.ToString() ?? string.Empty;
+            string descrizione = row["DESCRIZIONE"]?.ToString() ?? string.Empty;
+            string prezzoNetto = row["PREZZO_NETTO"]?.ToString() ?? string.Empty;
+            string prezzoIvato = row["PREZZO_IVATO"]?.ToString() ?? string.Empty;
+            string aliquota = row["ALIQUOTA"]?.ToString() ?? string.Empty;
+            string data = row["DATA"]?.ToString() ?? string.Empty;
+            string note = row["NOTE"]?.ToString() ?? string.Empty;
 
-            if (!int.TryParse(DTproductRow.Rows[0]["QNT"].ToString(), out int intQnt)) return;
-
-            if (intQnt > 1)
+            if (!int.TryParse(row["QNT"]?.ToString(), out int qnt))
             {
-                ModelProdotti.updateQuantity(idProdotto, intQnt - 1);
+                qnt = 0;
+            }
+
+            if (qnt > 1)
+                row["QNT"] = qnt - 1;
+            else
+                dtProdottiTemp.Rows.Remove(row);
+
+            DataRow[] acquistoEsistente = dtAcquistiTemp.Select($"IDPRODOTTO = '{idProdotto}'");
+
+            if (acquistoEsistente.Length == 0)
+            {
+                DataRow newAcq = dtAcquistiTemp.NewRow();
+
+                newAcq["IDPRODOTTO"] = idProdotto;
+                newAcq["IDCLIENTE"] = idCliente;
+                newAcq["MARCA"] = marca;
+                newAcq["DESCRIZIONE"] = descrizione;
+                newAcq["PREZZO_NETTO"] = prezzoNetto;
+                newAcq["PREZZO_IVATO"] = prezzoIvato;
+                newAcq["ALIQUOTA"] = aliquota;
+                newAcq["DATA"] = data;
+                newAcq["NOTE"] = note;
+                newAcq["TIMESTAMP"] = timeStamp.ToString();
+                newAcq["QNT"] = 1;
+
+                dtAcquistiTemp.Rows.Add(newAcq);
             }
             else
             {
-                ModelProdotti.deleteProdotto(idProdotto);
+                if (!int.TryParse(acquistoEsistente[0]["QNT"]?.ToString(), out int q))
+                {
+                    q = 0;
+                }
+
+                acquistoEsistente[0]["QNT"] = q + 1;
             }
 
-            dgvData.DataSource = ModelProdotti.getProdotti();
-            
-            DataTable dt = ModelAcquisti.getAcquistiByIdClienteAndProductId(idCliente, idProdotto);
-            if (dt.Rows.Count == 0)
-            {
-                ModelAcquisti.addAcquisto(
-                    DTproductRow.Rows[0]["MARCA"].ToString()!,
-                    DTproductRow.Rows[0]["DESCRIZIONE"].ToString()!,
-                    1.ToString(),
-                    DTproductRow.Rows[0]["PREZZO_NETTO"].ToString()!,
-                    DTproductRow.Rows[0]["PREZZO_IVATO"].ToString()!,
-                    DTproductRow.Rows[0]["DATA"].ToString()!,
-                    idCliente,
-                    idProdotto,
-                    DTproductRow.Rows[0]["ALIQUOTA"].ToString()!,
-                    DTproductRow.Rows[0]["NOTE"].ToString()!,
-                    timeStamp.ToString()
-                    );
-            }
-            else
-            {
-                if (!int.TryParse(dt.Rows[0]["QNT"].ToString(), out int qnt)) return;
-                ModelAcquisti.updateQuantity(idProdotto, idCliente, ++qnt);
-            }
+            dgvData.Refresh();
+            dgvDataAcquisto.Refresh();
 
-            dgvDataAcquisto.DataSource = ModelAcquisti.getAcquistiByIdCliente(idCliente, timeStamp.ToString());
-
-            dgvDataAcquisto.ClearSelection();
             dgvData.ClearSelection();
+            dgvDataAcquisto.ClearSelection();
         }
+
+
 
         private void dgvDataAcquisto_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0) return;
 
-            if (dgvDataAcquisto.Rows[e.RowIndex].Cells["IDPRODOTTO"].Value == null) return;
-            String idProdotto = dgvDataAcquisto.Rows[e.RowIndex].Cells["IDPRODOTTO"].Value.ToString()!;
+            DataRow acqRow = ((DataRowView)dgvDataAcquisto.Rows[e.RowIndex].DataBoundItem).Row;
+            string idProdotto = acqRow["IDPRODOTTO"]?.ToString() ?? string.Empty;
 
-            DataTable DTacquistoRow = ModelAcquisti.getAcquistiByIdClienteAndProductId(idCliente, idProdotto);
-            if (!int.TryParse(DTacquistoRow.Rows[0]["QNT"].ToString(), out int intQnt)) return;
+            int qntAcq = Convert.ToInt32(acqRow["QNT"]);
 
-            DataTable DTproductRow = ModelProdotti.getProdottoById(idProdotto);
+            DataRow[] prdRows = dtProdottiTemp.Select($"IDPRODOTTO = '{idProdotto}'");
 
-            if (DTproductRow.Rows.Count == 0)
+            if (prdRows.Length == 0)
             {
-                ModelProdotti.addProdotto(
-                    DTacquistoRow.Rows[0]["DATA"].ToString()!,
-                    DTacquistoRow.Rows[0]["MARCA"].ToString()!,
-                    DTacquistoRow.Rows[0]["DESCRIZIONE"].ToString()!,
-                    DTacquistoRow.Rows[0]["ALIQUOTA"].ToString()!,
-                    1.ToString(),
-                    DTacquistoRow.Rows[0]["PREZZO_NETTO"].ToString()!,
-                    DTacquistoRow.Rows[0]["PREZZO_IVATO"].ToString()!,
-                    DTacquistoRow.Rows[0]["NOTE"].ToString()!,
-                    DTacquistoRow.Rows[0]["IDPRODOTTO"].ToString()!
-                    );
+                DataRow newPrd = dtProdottiTemp.NewRow();
+
+                newPrd["IDPRODOTTO"] = idProdotto;
+                newPrd["DATA"] = acqRow["DATA"];
+                newPrd["MARCA"] = acqRow["MARCA"];
+                newPrd["DESCRIZIONE"] = acqRow["DESCRIZIONE"];
+                newPrd["ALIQUOTA"] = acqRow["ALIQUOTA"];
+                newPrd["PREZZO_NETTO"] = acqRow["PREZZO_NETTO"];
+                newPrd["PREZZO_IVATO"] = acqRow["PREZZO_IVATO"];
+                newPrd["NOTE"] = acqRow["NOTE"];
+
+                newPrd["QNT"] = 1;
+
+                dtProdottiTemp.Rows.Add(newPrd);
             }
             else
             {
-                if (!int.TryParse(DTproductRow.Rows[0]["QNT"].ToString(), out int intQntPrd)) return;
-                ModelProdotti.updateQuantity(idProdotto, ++intQntPrd);
+                int qntMag = Convert.ToInt32(prdRows[0]["QNT"]);
+                prdRows[0]["QNT"] = qntMag + 1;
             }
 
-            dgvData.DataSource = ModelProdotti.getProdotti();
-
-            
-            if (intQnt > 1)
+            if (qntAcq > 1)
             {
-                ModelAcquisti.updateQuantity(idProdotto, idCliente, intQnt - 1);
+                acqRow["QNT"] = qntAcq - 1;
             }
             else
             {
-                ModelAcquisti.deleteAcquisto(idProdotto, idCliente);
+                dtAcquistiTemp.Rows.Remove(acqRow);
             }
 
-            dgvDataAcquisto.DataSource = ModelAcquisti.getAcquistiByIdCliente(idCliente, timeStamp.ToString());
+            dgvData.Refresh();
+            dgvDataAcquisto.Refresh();
 
             dgvData.ClearSelection();
             dgvDataAcquisto.ClearSelection();
         }
 
+        private void btnOk_Click(object sender, EventArgs e)
+        {
+            DataTable originalProducts = ModelProdotti.getProdotti();
+
+            foreach (DataRow tempRow in dtProdottiTemp.Rows)
+            {
+                string id = tempRow["IDPRODOTTO"]?.ToString() ?? string.Empty;
+                int qnt = Convert.ToInt32(tempRow["QNT"]);
+
+                string data = tempRow["DATA"]?.ToString() ?? string.Empty;
+                string marca = tempRow["MARCA"]?.ToString() ?? string.Empty;
+                string descrizione = tempRow["DESCRIZIONE"]?.ToString() ?? string.Empty;
+                string aliquota = tempRow["ALIQUOTA"]?.ToString() ?? string.Empty;
+                string prezzoNetto = tempRow["PREZZO_NETTO"]?.ToString() ?? string.Empty;
+                string prezzoIvato = tempRow["PREZZO_IVATO"]?.ToString() ?? string.Empty;
+                string note = tempRow["NOTE"]?.ToString() ?? string.Empty;
+
+                DataRow[] found = originalProducts.Select($"IDPRODOTTO = '{id}'");
+
+                if (found.Length == 0)
+                {
+                    ModelProdotti.addProdotto(
+                        data,
+                        marca,
+                        descrizione,
+                        aliquota,
+                        qnt.ToString(),
+                        prezzoNetto,
+                        prezzoIvato,
+                        note,
+                        id
+                    );
+                }
+                else
+                {
+                    ModelProdotti.updateQuantity(id, qnt);
+                }
+            }
+
+            foreach (DataRow orig in originalProducts.Rows)
+            {
+                string id = orig["IDPRODOTTO"]?.ToString() ?? string.Empty;
+
+                bool stillExists = dtProdottiTemp.AsEnumerable()
+                    .Any(r => r["IDPRODOTTO"].ToString() == id);
+
+                if (!stillExists)
+                {
+                    ModelProdotti.deleteProdotto(id);
+                }
+            }
+
+            DataTable originalAcquisti =
+                ModelAcquisti.getAcquistiByIdCliente(idCliente, timeStamp.ToString());
+
+            foreach (DataRow temp in dtAcquistiTemp.Rows)
+            {
+                string idProdotto = temp["IDPRODOTTO"]?.ToString() ?? string.Empty;
+                int qnt = Convert.ToInt32(temp["QNT"]);
+
+                string marca = temp["MARCA"]?.ToString() ?? string.Empty;
+                string descrizione = temp["DESCRIZIONE"]?.ToString() ?? string.Empty;
+                string prezzoNetto = temp["PREZZO_NETTO"]?.ToString() ?? string.Empty;
+                string prezzoIvato = temp["PREZZO_IVATO"]?.ToString() ?? string.Empty;
+                string dataAcquisto = temp["DATA"]?.ToString() ?? string.Empty;
+                string aliquota = temp["ALIQUOTA"]?.ToString() ?? string.Empty;
+                string note = temp["NOTE"]?.ToString() ?? string.Empty;
+                string timeStampValue = temp["TIMESTAMP"]?.ToString() ?? string.Empty;
+
+                DataRow[] found = originalAcquisti.Select($"IDPRODOTTO = '{idProdotto}'");
+
+                if (found.Length == 0)
+                {
+                    ModelAcquisti.addAcquisto(
+                        marca,
+                        descrizione,
+                        qnt.ToString(),
+                        prezzoNetto,
+                        prezzoIvato,
+                        dataAcquisto,
+                        idCliente,
+                        idProdotto,
+                        aliquota,
+                        note,
+                        timeStampValue
+                    );
+                }
+                else
+                {
+                    ModelAcquisti.updateQuantity(idProdotto, idCliente, qnt);
+                }
+            }
+
+            foreach (DataRow orig in originalAcquisti.Rows)
+            {
+                string idProdotto = orig["IDPRODOTTO"]?.ToString() ?? string.Empty;
+
+                bool stillExists = dtAcquistiTemp.AsEnumerable()
+                    .Any(r => r["IDPRODOTTO"].ToString() == idProdotto);
+
+                if (!stillExists)
+                {
+                    ModelAcquisti.deleteAcquisto(idProdotto, idCliente);
+                }
+            }
+
+            MessageBox.Show("Modifiche confermate.", "OK", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            this.Close();
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }
 
