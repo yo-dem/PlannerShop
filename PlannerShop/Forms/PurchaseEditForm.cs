@@ -164,7 +164,7 @@ namespace PlannerShop.Forms
             qntProductColumn.DisplayIndex = 3;
             qntProductColumn.Visible = true;
             qntProductColumn.HeaderText = "QNT";
-            qntProductColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            qntProductColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             qntProductColumn.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
             qntProductColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             qntProductColumn.DefaultCellStyle.Font = new Font("Corbel", fontSize, FontStyle.Regular);
