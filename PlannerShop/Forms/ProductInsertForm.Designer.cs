@@ -55,35 +55,37 @@
             // lblMarca
             // 
             lblMarca.AutoSize = true;
-            lblMarca.Location = new Point(14, 87);
+            lblMarca.Location = new Point(12, 65);
             lblMarca.Name = "lblMarca";
-            lblMarca.Size = new Size(66, 20);
+            lblMarca.Size = new Size(54, 15);
             lblMarca.TabIndex = 0;
             lblMarca.Text = "MARCA*";
             // 
             // txtMarca
             // 
-            txtMarca.Location = new Point(14, 109);
+            txtMarca.Location = new Point(12, 82);
+            txtMarca.Margin = new Padding(3, 2, 3, 2);
             txtMarca.Name = "txtMarca";
-            txtMarca.Size = new Size(202, 27);
+            txtMarca.Size = new Size(177, 23);
             txtMarca.TabIndex = 1;
             txtMarca.TextChanged += TxtMarca_TextChanged;
             // 
             // lblDescrizione
             // 
             lblDescrizione.AutoSize = true;
-            lblDescrizione.Location = new Point(14, 143);
+            lblDescrizione.Location = new Point(12, 107);
             lblDescrizione.Name = "lblDescrizione";
-            lblDescrizione.Size = new Size(107, 20);
+            lblDescrizione.Size = new Size(84, 15);
             lblDescrizione.TabIndex = 0;
             lblDescrizione.Text = "DESCRIZIONE*";
             // 
             // txtDescrizione
             // 
-            txtDescrizione.Location = new Point(14, 165);
+            txtDescrizione.Location = new Point(12, 124);
+            txtDescrizione.Margin = new Padding(3, 2, 3, 2);
             txtDescrizione.Multiline = true;
             txtDescrizione.Name = "txtDescrizione";
-            txtDescrizione.Size = new Size(202, 160);
+            txtDescrizione.Size = new Size(177, 121);
             txtDescrizione.TabIndex = 2;
             txtDescrizione.TextChanged += TxtDescrizione_TextChanged;
             // 
@@ -91,44 +93,47 @@
             // 
             dtpData.CustomFormat = "";
             dtpData.Format = DateTimePickerFormat.Short;
-            dtpData.Location = new Point(14, 15);
+            dtpData.Location = new Point(12, 11);
+            dtpData.Margin = new Padding(3, 2, 3, 2);
             dtpData.Name = "dtpData";
-            dtpData.Size = new Size(202, 27);
+            dtpData.Size = new Size(177, 23);
             dtpData.TabIndex = 0;
             dtpData.TabStop = false;
             // 
             // lblNote
             // 
             lblNote.AutoSize = true;
-            lblNote.Location = new Point(223, 87);
+            lblNote.Location = new Point(195, 65);
             lblNote.Name = "lblNote";
-            lblNote.Size = new Size(46, 20);
+            lblNote.Size = new Size(37, 15);
             lblNote.TabIndex = 0;
             lblNote.Text = "NOTE";
             // 
             // txtNote
             // 
             txtNote.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            txtNote.Location = new Point(223, 109);
+            txtNote.Location = new Point(195, 82);
+            txtNote.Margin = new Padding(3, 2, 3, 2);
             txtNote.Multiline = true;
             txtNote.Name = "txtNote";
-            txtNote.Size = new Size(842, 460);
+            txtNote.Size = new Size(737, 345);
             txtNote.TabIndex = 9;
             // 
             // lblPrezzoNetto
             // 
             lblPrezzoNetto.AutoSize = true;
-            lblPrezzoNetto.Location = new Point(14, 328);
+            lblPrezzoNetto.Location = new Point(12, 246);
             lblPrezzoNetto.Name = "lblPrezzoNetto";
-            lblPrezzoNetto.Size = new Size(118, 20);
+            lblPrezzoNetto.Size = new Size(95, 15);
             lblPrezzoNetto.TabIndex = 0;
             lblPrezzoNetto.Text = "PREZZO NETTO*";
             // 
             // txtPrezzoNetto
             // 
-            txtPrezzoNetto.Location = new Point(14, 351);
+            txtPrezzoNetto.Location = new Point(12, 263);
+            txtPrezzoNetto.Margin = new Padding(3, 2, 3, 2);
             txtPrezzoNetto.Name = "txtPrezzoNetto";
-            txtPrezzoNetto.Size = new Size(180, 27);
+            txtPrezzoNetto.Size = new Size(158, 23);
             txtPrezzoNetto.TabIndex = 5;
             txtPrezzoNetto.TextAlign = HorizontalAlignment.Right;
             txtPrezzoNetto.TextChanged += txtPrezzoNetto_TextChanged;
@@ -137,17 +142,18 @@
             // lblPrezzoIvato
             // 
             lblPrezzoIvato.AutoSize = true;
-            lblPrezzoIvato.Location = new Point(14, 384);
+            lblPrezzoIvato.Location = new Point(12, 288);
             lblPrezzoIvato.Name = "lblPrezzoIvato";
-            lblPrezzoIvato.Size = new Size(112, 20);
+            lblPrezzoIvato.Size = new Size(89, 15);
             lblPrezzoIvato.TabIndex = 0;
             lblPrezzoIvato.Text = "PREZZO IVATO*";
             // 
             // txtPrezzoIvato
             // 
-            txtPrezzoIvato.Location = new Point(14, 407);
+            txtPrezzoIvato.Location = new Point(12, 305);
+            txtPrezzoIvato.Margin = new Padding(3, 2, 3, 2);
             txtPrezzoIvato.Name = "txtPrezzoIvato";
-            txtPrezzoIvato.Size = new Size(180, 27);
+            txtPrezzoIvato.Size = new Size(158, 23);
             txtPrezzoIvato.TabIndex = 0;
             txtPrezzoIvato.TabStop = false;
             txtPrezzoIvato.TextAlign = HorizontalAlignment.Right;
@@ -158,9 +164,10 @@
             btnOk.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             btnOk.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             btnOk.Image = Properties.Resources.okImage;
-            btnOk.Location = new Point(14, 576);
+            btnOk.Location = new Point(12, 431);
+            btnOk.Margin = new Padding(3, 2, 3, 2);
             btnOk.Name = "btnOk";
-            btnOk.Size = new Size(1052, 91);
+            btnOk.Size = new Size(920, 68);
             btnOk.TabIndex = 10;
             btnOk.Text = "CARICA PRODOTTO";
             btnOk.TextAlign = ContentAlignment.BottomCenter;
@@ -173,9 +180,10 @@
             chkRipeti.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             chkRipeti.AutoSize = true;
             chkRipeti.CheckAlign = ContentAlignment.MiddleRight;
-            chkRipeti.Location = new Point(899, 12);
+            chkRipeti.Location = new Point(799, 9);
+            chkRipeti.Margin = new Padding(3, 2, 3, 2);
             chkRipeti.Name = "chkRipeti";
-            chkRipeti.Size = new Size(170, 24);
+            chkRipeti.Size = new Size(137, 19);
             chkRipeti.TabIndex = 0;
             chkRipeti.TabStop = false;
             chkRipeti.Text = "RIPETI INSERIMENTO";
@@ -186,20 +194,21 @@
             lblQnt.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             lblQnt.AutoSize = true;
             lblQnt.LiveSetting = System.Windows.Forms.Automation.AutomationLiveSetting.Polite;
-            lblQnt.Location = new Point(982, 53);
+            lblQnt.Location = new Point(859, 40);
             lblQnt.Name = "lblQnt";
-            lblQnt.Size = new Size(83, 20);
+            lblQnt.Size = new Size(68, 15);
             lblQnt.TabIndex = 0;
             lblQnt.Text = "QUANTITA'";
             // 
             // nudQnt
             // 
             nudQnt.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            nudQnt.Location = new Point(929, 76);
+            nudQnt.Location = new Point(813, 57);
+            nudQnt.Margin = new Padding(3, 2, 3, 2);
             nudQnt.Maximum = new decimal(new int[] { 9999, 0, 0, 0 });
             nudQnt.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             nudQnt.Name = "nudQnt";
-            nudQnt.Size = new Size(136, 27);
+            nudQnt.Size = new Size(119, 23);
             nudQnt.TabIndex = 0;
             nudQnt.TabStop = false;
             nudQnt.TextAlign = HorizontalAlignment.Right;
@@ -209,19 +218,20 @@
             // 
             lblAliquota.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             lblAliquota.AutoSize = true;
-            lblAliquota.Location = new Point(845, 53);
+            lblAliquota.Location = new Point(739, 40);
             lblAliquota.Name = "lblAliquota";
-            lblAliquota.Size = new Size(78, 20);
+            lblAliquota.Size = new Size(63, 15);
             lblAliquota.TabIndex = 0;
             lblAliquota.Text = "ALIQUOTA";
             // 
             // nudAliquota
             // 
             nudAliquota.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            nudAliquota.Location = new Point(787, 76);
+            nudAliquota.Location = new Point(689, 57);
+            nudAliquota.Margin = new Padding(3, 2, 3, 2);
             nudAliquota.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             nudAliquota.Name = "nudAliquota";
-            nudAliquota.Size = new Size(136, 27);
+            nudAliquota.Size = new Size(119, 23);
             nudAliquota.TabIndex = 0;
             nudAliquota.TabStop = false;
             nudAliquota.TextAlign = HorizontalAlignment.Right;
@@ -232,9 +242,10 @@
             // rdbPrezzoIvato
             // 
             rdbPrezzoIvato.AutoSize = true;
-            rdbPrezzoIvato.Location = new Point(200, 412);
+            rdbPrezzoIvato.Location = new Point(175, 309);
+            rdbPrezzoIvato.Margin = new Padding(3, 2, 3, 2);
             rdbPrezzoIvato.Name = "rdbPrezzoIvato";
-            rdbPrezzoIvato.Size = new Size(17, 16);
+            rdbPrezzoIvato.Size = new Size(14, 13);
             rdbPrezzoIvato.TabIndex = 14;
             rdbPrezzoIvato.UseVisualStyleBackColor = true;
             rdbPrezzoIvato.CheckedChanged += rdbPrezzoIvato_CheckedChanged;
@@ -243,9 +254,10 @@
             // 
             rdbPrezzoNetto.AutoSize = true;
             rdbPrezzoNetto.Checked = true;
-            rdbPrezzoNetto.Location = new Point(200, 356);
+            rdbPrezzoNetto.Location = new Point(175, 267);
+            rdbPrezzoNetto.Margin = new Padding(3, 2, 3, 2);
             rdbPrezzoNetto.Name = "rdbPrezzoNetto";
-            rdbPrezzoNetto.Size = new Size(17, 16);
+            rdbPrezzoNetto.Size = new Size(14, 13);
             rdbPrezzoNetto.TabIndex = 13;
             rdbPrezzoNetto.TabStop = true;
             rdbPrezzoNetto.UseVisualStyleBackColor = true;
@@ -254,9 +266,9 @@
             // ProductInsertForm
             // 
             AcceptButton = btnOk;
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1082, 689);
+            ClientSize = new Size(948, 523);
             Controls.Add(rdbPrezzoIvato);
             Controls.Add(rdbPrezzoNetto);
             Controls.Add(nudAliquota);
@@ -277,7 +289,8 @@
             Controls.Add(lblMarca);
             Controls.Add(txtMarca);
             Icon = (Icon)resources.GetObject("$this.Icon");
-            MinimumSize = new Size(1100, 726);
+            Margin = new Padding(3, 2, 3, 2);
+            MinimumSize = new Size(964, 562);
             Name = "ProductInsertForm";
             StartPosition = FormStartPosition.CenterParent;
             Text = "INSERIMENTO PRODOTTO";

@@ -46,17 +46,18 @@
             // lblNome
             // 
             lblNome.AutoSize = true;
-            lblNome.Location = new Point(14, 87);
+            lblNome.Location = new Point(12, 65);
             lblNome.Name = "lblNome";
-            lblNome.Size = new Size(52, 20);
+            lblNome.Size = new Size(42, 15);
             lblNome.TabIndex = 0;
             lblNome.Text = "NOME";
             // 
             // txtNome
             // 
-            txtNome.Location = new Point(14, 109);
+            txtNome.Location = new Point(12, 82);
+            txtNome.Margin = new Padding(3, 2, 3, 2);
             txtNome.Name = "txtNome";
-            txtNome.Size = new Size(202, 27);
+            txtNome.Size = new Size(177, 23);
             txtNome.TabIndex = 1;
             txtNome.TextChanged += TxtNome_TextChanged;
             txtNome.KeyDown += txtMarca_KeyDown;
@@ -64,62 +65,65 @@
             // lblIndirizzo
             // 
             lblIndirizzo.AutoSize = true;
-            lblIndirizzo.Location = new Point(14, 143);
+            lblIndirizzo.Location = new Point(12, 107);
             lblIndirizzo.Name = "lblIndirizzo";
-            lblIndirizzo.Size = new Size(81, 20);
+            lblIndirizzo.Size = new Size(63, 15);
             lblIndirizzo.TabIndex = 0;
             lblIndirizzo.Text = "INDIRIZZO";
             // 
             // txtIndirizzo
             // 
-            txtIndirizzo.Location = new Point(14, 165);
+            txtIndirizzo.Location = new Point(12, 124);
+            txtIndirizzo.Margin = new Padding(3, 2, 3, 2);
             txtIndirizzo.Multiline = true;
             txtIndirizzo.Name = "txtIndirizzo";
-            txtIndirizzo.Size = new Size(202, 103);
+            txtIndirizzo.Size = new Size(177, 78);
             txtIndirizzo.TabIndex = 2;
             txtIndirizzo.TextChanged += TxtIndirizzo_TextChanged;
             // 
             // lblNote
             // 
             lblNote.AutoSize = true;
-            lblNote.Location = new Point(223, 87);
+            lblNote.Location = new Point(195, 65);
             lblNote.Name = "lblNote";
-            lblNote.Size = new Size(46, 20);
+            lblNote.Size = new Size(37, 15);
             lblNote.TabIndex = 0;
             lblNote.Text = "NOTE";
             // 
             // txtNote
             // 
             txtNote.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            txtNote.Location = new Point(223, 109);
+            txtNote.Location = new Point(195, 82);
+            txtNote.Margin = new Padding(3, 2, 3, 2);
             txtNote.Multiline = true;
             txtNote.Name = "txtNote";
-            txtNote.Size = new Size(842, 460);
+            txtNote.Size = new Size(737, 346);
             txtNote.TabIndex = 6;
             // 
             // lblTelefono
             // 
             lblTelefono.AutoSize = true;
-            lblTelefono.Location = new Point(14, 271);
+            lblTelefono.Location = new Point(12, 203);
             lblTelefono.Name = "lblTelefono";
-            lblTelefono.Size = new Size(169, 20);
+            lblTelefono.Size = new Size(138, 15);
             lblTelefono.TabIndex = 0;
             lblTelefono.Text = "RECAPITO TELEFONICO*";
             // 
             // lblEmail
             // 
             lblEmail.AutoSize = true;
-            lblEmail.Location = new Point(14, 327);
+            lblEmail.Location = new Point(12, 245);
             lblEmail.Name = "lblEmail";
-            lblEmail.Size = new Size(51, 20);
+            lblEmail.Size = new Size(46, 15);
             lblEmail.TabIndex = 0;
-            lblEmail.Text = "EMAIL";
+            lblEmail.Text = "EMAIL*";
             // 
             // txtEmail
             // 
-            txtEmail.Location = new Point(14, 350);
+            txtEmail.Location = new Point(12, 262);
+            txtEmail.Margin = new Padding(3, 2, 3, 2);
             txtEmail.Name = "txtEmail";
-            txtEmail.Size = new Size(202, 27);
+            txtEmail.Size = new Size(177, 23);
             txtEmail.TabIndex = 5;
             txtEmail.TextAlign = HorizontalAlignment.Right;
             txtEmail.TextChanged += TxtEmail_TextChanged;
@@ -129,9 +133,10 @@
             btnOk.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             btnOk.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             btnOk.Image = Properties.Resources.okImage;
-            btnOk.Location = new Point(223, 576);
+            btnOk.Location = new Point(195, 432);
+            btnOk.Margin = new Padding(3, 2, 3, 2);
             btnOk.Name = "btnOk";
-            btnOk.Size = new Size(843, 91);
+            btnOk.Size = new Size(738, 68);
             btnOk.TabIndex = 10;
             btnOk.Text = "SALVA MODIFICHE";
             btnOk.TextAlign = ContentAlignment.BottomCenter;
@@ -141,9 +146,10 @@
             // 
             // txtTelefono
             // 
-            txtTelefono.Location = new Point(14, 294);
+            txtTelefono.Location = new Point(12, 220);
+            txtTelefono.Margin = new Padding(3, 2, 3, 2);
             txtTelefono.Name = "txtTelefono";
-            txtTelefono.Size = new Size(202, 27);
+            txtTelefono.Size = new Size(177, 23);
             txtTelefono.TabIndex = 4;
             txtTelefono.TextAlign = HorizontalAlignment.Right;
             txtTelefono.TextChanged += TxtTelefono_TextChanged;
@@ -155,9 +161,10 @@
             btnDelete.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             btnDelete.ForeColor = Color.Red;
             btnDelete.Image = Properties.Resources.trashImage;
-            btnDelete.Location = new Point(14, 576);
+            btnDelete.Location = new Point(12, 432);
+            btnDelete.Margin = new Padding(3, 2, 3, 2);
             btnDelete.Name = "btnDelete";
-            btnDelete.Size = new Size(201, 91);
+            btnDelete.Size = new Size(176, 68);
             btnDelete.TabIndex = 12;
             btnDelete.TabStop = false;
             btnDelete.Text = "ELIMINA IL FORNITORE";
@@ -169,9 +176,9 @@
             // SupplierEditForm
             // 
             AcceptButton = btnOk;
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1082, 689);
+            ClientSize = new Size(948, 523);
             Controls.Add(btnDelete);
             Controls.Add(txtTelefono);
             Controls.Add(btnOk);
@@ -185,7 +192,8 @@
             Controls.Add(lblNome);
             Controls.Add(txtNome);
             Icon = (Icon)resources.GetObject("$this.Icon");
-            MinimumSize = new Size(1100, 736);
+            Margin = new Padding(3, 2, 3, 2);
+            MinimumSize = new Size(964, 562);
             Name = "SupplierEditForm";
             StartPosition = FormStartPosition.CenterParent;
             Text = "MODIFICA FORNITORE";

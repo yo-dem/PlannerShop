@@ -52,26 +52,27 @@
             // lblNome
             // 
             lblNome.AutoSize = true;
-            lblNome.Location = new Point(14, 87);
+            lblNome.Location = new Point(12, 65);
             lblNome.Name = "lblNome";
-            lblNome.Size = new Size(58, 20);
+            lblNome.Size = new Size(47, 15);
             lblNome.TabIndex = 0;
             lblNome.Text = "NOME*";
             // 
             // txtNome
             // 
-            txtNome.Location = new Point(14, 109);
+            txtNome.Location = new Point(12, 82);
+            txtNome.Margin = new Padding(3, 2, 3, 2);
             txtNome.Name = "txtNome";
-            txtNome.Size = new Size(202, 27);
+            txtNome.Size = new Size(177, 23);
             txtNome.TabIndex = 1;
             txtNome.TextChanged += txtNome_TextChanged;
             // 
             // lblCognome
             // 
             lblCognome.AutoSize = true;
-            lblCognome.Location = new Point(14, 143);
+            lblCognome.Location = new Point(12, 107);
             lblCognome.Name = "lblCognome";
-            lblCognome.Size = new Size(88, 20);
+            lblCognome.Size = new Size(72, 15);
             lblCognome.TabIndex = 0;
             lblCognome.Text = "COGNOME*";
             // 
@@ -79,13 +80,14 @@
             // 
             dtpCompleanno.CustomFormat = " dd-MM";
             dtpCompleanno.Format = DateTimePickerFormat.Custom;
-            dtpCompleanno.Location = new Point(14, 540);
+            dtpCompleanno.Location = new Point(12, 405);
+            dtpCompleanno.Margin = new Padding(3, 2, 3, 2);
             dtpCompleanno.MaxDate = new DateTime(2000, 12, 31, 0, 0, 0, 0);
             dtpCompleanno.MinDate = new DateTime(2000, 1, 1, 0, 0, 0, 0);
             dtpCompleanno.Name = "dtpCompleanno";
             dtpCompleanno.RightToLeft = RightToLeft.No;
             dtpCompleanno.ShowUpDown = true;
-            dtpCompleanno.Size = new Size(202, 27);
+            dtpCompleanno.Size = new Size(177, 23);
             dtpCompleanno.TabIndex = 0;
             dtpCompleanno.TabStop = false;
             dtpCompleanno.Value = new DateTime(2000, 1, 1, 0, 0, 0, 0);
@@ -94,19 +96,20 @@
             // lblNote
             // 
             lblNote.AutoSize = true;
-            lblNote.Location = new Point(222, 87);
+            lblNote.Location = new Point(194, 65);
             lblNote.Name = "lblNote";
-            lblNote.Size = new Size(46, 20);
+            lblNote.Size = new Size(37, 15);
             lblNote.TabIndex = 0;
             lblNote.Text = "NOTE";
             // 
             // txtNote
             // 
             txtNote.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            txtNote.Location = new Point(223, 109);
+            txtNote.Location = new Point(195, 82);
+            txtNote.Margin = new Padding(3, 2, 3, 2);
             txtNote.Multiline = true;
             txtNote.Name = "txtNote";
-            txtNote.Size = new Size(840, 403);
+            txtNote.Size = new Size(736, 303);
             txtNote.TabIndex = 7;
             // 
             // btnOk
@@ -114,9 +117,10 @@
             btnOk.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             btnOk.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             btnOk.Image = Properties.Resources.okImage;
-            btnOk.Location = new Point(223, 576);
+            btnOk.Location = new Point(195, 432);
+            btnOk.Margin = new Padding(3, 2, 3, 2);
             btnOk.Name = "btnOk";
-            btnOk.Size = new Size(841, 91);
+            btnOk.Size = new Size(738, 68);
             btnOk.TabIndex = 10;
             btnOk.Text = "SALVA MODIFICHE";
             btnOk.TextAlign = ContentAlignment.BottomCenter;
@@ -126,70 +130,74 @@
             // 
             // txtCognome
             // 
-            txtCognome.Location = new Point(14, 165);
+            txtCognome.Location = new Point(12, 124);
+            txtCognome.Margin = new Padding(3, 2, 3, 2);
             txtCognome.Name = "txtCognome";
-            txtCognome.Size = new Size(202, 27);
+            txtCognome.Size = new Size(177, 23);
             txtCognome.TabIndex = 2;
             txtCognome.TextChanged += txtCognome_TextChanged;
             // 
             // lblCompleanno
             // 
             lblCompleanno.AutoSize = true;
-            lblCompleanno.Location = new Point(14, 516);
+            lblCompleanno.Location = new Point(12, 387);
             lblCompleanno.Name = "lblCompleanno";
-            lblCompleanno.Size = new Size(108, 20);
+            lblCompleanno.Size = new Size(89, 15);
             lblCompleanno.TabIndex = 12;
             lblCompleanno.Text = "COMPLEANNO";
             // 
             // txtTelefono
             // 
-            txtTelefono.Location = new Point(14, 219);
+            txtTelefono.Location = new Point(12, 164);
+            txtTelefono.Margin = new Padding(3, 2, 3, 2);
             txtTelefono.Name = "txtTelefono";
-            txtTelefono.Size = new Size(202, 27);
+            txtTelefono.Size = new Size(177, 23);
             txtTelefono.TabIndex = 3;
             txtTelefono.TextChanged += txtTelefono_TextChanged;
             // 
             // lblTelefono
             // 
             lblTelefono.AutoSize = true;
-            lblTelefono.Location = new Point(14, 196);
+            lblTelefono.Location = new Point(12, 147);
             lblTelefono.Name = "lblTelefono";
-            lblTelefono.Size = new Size(169, 20);
+            lblTelefono.Size = new Size(138, 15);
             lblTelefono.TabIndex = 13;
             lblTelefono.Text = "RECAPITO TELEFONICO*";
             // 
             // lblEmail
             // 
             lblEmail.AutoSize = true;
-            lblEmail.Location = new Point(14, 249);
+            lblEmail.Location = new Point(12, 187);
             lblEmail.Name = "lblEmail";
-            lblEmail.Size = new Size(57, 20);
+            lblEmail.Size = new Size(46, 15);
             lblEmail.TabIndex = 17;
             lblEmail.Text = "EMAIL*";
             // 
             // txtEmail
             // 
-            txtEmail.Location = new Point(14, 273);
+            txtEmail.Location = new Point(12, 205);
+            txtEmail.Margin = new Padding(3, 2, 3, 2);
             txtEmail.Name = "txtEmail";
-            txtEmail.Size = new Size(202, 27);
+            txtEmail.Size = new Size(177, 23);
             txtEmail.TabIndex = 5;
             txtEmail.TextChanged += txtEmail_TextChanged;
             // 
             // lblIndirizzo
             // 
             lblIndirizzo.AutoSize = true;
-            lblIndirizzo.Location = new Point(14, 303);
+            lblIndirizzo.Location = new Point(12, 229);
             lblIndirizzo.Name = "lblIndirizzo";
-            lblIndirizzo.Size = new Size(81, 20);
+            lblIndirizzo.Size = new Size(63, 15);
             lblIndirizzo.TabIndex = 19;
             lblIndirizzo.Text = "INDIRIZZO";
             // 
             // txtIndirizzo
             // 
-            txtIndirizzo.Location = new Point(14, 326);
+            txtIndirizzo.Location = new Point(12, 246);
+            txtIndirizzo.Margin = new Padding(3, 2, 3, 2);
             txtIndirizzo.Multiline = true;
             txtIndirizzo.Name = "txtIndirizzo";
-            txtIndirizzo.Size = new Size(202, 186);
+            txtIndirizzo.Size = new Size(177, 139);
             txtIndirizzo.TabIndex = 6;
             // 
             // btnDelete
@@ -198,9 +206,10 @@
             btnDelete.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             btnDelete.ForeColor = Color.Red;
             btnDelete.Image = Properties.Resources.trashImage;
-            btnDelete.Location = new Point(14, 576);
+            btnDelete.Location = new Point(12, 432);
+            btnDelete.Margin = new Padding(3, 2, 3, 2);
             btnDelete.Name = "btnDelete";
-            btnDelete.Size = new Size(201, 91);
+            btnDelete.Size = new Size(176, 68);
             btnDelete.TabIndex = 0;
             btnDelete.TabStop = false;
             btnDelete.Text = "ELIMINA IL CLIENTE";
@@ -215,9 +224,10 @@
             btnPurchase.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             btnPurchase.ForeColor = SystemColors.ControlText;
             btnPurchase.Image = Properties.Resources.prodotti_24;
-            btnPurchase.Location = new Point(223, 521);
+            btnPurchase.Location = new Point(195, 391);
+            btnPurchase.Margin = new Padding(3, 2, 3, 2);
             btnPurchase.Name = "btnPurchase";
-            btnPurchase.Size = new Size(584, 49);
+            btnPurchase.Size = new Size(511, 37);
             btnPurchase.TabIndex = 8;
             btnPurchase.Text = "EFFETTUA ACQUISTO";
             btnPurchase.TextAlign = ContentAlignment.MiddleRight;
@@ -231,9 +241,10 @@
             button1.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             button1.ForeColor = SystemColors.ControlText;
             button1.Image = Properties.Resources.statistiche_24;
-            button1.Location = new Point(813, 521);
+            button1.Location = new Point(711, 391);
+            button1.Margin = new Padding(3, 2, 3, 2);
             button1.Name = "button1";
-            button1.Size = new Size(251, 49);
+            button1.Size = new Size(220, 37);
             button1.TabIndex = 9;
             button1.Text = "VISUALIZZA ACQUISTI";
             button1.TextAlign = ContentAlignment.MiddleRight;
@@ -243,9 +254,9 @@
             // ClientEditForm
             // 
             AcceptButton = btnOk;
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1082, 689);
+            ClientSize = new Size(948, 523);
             Controls.Add(button1);
             Controls.Add(btnPurchase);
             Controls.Add(btnDelete);
@@ -265,7 +276,8 @@
             Controls.Add(lblNome);
             Controls.Add(txtNome);
             Icon = (Icon)resources.GetObject("$this.Icon");
-            MinimumSize = new Size(1100, 736);
+            Margin = new Padding(3, 2, 3, 2);
+            MinimumSize = new Size(964, 562);
             Name = "ClientEditForm";
             StartPosition = FormStartPosition.CenterParent;
             Text = "MODIFICA CLIENTE";
