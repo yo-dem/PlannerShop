@@ -81,7 +81,7 @@ namespace PlannerShop
             telefonoFissoSupplierColumn.DisplayIndex = 5;
             telefonoFissoSupplierColumn.Visible = true;
             telefonoFissoSupplierColumn.HeaderText = "TELEFONO";
-            telefonoFissoSupplierColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            telefonoFissoSupplierColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             telefonoFissoSupplierColumn.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft;
             telefonoFissoSupplierColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             telefonoFissoSupplierColumn.DefaultCellStyle.Font = new Font("Corbel", fontSize, FontStyle.Regular);
@@ -235,8 +235,8 @@ namespace PlannerShop
             var telefonoFissoSupplierColumn = dgvData.Columns["TELEFONO"];
             telefonoFissoSupplierColumn.DisplayIndex = 3;
             telefonoFissoSupplierColumn.Visible = true;
-            telefonoFissoSupplierColumn.HeaderText = "TEL. FISSO";
-            telefonoFissoSupplierColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            telefonoFissoSupplierColumn.HeaderText = "TELEFONO";
+            telefonoFissoSupplierColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             telefonoFissoSupplierColumn.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft;
             telefonoFissoSupplierColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             telefonoFissoSupplierColumn.DefaultCellStyle.Font = new Font("Corbel", fontSize, FontStyle.Regular);
