@@ -241,9 +241,18 @@ namespace PlannerShop
             emailSupplierColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
             emailSupplierColumn.DefaultCellStyle.Font = new Font("Corbel", fontSize, FontStyle.Regular);
 
+            var ibanSupplierColumn = dgvData.Columns["IBAN"];
+            ibanSupplierColumn.DisplayIndex = 5;
+            ibanSupplierColumn.Visible = false;
+            ibanSupplierColumn.HeaderText = "IBAN";
+            ibanSupplierColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            ibanSupplierColumn.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            ibanSupplierColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            ibanSupplierColumn.DefaultCellStyle.Font = new Font("Corbel", fontSize, FontStyle.Regular);
+
 
             var noteProductionColumn = dgvData.Columns["NOTE"];
-            noteProductionColumn.DisplayIndex = 5;
+            noteProductionColumn.DisplayIndex = 6;
             noteProductionColumn.Visible = true;
             noteProductionColumn.HeaderText = "NOTE";
             noteProductionColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;

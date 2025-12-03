@@ -5,6 +5,7 @@ namespace PlannerShop.Forms
     public partial class ProductInsertForm : Form
     {
         public bool isDone = false;
+
         public ProductInsertForm()
         {
             InitializeComponent();

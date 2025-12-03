@@ -7,6 +7,7 @@ namespace PlannerShop.Forms
     {
         bool emailNotValid = false;
         public bool isDone = false;
+        
         public ClientInsertForm()
         {
             InitializeComponent();

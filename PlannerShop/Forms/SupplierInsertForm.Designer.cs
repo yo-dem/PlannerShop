@@ -41,6 +41,8 @@
             btnOk = new Button();
             chkRipeti = new CheckBox();
             txtTelefono = new TextBox();
+            lblIban = new Label();
+            txtIban = new TextBox();
             SuspendLayout();
             // 
             // lblNome
@@ -167,12 +169,33 @@
             txtTelefono.TextAlign = HorizontalAlignment.Right;
             txtTelefono.KeyPress += txtTelefonoMobile_KeyPress;
             // 
+            // lblIban
+            // 
+            lblIban.AutoSize = true;
+            lblIban.Location = new Point(13, 287);
+            lblIban.Name = "lblIban";
+            lblIban.Size = new Size(34, 15);
+            lblIban.TabIndex = 11;
+            lblIban.Text = "IBAN";
+            // 
+            // txtIban
+            // 
+            txtIban.Location = new Point(13, 304);
+            txtIban.Margin = new Padding(3, 2, 3, 2);
+            txtIban.Name = "txtIban";
+            txtIban.Size = new Size(177, 23);
+            txtIban.TabIndex = 12;
+            txtIban.TextAlign = HorizontalAlignment.Right;
+            txtIban.TextChanged += TxtIban_TextChanged;
+            // 
             // SupplierInsertForm
             // 
             AcceptButton = btnOk;
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(948, 523);
+            Controls.Add(lblIban);
+            Controls.Add(txtIban);
             Controls.Add(txtTelefono);
             Controls.Add(chkRipeti);
             Controls.Add(btnOk);
@@ -209,5 +232,7 @@
         private Button btnOk;
         private CheckBox chkRipeti;
         private TextBox txtTelefono;
+        private Label lblIban;
+        private TextBox txtIban;
     }
 }

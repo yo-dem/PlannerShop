@@ -41,6 +41,8 @@
             btnOk = new Button();
             txtTelefono = new TextBox();
             btnDelete = new Button();
+            lblIban = new Label();
+            txtIban = new TextBox();
             SuspendLayout();
             // 
             // lblNome
@@ -173,12 +175,33 @@
             btnDelete.UseVisualStyleBackColor = true;
             btnDelete.Click += btnDelete_Click;
             // 
+            // lblIban
+            // 
+            lblIban.AutoSize = true;
+            lblIban.Location = new Point(12, 287);
+            lblIban.Name = "lblIban";
+            lblIban.Size = new Size(34, 15);
+            lblIban.TabIndex = 13;
+            lblIban.Text = "IBAN";
+            // 
+            // txtIban
+            // 
+            txtIban.Location = new Point(12, 304);
+            txtIban.Margin = new Padding(3, 2, 3, 2);
+            txtIban.Name = "txtIban";
+            txtIban.Size = new Size(177, 23);
+            txtIban.TabIndex = 14;
+            txtIban.TextAlign = HorizontalAlignment.Right;
+            txtIban.TextChanged += TxtIban_TextChanged;
+            // 
             // SupplierEditForm
             // 
             AcceptButton = btnOk;
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(948, 523);
+            Controls.Add(lblIban);
+            Controls.Add(txtIban);
             Controls.Add(btnDelete);
             Controls.Add(txtTelefono);
             Controls.Add(btnOk);
@@ -215,5 +238,7 @@
         private Button btnOk;
         private TextBox txtTelefono;
         private Button btnDelete;
+        private Label lblIban;
+        private TextBox txtIban;
     }
 }

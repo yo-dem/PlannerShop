@@ -9,6 +9,7 @@ namespace PlannerShop.Forms
         string idCliente;
         bool emailNotValid = false;
         public bool isDelete = false;
+
         public ClientEditForm(string idCliente)
         {
             InitializeComponent();
