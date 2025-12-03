@@ -19,10 +19,11 @@ namespace PlannerShop.Data
             string indirizzo,
             string telefono,
             string email,
+            string iban,
             string note)
         {
-            string sql = @"INSERT INTO TFORNITORI (NOME,INDIRIZZO,TELEFONO,EMAIL,NOTE)
-                           VALUES(@nome,@indirizzo,@tel,@email,@note)";
+            string sql = @"INSERT INTO TFORNITORI (NOME,INDIRIZZO,TELEFONO,EMAIL,IBAN,NOTE)
+                           VALUES(@nome,@indirizzo,@tel,@email,@iban,@note)";
 
             var parameters = new Dictionary<string, object?>()
             {
@@ -30,6 +31,7 @@ namespace PlannerShop.Data
                 { "@indirizzo", indirizzo },
                 { "@tel", telefono },
                 { "@email", email },
+                { "@iban", iban },
                 { "@note", note }
             };
 
@@ -42,9 +44,10 @@ namespace PlannerShop.Data
             string indirizzo,
             string telefono,
             string email,
+            string iban,
             string note)
         {
-            string sql = @"UPDATE TFORNITORI SET NOME=@nome, INDIRIZZO=@indirizzo, TELEFONO=@tel, EMAIL=@email, NOTE=@note
+            string sql = @"UPDATE TFORNITORI SET NOME=@nome, INDIRIZZO=@indirizzo, TELEFONO=@tel, EMAIL=@email, IBAN=@iban, NOTE=@note
                            WHERE IDFORNITORE=@id";
 
             var parameters = new Dictionary<string, object?>()
@@ -53,6 +56,7 @@ namespace PlannerShop.Data
                 { "@indirizzo", indirizzo },
                 { "@tel", telefono },
                 { "@email", email },
+                { "@iban", iban },
                 { "@note", note },
                 { "@id", idFornitore }
             };
