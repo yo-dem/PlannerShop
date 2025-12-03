@@ -146,6 +146,9 @@ namespace PlannerShop.Forms
                 string? strPI = dt.Rows[0]["PREZZO_IVATO"].ToString();
                 if (!String.IsNullOrEmpty(strPI))
                     txtPrezzoIvato.Text = strPI.Replace("€", "");
+                string? strPV = dt.Rows[0]["PREZZO_VENDITA"].ToString();
+                if (!String.IsNullOrEmpty(strPV))
+                    txtPrezzoVendita.Text = strPV.Replace("€", "");
                 txtNote.Text = dt.Rows[0]["NOTE"].ToString();
             }
         }
@@ -179,7 +182,6 @@ namespace PlannerShop.Forms
                 lblPrezzoIvato.ForeColor = Color.Red;
                 res4 = false;
             }
-
             if (txtPrezzoNetto.ForeColor == Color.Red || txtPrezzoIvato.ForeColor == Color.Red)
             {
                 res5 = false;
@@ -202,6 +204,7 @@ namespace PlannerShop.Forms
                     nudQnt.Value.ToString(),
                     prezzoNetto.ToString() + " €",
                     txtPrezzoIvato.Text + " €",
+                    txtPrezzoVendita.Text + " €",
                     txtNote.Text);
 
                 this.Close();

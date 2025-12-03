@@ -182,8 +182,17 @@ namespace PlannerShop
             prezzoIvatoProductColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             prezzoIvatoProductColumn.DefaultCellStyle.Font = new Font("Corbel", fontSize, FontStyle.Regular);
 
+            var prezzoVenditaProductColumn = dgvData.Columns["PREZZO_VENDITA"];
+            prezzoVenditaProductColumn.DisplayIndex = 8;
+            prezzoVenditaProductColumn.Visible = true;
+            prezzoVenditaProductColumn.HeaderText = "VENDITA";
+            prezzoVenditaProductColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            prezzoVenditaProductColumn.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            prezzoVenditaProductColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            prezzoVenditaProductColumn.DefaultCellStyle.Font = new Font("Corbel", fontSize, FontStyle.Regular);
+
             var noteProductionColumn = dgvData.Columns["NOTE"];
-            noteProductionColumn.DisplayIndex = 8;
+            noteProductionColumn.DisplayIndex = 9;
             noteProductionColumn.Visible = true;
             noteProductionColumn.HeaderText = "NOTE";
             noteProductionColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;

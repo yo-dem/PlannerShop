@@ -126,7 +126,7 @@
             txtEmail.Margin = new Padding(3, 2, 3, 2);
             txtEmail.Name = "txtEmail";
             txtEmail.Size = new Size(177, 23);
-            txtEmail.TabIndex = 5;
+            txtEmail.TabIndex = 4;
             txtEmail.TextAlign = HorizontalAlignment.Right;
             txtEmail.TextChanged += TxtEmail_TextChanged;
             // 
@@ -139,7 +139,7 @@
             btnOk.Margin = new Padding(3, 2, 3, 2);
             btnOk.Name = "btnOk";
             btnOk.Size = new Size(738, 68);
-            btnOk.TabIndex = 10;
+            btnOk.TabIndex = 7;
             btnOk.Text = "SALVA MODIFICHE";
             btnOk.TextAlign = ContentAlignment.BottomCenter;
             btnOk.TextImageRelation = TextImageRelation.ImageAboveText;
@@ -152,7 +152,7 @@
             txtTelefono.Margin = new Padding(3, 2, 3, 2);
             txtTelefono.Name = "txtTelefono";
             txtTelefono.Size = new Size(177, 23);
-            txtTelefono.TabIndex = 4;
+            txtTelefono.TabIndex = 3;
             txtTelefono.TextAlign = HorizontalAlignment.Right;
             txtTelefono.TextChanged += TxtTelefono_TextChanged;
             txtTelefono.KeyPress += txtTelefonoMobile_KeyPress;
@@ -167,7 +167,7 @@
             btnDelete.Margin = new Padding(3, 2, 3, 2);
             btnDelete.Name = "btnDelete";
             btnDelete.Size = new Size(176, 68);
-            btnDelete.TabIndex = 12;
+            btnDelete.TabIndex = 0;
             btnDelete.TabStop = false;
             btnDelete.Text = "ELIMINA IL FORNITORE";
             btnDelete.TextAlign = ContentAlignment.BottomCenter;
@@ -190,7 +190,7 @@
             txtIban.Margin = new Padding(3, 2, 3, 2);
             txtIban.Name = "txtIban";
             txtIban.Size = new Size(177, 23);
-            txtIban.TabIndex = 14;
+            txtIban.TabIndex = 5;
             txtIban.TextAlign = HorizontalAlignment.Right;
             txtIban.TextChanged += TxtIban_TextChanged;
             // 

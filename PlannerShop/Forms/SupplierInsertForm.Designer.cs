@@ -125,7 +125,7 @@
             txtEmail.Margin = new Padding(3, 2, 3, 2);
             txtEmail.Name = "txtEmail";
             txtEmail.Size = new Size(177, 23);
-            txtEmail.TabIndex = 5;
+            txtEmail.TabIndex = 4;
             txtEmail.TextAlign = HorizontalAlignment.Right;
             txtEmail.TextChanged += TxtEmail_TextChanged;
             // 
@@ -138,7 +138,7 @@
             btnOk.Margin = new Padding(3, 2, 3, 2);
             btnOk.Name = "btnOk";
             btnOk.Size = new Size(920, 68);
-            btnOk.TabIndex = 10;
+            btnOk.TabIndex = 7;
             btnOk.Text = "CARICA FORNITORE";
             btnOk.TextAlign = ContentAlignment.BottomCenter;
             btnOk.TextImageRelation = TextImageRelation.ImageAboveText;
@@ -165,7 +165,7 @@
             txtTelefono.Margin = new Padding(3, 2, 3, 2);
             txtTelefono.Name = "txtTelefono";
             txtTelefono.Size = new Size(177, 23);
-            txtTelefono.TabIndex = 4;
+            txtTelefono.TabIndex = 3;
             txtTelefono.TextAlign = HorizontalAlignment.Right;
             txtTelefono.KeyPress += txtTelefonoMobile_KeyPress;
             // 
@@ -184,7 +184,7 @@
             txtIban.Margin = new Padding(3, 2, 3, 2);
             txtIban.Name = "txtIban";
             txtIban.Size = new Size(177, 23);
-            txtIban.TabIndex = 12;
+            txtIban.TabIndex = 5;
             txtIban.TextAlign = HorizontalAlignment.Right;
             txtIban.TextChanged += TxtIban_TextChanged;
             // 

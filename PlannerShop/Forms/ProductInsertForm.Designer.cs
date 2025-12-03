@@ -48,6 +48,8 @@
             nudAliquota = new NumericUpDown();
             rdbPrezzoIvato = new RadioButton();
             rdbPrezzoNetto = new RadioButton();
+            lblPrezzoVendita = new Label();
+            txtPrezzoVendita = new TextBox();
             ((System.ComponentModel.ISupportInitialize)nudQnt).BeginInit();
             ((System.ComponentModel.ISupportInitialize)nudAliquota).BeginInit();
             SuspendLayout();
@@ -117,7 +119,7 @@
             txtNote.Multiline = true;
             txtNote.Name = "txtNote";
             txtNote.Size = new Size(737, 345);
-            txtNote.TabIndex = 9;
+            txtNote.TabIndex = 5;
             // 
             // lblPrezzoNetto
             // 
@@ -134,7 +136,7 @@
             txtPrezzoNetto.Margin = new Padding(3, 2, 3, 2);
             txtPrezzoNetto.Name = "txtPrezzoNetto";
             txtPrezzoNetto.Size = new Size(158, 23);
-            txtPrezzoNetto.TabIndex = 5;
+            txtPrezzoNetto.TabIndex = 3;
             txtPrezzoNetto.TextAlign = HorizontalAlignment.Right;
             txtPrezzoNetto.TextChanged += txtPrezzoNetto_TextChanged;
             txtPrezzoNetto.KeyPress += txtPrezzoNetto_KeyPress;
@@ -168,7 +170,7 @@
             btnOk.Margin = new Padding(3, 2, 3, 2);
             btnOk.Name = "btnOk";
             btnOk.Size = new Size(920, 68);
-            btnOk.TabIndex = 10;
+            btnOk.TabIndex = 6;
             btnOk.Text = "CARICA PRODOTTO";
             btnOk.TextAlign = ContentAlignment.BottomCenter;
             btnOk.TextImageRelation = TextImageRelation.ImageAboveText;
@@ -263,12 +265,32 @@
             rdbPrezzoNetto.UseVisualStyleBackColor = true;
             rdbPrezzoNetto.CheckedChanged += rdbPrezzoNetto_CheckedChanged;
             // 
+            // lblPrezzoVendita
+            // 
+            lblPrezzoVendita.AutoSize = true;
+            lblPrezzoVendita.Location = new Point(12, 387);
+            lblPrezzoVendita.Name = "lblPrezzoVendita";
+            lblPrezzoVendita.Size = new Size(100, 15);
+            lblPrezzoVendita.TabIndex = 15;
+            lblPrezzoVendita.Text = "PREZZO VENDITA";
+            // 
+            // txtPrezzoVendita
+            // 
+            txtPrezzoVendita.Location = new Point(12, 404);
+            txtPrezzoVendita.Margin = new Padding(3, 2, 3, 2);
+            txtPrezzoVendita.Name = "txtPrezzoVendita";
+            txtPrezzoVendita.Size = new Size(177, 23);
+            txtPrezzoVendita.TabIndex = 4;
+            txtPrezzoVendita.TextAlign = HorizontalAlignment.Right;
+            // 
             // ProductInsertForm
             // 
             AcceptButton = btnOk;
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(948, 523);
+            Controls.Add(lblPrezzoVendita);
+            Controls.Add(txtPrezzoVendita);
             Controls.Add(rdbPrezzoIvato);
             Controls.Add(rdbPrezzoNetto);
             Controls.Add(nudAliquota);
@@ -321,5 +343,7 @@
         private NumericUpDown nudAliquota;
         private RadioButton rdbPrezzoIvato;
         private RadioButton rdbPrezzoNetto;
+        private Label lblPrezzoVendita;
+        private TextBox txtPrezzoVendita;
     }
 }

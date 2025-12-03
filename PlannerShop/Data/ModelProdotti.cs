@@ -24,12 +24,13 @@ namespace PlannerShop.Data
             string qnt,
             string prezzoNetto,
             string prezzoIvato,
+            string prezzoVendita,
             string note,
             string? idProdotto = null)
         {
 
-            string sql = @"INSERT INTO TPRODOTTI (DATA,MARCA,DESCRIZIONE,ALIQUOTA,QNT,PREZZO_NETTO,PREZZO_IVATO,NOTE,IDPRODOTTO)
-                           VALUES(@data,@marca,@descr,@aliq,@qnt,@pn,@pi,@note,@idProd)";
+            string sql = @"INSERT INTO TPRODOTTI (DATA,MARCA,DESCRIZIONE,ALIQUOTA,QNT,PREZZO_NETTO,PREZZO_IVATO,PREZZO_VENDITA,NOTE,IDPRODOTTO)
+                           VALUES(@data,@marca,@descr,@aliq,@qnt,@pn,@pi,@pv,@note,@idProd)";
 
             var parameters = new Dictionary<string, object?>()
             {
@@ -40,6 +41,7 @@ namespace PlannerShop.Data
                 { "@qnt", qnt },
                 { "@pn", prezzoNetto },
                 { "@pi", prezzoIvato },
+                { "@pv", prezzoVendita },
                 { "@note", note },
                 { "@idProd", idProdotto ?? (object?)DBNull.Value }
             };
@@ -56,10 +58,11 @@ namespace PlannerShop.Data
             string qnt,
             string prezzoNetto,
             string prezzoIvato,
+            string prezzoVendita,
             string note)
         {
             
-            string sql = @"UPDATE TPRODOTTI SET DATA=@data, MARCA=@marca, DESCRIZIONE=@descr, ALIQUOTA=@aliq, QNT=@qnt, PREZZO_NETTO=@pn, PREZZO_IVATO=@pi, NOTE=@note
+            string sql = @"UPDATE TPRODOTTI SET DATA=@data, MARCA=@marca, DESCRIZIONE=@descr, ALIQUOTA=@aliq, QNT=@qnt, PREZZO_NETTO=@pn, PREZZO_IVATO=@pi, PREZZO_VENDITA=@pv, NOTE=@note
                            WHERE IDPRODOTTO=@idProd";
 
             var parameters = new Dictionary<string, object?>()
@@ -71,6 +74,7 @@ namespace PlannerShop.Data
                 { "@qnt", qnt },
                 { "@pn", prezzoNetto },
                 { "@pi", prezzoIvato },
+                { "@pv", prezzoVendita },
                 { "@note", note },
                 { "@idProd", idProdotto }
             };

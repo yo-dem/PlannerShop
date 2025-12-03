@@ -88,8 +88,7 @@
             dtpCompleanno.RightToLeft = RightToLeft.No;
             dtpCompleanno.ShowUpDown = true;
             dtpCompleanno.Size = new Size(177, 23);
-            dtpCompleanno.TabIndex = 0;
-            dtpCompleanno.TabStop = false;
+            dtpCompleanno.TabIndex = 6;
             dtpCompleanno.Value = new DateTime(2000, 1, 1, 0, 0, 0, 0);
             dtpCompleanno.ValueChanged += dtpDataNascita_ValueChanged;
             // 
@@ -179,7 +178,7 @@
             txtEmail.Margin = new Padding(3, 2, 3, 2);
             txtEmail.Name = "txtEmail";
             txtEmail.Size = new Size(177, 23);
-            txtEmail.TabIndex = 5;
+            txtEmail.TabIndex = 4;
             txtEmail.TextChanged += txtEmail_TextChanged;
             // 
             // lblIndirizzo
@@ -198,7 +197,7 @@
             txtIndirizzo.Multiline = true;
             txtIndirizzo.Name = "txtIndirizzo";
             txtIndirizzo.Size = new Size(177, 139);
-            txtIndirizzo.TabIndex = 6;
+            txtIndirizzo.TabIndex = 5;
             // 
             // btnDelete
             // 

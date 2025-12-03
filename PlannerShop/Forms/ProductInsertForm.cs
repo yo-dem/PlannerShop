@@ -163,6 +163,7 @@ namespace PlannerShop.Forms
                     nudQnt.Value.ToString(),
                     prezzoNetto.ToString() + " €",
                     txtPrezzoIvato.Text + " €",
+                    txtPrezzoVendita.Text + " €",
                     txtNote.Text);
                 if (chkRipeti.Checked)
                 {
@@ -173,6 +174,7 @@ namespace PlannerShop.Forms
                     nudQnt.Value = 1;
                     txtPrezzoNetto.Text = String.Empty;
                     txtPrezzoIvato.Text = String.Empty;
+                    txtPrezzoVendita.Text = String.Empty;
                     txtNote.Text = String.Empty;
 
                     txtPrezzoNetto.ForeColor = Color.Black;
