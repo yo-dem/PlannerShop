@@ -8,6 +8,7 @@ namespace PlannerShop.Forms
     {
         private DataTable dtProdottiTemp;
         private DataTable dtAcquistiTemp;
+        private DataTable dtCliente;
 
         DateTime timeStamp;
         string idCliente;
@@ -36,7 +37,7 @@ namespace PlannerShop.Forms
 
         private void loadClienteData()
         {
-            DataTable dtCliente = ModelClienti.getClienteById(idCliente);
+            dtCliente = ModelClienti.getClienteById(idCliente);
             lblName.Text = dtCliente.Rows[0]["NOME"].ToString()!.ToUpper() + " " + dtCliente.Rows[0]["COGNOME"].ToString()!.ToUpper();
             lblIndirizzo.Text = dtCliente.Rows[0]["INDIRIZZO"].ToString();
             lblTelefono.Text = "Tel. " + dtCliente.Rows[0]["TELEFONO"].ToString();
@@ -297,63 +298,67 @@ namespace PlannerShop.Forms
             if (e.RowIndex < 0) return;
 
             DataRow row = dtProdottiTemp.Rows[e.RowIndex];
-            string idProdotto = row["IDPRODOTTO"]?.ToString() ?? string.Empty;
 
-            string marca = row["MARCA"]?.ToString() ?? string.Empty;
-            string descrizione = row["DESCRIZIONE"]?.ToString() ?? string.Empty;
-            string prezzoNetto = row["PREZZO_NETTO"]?.ToString() ?? string.Empty;
-            string prezzoIvato = row["PREZZO_IVATO"]?.ToString() ?? string.Empty;
-            string prezzoVendita = row["PREZZO_VENDITA"]?.ToString() ?? string.Empty;
-            string aliquota = row["ALIQUOTA"]?.ToString() ?? string.Empty;
-            string data = row["DATA"]?.ToString() ?? string.Empty;
-            string note = row["NOTE"]?.ToString() ?? string.Empty;
+            PurchaseDetaIlForm purchaseDetailForm = new PurchaseDetaIlForm(row, dtCliente);
+            purchaseDetailForm.ShowDialog();
 
-            if (!int.TryParse(row["QNT"]?.ToString(), out int qnt))
-            {
-                qnt = 0;
-            }
+            //string idProdotto = row["IDPRODOTTO"]?.ToString() ?? string.Empty;
 
-            if (qnt > 1)
-                row["QNT"] = qnt - 1;
-            else
-                dtProdottiTemp.Rows.Remove(row);
+            //string marca = row["MARCA"]?.ToString() ?? string.Empty;
+            //string descrizione = row["DESCRIZIONE"]?.ToString() ?? string.Empty;
+            //string prezzoNetto = row["PREZZO_NETTO"]?.ToString() ?? string.Empty;
+            //string prezzoIvato = row["PREZZO_IVATO"]?.ToString() ?? string.Empty;
+            //string prezzoVendita = row["PREZZO_VENDITA"]?.ToString() ?? string.Empty;
+            //string aliquota = row["ALIQUOTA"]?.ToString() ?? string.Empty;
+            //string data = row["DATA"]?.ToString() ?? string.Empty;
+            //string note = row["NOTE"]?.ToString() ?? string.Empty;
 
-            DataRow[] acquistoEsistente = dtAcquistiTemp.Select($"IDPRODOTTO = '{idProdotto}'");
+            //if (!int.TryParse(row["QNT"]?.ToString(), out int qnt))
+            //{
+            //    qnt = 0;
+            //}
 
-            if (acquistoEsistente.Length == 0)
-            {
-                DataRow newAcq = dtAcquistiTemp.NewRow();
+            //if (qnt > 1)
+            //    row["QNT"] = qnt - 1;
+            //else
+            //    dtProdottiTemp.Rows.Remove(row);
 
-                newAcq["IDPRODOTTO"] = idProdotto;
-                newAcq["IDCLIENTE"] = idCliente;
-                newAcq["MARCA"] = marca;
-                newAcq["DESCRIZIONE"] = descrizione;
-                newAcq["PREZZO_NETTO"] = prezzoNetto;
-                newAcq["PREZZO_IVATO"] = prezzoIvato;
-                newAcq["PREZZO_VENDITA"] = prezzoVendita;
-                newAcq["ALIQUOTA"] = aliquota;
-                newAcq["DATA"] = data;
-                newAcq["NOTE"] = note;
-                newAcq["TIMESTAMP"] = timeStamp.ToString();
-                newAcq["QNT"] = 1;
+            //DataRow[] acquistoEsistente = dtAcquistiTemp.Select($"IDPRODOTTO = '{idProdotto}'");
 
-                dtAcquistiTemp.Rows.Add(newAcq);
-            }
-            else
-            {
-                if (!int.TryParse(acquistoEsistente[0]["QNT"]?.ToString(), out int q))
-                {
-                    q = 0;
-                }
+            //if (acquistoEsistente.Length == 0)
+            //{
+            //    DataRow newAcq = dtAcquistiTemp.NewRow();
 
-                acquistoEsistente[0]["QNT"] = q + 1;
-            }
+            //    newAcq["IDPRODOTTO"] = idProdotto;
+            //    newAcq["IDCLIENTE"] = idCliente;
+            //    newAcq["MARCA"] = marca;
+            //    newAcq["DESCRIZIONE"] = descrizione;
+            //    newAcq["PREZZO_NETTO"] = prezzoNetto;
+            //    newAcq["PREZZO_IVATO"] = prezzoIvato;
+            //    newAcq["PREZZO_VENDITA"] = prezzoVendita;
+            //    newAcq["ALIQUOTA"] = aliquota;
+            //    newAcq["DATA"] = data;
+            //    newAcq["NOTE"] = note;
+            //    newAcq["TIMESTAMP"] = timeStamp.ToString();
+            //    newAcq["QNT"] = 1;
 
-            dgvData.Refresh();
-            dgvDataAcquisto.Refresh();
+            //    dtAcquistiTemp.Rows.Add(newAcq);
+            //}
+            //else
+            //{
+            //    if (!int.TryParse(acquistoEsistente[0]["QNT"]?.ToString(), out int q))
+            //    {
+            //        q = 0;
+            //    }
 
-            dgvData.ClearSelection();
-            dgvDataAcquisto.ClearSelection();
+            //    acquistoEsistente[0]["QNT"] = q + 1;
+            //}
+
+            //dgvData.Refresh();
+            //dgvDataAcquisto.Refresh();
+
+            //dgvData.ClearSelection();
+            //dgvDataAcquisto.ClearSelection();
         }
 
 

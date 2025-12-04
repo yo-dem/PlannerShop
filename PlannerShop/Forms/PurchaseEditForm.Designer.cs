@@ -132,9 +132,9 @@
             lblTelefono.AutoSize = true;
             lblTelefono.Location = new Point(5, 70);
             lblTelefono.Name = "lblTelefono";
-            lblTelefono.Size = new Size(112, 15);
+            lblTelefono.Size = new Size(65, 15);
             lblTelefono.TabIndex = 3;
-            lblTelefono.Text = "TELEFONO_MOBILE";
+            lblTelefono.Text = "TELEFONO";
             // 
             // lblIndirizzo
             // 
@@ -206,7 +206,7 @@
             btnCancel.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             btnCancel.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             btnCancel.ForeColor = Color.Red;
-            btnCancel.Location = new Point(10, 562);
+            btnCancel.Location = new Point(12, 562);
             btnCancel.Margin = new Padding(3, 2, 3, 2);
             btnCancel.Name = "btnCancel";
             btnCancel.Size = new Size(186, 68);
@@ -222,10 +222,10 @@
             btnOk.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             btnOk.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             btnOk.Image = Properties.Resources.okImage;
-            btnOk.Location = new Point(200, 562);
+            btnOk.Location = new Point(204, 562);
             btnOk.Margin = new Padding(3, 2, 3, 2);
             btnOk.Name = "btnOk";
-            btnOk.Size = new Size(736, 68);
+            btnOk.Size = new Size(732, 68);
             btnOk.TabIndex = 28;
             btnOk.Text = "SALVA MODIFICHE";
             btnOk.TextAlign = ContentAlignment.BottomCenter;
