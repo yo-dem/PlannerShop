@@ -160,6 +160,7 @@
             txtPrezzoIvato.TabStop = false;
             txtPrezzoIvato.TextAlign = HorizontalAlignment.Right;
             txtPrezzoIvato.TextChanged += txtPrezzoIvato_TextChanged;
+            txtPrezzoIvato.KeyPress += txtPrezzoIvato_KeyPress;
             // 
             // btnOk
             // 
@@ -268,9 +269,9 @@
             lblPrezzoVendita.AutoSize = true;
             lblPrezzoVendita.Location = new Point(12, 387);
             lblPrezzoVendita.Name = "lblPrezzoVendita";
-            lblPrezzoVendita.Size = new Size(100, 15);
+            lblPrezzoVendita.Size = new Size(105, 15);
             lblPrezzoVendita.TabIndex = 15;
-            lblPrezzoVendita.Text = "PREZZO VENDITA";
+            lblPrezzoVendita.Text = "PREZZO VENDITA*";
             // 
             // txtPrezzoVendita
             // 
@@ -280,6 +281,7 @@
             txtPrezzoVendita.Size = new Size(177, 23);
             txtPrezzoVendita.TabIndex = 4;
             txtPrezzoVendita.TextAlign = HorizontalAlignment.Right;
+            txtPrezzoVendita.TextChanged += txtPrezzoVendita_TextChanged;
             // 
             // ProductInsertForm
             // 

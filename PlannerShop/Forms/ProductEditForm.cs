@@ -71,6 +71,14 @@ namespace PlannerShop.Forms
             }
         }
 
+        private void txtPrezzoIvato_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != (char)Keys.Back && e.KeyChar != ',')
+            {
+                e.Handled = true;
+            }
+        }
+
         private void txtPrezzoIvato_TextChanged(object sender, EventArgs e)
         {
             if (rdbPrezzoIvato.Checked)
@@ -95,6 +103,11 @@ namespace PlannerShop.Forms
                     txtPrezzoNetto.Text = String.Empty;
                 }
             }
+        }
+
+        private void txtPrezzoVendita_TextChanged(object sender, EventArgs e)
+        {
+            lblPrezzoVendita.ForeColor = Color.Black;
         }
 
         private void nudAliquota_KeyPress(object sender, KeyPressEventArgs e)
@@ -161,6 +174,7 @@ namespace PlannerShop.Forms
             bool res3 = true;
             bool res4 = true;
             bool res5 = true;
+            bool res6 = true;
 
             if (String.IsNullOrEmpty(txtMarca.Text))
             {
@@ -182,9 +196,15 @@ namespace PlannerShop.Forms
                 lblPrezzoIvato.ForeColor = Color.Red;
                 res4 = false;
             }
+            if (String.IsNullOrEmpty(txtPrezzoVendita.Text))
+            {
+                lblPrezzoVendita.ForeColor = Color.Red;
+                res5 = false;
+            }
+
             if (txtPrezzoNetto.ForeColor == Color.Red || txtPrezzoIvato.ForeColor == Color.Red)
             {
-                res5 = false;
+                res6 = false;
             }
 
             return res0 && res1 && res2 && res3 && res4 && res5;

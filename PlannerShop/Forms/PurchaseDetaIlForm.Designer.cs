@@ -32,7 +32,6 @@
             btnCancel = new Button();
             btnOk = new Button();
             lblSconto = new Label();
-            lblVendita = new Label();
             lblQnt = new Label();
             grpPurchaseDetail = new GroupBox();
             lblEmail = new Label();
@@ -40,7 +39,6 @@
             lblIndirizzo = new Label();
             lblName = new Label();
             groupBox1 = new GroupBox();
-            txtPrezzoVendita = new TextBox();
             nudQnt = new NumericUpDown();
             nudSconto = new NumericUpDown();
             lblTotaleCalcolato = new Label();
@@ -48,6 +46,7 @@
             groupBox2 = new GroupBox();
             lblDescrizione = new Label();
             lblMarca = new Label();
+            lblPrezzoVendita = new Label();
             grpPurchaseDetail.SuspendLayout();
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)nudQnt).BeginInit();
@@ -105,19 +104,10 @@
             lblSconto.TabIndex = 31;
             lblSconto.Text = "Sconto %";
             // 
-            // lblVendita
-            // 
-            lblVendita.AutoSize = true;
-            lblVendita.Location = new Point(6, 81);
-            lblVendita.Name = "lblVendita";
-            lblVendita.Size = new Size(96, 15);
-            lblVendita.TabIndex = 33;
-            lblVendita.Text = "Prezzo di vendita";
-            // 
             // lblQnt
             // 
             lblQnt.AutoSize = true;
-            lblQnt.Location = new Point(6, 141);
+            lblQnt.Location = new Point(6, 81);
             lblQnt.Name = "lblQnt";
             lblQnt.Size = new Size(53, 15);
             lblQnt.TabIndex = 35;
@@ -174,13 +164,11 @@
             // 
             // groupBox1
             // 
-            groupBox1.Controls.Add(txtPrezzoVendita);
             groupBox1.Controls.Add(nudQnt);
             groupBox1.Controls.Add(nudSconto);
             groupBox1.Controls.Add(lblTotaleCalcolato);
             groupBox1.Controls.Add(lblTotale);
             groupBox1.Controls.Add(lblSconto);
-            groupBox1.Controls.Add(lblVendita);
             groupBox1.Controls.Add(lblQnt);
             groupBox1.Location = new Point(450, 16);
             groupBox1.Name = "groupBox1";
@@ -188,20 +176,10 @@
             groupBox1.TabIndex = 38;
             groupBox1.TabStop = false;
             // 
-            // txtPrezzoVendita
-            // 
-            txtPrezzoVendita.Font = new Font("Segoe UI", 18F);
-            txtPrezzoVendita.Location = new Point(6, 99);
-            txtPrezzoVendita.Name = "txtPrezzoVendita";
-            txtPrezzoVendita.Size = new Size(204, 39);
-            txtPrezzoVendita.TabIndex = 41;
-            txtPrezzoVendita.TextChanged += txtPrezzoVendita_TextChanged;
-            txtPrezzoVendita.KeyPress += txtPrezzoVendita_KeyPress;
-            // 
             // nudQnt
             // 
             nudQnt.Font = new Font("Segoe UI", 18F);
-            nudQnt.Location = new Point(6, 159);
+            nudQnt.Location = new Point(6, 99);
             nudQnt.Maximum = new decimal(new int[] { 1000, 0, 0, 0 });
             nudQnt.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             nudQnt.Name = "nudQnt";
@@ -243,6 +221,7 @@
             // 
             // groupBox2
             // 
+            groupBox2.Controls.Add(lblPrezzoVendita);
             groupBox2.Controls.Add(lblDescrizione);
             groupBox2.Controls.Add(lblMarca);
             groupBox2.Location = new Point(12, 160);
@@ -270,6 +249,16 @@
             lblMarca.Size = new Size(67, 21);
             lblMarca.TabIndex = 5;
             lblMarca.Text = "MARCA";
+            // 
+            // lblPrezzoVendita
+            // 
+            lblPrezzoVendita.AutoSize = true;
+            lblPrezzoVendita.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            lblPrezzoVendita.Location = new Point(6, 61);
+            lblPrezzoVendita.Name = "lblPrezzoVendita";
+            lblPrezzoVendita.Size = new Size(165, 21);
+            lblPrezzoVendita.TabIndex = 8;
+            lblPrezzoVendita.Text = "PREZZO DI VENDITA";
             // 
             // PurchaseDetaIlForm
             // 
@@ -304,7 +293,6 @@
         private Button btnCancel;
         private Button btnOk;
         private Label lblSconto;
-        private Label lblVendita;
         private Label lblQnt;
         private GroupBox grpPurchaseDetail;
         private GroupBox groupBox1;
@@ -319,6 +307,6 @@
         public NumericUpDown nudQnt;
         private NumericUpDown nudSconto;
         public Label lblTotaleCalcolato;
-        private TextBox txtPrezzoVendita;
+        private Label lblPrezzoVendita;
     }
 }

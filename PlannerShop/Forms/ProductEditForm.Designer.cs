@@ -137,6 +137,7 @@
             txtPrezzoIvato.TabStop = false;
             txtPrezzoIvato.TextAlign = HorizontalAlignment.Right;
             txtPrezzoIvato.TextChanged += txtPrezzoIvato_TextChanged;
+            txtPrezzoIvato.KeyPress += txtPrezzoIvato_KeyPress;
             // 
             // lblPrezzoNetto
             // 
@@ -285,6 +286,7 @@
             txtPrezzoVendita.Size = new Size(177, 23);
             txtPrezzoVendita.TabIndex = 4;
             txtPrezzoVendita.TextAlign = HorizontalAlignment.Right;
+            txtPrezzoVendita.TextChanged += txtPrezzoVendita_TextChanged;
             // 
             // ProductEditForm
             // 

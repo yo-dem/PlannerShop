@@ -343,7 +343,10 @@ namespace PlannerShop.Forms
                 newAcq["DESCRIZIONE"] = descrizione;
                 newAcq["PREZZO_NETTO"] = prezzoNetto;
                 newAcq["PREZZO_IVATO"] = prezzoIvato;
-                newAcq["PREZZO_VENDITA"] = prezzoVendita;
+
+                decimal totaleVendita = decimal.Parse(prezzoVendita.Replace("€", "").Trim());
+                newAcq["PREZZO_VENDITA"] = totaleVendita.ToString("F2")+"€";
+
                 newAcq["ALIQUOTA"] = aliquota;
                 newAcq["DATA"] = data;
                 newAcq["NOTE"] = note;
@@ -354,13 +357,16 @@ namespace PlannerShop.Forms
             }
             else
             {
-                if (!int.TryParse(acquistoEsistente[0]["QNT"]?.ToString(), out int q))
-                {
-                    q = 0;
-                }
+                DataRow acq = acquistoEsistente[0];
 
-                acquistoEsistente[0]["QNT"] = q + qnt;
+                int qVecchia = int.Parse(acq["QNT"].ToString());
+                acq["QNT"] = qVecchia + qnt;
+
+                decimal vecchioTotale = decimal.Parse(acq["PREZZO_VENDITA"].ToString().Replace("€",""));
+                decimal nuovoTotale = decimal.Parse(prezzoVendita.Replace("€", "").Trim());
+                acq["PREZZO_VENDITA"] = (vecchioTotale + nuovoTotale).ToString("F2")+"€";
             }
+
 
             dgvData.Refresh();
             dgvDataAcquisto.Refresh();

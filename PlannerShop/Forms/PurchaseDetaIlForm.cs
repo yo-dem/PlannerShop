@@ -17,12 +17,14 @@ namespace PlannerShop.Forms
             lblTelefono.Text = "Tel. " + dtCliente.Rows[0]["TELEFONO"].ToString();
             lblEmail.Text = dtCliente.Rows[0]["EMAIL"].ToString();
 
-            txtPrezzoVendita.Text = row["PREZZO_VENDITA"].ToString();
+            lblPrezzoVendita.Text = row["PREZZO_VENDITA"].ToString();
 
             nudQnt.Maximum = Convert.ToDecimal(row["QNT"]);
 
             lblMarca.Text = row["MARCA"].ToString();
             lblDescrizione.Text = row["DESCRIZIONE"].ToString();
+
+            lblTotaleCalcolato.Text = lblPrezzoVendita.Text;
         }
 
         private void nudSconto_KeyUp(object sender, KeyEventArgs e)
@@ -61,7 +63,7 @@ namespace PlannerShop.Forms
         private void totalCalculator()
         {
             // Rimuove simbolo € e spazi
-            string prezzoText = txtPrezzoVendita.Text.Replace("€", "").Trim();
+            string prezzoText = lblPrezzoVendita.Text.Replace("€", "").Trim();
 
             // Controlla se il campo non è vuoto e se il valore è valido
             if (decimal.TryParse(prezzoText, out decimal prezzoVendita))
