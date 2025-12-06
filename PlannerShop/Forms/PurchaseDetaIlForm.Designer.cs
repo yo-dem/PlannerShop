@@ -44,9 +44,9 @@
             lblTotaleCalcolato = new Label();
             lblTotale = new Label();
             groupBox2 = new GroupBox();
+            lblPrezzoVendita = new Label();
             lblDescrizione = new Label();
             lblMarca = new Label();
-            lblPrezzoVendita = new Label();
             grpPurchaseDetail.SuspendLayout();
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)nudQnt).BeginInit();
@@ -72,8 +72,7 @@
             btnCancel.Margin = new Padding(3, 2, 3, 2);
             btnCancel.Name = "btnCancel";
             btnCancel.Size = new Size(432, 68);
-            btnCancel.TabIndex = 29;
-            btnCancel.TabStop = false;
+            btnCancel.TabIndex = 4;
             btnCancel.Text = "ANNULLA";
             btnCancel.TextImageRelation = TextImageRelation.ImageAboveText;
             btnCancel.UseVisualStyleBackColor = true;
@@ -88,7 +87,7 @@
             btnOk.Margin = new Padding(3, 2, 3, 2);
             btnOk.Name = "btnOk";
             btnOk.Size = new Size(216, 68);
-            btnOk.TabIndex = 30;
+            btnOk.TabIndex = 3;
             btnOk.Text = "COMPLETA ACQUISTO";
             btnOk.TextAlign = ContentAlignment.BottomCenter;
             btnOk.TextImageRelation = TextImageRelation.ImageAboveText;
@@ -98,19 +97,19 @@
             // lblSconto
             // 
             lblSconto.AutoSize = true;
-            lblSconto.Location = new Point(6, 21);
+            lblSconto.Location = new Point(6, 79);
             lblSconto.Name = "lblSconto";
             lblSconto.Size = new Size(57, 15);
-            lblSconto.TabIndex = 31;
+            lblSconto.TabIndex = 0;
             lblSconto.Text = "Sconto %";
             // 
             // lblQnt
             // 
             lblQnt.AutoSize = true;
-            lblQnt.Location = new Point(6, 81);
+            lblQnt.Location = new Point(6, 19);
             lblQnt.Name = "lblQnt";
             lblQnt.Size = new Size(53, 15);
-            lblQnt.TabIndex = 35;
+            lblQnt.TabIndex = 0;
             lblQnt.Text = "Quantità";
             // 
             // grpPurchaseDetail
@@ -122,7 +121,7 @@
             grpPurchaseDetail.Location = new Point(12, 16);
             grpPurchaseDetail.Name = "grpPurchaseDetail";
             grpPurchaseDetail.Size = new Size(432, 138);
-            grpPurchaseDetail.TabIndex = 37;
+            grpPurchaseDetail.TabIndex = 0;
             grpPurchaseDetail.TabStop = false;
             // 
             // lblEmail
@@ -131,7 +130,7 @@
             lblEmail.Location = new Point(6, 79);
             lblEmail.Name = "lblEmail";
             lblEmail.Size = new Size(41, 15);
-            lblEmail.TabIndex = 8;
+            lblEmail.TabIndex = 0;
             lblEmail.Text = "EMAIL";
             // 
             // lblTelefono
@@ -140,7 +139,7 @@
             lblTelefono.Location = new Point(6, 64);
             lblTelefono.Name = "lblTelefono";
             lblTelefono.Size = new Size(65, 15);
-            lblTelefono.TabIndex = 7;
+            lblTelefono.TabIndex = 0;
             lblTelefono.Text = "TELEFONO";
             // 
             // lblIndirizzo
@@ -150,7 +149,7 @@
             lblIndirizzo.Location = new Point(6, 49);
             lblIndirizzo.Name = "lblIndirizzo";
             lblIndirizzo.Size = new Size(62, 13);
-            lblIndirizzo.TabIndex = 6;
+            lblIndirizzo.TabIndex = 0;
             lblIndirizzo.Text = "INDIRIZZO";
             // 
             // lblName
@@ -159,7 +158,7 @@
             lblName.Location = new Point(6, 19);
             lblName.Name = "lblName";
             lblName.Size = new Size(42, 15);
-            lblName.TabIndex = 5;
+            lblName.TabIndex = 0;
             lblName.Text = "NOME";
             // 
             // groupBox1
@@ -173,18 +172,18 @@
             groupBox1.Location = new Point(450, 16);
             groupBox1.Name = "groupBox1";
             groupBox1.Size = new Size(216, 281);
-            groupBox1.TabIndex = 38;
+            groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
             // 
             // nudQnt
             // 
             nudQnt.Font = new Font("Segoe UI", 18F);
-            nudQnt.Location = new Point(6, 99);
+            nudQnt.Location = new Point(6, 37);
             nudQnt.Maximum = new decimal(new int[] { 1000, 0, 0, 0 });
             nudQnt.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             nudQnt.Name = "nudQnt";
             nudQnt.Size = new Size(204, 39);
-            nudQnt.TabIndex = 40;
+            nudQnt.TabIndex = 1;
             nudQnt.Value = new decimal(new int[] { 1, 0, 0, 0 });
             nudQnt.ValueChanged += nudQnt_ValueChanged;
             nudQnt.KeyUp += nudQnt_KeyUp;
@@ -192,10 +191,10 @@
             // nudSconto
             // 
             nudSconto.Font = new Font("Segoe UI", 18F);
-            nudSconto.Location = new Point(6, 39);
+            nudSconto.Location = new Point(6, 97);
             nudSconto.Name = "nudSconto";
             nudSconto.Size = new Size(204, 39);
-            nudSconto.TabIndex = 39;
+            nudSconto.TabIndex = 2;
             nudSconto.ValueChanged += nudSconto_ValueChanged;
             nudSconto.KeyUp += nudSconto_KeyUp;
             // 
@@ -205,7 +204,7 @@
             lblTotaleCalcolato.Location = new Point(6, 235);
             lblTotaleCalcolato.Name = "lblTotaleCalcolato";
             lblTotaleCalcolato.Size = new Size(204, 34);
-            lblTotaleCalcolato.TabIndex = 38;
+            lblTotaleCalcolato.TabIndex = 0;
             lblTotaleCalcolato.Text = "TOTALE";
             lblTotaleCalcolato.TextAlign = ContentAlignment.MiddleCenter;
             // 
@@ -215,7 +214,7 @@
             lblTotale.Location = new Point(6, 201);
             lblTotale.Name = "lblTotale";
             lblTotale.Size = new Size(204, 34);
-            lblTotale.TabIndex = 37;
+            lblTotale.TabIndex = 0;
             lblTotale.Text = "TOTALE";
             lblTotale.TextAlign = ContentAlignment.MiddleCenter;
             // 
@@ -227,8 +226,18 @@
             groupBox2.Location = new Point(12, 160);
             groupBox2.Name = "groupBox2";
             groupBox2.Size = new Size(432, 137);
-            groupBox2.TabIndex = 38;
+            groupBox2.TabIndex = 0;
             groupBox2.TabStop = false;
+            // 
+            // lblPrezzoVendita
+            // 
+            lblPrezzoVendita.AutoSize = true;
+            lblPrezzoVendita.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            lblPrezzoVendita.Location = new Point(6, 61);
+            lblPrezzoVendita.Name = "lblPrezzoVendita";
+            lblPrezzoVendita.Size = new Size(165, 21);
+            lblPrezzoVendita.TabIndex = 0;
+            lblPrezzoVendita.Text = "PREZZO DI VENDITA";
             // 
             // lblDescrizione
             // 
@@ -237,7 +246,7 @@
             lblDescrizione.Location = new Point(6, 40);
             lblDescrizione.Name = "lblDescrizione";
             lblDescrizione.Size = new Size(114, 21);
-            lblDescrizione.TabIndex = 7;
+            lblDescrizione.TabIndex = 0;
             lblDescrizione.Text = "DESCRIZIONE";
             // 
             // lblMarca
@@ -247,18 +256,8 @@
             lblMarca.Location = new Point(6, 19);
             lblMarca.Name = "lblMarca";
             lblMarca.Size = new Size(67, 21);
-            lblMarca.TabIndex = 5;
+            lblMarca.TabIndex = 0;
             lblMarca.Text = "MARCA";
-            // 
-            // lblPrezzoVendita
-            // 
-            lblPrezzoVendita.AutoSize = true;
-            lblPrezzoVendita.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            lblPrezzoVendita.Location = new Point(6, 61);
-            lblPrezzoVendita.Name = "lblPrezzoVendita";
-            lblPrezzoVendita.Size = new Size(165, 21);
-            lblPrezzoVendita.TabIndex = 8;
-            lblPrezzoVendita.Text = "PREZZO DI VENDITA";
             // 
             // PurchaseDetaIlForm
             // 
