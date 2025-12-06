@@ -78,6 +78,7 @@
             btnCancel.Text = "ANNULLA";
             btnCancel.TextImageRelation = TextImageRelation.ImageAboveText;
             btnCancel.UseVisualStyleBackColor = true;
+            btnCancel.Click += btnCancel_Click;
             // 
             // btnOk
             // 

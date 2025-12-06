@@ -132,7 +132,11 @@ namespace PlannerShop.Forms
         private void btnPurchase_Click(object sender, EventArgs e)
         {
             PurchaseEditForm purchaseEditForm = new PurchaseEditForm(idCliente);
-            purchaseEditForm.ShowDialog();
+            DialogResult result = purchaseEditForm.ShowDialog();
+            if (result == DialogResult.Cancel)
+            {
+                this.Close();
+            }
         }
 
         private void txtEmail_TextChanged(object sender, EventArgs e)

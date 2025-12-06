@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using System.Data;
 
 namespace PlannerShop.Forms
 {
@@ -68,26 +60,43 @@ namespace PlannerShop.Forms
 
         private void totalCalculator()
         {
-            if (txtPrezzoVendita.Text != "")
+            // Rimuove simbolo € e spazi
+            string prezzoText = txtPrezzoVendita.Text.Replace("€", "").Trim();
+
+            // Controlla se il campo non è vuoto e se il valore è valido
+            if (decimal.TryParse(prezzoText, out decimal prezzoVendita))
             {
-                if (txtPrezzoVendita.Text.Contains("€"))
-                {
-                    txtPrezzoVendita.Text = txtPrezzoVendita.Text.Replace("€", "");
-                }
-                decimal prezzoVendita = Convert.ToDecimal(txtPrezzoVendita.Text);
                 decimal qnt = nudQnt.Value;
-                decimal total = prezzoVendita * qnt - (prezzoVendita * nudSconto.Value / 100);
-                lblTotaleCalcolato.Text = total.ToString() + "€";
+                decimal sconto = nudSconto.Value;
+
+                // Calcolo totale con sconto
+                decimal total = prezzoVendita * qnt * (1 - sconto / 100);
+
+                // Arrotondamento a 2 decimali
+                total = Math.Round(total, 2);
+
+                // Visualizzazione con sempre due cifre decimali
+                lblTotaleCalcolato.Text = total.ToString("F2") + " €";
             }
             else
             {
+                // Se il campo non contiene un numero valido
                 lblTotaleCalcolato.Text = "Totale: 0.00 €";
             }
         }
 
+
+
         private void btnOk_Click(object sender, EventArgs e)
         {
+            this.DialogResult = DialogResult.OK;
             this.Hide();
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.Cancel;
+            this.Close();
         }
     }
 }

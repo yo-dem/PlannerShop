@@ -300,7 +300,10 @@ namespace PlannerShop.Forms
             DataRow row = dtProdottiTemp.Rows[e.RowIndex];
 
             PurchaseDetaIlForm purchaseDetailForm = new PurchaseDetaIlForm(row, dtCliente);
-            purchaseDetailForm.ShowDialog();
+            DialogResult result = purchaseDetailForm.ShowDialog();
+
+            if (result == DialogResult.Cancel)
+                return;
 
             string idProdotto = row["IDPRODOTTO"]?.ToString() ?? string.Empty;
 
@@ -308,7 +311,7 @@ namespace PlannerShop.Forms
             string descrizione = row["DESCRIZIONE"]?.ToString() ?? string.Empty;
             string prezzoNetto = row["PREZZO_NETTO"]?.ToString() ?? string.Empty;
             string prezzoIvato = row["PREZZO_IVATO"]?.ToString() ?? string.Empty;
-            string prezzoVendita = purchaseDetailForm.lblTotaleCalcolato.Text; 
+            string prezzoVendita = purchaseDetailForm.lblTotaleCalcolato.Text;
             string aliquota = row["ALIQUOTA"]?.ToString() ?? string.Empty;
             string data = row["DATA"]?.ToString() ?? string.Empty;
             string note = row["NOTE"]?.ToString() ?? string.Empty;
@@ -356,7 +359,7 @@ namespace PlannerShop.Forms
                     q = 0;
                 }
 
-                acquistoEsistente[0]["QNT"] = q + 1;
+                acquistoEsistente[0]["QNT"] = q + qnt;
             }
 
             dgvData.Refresh();
@@ -400,15 +403,15 @@ namespace PlannerShop.Forms
             else
             {
                 int qntMag = Convert.ToInt32(prdRows[0]["QNT"]);
-                prdRows[0]["QNT"] = qntMag + 1;
+                prdRows[0]["QNT"] = qntMag + Convert.ToInt32(acqRow["QNT"]);
             }
 
-            if (qntAcq > 1)
-            {
-                acqRow["QNT"] = qntAcq - 1;
-                acqRow["PREZZO_VENDITA"] = Decimal.Parse(acqRow["PREZZO_VENDITA"].ToString()) - Decimal.Parse(acqRow["PREZZO_VENDITA"].ToString()) / qntAcq;
-            }
-            else
+            //if (qntAcq > 1)
+            //{
+            //    acqRow["QNT"] = qntAcq - 1;
+            //    acqRow["PREZZO_VENDITA"] = Decimal.Parse(acqRow["PREZZO_VENDITA"].ToString().Replace("€", "")) - Decimal.Parse(acqRow["PREZZO_VENDITA"].ToString().Replace("€", "")) / qntAcq;
+            //}
+            //else
             {
                 dtAcquistiTemp.Rows.Remove(acqRow);
             }
@@ -422,6 +425,12 @@ namespace PlannerShop.Forms
 
         private void btnOk_Click(object sender, EventArgs e)
         {
+            if (dgvDataAcquisto.Rows.Count == 0)
+            {
+                this.DialogResult = DialogResult.Cancel;
+                return;
+            }
+
             DataTable originalProducts = ModelProdotti.getProdotti();
 
             foreach (DataRow tempRow in dtProdottiTemp.Rows)
