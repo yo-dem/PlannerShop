@@ -208,13 +208,11 @@
             nudQnt.Location = new Point(813, 57);
             nudQnt.Margin = new Padding(3, 2, 3, 2);
             nudQnt.Maximum = new decimal(new int[] { 9999, 0, 0, 0 });
-            nudQnt.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             nudQnt.Name = "nudQnt";
             nudQnt.Size = new Size(119, 23);
             nudQnt.TabIndex = 0;
             nudQnt.TabStop = false;
             nudQnt.TextAlign = HorizontalAlignment.Right;
-            nudQnt.Value = new decimal(new int[] { 1, 0, 0, 0 });
             // 
             // lblAliquota
             // 

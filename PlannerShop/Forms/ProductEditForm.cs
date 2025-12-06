@@ -139,7 +139,7 @@ namespace PlannerShop.Forms
                     nudQnt.Value = int.Parse(sqnt);
                 string? saliquota = dt.Rows[0]["ALIQUOTA"].ToString();
                 if (!String.IsNullOrEmpty(saliquota))
-                    nudAliquota.Value = int.Parse(saliquota);
+                    nudAliquota.Value = int.Parse(saliquota.Replace("%", ""));
                 string? strPN = dt.Rows[0]["PREZZO_NETTO"].ToString();
                 if (!String.IsNullOrEmpty(strPN))
                     txtPrezzoNetto.Text = strPN.Replace("€", "");
@@ -202,9 +202,9 @@ namespace PlannerShop.Forms
                     txtDescrizione.Text.ToUpper(),
                     nudAliquota.Value.ToString(),
                     nudQnt.Value.ToString(),
-                    prezzoNetto.ToString() + " €",
-                    txtPrezzoIvato.Text + " €",
-                    txtPrezzoVendita.Text + " €",
+                    prezzoNetto.ToString() + "€",
+                    txtPrezzoIvato.Text + "€",
+                    txtPrezzoVendita.Text + "€",
                     txtNote.Text);
 
                 this.Close();

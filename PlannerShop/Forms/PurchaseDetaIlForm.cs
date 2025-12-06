@@ -72,12 +72,12 @@ namespace PlannerShop.Forms
             {
                 if (txtPrezzoVendita.Text.Contains("€"))
                 {
-                    txtPrezzoVendita.Text = txtPrezzoVendita.Text.Replace(" €", "");
+                    txtPrezzoVendita.Text = txtPrezzoVendita.Text.Replace("€", "");
                 }
                 decimal prezzoVendita = Convert.ToDecimal(txtPrezzoVendita.Text);
                 decimal qnt = nudQnt.Value;
                 decimal total = prezzoVendita * qnt - (prezzoVendita * nudSconto.Value / 100);
-                lblTotaleCalcolato.Text = total.ToString("F2") + " €";
+                lblTotaleCalcolato.Text = total.ToString() + "€";
             }
             else
             {
@@ -85,5 +85,9 @@ namespace PlannerShop.Forms
             }
         }
 
+        private void btnOk_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+        }
     }
 }

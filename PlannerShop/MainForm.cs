@@ -16,7 +16,7 @@ namespace PlannerShop
         {
             InitializeComponent();
 
-            Utils.SetDataGridStyle(dgvData, true, 50, 40);
+            Utils.SetDataGridStyle(dgvData, true, 40, 30);
             LoadClienti();
 
             if (ModelPwd.IsEnabled())
@@ -26,6 +26,9 @@ namespace PlannerShop
 
             btnDefaultColor = Color.White;
             btnClienti.BackColor = Color.FromArgb(90, 192, 192, 255);
+
+            dgvData.DataBindingComplete += DgvData_DataBindingComplete;
+
         }
 
         void SetClientDataGridStructure()
@@ -67,7 +70,7 @@ namespace PlannerShop
             dataNascitaClientColumn.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataNascitaClientColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dataNascitaClientColumn.DefaultCellStyle.Font = new Font("Corbel", fontSize, FontStyle.Regular);
-            
+
             var indirizzoSupplierColumn = dgvData.Columns["INDIRIZZO"];
             indirizzoSupplierColumn.DisplayIndex = 4;
             indirizzoSupplierColumn.Visible = true;
@@ -86,7 +89,7 @@ namespace PlannerShop
             telefonoFissoSupplierColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             telefonoFissoSupplierColumn.DefaultCellStyle.Font = new Font("Corbel", fontSize, FontStyle.Regular);
 
-            
+
             var emailSupplierColumn = dgvData.Columns["EMAIL"];
             emailSupplierColumn.DisplayIndex = 6;
             emailSupplierColumn.Visible = true;
@@ -146,23 +149,23 @@ namespace PlannerShop
             descrizioneProductColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
             descrizioneProductColumn.DefaultCellStyle.Font = new Font("Corbel", fontSize, FontStyle.Bold);
 
-            var aliquotaProductColumn = dgvData.Columns["ALIQUOTA"];
-            aliquotaProductColumn.DisplayIndex = 4;
-            aliquotaProductColumn.Visible = true;
-            aliquotaProductColumn.HeaderText = "IVA";
-            aliquotaProductColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            aliquotaProductColumn.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            aliquotaProductColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            aliquotaProductColumn.DefaultCellStyle.Font = new Font("Corbel", fontSize, FontStyle.Regular);
-
             var qntProductColumn = dgvData.Columns["QNT"];
-            qntProductColumn.DisplayIndex = 5;
+            qntProductColumn.DisplayIndex = 4;
             qntProductColumn.Visible = true;
             qntProductColumn.HeaderText = "QNT";
             qntProductColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             qntProductColumn.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft;
             qntProductColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             qntProductColumn.DefaultCellStyle.Font = new Font("Corbel", fontSize, FontStyle.Regular);
+
+            var aliquotaProductColumn = dgvData.Columns["ALIQUOTA"];
+            aliquotaProductColumn.DisplayIndex = 5;
+            aliquotaProductColumn.Visible = true;
+            aliquotaProductColumn.HeaderText = "IVA";
+            aliquotaProductColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            aliquotaProductColumn.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            aliquotaProductColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            aliquotaProductColumn.DefaultCellStyle.Font = new Font("Corbel", fontSize, FontStyle.Regular);
 
             var prezzoNettoProductColumn = dgvData.Columns["PREZZO_NETTO"];
             prezzoNettoProductColumn.DisplayIndex = 6;
@@ -270,6 +273,7 @@ namespace PlannerShop
             noteProductionColumn.DefaultCellStyle.Font = new Font("Corbel", fontSize, FontStyle.Bold);
         }
 
+
         void LoadClienti()
         {
             isClienteSelected = true;
@@ -297,6 +301,24 @@ namespace PlannerShop
             SetProductDataGridStructure();
         }
 
+        private void DgvData_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            if (isProdottoSelected)
+            {
+                foreach (DataGridViewRow row in dgvData.Rows)
+                {
+                    if (row.Cells["QNT"].Value != null &&
+                        int.TryParse(row.Cells["QNT"].Value.ToString(), out int qnt) &&
+                        qnt == 0)
+                    {
+                        row.DefaultCellStyle.ForeColor = Color.Red;
+                        row.DefaultCellStyle.Font = new Font(dgvData.Font, FontStyle.Bold);
+                    }
+                }
+            }
+        }
+
+
         private void btnProdotti_Click(object sender, EventArgs e)
         {
             LoadProdotti();
@@ -320,7 +342,7 @@ namespace PlannerShop
             LoadFornitori();
             btnClienti.BackColor = btnDefaultColor;
             btnProdotti.BackColor = btnDefaultColor;
-            btnFornitori.BackColor = Color.FromArgb(90, 192, 192, 255); 
+            btnFornitori.BackColor = Color.FromArgb(90, 192, 192, 255);
             EnableDisableEditAndInsert();
         }
 
@@ -451,7 +473,7 @@ namespace PlannerShop
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            if(dgvData.Rows.Count==0) { return; }
+            if (dgvData.Rows.Count == 0) { return; }
             List<String> idsToDelete = new List<String>();
             int firstSelectedIndex = dgvData.SelectedRows[0].Index;
             int displayPos = dgvData.FirstDisplayedScrollingRowIndex;

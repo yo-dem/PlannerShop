@@ -161,9 +161,9 @@ namespace PlannerShop.Forms
                     txtDescrizione.Text.ToUpper(),
                     nudAliquota.Value.ToString(),
                     nudQnt.Value.ToString(),
-                    prezzoNetto.ToString() + " €",
-                    txtPrezzoIvato.Text + " €",
-                    txtPrezzoVendita.Text + " €",
+                    prezzoNetto.ToString() + "€",
+                    txtPrezzoIvato.Text + "€",
+                    txtPrezzoVendita.Text + "€",
                     txtNote.Text);
                 if (chkRipeti.Checked)
                 {

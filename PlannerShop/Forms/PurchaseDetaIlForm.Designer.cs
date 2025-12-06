@@ -89,10 +89,11 @@
             btnOk.Name = "btnOk";
             btnOk.Size = new Size(216, 68);
             btnOk.TabIndex = 30;
-            btnOk.Text = "SALVA MODIFICHE";
+            btnOk.Text = "COMPLETA ACQUISTO";
             btnOk.TextAlign = ContentAlignment.BottomCenter;
             btnOk.TextImageRelation = TextImageRelation.ImageAboveText;
             btnOk.UseVisualStyleBackColor = true;
+            btnOk.Click += btnOk_Click;
             // 
             // lblSconto
             // 
@@ -221,7 +222,7 @@
             // 
             // lblTotaleCalcolato
             // 
-            lblTotaleCalcolato.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblTotaleCalcolato.Font = new Font("Segoe UI", 18F, FontStyle.Bold);
             lblTotaleCalcolato.Location = new Point(6, 235);
             lblTotaleCalcolato.Name = "lblTotaleCalcolato";
             lblTotaleCalcolato.Size = new Size(204, 34);
@@ -314,9 +315,9 @@
         private Label lblDescrizione;
         private Label lblMarca;
         private Label lblTotale;
-        private Label lblTotaleCalcolato;
+        public NumericUpDown nudQnt;
         private NumericUpDown nudSconto;
-        private NumericUpDown nudQnt;
+        public Label lblTotaleCalcolato;
         private TextBox txtPrezzoVendita;
     }
 }

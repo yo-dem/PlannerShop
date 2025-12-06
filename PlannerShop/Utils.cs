@@ -76,5 +76,6 @@ namespace PlannerShop
             // Disabilita la possibilità di ridimensionare la larghezza dell'header delle righe
             dgvData.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
         }
+
     }
 }
