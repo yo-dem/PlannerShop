@@ -199,12 +199,21 @@ namespace PlannerShop.Forms
 
             var prezzoVenditaPurchaseColumn = dgvDataAcquisto.Columns["PREZZO_VENDITA"];
             prezzoVenditaPurchaseColumn.DisplayIndex = 6;
-            prezzoVenditaPurchaseColumn.Visible = true;
+            prezzoVenditaPurchaseColumn.Visible = false;
             prezzoVenditaPurchaseColumn.HeaderText = "VENDITA";
             prezzoVenditaPurchaseColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             prezzoVenditaPurchaseColumn.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft;
             prezzoVenditaPurchaseColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             prezzoVenditaPurchaseColumn.DefaultCellStyle.Font = new Font("Corbel", fontSize, FontStyle.Regular);
+
+            var totalePurchaseColumn = dgvDataAcquisto.Columns["TOTALE"];
+            totalePurchaseColumn.DisplayIndex = 6;
+            totalePurchaseColumn.Visible = true;
+            totalePurchaseColumn.HeaderText = "TOTALE";
+            totalePurchaseColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            totalePurchaseColumn.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            totalePurchaseColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            totalePurchaseColumn.DefaultCellStyle.Font = new Font("Corbel", fontSize, FontStyle.Regular);
 
             var dataPurchaseColumn = dgvDataAcquisto.Columns["DATA"];
             dataPurchaseColumn.DisplayIndex = 7;
@@ -311,7 +320,8 @@ namespace PlannerShop.Forms
             string descrizione = row["DESCRIZIONE"]?.ToString() ?? string.Empty;
             string prezzoNetto = row["PREZZO_NETTO"]?.ToString() ?? string.Empty;
             string prezzoIvato = row["PREZZO_IVATO"]?.ToString() ?? string.Empty;
-            string prezzoVendita = purchaseDetailForm.lblTotaleCalcolato.Text;
+            string prezzoVendita = row["PREZZO_VENDITA"]?.ToString() ?? string.Empty;
+            string totale = purchaseDetailForm.lblTotaleCalcolato.Text;
             string aliquota = row["ALIQUOTA"]?.ToString() ?? string.Empty;
             string data = row["DATA"]?.ToString() ?? string.Empty;
             string note = row["NOTE"]?.ToString() ?? string.Empty;
@@ -343,9 +353,10 @@ namespace PlannerShop.Forms
                 newAcq["DESCRIZIONE"] = descrizione;
                 newAcq["PREZZO_NETTO"] = prezzoNetto;
                 newAcq["PREZZO_IVATO"] = prezzoIvato;
+                newAcq["PREZZO_VENDITA"] = prezzoVendita;
 
-                decimal totaleVendita = decimal.Parse(prezzoVendita.Replace("€", "").Trim());
-                newAcq["PREZZO_VENDITA"] = totaleVendita.ToString("F2")+"€";
+                decimal totaleVendita = decimal.Parse(totale.Replace("€", "").Trim());
+                newAcq["TOTALE"] = totaleVendita.ToString("F2") + "€";
 
                 newAcq["ALIQUOTA"] = aliquota;
                 newAcq["DATA"] = data;
@@ -362,11 +373,10 @@ namespace PlannerShop.Forms
                 int qVecchia = int.Parse(acq["QNT"].ToString());
                 acq["QNT"] = qVecchia + qnt;
 
-                decimal vecchioTotale = decimal.Parse(acq["PREZZO_VENDITA"].ToString().Replace("€",""));
-                decimal nuovoTotale = decimal.Parse(prezzoVendita.Replace("€", "").Trim());
-                acq["PREZZO_VENDITA"] = (vecchioTotale + nuovoTotale).ToString("F2")+"€";
+                decimal vecchioTotale = decimal.Parse(acq["TOTALE"].ToString().Replace("€", ""));
+                decimal nuovoTotale = decimal.Parse(totale.Replace("€", "").Trim());
+                acq["TOTALE"] = (vecchioTotale + nuovoTotale).ToString("F2") + "€";
             }
-
 
             dgvData.Refresh();
             dgvDataAcquisto.Refresh();
@@ -374,8 +384,6 @@ namespace PlannerShop.Forms
             dgvData.ClearSelection();
             dgvDataAcquisto.ClearSelection();
         }
-
-
 
         private void dgvDataAcquisto_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -412,15 +420,7 @@ namespace PlannerShop.Forms
                 prdRows[0]["QNT"] = qntMag + Convert.ToInt32(acqRow["QNT"]);
             }
 
-            //if (qntAcq > 1)
-            //{
-            //    acqRow["QNT"] = qntAcq - 1;
-            //    acqRow["PREZZO_VENDITA"] = Decimal.Parse(acqRow["PREZZO_VENDITA"].ToString().Replace("€", "")) - Decimal.Parse(acqRow["PREZZO_VENDITA"].ToString().Replace("€", "")) / qntAcq;
-            //}
-            //else
-            {
-                dtAcquistiTemp.Rows.Remove(acqRow);
-            }
+            dtAcquistiTemp.Rows.Remove(acqRow);
 
             dgvData.Refresh();
             dgvDataAcquisto.Refresh();
@@ -502,6 +502,7 @@ namespace PlannerShop.Forms
                 string prezzoNetto = temp["PREZZO_NETTO"]?.ToString() ?? string.Empty;
                 string prezzoIvato = temp["PREZZO_IVATO"]?.ToString() ?? string.Empty;
                 string prezzoVendita = temp["PREZZO_VENDITA"]?.ToString() ?? string.Empty;
+                string totale = temp["TOTALE"]?.ToString() ?? string.Empty;
                 string dataAcquisto = temp["DATA"]?.ToString() ?? string.Empty;
                 string aliquota = temp["ALIQUOTA"]?.ToString() ?? string.Empty;
                 string note = temp["NOTE"]?.ToString() ?? string.Empty;
@@ -518,6 +519,7 @@ namespace PlannerShop.Forms
                         prezzoNetto,
                         prezzoIvato,
                         prezzoVendita,
+                        totale,
                         dataAcquisto,
                         idCliente,
                         idProdotto,

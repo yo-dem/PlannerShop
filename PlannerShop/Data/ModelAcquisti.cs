@@ -29,6 +29,7 @@ namespace PlannerShop.Data
             string prezzoNetto,
             string prezzoIvato,
             string prezzoVendita,
+            string totale,
             string dataAcquisto,
             string idCliente,
             string idProdotto,
@@ -37,8 +38,8 @@ namespace PlannerShop.Data
             string timeStamp)
         {
 
-            string sql = @"INSERT INTO TACQUISTI (MARCA,DESCRIZIONE,QNT,PREZZO_NETTO,PREZZO_IVATO,PREZZO_VENDITA,DATA,IDCLIENTE,IDPRODOTTO,ALIQUOTA,NOTE,TIMESTAMP)
-                           VALUES(@marca,@descr,@qnt,@pn,@pi,@pv,@data,@idCliente,@idProd,@aliq,@note,@ts)";
+            string sql = @"INSERT INTO TACQUISTI (MARCA,DESCRIZIONE,QNT,PREZZO_NETTO,PREZZO_IVATO,PREZZO_VENDITA,TOTALE,DATA,IDCLIENTE,IDPRODOTTO,ALIQUOTA,NOTE,TIMESTAMP)
+                           VALUES(@marca,@descr,@qnt,@pn,@pi,@pv,@pt,@data,@idCliente,@idProd,@aliq,@note,@ts)";
 
             var parameters = new Dictionary<string, object?>()
             {
@@ -48,6 +49,7 @@ namespace PlannerShop.Data
                 { "@pn", prezzoNetto },
                 { "@pi", prezzoIvato },
                 { "@pv", prezzoVendita  },
+                { "@pt", totale },
                 { "@data", dataAcquisto },
                 { "@idCliente", int.Parse(idCliente) },
                 { "@idProd", int.Parse(idProdotto) },
