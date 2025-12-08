@@ -157,6 +157,15 @@ namespace PlannerShop.Forms
             }
         }
 
+        private void btnViewPurchase_Click(object sender, EventArgs e)
+        {
+            PurchaseClientEditForm purchaseClientEditForm = new PurchaseClientEditForm(idCliente);
+            DialogResult result = purchaseClientEditForm.ShowDialog();
+            if (result == DialogResult.Cancel)
+            {
+                this.Close();
+            }
+        }
     }
 }
 

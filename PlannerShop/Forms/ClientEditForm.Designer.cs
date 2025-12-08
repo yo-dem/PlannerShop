@@ -46,7 +46,7 @@
             txtIndirizzo = new TextBox();
             btnDelete = new Button();
             btnPurchase = new Button();
-            button1 = new Button();
+            btnViewPurchase = new Button();
             SuspendLayout();
             // 
             // lblNome
@@ -234,21 +234,22 @@
             btnPurchase.UseVisualStyleBackColor = true;
             btnPurchase.Click += btnPurchase_Click;
             // 
-            // button1
+            // btnViewPurchase
             // 
-            button1.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            button1.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
-            button1.ForeColor = SystemColors.ControlText;
-            button1.Image = Properties.Resources.statistiche_24;
-            button1.Location = new Point(711, 391);
-            button1.Margin = new Padding(3, 2, 3, 2);
-            button1.Name = "button1";
-            button1.Size = new Size(220, 37);
-            button1.TabIndex = 9;
-            button1.Text = "VISUALIZZA ACQUISTI";
-            button1.TextAlign = ContentAlignment.MiddleRight;
-            button1.TextImageRelation = TextImageRelation.ImageBeforeText;
-            button1.UseVisualStyleBackColor = true;
+            btnViewPurchase.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            btnViewPurchase.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
+            btnViewPurchase.ForeColor = SystemColors.ControlText;
+            btnViewPurchase.Image = Properties.Resources.statistiche_24;
+            btnViewPurchase.Location = new Point(711, 391);
+            btnViewPurchase.Margin = new Padding(3, 2, 3, 2);
+            btnViewPurchase.Name = "btnViewPurchase";
+            btnViewPurchase.Size = new Size(220, 37);
+            btnViewPurchase.TabIndex = 9;
+            btnViewPurchase.Text = "VISUALIZZA ACQUISTI";
+            btnViewPurchase.TextAlign = ContentAlignment.MiddleRight;
+            btnViewPurchase.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btnViewPurchase.UseVisualStyleBackColor = true;
+            btnViewPurchase.Click += btnViewPurchase_Click;
             // 
             // ClientEditForm
             // 
@@ -256,7 +257,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(948, 523);
-            Controls.Add(button1);
+            Controls.Add(btnViewPurchase);
             Controls.Add(btnPurchase);
             Controls.Add(btnDelete);
             Controls.Add(lblIndirizzo);
@@ -303,6 +304,6 @@
         private TextBox txtIndirizzo;
         private Button btnDelete;
         private Button btnPurchase;
-        private Button button1;
+        private Button btnViewPurchase;
     }
 }

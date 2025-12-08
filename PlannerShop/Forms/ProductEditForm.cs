@@ -207,7 +207,7 @@ namespace PlannerShop.Forms
                 res6 = false;
             }
 
-            return res0 && res1 && res2 && res3 && res4 && res5;
+            return res0 && res1 && res2 && res3 && res4 && res5 && res6;
         }
 
         private void btnOk_Click(object sender, EventArgs e)

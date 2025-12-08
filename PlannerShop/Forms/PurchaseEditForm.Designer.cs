@@ -109,11 +109,11 @@
             grpCliente.Controls.Add(lblTelefono);
             grpCliente.Controls.Add(lblIndirizzo);
             grpCliente.Controls.Add(lblName);
-            grpCliente.Location = new Point(15, 15);
+            grpCliente.Location = new Point(10, 15);
             grpCliente.Margin = new Padding(3, 2, 3, 2);
             grpCliente.Name = "grpCliente";
             grpCliente.Padding = new Padding(3, 2, 3, 2);
-            grpCliente.Size = new Size(920, 106);
+            grpCliente.Size = new Size(926, 106);
             grpCliente.TabIndex = 24;
             grpCliente.TabStop = false;
             grpCliente.Text = "CLIENTE";

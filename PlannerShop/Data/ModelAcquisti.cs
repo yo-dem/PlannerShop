@@ -10,10 +10,16 @@ namespace PlannerShop.Data
             return DBUtility.getDBData("SELECT * FROM TACQUISTI WHERE IDACQUISTO=@id", new Dictionary<string, object?> { { "@id", idAcquisto } });
         }
 
-        public static DataTable getAcquistiByIdCliente(string idCliente, string timeStamp)
+        public static DataTable getAcquistiByIdClienteAndTimestamp(string idCliente, string timeStamp)
         {
             return DBUtility.getDBData("SELECT * FROM TACQUISTI WHERE IDCLIENTE=@idCliente AND TIMESTAMP=@ts ORDER BY IDACQUISTO DESC",
                 new Dictionary<string, object?> { { "@idCliente", idCliente }, { "@ts", timeStamp } });
+        }
+
+        public static DataTable getAcquistiByIdCliente(string idCliente)
+        {
+            return DBUtility.getDBData("SELECT * FROM TACQUISTI WHERE IDCLIENTE=@idCliente ORDER BY IDACQUISTO DESC",
+                new Dictionary<string, object?> { { "@idCliente", idCliente } });
         }
 
         public static DataTable getAcquistiByIdClienteAndProductId(string idCliente, string idProdotto)

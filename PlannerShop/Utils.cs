@@ -64,7 +64,7 @@ namespace PlannerShop
             // Imposta il colore di sfondo dell'header delle colonne a un grigio chiaro
             dgvData.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(220, 220, 220);
             // Imposta il colore di sfondo delle righe selezionate
-            dgvData.DefaultCellStyle.SelectionBackColor = Color.FromArgb(210, 210, 240);
+            dgvData.DefaultCellStyle.SelectionBackColor = Color.FromArgb(230, 230, 250);
             // Imposta il colore del testo delle righe selezionate
             dgvData.DefaultCellStyle.SelectionForeColor = Color.Black;
             // Imposta il colore di sfondo dell'header selezionato uguale a quello del proprio sfondo

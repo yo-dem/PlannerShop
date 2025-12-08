@@ -22,7 +22,7 @@ namespace PlannerShop.Forms
 
             // Copie locali
             dtProdottiTemp = ModelProdotti.getProdotti().Copy();
-            dtAcquistiTemp = ModelAcquisti.getAcquistiByIdCliente(idCliente, timeStamp.ToString()).Copy();
+            dtAcquistiTemp = ModelAcquisti.getAcquistiByIdClienteAndTimestamp(idCliente, timeStamp.ToString()).Copy();
 
             dgvData.DataSource = dtProdottiTemp;
             SetProductDataGridStructure();
@@ -490,7 +490,7 @@ namespace PlannerShop.Forms
             }
 
             DataTable originalAcquisti =
-                ModelAcquisti.getAcquistiByIdCliente(idCliente, timeStamp.ToString());
+                ModelAcquisti.getAcquistiByIdClienteAndTimestamp(idCliente, timeStamp.ToString());
 
             foreach (DataRow temp in dtAcquistiTemp.Rows)
             {
