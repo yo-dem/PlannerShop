@@ -16,7 +16,6 @@ namespace PlannerShop
         {
             InitializeComponent();
 
-            Utils.SetDataGridStyle(dgvData, true, 40, 30);
             LoadClienti();
 
             if (ModelPwd.IsEnabled())
@@ -280,6 +279,7 @@ namespace PlannerShop
             isFornitoreSelected = false;
             isProdottoSelected = false;
             dgvData.DataSource = ModelClienti.getClienti();
+            Utils.SetDataGridStyle(dgvData, true, 40, 40, true);
             SetClientDataGridStructure();
         }
 
@@ -289,6 +289,7 @@ namespace PlannerShop
             isFornitoreSelected = true;
             isProdottoSelected = false;
             dgvData.DataSource = ModelFornitori.getFornitori();
+            Utils.SetDataGridStyle(dgvData, true, 40, 40, true);
             SetSupplierDataGridStructure();
         }
 
@@ -298,6 +299,7 @@ namespace PlannerShop
             isFornitoreSelected = false;
             isProdottoSelected = true;
             dgvData.DataSource = ModelProdotti.getProdotti();
+            Utils.SetDataGridStyle(dgvData, true, 40, 40, true);
             SetProductDataGridStructure();
         }
 

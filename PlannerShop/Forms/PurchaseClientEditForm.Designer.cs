@@ -75,7 +75,7 @@
             // lblEmail
             // 
             lblEmail.AutoSize = true;
-            lblEmail.Location = new Point(5, 84);
+            lblEmail.Location = new Point(6, 61);
             lblEmail.Name = "lblEmail";
             lblEmail.Size = new Size(41, 15);
             lblEmail.TabIndex = 4;
@@ -84,7 +84,7 @@
             // lblTelefono
             // 
             lblTelefono.AutoSize = true;
-            lblTelefono.Location = new Point(5, 69);
+            lblTelefono.Location = new Point(6, 46);
             lblTelefono.Name = "lblTelefono";
             lblTelefono.Size = new Size(65, 15);
             lblTelefono.TabIndex = 3;
@@ -94,7 +94,7 @@
             // 
             lblIndirizzo.AutoSize = true;
             lblIndirizzo.Font = new Font("Segoe UI", 8F, FontStyle.Bold);
-            lblIndirizzo.Location = new Point(5, 54);
+            lblIndirizzo.Location = new Point(6, 33);
             lblIndirizzo.Name = "lblIndirizzo";
             lblIndirizzo.Size = new Size(62, 13);
             lblIndirizzo.TabIndex = 2;
@@ -103,7 +103,7 @@
             // lblName
             // 
             lblName.AutoSize = true;
-            lblName.Location = new Point(5, 24);
+            lblName.Location = new Point(6, 18);
             lblName.Name = "lblName";
             lblName.Size = new Size(42, 15);
             lblName.TabIndex = 0;

@@ -8,7 +8,7 @@ namespace PlannerShop
 {
     struct Utils
     {
-        public static void SetDataGridStyle(DataGridView dgvData, Boolean isMultiSelect, int headerColumnHeight, int rowHeight)
+        public static void SetDataGridStyle(DataGridView dgvData, Boolean isMultiSelect, int headerColumnHeight, int rowHeight, bool sortable)
         {
             // Elimina i tooltips dalle celle
             dgvData.ShowCellToolTips = true;
@@ -39,13 +39,16 @@ namespace PlannerShop
             // Impedisce la selezione di più righe contemporaneamente
             dgvData.MultiSelect = isMultiSelect;
             // Aggiunge un offset per distanziare i contenuti delle celle dai bordi
-            dgvData.DefaultCellStyle.Padding = new Padding(5);
-            // Disabilita l'ordinamento automatico di ogni colonna, escluse le prime 4
-            foreach (DataGridViewColumn column in dgvData.Columns)
+            dgvData.DefaultCellStyle.Padding = new Padding(4);
+            // Disabilita l'ordinamento automatico
+            if (!sortable)
             {
-                if (column.Index > 3)
+                foreach (DataGridViewColumn column in dgvData.Columns)
+                {
                     column.SortMode = DataGridViewColumnSortMode.NotSortable;
+                }
             }
+
 
             //
             // Opzioni di stile grafico
@@ -64,7 +67,7 @@ namespace PlannerShop
             // Imposta il colore di sfondo dell'header delle colonne a un grigio chiaro
             dgvData.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(220, 220, 220);
             // Imposta il colore di sfondo delle righe selezionate
-            dgvData.DefaultCellStyle.SelectionBackColor = Color.FromArgb(230, 230, 250);
+            dgvData.DefaultCellStyle.SelectionBackColor = Color.FromArgb(230, 230, 250); //Color.FromArgb(200, 220, 255);
             // Imposta il colore del testo delle righe selezionate
             dgvData.DefaultCellStyle.SelectionForeColor = Color.Black;
             // Imposta il colore di sfondo dell'header selezionato uguale a quello del proprio sfondo

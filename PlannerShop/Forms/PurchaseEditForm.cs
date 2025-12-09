@@ -27,8 +27,8 @@ namespace PlannerShop.Forms
             dgvData.DataSource = dtProdottiTemp;
             SetProductDataGridStructure();
 
-            Utils.SetDataGridStyle(dgvData, false, 40, 40);
-            Utils.SetDataGridStyle(dgvDataAcquisto, false, 40, 40);
+            Utils.SetDataGridStyle(dgvData, false, 40, 40, true);
+            Utils.SetDataGridStyle(dgvDataAcquisto, false, 40, 40, true);
             loadClienteData();
 
             dgvDataAcquisto.DataSource = dtAcquistiTemp;

@@ -23,14 +23,13 @@ namespace PlannerShop.Forms
 
             DataTable dtAcquistiTemp = ModelAcquisti.getAcquistiByIdCliente(idCliente).Copy();
 
-            Utils.SetDataGridStyle(dgvDataAcquisto, false, 40, 40);
-
             foreach (DataRow item in dtAcquistiTemp.Rows)
             {
                 item["TIMESTAMP"] = item["TIMESTAMP"].ToString().Split(' ')[0];
             }
 
             dgvDataAcquisto.DataSource = dtAcquistiTemp;
+            Utils.SetDataGridStyle(dgvDataAcquisto, false, 40, 40, false);
             SetPurchaseDataGridStructure();
 
             dgvDataAcquisto.RowPrePaint += DgvDataAcquisto_RowPrePaint;
