@@ -52,6 +52,12 @@ namespace PlannerShop.Forms
                 txtEmail.ForeColor = Color.Red;
                 emailNotValid = true;
             }
+            if(String.IsNullOrEmpty(txtEmail.Text))
+            {
+                lblEmail.ForeColor = Color.Black;
+                txtEmail.ForeColor = Color.Black;
+                emailNotValid = false;
+            }
         }
 
         private void TxtNote_GotFocus(object? sender, EventArgs e)
@@ -86,12 +92,7 @@ namespace PlannerShop.Forms
                 lblTelefono.ForeColor = Color.Red;
                 res2 = false;
             }
-            if (String.IsNullOrEmpty(txtEmail.Text))
-            {
-                lblEmail.ForeColor = Color.Red;
-                res3 = false;
-            }
-            return !emailNotValid && res0 && res1 && res2 && res3;
+            return !emailNotValid && res0 && res1 && res2;
         }
 
         private void btnOk_Click(object sender, EventArgs e)

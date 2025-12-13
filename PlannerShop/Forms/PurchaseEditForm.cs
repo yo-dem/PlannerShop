@@ -33,6 +33,8 @@ namespace PlannerShop.Forms
 
             dgvDataAcquisto.DataSource = dtAcquistiTemp;
             SetPurchaseDataGridStructure();
+
+            dgvDataAcquisto.CellFormatting += dgvDataAcquisto_CellFormatting;
         }
 
         private void loadClienteData()
@@ -206,8 +208,18 @@ namespace PlannerShop.Forms
             prezzoVenditaPurchaseColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             prezzoVenditaPurchaseColumn.DefaultCellStyle.Font = new Font("Corbel", fontSize, FontStyle.Regular);
 
+            dgvDataAcquisto.Columns.Add("PREZZO_TOTALE", "PREZZO STANDARD");
+            var totalePrezzoPurchaseColumn = dgvDataAcquisto.Columns["PREZZO_TOTALE"];
+            totalePrezzoPurchaseColumn.DisplayIndex = 6;
+            totalePrezzoPurchaseColumn.Visible = true;
+            totalePrezzoPurchaseColumn.HeaderText = "PREZZO STANDARD";
+            totalePrezzoPurchaseColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            totalePrezzoPurchaseColumn.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            totalePrezzoPurchaseColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            totalePrezzoPurchaseColumn.DefaultCellStyle.Font = new Font("Corbel", fontSize, FontStyle.Regular);
+
             var totalePurchaseColumn = dgvDataAcquisto.Columns["TOTALE"];
-            totalePurchaseColumn.DisplayIndex = 6;
+            totalePurchaseColumn.DisplayIndex = 7;
             totalePurchaseColumn.Visible = true;
             totalePurchaseColumn.HeaderText = "TOTALE";
             totalePurchaseColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
@@ -216,7 +228,7 @@ namespace PlannerShop.Forms
             totalePurchaseColumn.DefaultCellStyle.Font = new Font("Corbel", fontSize, FontStyle.Regular);
 
             var dataPurchaseColumn = dgvDataAcquisto.Columns["DATA"];
-            dataPurchaseColumn.DisplayIndex = 7;
+            dataPurchaseColumn.DisplayIndex = 8;
             dataPurchaseColumn.Visible = false;
             dataPurchaseColumn.HeaderText = "DATA";
             dataPurchaseColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
@@ -225,7 +237,7 @@ namespace PlannerShop.Forms
             dataPurchaseColumn.DefaultCellStyle.Font = new Font("Corbel", fontSize, FontStyle.Regular);
 
             var idClientPurchaseColumn = dgvDataAcquisto.Columns["IDCLIENTE"];
-            idClientPurchaseColumn.DisplayIndex = 8;
+            idClientPurchaseColumn.DisplayIndex = 9;
             idClientPurchaseColumn.Visible = false;
             idClientPurchaseColumn.HeaderText = "IDCLIENTE";
             idClientPurchaseColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
@@ -234,7 +246,7 @@ namespace PlannerShop.Forms
             idClientPurchaseColumn.DefaultCellStyle.Font = new Font("Corbel", fontSize, FontStyle.Regular);
 
             var idProdottoPurchaseColumn = dgvDataAcquisto.Columns["IDPRODOTTO"];
-            idProdottoPurchaseColumn.DisplayIndex = 9;
+            idProdottoPurchaseColumn.DisplayIndex = 10;
             idProdottoPurchaseColumn.Visible = false;
             idProdottoPurchaseColumn.HeaderText = "IDPRODOTTO";
             idProdottoPurchaseColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
@@ -243,7 +255,7 @@ namespace PlannerShop.Forms
             idProdottoPurchaseColumn.DefaultCellStyle.Font = new Font("Corbel", fontSize, FontStyle.Regular);
 
             var aliquotaPurchaseColumn = dgvDataAcquisto.Columns["ALIQUOTA"];
-            aliquotaPurchaseColumn.DisplayIndex = 10;
+            aliquotaPurchaseColumn.DisplayIndex = 11;
             aliquotaPurchaseColumn.Visible = false;
             aliquotaPurchaseColumn.HeaderText = "IVA";
             aliquotaPurchaseColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
@@ -252,7 +264,7 @@ namespace PlannerShop.Forms
             aliquotaPurchaseColumn.DefaultCellStyle.Font = new Font("Corbel", fontSize, FontStyle.Regular);
 
             var notePurchaseColumn = dgvDataAcquisto.Columns["NOTE"];
-            notePurchaseColumn.DisplayIndex = 11;
+            notePurchaseColumn.DisplayIndex = 12;
             notePurchaseColumn.Visible = false;
             notePurchaseColumn.HeaderText = "NOTE";
             notePurchaseColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
@@ -261,7 +273,7 @@ namespace PlannerShop.Forms
             notePurchaseColumn.DefaultCellStyle.Font = new Font("Corbel", fontSize, FontStyle.Bold);
 
             var timestampPurchaseColumn = dgvDataAcquisto.Columns["TIMESTAMP"];
-            timestampPurchaseColumn.DisplayIndex = 12;
+            timestampPurchaseColumn.DisplayIndex = 13;
             timestampPurchaseColumn.Visible = false;
             timestampPurchaseColumn.HeaderText = "TIMESTAMP";
             timestampPurchaseColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
@@ -357,6 +369,9 @@ namespace PlannerShop.Forms
 
                 decimal totaleVendita = decimal.Parse(totale.Replace("€", "").Trim());
                 newAcq["TOTALE"] = totaleVendita.ToString("F2") + "€";
+
+
+                
 
                 newAcq["ALIQUOTA"] = aliquota;
                 newAcq["DATA"] = data;
@@ -553,6 +568,25 @@ namespace PlannerShop.Forms
         private void btnCancel_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void dgvDataAcquisto_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (e.RowIndex < 0) return;
+
+            if (dgvDataAcquisto.Columns[e.ColumnIndex].Name == "PREZZO_TOTALE")
+            {
+                var drv = dgvDataAcquisto.Rows[e.RowIndex].DataBoundItem as DataRowView;
+                if (drv == null) return;
+
+                decimal prezzoVendita = Convert.ToDecimal(drv["PREZZO_VENDITA"].ToString().Replace("€", ""));
+                int qnt = Convert.ToInt32(drv["QNT"]);
+
+                decimal totale = prezzoVendita * qnt;
+
+                e.Value = totale.ToString("F2") + " €";
+                e.FormattingApplied = true;
+            }
         }
 
     }
