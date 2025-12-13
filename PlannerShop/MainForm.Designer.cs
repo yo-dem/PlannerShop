@@ -285,6 +285,7 @@
             btnServizi.TextAlign = ContentAlignment.BottomCenter;
             btnServizi.TextImageRelation = TextImageRelation.ImageAboveText;
             btnServizi.UseVisualStyleBackColor = true;
+            btnServizi.Click += btnServizi_Click;
             // 
             // MainForm
             // 

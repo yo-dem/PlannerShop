@@ -9,6 +9,7 @@ namespace PlannerShop
         bool isClienteSelected = false;
         bool isFornitoreSelected = false;
         bool isProdottoSelected = false;
+        bool isServizioSelected = false;
 
         Color btnDefaultColor;
 
@@ -272,12 +273,99 @@ namespace PlannerShop
             noteProductionColumn.DefaultCellStyle.Font = new Font("Corbel", fontSize, FontStyle.Bold);
         }
 
+        void SetServiceDataGridStructure()
+        {
+            int fontSize = 10;
+
+            var idServiceColumn = dgvData.Columns["IDSERVIZIO"];
+            idServiceColumn.DisplayIndex = 0;
+            idServiceColumn.Visible = false;
+            idServiceColumn.HeaderText = "IDSERVIZIO";
+            idServiceColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            idServiceColumn.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            idServiceColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            idServiceColumn.DefaultCellStyle.Font = new Font("Corbel", fontSize, FontStyle.Regular);
+
+            var dataServiceColumn = dgvData.Columns["DATA"];
+            dataServiceColumn.DisplayIndex = 1;
+            dataServiceColumn.Visible = true;
+            dataServiceColumn.HeaderText = "DATA";
+            dataServiceColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            dataServiceColumn.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataServiceColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataServiceColumn.DefaultCellStyle.Font = new Font("Corbel", fontSize, FontStyle.Regular);
+
+            var nomeServiceColumn = dgvData.Columns["NOME"];
+            nomeServiceColumn.DisplayIndex = 2;
+            nomeServiceColumn.Visible = true;
+            nomeServiceColumn.HeaderText = "NOME";
+            nomeServiceColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            nomeServiceColumn.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            nomeServiceColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            nomeServiceColumn.DefaultCellStyle.Font = new Font("Corbel", fontSize, FontStyle.Regular);
+
+            var descrizioneServiceColumn = dgvData.Columns["DESCRIZIONE"];
+            descrizioneServiceColumn.DisplayIndex = 3;
+            descrizioneServiceColumn.Visible = true;
+            descrizioneServiceColumn.HeaderText = "DESCRIZIONE";
+            descrizioneServiceColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            descrizioneServiceColumn.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            descrizioneServiceColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            descrizioneServiceColumn.DefaultCellStyle.Font = new Font("Corbel", fontSize, FontStyle.Bold);
+
+            var aliquotaServiceColumn = dgvData.Columns["ALIQUOTA"];
+            aliquotaServiceColumn.DisplayIndex = 4;
+            aliquotaServiceColumn.Visible = true;
+            aliquotaServiceColumn.HeaderText = "IVA";
+            aliquotaServiceColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            aliquotaServiceColumn.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            aliquotaServiceColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            aliquotaServiceColumn.DefaultCellStyle.Font = new Font("Corbel", fontSize, FontStyle.Regular);
+
+            var prezzoNettoServiceColumn = dgvData.Columns["PREZZO_NETTO"];
+            prezzoNettoServiceColumn.DisplayIndex = 5;
+            prezzoNettoServiceColumn.Visible = true;
+            prezzoNettoServiceColumn.HeaderText = "NETTO";
+            prezzoNettoServiceColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            prezzoNettoServiceColumn.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            prezzoNettoServiceColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            prezzoNettoServiceColumn.DefaultCellStyle.Font = new Font("Corbel", fontSize, FontStyle.Regular);
+
+            var prezzoIvatoServiceColumn = dgvData.Columns["PREZZO_IVATO"];
+            prezzoIvatoServiceColumn.DisplayIndex = 6;
+            prezzoIvatoServiceColumn.Visible = true;
+            prezzoIvatoServiceColumn.HeaderText = "IVATO";
+            prezzoIvatoServiceColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            prezzoIvatoServiceColumn.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            prezzoIvatoServiceColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            prezzoIvatoServiceColumn.DefaultCellStyle.Font = new Font("Corbel", fontSize, FontStyle.Regular);
+
+            var prezzoVenditaServiceColumn = dgvData.Columns["PREZZO_VENDITA"];
+            prezzoVenditaServiceColumn.DisplayIndex = 7;
+            prezzoVenditaServiceColumn.Visible = true;
+            prezzoVenditaServiceColumn.HeaderText = "VENDITA";
+            prezzoVenditaServiceColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            prezzoVenditaServiceColumn.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            prezzoVenditaServiceColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            prezzoVenditaServiceColumn.DefaultCellStyle.Font = new Font("Corbel", fontSize, FontStyle.Regular);
+
+            var noteServiceColumn = dgvData.Columns["NOTE"];
+            noteServiceColumn.DisplayIndex = 8;
+            noteServiceColumn.Visible = true;
+            noteServiceColumn.HeaderText = "NOTE";
+            noteServiceColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            noteServiceColumn.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            noteServiceColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            noteServiceColumn.DefaultCellStyle.Font = new Font("Corbel", fontSize, FontStyle.Bold);
+        }
+
 
         void LoadClienti()
         {
             isClienteSelected = true;
             isFornitoreSelected = false;
             isProdottoSelected = false;
+            isServizioSelected = false;
             dgvData.DataSource = ModelClienti.getClienti();
             Utils.SetDataGridStyle(dgvData, true, 40, 40, true);
             SetClientDataGridStructure();
@@ -288,6 +376,7 @@ namespace PlannerShop
             isClienteSelected = false;
             isFornitoreSelected = true;
             isProdottoSelected = false;
+            isServizioSelected = false;
             dgvData.DataSource = ModelFornitori.getFornitori();
             Utils.SetDataGridStyle(dgvData, true, 40, 40, true);
             SetSupplierDataGridStructure();
@@ -298,9 +387,21 @@ namespace PlannerShop
             isClienteSelected = false;
             isFornitoreSelected = false;
             isProdottoSelected = true;
+            isServizioSelected = false;
             dgvData.DataSource = ModelProdotti.getProdotti();
             Utils.SetDataGridStyle(dgvData, true, 40, 40, true);
             SetProductDataGridStructure();
+        }
+
+        void LoadServizi()
+        {
+            isClienteSelected = false;
+            isFornitoreSelected = false;
+            isProdottoSelected = false;
+            isServizioSelected = true;
+            dgvData.DataSource = ModelServizi.getServizi();
+            Utils.SetDataGridStyle(dgvData, true, 40, 40, true);
+            SetServiceDataGridStructure();
         }
 
         private void DgvData_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
@@ -321,21 +422,23 @@ namespace PlannerShop
         }
 
 
-        private void btnProdotti_Click(object sender, EventArgs e)
-        {
-            LoadProdotti();
-            btnClienti.BackColor = btnDefaultColor;
-            btnProdotti.BackColor = Color.FromArgb(90, 192, 192, 255);
-            btnFornitori.BackColor = btnDefaultColor;
-            EnableDisableEditAndInsert();
-        }
-
         private void btnClienti_Click(object sender, EventArgs e)
         {
             LoadClienti();
             btnClienti.BackColor = Color.FromArgb(90, 192, 192, 255);
             btnProdotti.BackColor = btnDefaultColor;
             btnFornitori.BackColor = btnDefaultColor;
+            btnServizi.BackColor = btnDefaultColor;
+            EnableDisableEditAndInsert();
+        }
+
+        private void btnProdotti_Click(object sender, EventArgs e)
+        {
+            LoadProdotti();
+            btnClienti.BackColor = btnDefaultColor;
+            btnProdotti.BackColor = Color.FromArgb(90, 192, 192, 255);
+            btnFornitori.BackColor = btnDefaultColor;
+            btnServizi.BackColor = btnDefaultColor;
             EnableDisableEditAndInsert();
         }
 
@@ -345,6 +448,17 @@ namespace PlannerShop
             btnClienti.BackColor = btnDefaultColor;
             btnProdotti.BackColor = btnDefaultColor;
             btnFornitori.BackColor = Color.FromArgb(90, 192, 192, 255);
+            btnServizi.BackColor = btnDefaultColor;
+            EnableDisableEditAndInsert();
+        }
+
+        private void btnServizi_Click(object sender, EventArgs e)
+        {
+            LoadServizi();
+            btnClienti.BackColor = btnDefaultColor;
+            btnProdotti.BackColor = btnDefaultColor;
+            btnFornitori.BackColor = btnDefaultColor;
+            btnServizi.BackColor = Color.FromArgb(90, 192, 192, 255);
             EnableDisableEditAndInsert();
         }
 
@@ -396,6 +510,13 @@ namespace PlannerShop
                 supplierInsertForm.ShowDialog();
                 if (supplierInsertForm.isDone)
                     dgvData.DataSource = ModelFornitori.getFornitori();
+            }
+            else if (isServizioSelected)
+            {
+                ServiceInsertForm serviceInsertForm = new ServiceInsertForm();
+                serviceInsertForm.ShowDialog();
+                if (serviceInsertForm.isDone)
+                    dgvData.DataSource = ModelServizi.getServizi();
             }
             EnableDisableEditAndInsert();
         }
