@@ -28,7 +28,9 @@ namespace PlannerShop.Forms
             SetProductDataGridStructure();
 
             Utils.SetDataGridStyle(dgvData, false, 40, 40, true);
+            dgvData.DefaultCellStyle.SelectionBackColor = dgvData.DefaultCellStyle.BackColor;
             Utils.SetDataGridStyle(dgvDataAcquisto, false, 40, 40, true);
+            dgvDataAcquisto.DefaultCellStyle.SelectionBackColor = dgvDataAcquisto.DefaultCellStyle.BackColor;
             loadClienteData();
 
             dgvDataAcquisto.DataSource = dtAcquistiTemp;

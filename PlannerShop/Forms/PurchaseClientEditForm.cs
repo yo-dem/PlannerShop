@@ -30,6 +30,7 @@ namespace PlannerShop.Forms
 
             dgvDataAcquisto.DataSource = dtAcquistiTemp;
             Utils.SetDataGridStyle(dgvDataAcquisto, false, 40, 40, false);
+            dgvDataAcquisto.DefaultCellStyle.SelectionBackColor = dgvDataAcquisto.DefaultCellStyle.BackColor;
             SetPurchaseDataGridStructure();
 
             dgvDataAcquisto.RowPrePaint += DgvDataAcquisto_RowPrePaint;
