@@ -45,6 +45,7 @@
             txtIndirizzo = new TextBox();
             chkRipeti = new CheckBox();
             txtTelefono = new TextBox();
+            btnAnnulla = new Button();
             SuspendLayout();
             // 
             // lblNome
@@ -104,6 +105,7 @@
             txtNote.Margin = new Padding(3, 2, 3, 2);
             txtNote.Multiline = true;
             txtNote.Name = "txtNote";
+            txtNote.ScrollBars = ScrollBars.Both;
             txtNote.Size = new Size(737, 345);
             txtNote.TabIndex = 7;
             // 
@@ -112,10 +114,10 @@
             btnOk.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             btnOk.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             btnOk.Image = Properties.Resources.okImage;
-            btnOk.Location = new Point(12, 431);
+            btnOk.Location = new Point(195, 431);
             btnOk.Margin = new Padding(3, 2, 3, 2);
             btnOk.Name = "btnOk";
-            btnOk.Size = new Size(920, 68);
+            btnOk.Size = new Size(737, 68);
             btnOk.TabIndex = 8;
             btnOk.Text = "CARICA CLIENTE";
             btnOk.TextAlign = ContentAlignment.BottomCenter;
@@ -209,12 +211,31 @@
             txtTelefono.TabIndex = 3;
             txtTelefono.TextChanged += txtTelefono_TextChanged;
             // 
+            // btnAnnulla
+            // 
+            btnAnnulla.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            btnAnnulla.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
+            btnAnnulla.ForeColor = SystemColors.ControlText;
+            btnAnnulla.Image = Properties.Resources.annulla_24;
+            btnAnnulla.Location = new Point(12, 431);
+            btnAnnulla.Margin = new Padding(3, 2, 3, 2);
+            btnAnnulla.Name = "btnAnnulla";
+            btnAnnulla.Size = new Size(176, 68);
+            btnAnnulla.TabIndex = 21;
+            btnAnnulla.TabStop = false;
+            btnAnnulla.Text = "ANNULLA";
+            btnAnnulla.TextAlign = ContentAlignment.BottomCenter;
+            btnAnnulla.TextImageRelation = TextImageRelation.ImageAboveText;
+            btnAnnulla.UseVisualStyleBackColor = true;
+            btnAnnulla.Click += btnAnnulla_Click;
+            // 
             // ClientInsertForm
             // 
             AcceptButton = btnOk;
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(948, 523);
+            Controls.Add(btnAnnulla);
             Controls.Add(txtTelefono);
             Controls.Add(lblIndirizzo);
             Controls.Add(txtIndirizzo);
@@ -259,5 +280,6 @@
         private TextBox txtIndirizzo;
         private CheckBox chkRipeti;
         private TextBox txtTelefono;
+        private Button btnAnnulla;
     }
 }

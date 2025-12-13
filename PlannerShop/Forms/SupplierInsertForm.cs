@@ -191,5 +191,10 @@ namespace PlannerShop.Forms
                 isDone = true;
             }
         }
+
+        private void btnAnnulla_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

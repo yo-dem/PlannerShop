@@ -209,6 +209,11 @@ namespace PlannerShop.Forms
             }
         }
 
+        private void btnAnnulla_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
         private void rdbPrezzoNetto_CheckedChanged(object sender, EventArgs e)
         {
             txtPrezzoIvato.ReadOnly = !rdbPrezzoIvato.Checked;

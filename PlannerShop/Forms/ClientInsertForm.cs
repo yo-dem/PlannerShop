@@ -7,7 +7,7 @@ namespace PlannerShop.Forms
     {
         bool emailNotValid = false;
         public bool isDone = false;
-        
+
         public ClientInsertForm()
         {
             InitializeComponent();
@@ -34,6 +34,24 @@ namespace PlannerShop.Forms
         private void txtIndirizzo_TextChanged(object sender, EventArgs e)
         {
             lblIndirizzo.ForeColor = Color.Black;
+        }
+
+        private void txtEmail_TextChanged(object sender, EventArgs e)
+        {
+            lblEmail.ForeColor = Color.Black;
+            string emailPattern = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
+            if (Regex.IsMatch(txtEmail.Text, emailPattern))
+            {
+                lblEmail.ForeColor = Color.Black;
+                txtEmail.ForeColor = Color.Black;
+                emailNotValid = false;
+            }
+            else
+            {
+                lblEmail.ForeColor = Color.Red;
+                txtEmail.ForeColor = Color.Red;
+                emailNotValid = true;
+            }
         }
 
         private void TxtNote_GotFocus(object? sender, EventArgs e)
@@ -106,22 +124,10 @@ namespace PlannerShop.Forms
             }
         }
 
-        private void txtEmail_TextChanged(object sender, EventArgs e)
+        private void btnAnnulla_Click(object sender, EventArgs e)
         {
-            lblEmail.ForeColor = Color.Black;
-            string emailPattern = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
-            if (Regex.IsMatch(txtEmail.Text, emailPattern))
-            {
-                lblEmail.ForeColor = Color.Black;
-                txtEmail.ForeColor = Color.Black;
-                emailNotValid = false;
-            }
-            else
-            {
-                lblEmail.ForeColor = Color.Red;
-                txtEmail.ForeColor = Color.Red;
-                emailNotValid = true;
-            }
+            this.Close();
         }
+
     }
 }

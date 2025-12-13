@@ -50,6 +50,7 @@
             rdbPrezzoNetto = new RadioButton();
             lblPrezzoVendita = new Label();
             txtPrezzoVendita = new TextBox();
+            btnAnnulla = new Button();
             ((System.ComponentModel.ISupportInitialize)nudQnt).BeginInit();
             ((System.ComponentModel.ISupportInitialize)nudAliquota).BeginInit();
             SuspendLayout();
@@ -118,6 +119,7 @@
             txtNote.Margin = new Padding(3, 2, 3, 2);
             txtNote.Multiline = true;
             txtNote.Name = "txtNote";
+            txtNote.ScrollBars = ScrollBars.Both;
             txtNote.Size = new Size(737, 345);
             txtNote.TabIndex = 5;
             // 
@@ -167,10 +169,10 @@
             btnOk.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             btnOk.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             btnOk.Image = Properties.Resources.okImage;
-            btnOk.Location = new Point(12, 431);
+            btnOk.Location = new Point(195, 431);
             btnOk.Margin = new Padding(3, 2, 3, 2);
             btnOk.Name = "btnOk";
-            btnOk.Size = new Size(920, 68);
+            btnOk.Size = new Size(737, 68);
             btnOk.TabIndex = 6;
             btnOk.Text = "CARICA PRODOTTO";
             btnOk.TextAlign = ContentAlignment.BottomCenter;
@@ -283,12 +285,31 @@
             txtPrezzoVendita.TextAlign = HorizontalAlignment.Right;
             txtPrezzoVendita.TextChanged += txtPrezzoVendita_TextChanged;
             // 
+            // btnAnnulla
+            // 
+            btnAnnulla.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            btnAnnulla.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
+            btnAnnulla.ForeColor = SystemColors.ControlText;
+            btnAnnulla.Image = Properties.Resources.annulla_24;
+            btnAnnulla.Location = new Point(12, 431);
+            btnAnnulla.Margin = new Padding(3, 2, 3, 2);
+            btnAnnulla.Name = "btnAnnulla";
+            btnAnnulla.Size = new Size(176, 68);
+            btnAnnulla.TabIndex = 22;
+            btnAnnulla.TabStop = false;
+            btnAnnulla.Text = "ANNULLA";
+            btnAnnulla.TextAlign = ContentAlignment.BottomCenter;
+            btnAnnulla.TextImageRelation = TextImageRelation.ImageAboveText;
+            btnAnnulla.UseVisualStyleBackColor = true;
+            btnAnnulla.Click += btnAnnulla_Click;
+            // 
             // ProductInsertForm
             // 
             AcceptButton = btnOk;
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(948, 523);
+            Controls.Add(btnAnnulla);
             Controls.Add(lblPrezzoVendita);
             Controls.Add(txtPrezzoVendita);
             Controls.Add(rdbPrezzoIvato);
@@ -345,5 +366,6 @@
         private RadioButton rdbPrezzoNetto;
         private Label lblPrezzoVendita;
         private TextBox txtPrezzoVendita;
+        private Button btnAnnulla;
     }
 }

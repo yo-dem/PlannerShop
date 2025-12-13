@@ -108,6 +108,7 @@
             txtNote.Margin = new Padding(3, 2, 3, 2);
             txtNote.Multiline = true;
             txtNote.Name = "txtNote";
+            txtNote.ScrollBars = ScrollBars.Both;
             txtNote.Size = new Size(736, 303);
             txtNote.TabIndex = 7;
             // 

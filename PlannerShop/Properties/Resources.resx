@@ -118,6 +118,9 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="serviziEstetici" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\serviziEstetici.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="clienti" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\clienti.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -145,8 +148,8 @@
   <data name="trashImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\trashImage.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="printerImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\printerImage.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="prodotti-24" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\prodotti-24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="settingsImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\settingsImage.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -157,10 +160,10 @@
   <data name="addLiteImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\addLiteImage.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="prodotti-24" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\prodotti-24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="printerImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\printerImage.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="serviziEstetici" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\serviziEstetici.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="annulla-24" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\annulla-24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

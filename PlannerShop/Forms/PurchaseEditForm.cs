@@ -547,8 +547,6 @@ namespace PlannerShop.Forms
                 }
             }
 
-            MessageBox.Show("Modifiche confermate.", "OK", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
             this.Close();
         }
 

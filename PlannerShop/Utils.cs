@@ -39,7 +39,7 @@ namespace PlannerShop
             // Impedisce la selezione di più righe contemporaneamente
             dgvData.MultiSelect = isMultiSelect;
             // Aggiunge un offset per distanziare i contenuti delle celle dai bordi
-            dgvData.DefaultCellStyle.Padding = new Padding(4);
+            dgvData.DefaultCellStyle.Padding = new Padding(5);
             // Disabilita l'ordinamento automatico
             if (!sortable)
             {

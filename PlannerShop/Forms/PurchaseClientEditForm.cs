@@ -176,12 +176,11 @@ namespace PlannerShop.Forms
             timestampPurchaseColumn.DefaultCellStyle.Font = new Font("Corbel", fontSize, FontStyle.Bold);
         }
 
-        private void DgvDataAcquisto_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
+        private void DgvDataAcquisto_RowPrePaint(object? sender, DataGridViewRowPrePaintEventArgs e)
         {
-            var grid = sender as DataGridView;
             if (e.RowIndex < 0) return;
 
-            var row = grid.Rows[e.RowIndex];
+            var row = dgvDataAcquisto.Rows[e.RowIndex];
             var timestampValue = row.Cells["TIMESTAMP"].Value?.ToString();
 
             if (string.IsNullOrEmpty(timestampValue))
@@ -194,7 +193,6 @@ namespace PlannerShop.Forms
                 groupColors[timestampValue] = nextColor;
             }
 
-            // Applicazione del colore
             row.DefaultCellStyle.BackColor = groupColors[timestampValue];
         }
 

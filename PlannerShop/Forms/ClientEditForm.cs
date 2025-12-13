@@ -36,6 +36,24 @@ namespace PlannerShop.Forms
             lblTelefono.ForeColor = Color.Black;
         }
 
+        private void txtEmail_TextChanged(object sender, EventArgs e)
+        {
+            lblEmail.ForeColor = Color.Black;
+            string emailPattern = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
+            if (Regex.IsMatch(txtEmail.Text, emailPattern))
+            {
+                lblEmail.ForeColor = Color.Black;
+                txtEmail.ForeColor = Color.Black;
+                emailNotValid = false;
+            }
+            else
+            {
+                lblEmail.ForeColor = Color.Red;
+                txtEmail.ForeColor = Color.Red;
+                emailNotValid = true;
+            }
+        }
+
         private void dtpDataNascita_ValueChanged(object sender, EventArgs e)
         {
             lblCompleanno.ForeColor = Color.Black;
@@ -139,24 +157,6 @@ namespace PlannerShop.Forms
             }
         }
 
-        private void txtEmail_TextChanged(object sender, EventArgs e)
-        {
-            lblEmail.ForeColor = Color.Black;
-            string emailPattern = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
-            if (Regex.IsMatch(txtEmail.Text, emailPattern))
-            {
-                lblEmail.ForeColor = Color.Black;
-                txtEmail.ForeColor = Color.Black;
-                emailNotValid = false;
-            }
-            else
-            {
-                lblEmail.ForeColor = Color.Red;
-                txtEmail.ForeColor = Color.Red;
-                emailNotValid = true;
-            }
-        }
-
         private void btnViewPurchase_Click(object sender, EventArgs e)
         {
             PurchaseClientEditForm purchaseClientEditForm = new PurchaseClientEditForm(idCliente);
@@ -166,6 +166,7 @@ namespace PlannerShop.Forms
                 this.Close();
             }
         }
+
     }
 }
 
