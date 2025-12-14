@@ -47,6 +47,7 @@
             btnDelete = new Button();
             btnPurchase = new Button();
             btnViewPurchase = new Button();
+            button1 = new Button();
             SuspendLayout();
             // 
             // lblNome
@@ -227,9 +228,9 @@
             btnPurchase.Location = new Point(195, 391);
             btnPurchase.Margin = new Padding(3, 2, 3, 2);
             btnPurchase.Name = "btnPurchase";
-            btnPurchase.Size = new Size(511, 37);
+            btnPurchase.Size = new Size(242, 37);
             btnPurchase.TabIndex = 8;
-            btnPurchase.Text = "EFFETTUA ACQUISTO";
+            btnPurchase.Text = "ACQUISTA PRODOTTO";
             btnPurchase.TextAlign = ContentAlignment.MiddleRight;
             btnPurchase.TextImageRelation = TextImageRelation.ImageBeforeText;
             btnPurchase.UseVisualStyleBackColor = true;
@@ -240,11 +241,11 @@
             btnViewPurchase.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             btnViewPurchase.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             btnViewPurchase.ForeColor = SystemColors.ControlText;
-            btnViewPurchase.Image = Properties.Resources.statistiche_24;
-            btnViewPurchase.Location = new Point(711, 391);
+            btnViewPurchase.Image = Properties.Resources.calculatotImage;
+            btnViewPurchase.Location = new Point(691, 391);
             btnViewPurchase.Margin = new Padding(3, 2, 3, 2);
             btnViewPurchase.Name = "btnViewPurchase";
-            btnViewPurchase.Size = new Size(220, 37);
+            btnViewPurchase.Size = new Size(242, 37);
             btnViewPurchase.TabIndex = 9;
             btnViewPurchase.Text = "VISUALIZZA ACQUISTI";
             btnViewPurchase.TextAlign = ContentAlignment.MiddleRight;
@@ -252,12 +253,29 @@
             btnViewPurchase.UseVisualStyleBackColor = true;
             btnViewPurchase.Click += btnViewPurchase_Click;
             // 
+            // button1
+            // 
+            button1.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            button1.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
+            button1.ForeColor = SystemColors.ControlText;
+            button1.Image = Properties.Resources.serviziEstetici;
+            button1.Location = new Point(443, 391);
+            button1.Margin = new Padding(3, 2, 3, 2);
+            button1.Name = "button1";
+            button1.Size = new Size(242, 37);
+            button1.TabIndex = 20;
+            button1.Text = "ACQUISTA SERVIZIO";
+            button1.TextAlign = ContentAlignment.MiddleRight;
+            button1.TextImageRelation = TextImageRelation.ImageBeforeText;
+            button1.UseVisualStyleBackColor = true;
+            // 
             // ClientEditForm
             // 
             AcceptButton = btnOk;
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(948, 523);
+            Controls.Add(button1);
             Controls.Add(btnViewPurchase);
             Controls.Add(btnPurchase);
             Controls.Add(btnDelete);
@@ -306,5 +324,6 @@
         private Button btnDelete;
         private Button btnPurchase;
         private Button btnViewPurchase;
+        private Button button1;
     }
 }
