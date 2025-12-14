@@ -20,6 +20,9 @@
     <Compile Update="Forms\ClientInsertForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Forms\ServiceEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Forms\ServiceInsertForm.cs">
       <SubType>Form</SubType>
     </Compile>

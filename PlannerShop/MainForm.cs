@@ -592,6 +592,26 @@ namespace PlannerShop
                     }
                 }
             }
+            else if (isServizioSelected)
+            {
+                selectedId = dgvData.SelectedRows[0].Cells["IDSERVIZIO"].Value?.ToString();
+                if (!String.IsNullOrEmpty(selectedId))
+                {
+                    ServiceEditForm serviceEditForm = new ServiceEditForm(selectedId);
+                    serviceEditForm.ShowDialog();
+
+                    if (serviceEditForm.isDelete)
+                    {
+                        LoadServizi();
+                        SelectAfterDelete(selected, displayPos, 1);
+                    }
+                    else
+                    {
+                        LoadServizi();
+                        SelectRowById(selectedId, "IDSERVIZIO", displayPos);
+                    }
+                }
+            }
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
@@ -635,6 +655,10 @@ namespace PlannerShop
                     {
                         ModelProdotti.deleteProdotto(id);
                     }
+                    if (isServizioSelected)
+                    {
+                        ModelServizi.deleteServizio(id);
+                    }
                 }
                 if (isClienteSelected)
                 {
@@ -647,6 +671,10 @@ namespace PlannerShop
                 if (isProdottoSelected)
                 {
                     LoadProdotti();
+                }
+                if (isServizioSelected)
+                {
+                    LoadServizi();
                 }
 
                 SelectAfterDelete(firstSelectedIndex, displayPos, idsToDelete.Count);

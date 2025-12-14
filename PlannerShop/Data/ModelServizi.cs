@@ -50,7 +50,7 @@ namespace PlannerShop.Data
         public static void editServizio(
             string idServizio,
             string data,
-            string marca,
+            string nome,
             string descrizione,
             string aliquota,
             string prezzoNetto,
@@ -59,13 +59,13 @@ namespace PlannerShop.Data
             string note)
         {
             
-            string sql = @"UPDATE TSERVIZI SET DATA=@data, MARCA=@marca, DESCRIZIONE=@descr, ALIQUOTA=@aliq, PREZZO_NETTO=@pn, PREZZO_IVATO=@pi, PREZZO_VENDITA=@pv, NOTE=@note
+            string sql = @"UPDATE TSERVIZI SET DATA=@data, NOME=@nome, DESCRIZIONE=@descr, ALIQUOTA=@aliq, PREZZO_NETTO=@pn, PREZZO_IVATO=@pi, PREZZO_VENDITA=@pv, NOTE=@note
                            WHERE IDSERVIZIO=@idServ";
 
             var parameters = new Dictionary<string, object?>()
             {
                 { "@data", data },
-                { "@marca", marca },
+                { "@nome", nome },
                 { "@descr", descrizione },
                 { "@aliq", aliquota },
                 { "@pn", prezzoNetto },
