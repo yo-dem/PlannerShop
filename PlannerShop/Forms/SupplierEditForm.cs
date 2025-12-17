@@ -172,7 +172,6 @@ namespace PlannerShop.Forms
             bool res0 = true;
             bool res1 = true;
             bool res2 = true;
-            bool res3 = true;
 
             if (String.IsNullOrEmpty(txtNome.Text))
             {
@@ -189,13 +188,8 @@ namespace PlannerShop.Forms
                 lblTelefono.ForeColor = Color.Red;
                 res2 = false;
             }
-            if (String.IsNullOrEmpty(txtEmail.Text))
-            {
-                lblEmail.ForeColor = Color.Red;
-                res3 = false;
-            }
-
-            return res0 && res1 && res2 && res3 && !emailNotValid && !ibanNotValid;
+           
+            return res0 && res1 && res2 && !emailNotValid && !ibanNotValid;
         }
 
         private void btnOk_Click(object sender, EventArgs e)

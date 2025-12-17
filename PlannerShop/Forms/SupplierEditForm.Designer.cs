@@ -117,9 +117,9 @@
             lblEmail.AutoSize = true;
             lblEmail.Location = new Point(12, 245);
             lblEmail.Name = "lblEmail";
-            lblEmail.Size = new Size(46, 15);
+            lblEmail.Size = new Size(41, 15);
             lblEmail.TabIndex = 0;
-            lblEmail.Text = "EMAIL*";
+            lblEmail.Text = "EMAIL";
             // 
             // txtEmail
             // 

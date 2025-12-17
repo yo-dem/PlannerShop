@@ -28,15 +28,7 @@ namespace PlannerShop.Forms
             lblIndirizzo.ForeColor = Color.Black;
         }
 
-        private void txtTelefonoFisso_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsDigit(e.KeyChar) && e.KeyChar != (char)Keys.Back)
-            {
-                e.Handled = true;
-            }
-        }
-
-        private void txtTelefonoMobile_KeyPress(object sender, KeyPressEventArgs e)
+        private void txtTelefono_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsDigit(e.KeyChar) && e.KeyChar != (char)Keys.Back)
             {
@@ -140,7 +132,6 @@ namespace PlannerShop.Forms
             bool res0 = true;
             bool res1 = true;
             bool res2 = true;
-            bool res3 = true;
 
             if (String.IsNullOrEmpty(txtNome.Text))
             {
@@ -157,13 +148,8 @@ namespace PlannerShop.Forms
                 lblTelefono.ForeColor = Color.Red;
                 res2 = false;
             }
-            if (String.IsNullOrEmpty(txtEmail.Text))
-            {
-                lblEmail.ForeColor = Color.Red;
-                res3 = false;
-            }
 
-            return res0 && res1 && res2 && res3 && !emailNotValid && !ibanNotValid;
+            return res0 && res1 && res2 && !emailNotValid && !ibanNotValid;
         }
 
         private void btnOk_Click(object sender, EventArgs e)
