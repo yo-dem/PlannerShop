@@ -124,6 +124,16 @@ namespace PlannerShop.Forms
             this.AcceptButton = this.btnOk;
         }
 
+        private void txtIndirizzo_Enter(object sender, EventArgs e)
+        {
+            this.AcceptButton = null;
+        }
+
+        private void txtIndirizzo_Leave(object sender, EventArgs e)
+        {
+            this.AcceptButton = this.btnOk;
+        }
+
         bool InputCheck()
         {
             bool res0 = true;

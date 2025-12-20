@@ -360,46 +360,71 @@ namespace PlannerShop
         }
 
 
-        void LoadClienti()
+        void LoadClienti(String? searchItem = null)
         {
             isClienteSelected = true;
             isFornitoreSelected = false;
             isProdottoSelected = false;
             isServizioSelected = false;
-            dgvData.DataSource = ModelClienti.getClienti();
+            if(string.IsNullOrEmpty(searchItem))
+            {
+                dgvData.DataSource = ModelClienti.getClienti();
+            }
+            else
+            {
+                dgvData.DataSource = ModelClienti.searchClienti(searchItem);
+            }
             Utils.SetDataGridStyle(dgvData, true, 40, 40, true);
             SetClientDataGridStructure();
         }
 
-        void LoadFornitori()
+        void LoadFornitori(string? searchItem = null)
         {
             isClienteSelected = false;
             isFornitoreSelected = true;
             isProdottoSelected = false;
             isServizioSelected = false;
-            dgvData.DataSource = ModelFornitori.getFornitori();
+            if(string.IsNullOrEmpty(searchItem)) {
+                dgvData.DataSource = ModelFornitori.getFornitori();
+            }
+            else
+            {
+                dgvData.DataSource = ModelFornitori.searchFornitori(searchItem);
+            }
             Utils.SetDataGridStyle(dgvData, true, 40, 40, true);
             SetSupplierDataGridStructure();
         }
 
-        void LoadProdotti()
+        void LoadProdotti(string? searchItem = null)
         {
             isClienteSelected = false;
             isFornitoreSelected = false;
             isProdottoSelected = true;
             isServizioSelected = false;
-            dgvData.DataSource = ModelProdotti.getProdotti();
+            if(string.IsNullOrEmpty(searchItem)) {
+                dgvData.DataSource = ModelProdotti.getProdotti();
+            }
+            else
+            {
+                dgvData.DataSource = ModelProdotti.searchProdotti(searchItem);
+            }
             Utils.SetDataGridStyle(dgvData, true, 40, 40, true);
             SetProductDataGridStructure();
         }
 
-        void LoadServizi()
+        void LoadServizi(string? searchItem = null)
         {
             isClienteSelected = false;
             isFornitoreSelected = false;
             isProdottoSelected = false;
             isServizioSelected = true;
-            dgvData.DataSource = ModelServizi.getServizi();
+            if(string.IsNullOrEmpty(searchItem)) {
+                dgvData.DataSource = ModelServizi.getServizi();
+            }
+            else
+            {
+                dgvData.DataSource = ModelServizi.searchServizi(searchItem);
+            }
             Utils.SetDataGridStyle(dgvData, true, 40, 40, true);
             SetServiceDataGridStructure();
         }
@@ -547,7 +572,7 @@ namespace PlannerShop
                     }
                     else
                     {
-                        LoadClienti();
+                        LoadClienti(txtSearch.Text);
                         SelectRowById(selectedId, "IDCLIENTE", displayPos);
                     }
                 }
@@ -567,7 +592,7 @@ namespace PlannerShop
                     }
                     else
                     {
-                        LoadProdotti();
+                        LoadProdotti(txtSearch.Text);
                         SelectRowById(selectedId, "IDPRODOTTO", displayPos);
                     }
                 }
@@ -587,7 +612,7 @@ namespace PlannerShop
                     }
                     else
                     {
-                        LoadFornitori();
+                        LoadFornitori(txtSearch.Text);
                         SelectRowById(selectedId, "IDFORNITORE", displayPos);
                     }
                 }
@@ -607,7 +632,7 @@ namespace PlannerShop
                     }
                     else
                     {
-                        LoadServizi();
+                        LoadServizi(txtSearch.Text);
                         SelectRowById(selectedId, "IDSERVIZIO", displayPos);
                     }
                 }
@@ -683,94 +708,21 @@ namespace PlannerShop
 
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
-            if (txtSearch.Text != String.Empty && dgvData.Rows.Count > 0)
+            if (isClienteSelected)
             {
-                if (isClienteSelected)
-                {
-                    foreach (DataGridViewRow dgvr in dgvData.Rows)
-                    {
-                        try
-                        {
-                            String nome = dgvr.Cells["NOME"]?.Value?.ToString()?.ToLower() ?? String.Empty;
-                            String cognome = dgvr.Cells["COGNOME"].Value?.ToString()?.ToLower() ?? String.Empty;
-                            String indirizzo = dgvr.Cells["INDIRIZZO"].Value?.ToString()?.ToLower() ?? String.Empty;
-                            String telefono = dgvr.Cells["TELEFONO"].Value?.ToString()?.ToLower() ?? String.Empty;
-                            String email = dgvr.Cells["EMAIL"].Value?.ToString()?.ToLower() ?? String.Empty;
-
-                            if (nome.Contains(txtSearch.Text.ToLower())
-                                || cognome.Contains(txtSearch.Text.ToLower())
-                                || indirizzo.Contains(txtSearch.Text.ToLower())
-                                || telefono.Contains(txtSearch.Text.ToLower())
-                                || email.Contains(txtSearch.Text.ToLower())
-                                )
-                            {
-                                dgvData.ClearSelection();
-                                dgvData.Rows[dgvr.Index].Selected = true;
-                                dgvData.FirstDisplayedScrollingRowIndex = dgvData.SelectedRows[0].Index;
-                                return;
-                            }
-                        }
-                        catch
-                        {
-                            return;
-                        }
-                    }
-                }
-                if (isFornitoreSelected)
-                {
-                    foreach (DataGridViewRow dgvr in dgvData.Rows)
-                    {
-                        try
-                        {
-                            String nome = dgvr.Cells["NOME"]?.Value?.ToString()?.ToLower() ?? String.Empty;
-                            String indirizzo = dgvr.Cells["INDIRIZZO"].Value?.ToString()?.ToLower() ?? String.Empty;
-                            String telefono = dgvr.Cells["TELEFONO"].Value?.ToString()?.ToLower() ?? String.Empty;
-                            String email = dgvr.Cells["EMAIL"].Value?.ToString()?.ToLower() ?? String.Empty;
-
-                            if (nome.Contains(txtSearch.Text.ToLower())
-                                || indirizzo.Contains(txtSearch.Text.ToLower())
-                                || telefono.Contains(txtSearch.Text.ToLower())
-                                || email.Contains(txtSearch.Text.ToLower())
-                                )
-                            {
-                                dgvData.ClearSelection();
-                                dgvData.Rows[dgvr.Index].Selected = true;
-                                dgvData.FirstDisplayedScrollingRowIndex = dgvData.SelectedRows[0].Index;
-                                return;
-                            }
-                        }
-                        catch
-                        {
-                            return;
-                        }
-                    }
-                }
-                if (isProdottoSelected)
-                {
-                    foreach (DataGridViewRow dgvr in dgvData.Rows)
-                    {
-                        try
-                        {
-                            String data = dgvr.Cells["DATA"]?.Value?.ToString()?.ToLower() ?? String.Empty;
-                            String marca = dgvr.Cells["MARCA"].Value?.ToString()?.ToLower() ?? String.Empty;
-                            String descrizione = dgvr.Cells["DESCRIZIONE"].Value?.ToString()?.ToLower() ?? String.Empty;
-
-                            if (data.Contains(txtSearch.Text.ToLower())
-                                || marca.Contains(txtSearch.Text.ToLower())
-                                || descrizione.Contains(txtSearch.Text.ToLower()))
-                            {
-                                dgvData.ClearSelection();
-                                dgvData.Rows[dgvr.Index].Selected = true;
-                                dgvData.FirstDisplayedScrollingRowIndex = dgvData.SelectedRows[0].Index;
-                                return;
-                            }
-                        }
-                        catch
-                        {
-                            return;
-                        }
-                    }
-                }
+                LoadClienti(txtSearch.Text);
+            }
+            if (isFornitoreSelected)
+            {
+                LoadFornitori(txtSearch.Text);
+            }
+            if (isProdottoSelected)
+            {
+                LoadProdotti(txtSearch.Text);
+            }
+            if (isServizioSelected)
+            {
+                LoadServizi(txtSearch.Text);
             }
         }
 
@@ -780,22 +732,7 @@ namespace PlannerShop
             {
                 e.Handled = true;
                 e.SuppressKeyPress = true;
-                if (txtSearch.Text != String.Empty)
-                    btnEdit_Click(sender, e);
             }
-        }
-
-        private void txtSearch_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (e.KeyChar == (char)Keys.Enter)
-            {
-                e.Handled = true;
-            }
-        }
-
-        private void txtSearch_Leave(object sender, EventArgs e)
-        {
-            txtSearch.Text = String.Empty;
         }
 
         private void dgvData_MouseDoubleClick(object? sender, MouseEventArgs e)

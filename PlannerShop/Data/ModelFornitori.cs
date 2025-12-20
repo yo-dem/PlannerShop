@@ -14,6 +14,18 @@ namespace PlannerShop.Data
             return DBUtility.getDBData("SELECT * FROM TFORNITORI ORDER BY IDFORNITORE DESC");
         }
 
+        public static DataTable searchFornitori(string searchTerm)
+        {
+            string sql = @"SELECT * FROM TFORNITORI
+                           WHERE NOME LIKE @search OR INDIRIZZO LIKE @search OR TELEFONO LIKE @search OR EMAIL LIKE @search OR IBAN LIKE @search OR NOTE LIKE @search
+                           ORDER BY IDFORNITORE DESC";
+            var parameters = new Dictionary<string, object?>()
+            {
+                { "@search", "%" + searchTerm + "%" }
+            };
+            return DBUtility.getDBData(sql, parameters);
+        }
+
         public static void addFornitore(
             string nome,
             string indirizzo,

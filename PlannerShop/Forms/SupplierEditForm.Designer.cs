@@ -82,6 +82,8 @@
             txtIndirizzo.Size = new Size(177, 78);
             txtIndirizzo.TabIndex = 2;
             txtIndirizzo.TextChanged += TxtIndirizzo_TextChanged;
+            txtIndirizzo.Enter += txtIndirizzo_Enter;
+            txtIndirizzo.Leave += txtIndirizzo_Leave;
             // 
             // lblNote
             // 

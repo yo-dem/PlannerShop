@@ -245,8 +245,6 @@
             txtSearch.TextAlign = HorizontalAlignment.Center;
             txtSearch.TextChanged += txtSearch_TextChanged;
             txtSearch.KeyDown += txtSearch_KeyDown;
-            txtSearch.KeyPress += txtSearch_KeyPress;
-            txtSearch.Leave += txtSearch_Leave;
             // 
             // pnlTop
             // 

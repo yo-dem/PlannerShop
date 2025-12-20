@@ -202,6 +202,8 @@
             txtIndirizzo.Name = "txtIndirizzo";
             txtIndirizzo.Size = new Size(177, 139);
             txtIndirizzo.TabIndex = 5;
+            txtIndirizzo.Enter += txtIndirizzo_Enter;
+            txtIndirizzo.Leave += txtIndirizzo_Leave;
             // 
             // btnDelete
             // 
