@@ -305,12 +305,14 @@
             Controls.Add(btnEdit);
             Controls.Add(btnInsert);
             Icon = (Icon)resources.GetObject("$this.Icon");
+            KeyPreview = true;
             Margin = new Padding(3, 2, 3, 2);
             MinimumSize = new Size(1100, 396);
             Name = "MainForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "PlannerShop 1.0";
             WindowState = FormWindowState.Maximized;
+            KeyPress += MainForm_KeyPress;
             ((System.ComponentModel.ISupportInitialize)dgvData).EndInit();
             pnlSearch.ResumeLayout(false);
             pnlSearch.PerformLayout();

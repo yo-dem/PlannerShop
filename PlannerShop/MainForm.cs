@@ -366,7 +366,7 @@ namespace PlannerShop
             isFornitoreSelected = false;
             isProdottoSelected = false;
             isServizioSelected = false;
-            if(string.IsNullOrEmpty(searchItem))
+            if (string.IsNullOrEmpty(searchItem))
             {
                 dgvData.DataSource = ModelClienti.getClienti();
             }
@@ -384,7 +384,8 @@ namespace PlannerShop
             isFornitoreSelected = true;
             isProdottoSelected = false;
             isServizioSelected = false;
-            if(string.IsNullOrEmpty(searchItem)) {
+            if (string.IsNullOrEmpty(searchItem))
+            {
                 dgvData.DataSource = ModelFornitori.getFornitori();
             }
             else
@@ -401,7 +402,8 @@ namespace PlannerShop
             isFornitoreSelected = false;
             isProdottoSelected = true;
             isServizioSelected = false;
-            if(string.IsNullOrEmpty(searchItem)) {
+            if (string.IsNullOrEmpty(searchItem))
+            {
                 dgvData.DataSource = ModelProdotti.getProdotti();
             }
             else
@@ -418,7 +420,8 @@ namespace PlannerShop
             isFornitoreSelected = false;
             isProdottoSelected = false;
             isServizioSelected = true;
-            if(string.IsNullOrEmpty(searchItem)) {
+            if (string.IsNullOrEmpty(searchItem))
+            {
                 dgvData.DataSource = ModelServizi.getServizi();
             }
             else
@@ -809,5 +812,14 @@ namespace PlannerShop
             }
         }
 
+        private void MainForm_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (char.IsLetterOrDigit(e.KeyChar) || char.IsPunctuation(e.KeyChar) || char.IsSymbol(e.KeyChar))
+            {
+                txtSearch.Focus();
+                txtSearch.AppendText(e.KeyChar.ToString());
+                e.Handled = true;
+            }
+        }
     }
 }
