@@ -13,9 +13,6 @@ namespace PlannerShop.Forms
         public SupplierInsertForm()
         {
             InitializeComponent();
-
-            txtNote.GotFocus += TxtNote_GotFocus;
-            txtNote.LostFocus += TxtNote_LostFocus;
         }
 
         private void TxtNome_TextChanged(object? sender, EventArgs e)
@@ -117,12 +114,12 @@ namespace PlannerShop.Forms
             return chunk == 1;
         }
 
-        private void TxtNote_GotFocus(object? sender, EventArgs e)
+        private void txtNote_Enter(object sender, EventArgs e)
         {
             this.AcceptButton = null;
         }
 
-        private void TxtNote_LostFocus(object? sender, EventArgs e)
+        private void txtNote_Leave(object sender, EventArgs e)
         {
             this.AcceptButton = this.btnOk;
         }
@@ -182,5 +179,6 @@ namespace PlannerShop.Forms
         {
             this.Close();
         }
+
     }
 }

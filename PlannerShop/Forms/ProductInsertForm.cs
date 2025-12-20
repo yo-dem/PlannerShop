@@ -10,9 +10,6 @@ namespace PlannerShop.Forms
         {
             InitializeComponent();
 
-            txtNote.GotFocus += TxtNote_GotFocus;
-            txtNote.LostFocus += TxtNote_LostFocus;
-
             txtPrezzoIvato.ReadOnly = !rdbPrezzoIvato.Checked;
             txtPrezzoNetto.ReadOnly = !rdbPrezzoNetto.Checked;
         }
@@ -116,12 +113,12 @@ namespace PlannerShop.Forms
             txtPrezzoIvato.Text = string.Empty;
         }
 
-        private void TxtNote_GotFocus(object? sender, EventArgs e)
+        private void txtNote_Enter(object sender, EventArgs e)
         {
             this.AcceptButton = null;
         }
 
-        private void TxtNote_LostFocus(object? sender, EventArgs e)
+        private void txtNote_Leave(object sender, EventArgs e)
         {
             this.AcceptButton = this.btnOk;
         }

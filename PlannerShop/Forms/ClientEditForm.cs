@@ -15,9 +15,6 @@ namespace PlannerShop.Forms
             InitializeComponent();
             this.idCliente = idCliente;
 
-            txtNote.GotFocus += TxtNote_GotFocus;
-            txtNote.LostFocus += TxtNote_LostFocus;
-
             LoadForm();
         }
 
@@ -65,12 +62,12 @@ namespace PlannerShop.Forms
             lblCompleanno.ForeColor = Color.Black;
         }
 
-        private void TxtNote_GotFocus(object? sender, EventArgs e)
+        private void txtNote_Enter(object sender, EventArgs e)
         {
             this.AcceptButton = null;
         }
 
-        private void TxtNote_LostFocus(object? sender, EventArgs e)
+        private void txtNote_Leave(object sender, EventArgs e)
         {
             this.AcceptButton = this.btnOk;
         }

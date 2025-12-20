@@ -112,6 +112,8 @@
             txtNote.ScrollBars = ScrollBars.Both;
             txtNote.Size = new Size(736, 303);
             txtNote.TabIndex = 7;
+            txtNote.Enter += txtNote_Enter;
+            txtNote.Leave += txtNote_Leave;
             // 
             // btnOk
             // 

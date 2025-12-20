@@ -16,9 +16,6 @@ namespace PlannerShop.Forms
         {
             InitializeComponent();
             this.idFornitore = idFornitore;
-            
-            txtNote.GotFocus += TxtNote_GotFocus;
-            txtNote.LostFocus += TxtNote_LostFocus;
 
             LoadForm();
         }
@@ -143,12 +140,12 @@ namespace PlannerShop.Forms
             return chunk == 1;
         }
 
-        private void TxtNote_GotFocus(object? sender, EventArgs e)
+        private void txtNote_Enter(object sender, EventArgs e)
         {
             this.AcceptButton = null;
         }
 
-        private void TxtNote_LostFocus(object? sender, EventArgs e)
+        private void txtNote_Leave(object sender, EventArgs e)
         {
             this.AcceptButton = this.btnOk;
         }
@@ -188,7 +185,7 @@ namespace PlannerShop.Forms
                 lblTelefono.ForeColor = Color.Red;
                 res2 = false;
             }
-           
+
             return res0 && res1 && res2 && !emailNotValid && !ibanNotValid;
         }
 
@@ -223,6 +220,7 @@ namespace PlannerShop.Forms
             }
             catch { }
         }
+
     }
 }
 

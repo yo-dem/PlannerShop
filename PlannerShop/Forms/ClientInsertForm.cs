@@ -11,9 +11,6 @@ namespace PlannerShop.Forms
         public ClientInsertForm()
         {
             InitializeComponent();
-
-            txtNote.GotFocus += TxtNote_GotFocus;
-            txtNote.LostFocus += TxtNote_LostFocus;
         }
 
         private void txtNome_TextChanged(object sender, EventArgs e)
@@ -52,7 +49,7 @@ namespace PlannerShop.Forms
                 txtEmail.ForeColor = Color.Red;
                 emailNotValid = true;
             }
-            if(String.IsNullOrEmpty(txtEmail.Text))
+            if (String.IsNullOrEmpty(txtEmail.Text))
             {
                 lblEmail.ForeColor = Color.Black;
                 txtEmail.ForeColor = Color.Black;
@@ -60,12 +57,12 @@ namespace PlannerShop.Forms
             }
         }
 
-        private void TxtNote_GotFocus(object? sender, EventArgs e)
+        private void txtNote_Enter(object sender, EventArgs e)
         {
             this.AcceptButton = null;
         }
 
-        private void TxtNote_LostFocus(object? sender, EventArgs e)
+        private void txtNote_Leave(object sender, EventArgs e)
         {
             this.AcceptButton = this.btnOk;
         }

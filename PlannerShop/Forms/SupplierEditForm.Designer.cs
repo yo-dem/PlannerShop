@@ -102,6 +102,8 @@
             txtNote.ScrollBars = ScrollBars.Both;
             txtNote.Size = new Size(737, 346);
             txtNote.TabIndex = 6;
+            txtNote.Enter += txtNote_Enter;
+            txtNote.Leave += txtNote_Leave;
             // 
             // lblTelefono
             // 
