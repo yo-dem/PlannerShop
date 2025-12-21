@@ -286,34 +286,8 @@ namespace PlannerShop.Forms
 
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
-            if (txtSearch.Text != String.Empty && dgvData.Rows.Count > 0)
-            {
-                {
-                    foreach (DataGridViewRow dgvr in dgvData.Rows)
-                    {
-                        try
-                        {
-                            String data = dgvr.Cells["DATA"]?.Value?.ToString()?.ToLower() ?? String.Empty;
-                            String marca = dgvr.Cells["MARCA"].Value?.ToString()?.ToLower() ?? String.Empty;
-                            String descrizione = dgvr.Cells["DESCRIZIONE"].Value?.ToString()?.ToLower() ?? String.Empty;
-
-                            if (data.Contains(txtSearch.Text.ToLower())
-                                || marca.Contains(txtSearch.Text.ToLower())
-                                || descrizione.Contains(txtSearch.Text.ToLower()))
-                            {
-                                dgvData.ClearSelection();
-                                dgvData.Rows[dgvr.Index].Selected = true;
-                                dgvData.FirstDisplayedScrollingRowIndex = dgvData.SelectedRows[0].Index;
-                                return;
-                            }
-                        }
-                        catch
-                        {
-                            return;
-                        }
-                    }
-                }
-            }
+            dtProdottiTemp = ModelProdotti.searchProdotti(txtSearch.Text);
+            dgvData.DataSource = dtProdottiTemp;
         }
 
         private void dgvData_CellDoubleClick(object sender, DataGridViewCellEventArgs e)

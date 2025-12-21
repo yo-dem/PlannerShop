@@ -1,46 +1,40 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PlannerShop
+﻿namespace PlannerShop
 {
     struct Utils
     {
-        public static void SetDataGridStyle(DataGridView dgvData, Boolean isMultiSelect, int headerColumnHeight, int rowHeight, bool sortable)
+        public static void SetDataGridStyle(
+            DataGridView dgvData,
+            Boolean isMultiSelect,
+            int headerColumnHeight,
+            int rowHeight,
+            bool sortable)
         {
-            // Elimina i tooltips dalle celle
+            // Comportamento base
             dgvData.ShowCellToolTips = true;
-            // Impedisce al controllo di scegliere autonomamente l'altezza dell'header delle colonne
-            dgvData.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            // Imposta l'altezza dell'header delle colonne
-            dgvData.ColumnHeadersHeight = headerColumnHeight;//50;
-            // Imposta l'altezza delle singole righe
-            dgvData.RowTemplate.Height = rowHeight; //40;
-            // Imposta il font per l'header delle colonne
-            dgvData.ColumnHeadersDefaultCellStyle.Font = new Font("Corbel", 9, FontStyle.Bold);
-            // Impedisce all'utente di modificare la dimensione delle righe
-            dgvData.AllowUserToResizeRows = false;
-            // Impedisce all'utente di modificare la dimensione delle colonne
-            dgvData.AllowUserToResizeColumns = false;
-            // Impedisce all'utente di aggiungere una nuova riga
-            dgvData.AllowUserToAddRows = false;
-            // impedisce all'utente di eliminare le righe in modo non gestito
-            dgvData.AllowUserToDeleteRows = false;
-            // Impone la dimensione massima possibile per ciascuna colonna
-            dgvData.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            // Nasconde o visualizza il selettore di riga
-            dgvData.RowHeadersVisible = true;
-            // Impedisce la modifica del valore delle celle
             dgvData.ReadOnly = true;
-            // Impone la selezione dell'intera riga e non della singola cella
             dgvData.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            // Impedisce la selezione di più righe contemporaneamente
             dgvData.MultiSelect = isMultiSelect;
-            // Aggiunge un offset per distanziare i contenuti delle celle dai bordi
-            dgvData.DefaultCellStyle.Padding = new Padding(5);
-            // Disabilita l'ordinamento automatico
+
+            dgvData.AllowUserToAddRows = false;
+            dgvData.AllowUserToDeleteRows = false;
+            dgvData.AllowUserToResizeRows = false;
+            dgvData.AllowUserToResizeColumns = false;
+
+            // Dimensioni compatte stile Excel
+            dgvData.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            dgvData.ColumnHeadersHeight = headerColumnHeight;  
+            dgvData.RowTemplate.Height = rowHeight;             
+
+            dgvData.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+
+            // Font più piccolo e neutro (Excel-like)
+            dgvData.ColumnHeadersDefaultCellStyle.Font = new Font("Arial", 8.5f, FontStyle.Bold);
+            dgvData.DefaultCellStyle.Font = new Font("Segoe UI", 8.5f, FontStyle.Regular);
+
+            // Padding ridotto (chiave dell’effetto compatto)
+            dgvData.DefaultCellStyle.Padding = new Padding(8, 0, 8, 0);
+
+            // Ordinamento
             if (!sortable)
             {
                 foreach (DataGridViewColumn column in dgvData.Columns)
@@ -49,36 +43,37 @@ namespace PlannerShop
                 }
             }
 
-
             //
-            // Opzioni di stile grafico
+            // Stile grafico – Excel compatto ma con i TUOI colori
             //
 
-            // Abilita la gli stili automatici dell'header
             dgvData.EnableHeadersVisualStyles = false;
-            // Imposta il colore di sfondo del datagridview
-            dgvData.BackgroundColor = Color.FromArgb(240, 240, 240);
-            // Elimina il bordo del datagridview
-            dgvData.BorderStyle = BorderStyle.None;
-            // Elimina il bordo dell'header delle colonne
-            dgvData.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
-            // Imposta solo una bordo orizzontale per ogni riga
-            dgvData.CellBorderStyle = DataGridViewCellBorderStyle.Raised;
-            // Imposta il colore di sfondo dell'header delle colonne a un grigio chiaro
-            dgvData.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(220, 220, 220);
-            // Imposta il colore di sfondo delle righe selezionate
-            dgvData.DefaultCellStyle.SelectionBackColor = Color.FromArgb(230, 230, 250); //Color.FromArgb(200, 220, 255);
-            // Imposta il colore del testo delle righe selezionate
-            dgvData.DefaultCellStyle.SelectionForeColor = Color.Black;
-            // Imposta il colore di sfondo dell'header selezionato uguale a quello del proprio sfondo
-            dgvData.ColumnHeadersDefaultCellStyle.SelectionBackColor = dgvData.ColumnHeadersDefaultCellStyle.BackColor;
-            // Imposta il colore del selettore di riga
-            dgvData.RowHeadersDefaultCellStyle.SelectionBackColor = Color.FromArgb(200, 220, 255);
-            // Imposta la larghezza dell'header delle righe
-            dgvData.RowHeadersWidth = 30;
-            // Disabilita la possibilità di ridimensionare la larghezza dell'header delle righe
-            dgvData.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-        }
 
+            //dgvData.BackgroundColor = Color.FromArgb(240, 240, 240);
+            //dgvData.BorderStyle = BorderStyle.None;
+
+            // Griglie sottili stile Excel
+            dgvData.CellBorderStyle = DataGridViewCellBorderStyle.Single;
+            dgvData.GridColor = Color.FromArgb(210, 210, 210);
+
+            // Header colonne
+            dgvData.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
+            dgvData.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(220, 220, 220);
+            dgvData.ColumnHeadersDefaultCellStyle.ForeColor = Color.Black;
+            dgvData.ColumnHeadersDefaultCellStyle.SelectionBackColor = dgvData.ColumnHeadersDefaultCellStyle.BackColor;
+            
+            // Linee orizzontali nel selettore di riga
+            dgvData.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
+
+            // Righe
+            dgvData.RowHeadersVisible = true;
+            dgvData.RowHeadersWidth = 131;
+            dgvData.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+
+            // Colori di selezione (invariati)
+            dgvData.DefaultCellStyle.SelectionBackColor = Color.FromArgb(230, 230, 250);
+            dgvData.DefaultCellStyle.SelectionForeColor = Color.Black;
+            dgvData.RowHeadersDefaultCellStyle.SelectionBackColor = Color.FromArgb(200, 220, 255);
+        }
     }
 }

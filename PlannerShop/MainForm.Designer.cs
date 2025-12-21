@@ -39,26 +39,30 @@
             btnStatistiche = new Button();
             btnStampa = new Button();
             btnOpzioni = new Button();
-            pnlSearch = new Panel();
             searchImage = new PictureBox();
             txtSearch = new TextBox();
             pnlTop = new Panel();
             btnClienti = new Button();
             btnServizi = new Button();
+            pnlLine = new Panel();
+            pnlRight = new Panel();
+            pnlLeft = new Panel();
+            pnlUp = new Panel();
             ((System.ComponentModel.ISupportInitialize)dgvData).BeginInit();
-            pnlSearch.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)searchImage).BeginInit();
             SuspendLayout();
             // 
             // dgvData
             // 
             dgvData.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            dgvData.BackgroundColor = SystemColors.Control;
+            dgvData.BorderStyle = BorderStyle.None;
             dgvData.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvData.Location = new Point(12, 122);
+            dgvData.Location = new Point(12, 123);
             dgvData.Margin = new Padding(3, 2, 3, 2);
             dgvData.Name = "dgvData";
             dgvData.RowHeadersWidth = 51;
-            dgvData.Size = new Size(1060, 352);
+            dgvData.Size = new Size(1059, 425);
             dgvData.TabIndex = 5;
             dgvData.KeyDown += dgvData_KeyDown;
             dgvData.MouseClick += dgvData_MouseClick;
@@ -69,7 +73,7 @@
             btnDelete.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             btnDelete.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             btnDelete.Image = Properties.Resources.trashImage;
-            btnDelete.Location = new Point(286, 478);
+            btnDelete.Location = new Point(286, 553);
             btnDelete.Margin = new Padding(3, 2, 3, 2);
             btnDelete.Name = "btnDelete";
             btnDelete.Size = new Size(131, 52);
@@ -85,7 +89,7 @@
             btnLogout.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             btnLogout.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             btnLogout.Image = Properties.Resources.shutdown_orange;
-            btnLogout.Location = new Point(560, 478);
+            btnLogout.Location = new Point(560, 553);
             btnLogout.Margin = new Padding(3, 2, 3, 2);
             btnLogout.Name = "btnLogout";
             btnLogout.Size = new Size(511, 52);
@@ -101,7 +105,7 @@
             btnEdit.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             btnEdit.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             btnEdit.Image = Properties.Resources.editPageImage;
-            btnEdit.Location = new Point(149, 478);
+            btnEdit.Location = new Point(149, 553);
             btnEdit.Margin = new Padding(3, 2, 3, 2);
             btnEdit.Name = "btnEdit";
             btnEdit.Size = new Size(131, 52);
@@ -117,7 +121,7 @@
             btnInsert.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             btnInsert.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             btnInsert.Image = Properties.Resources.addLiteImage;
-            btnInsert.Location = new Point(12, 478);
+            btnInsert.Location = new Point(12, 553);
             btnInsert.Margin = new Padding(3, 2, 3, 2);
             btnInsert.Name = "btnInsert";
             btnInsert.Size = new Size(131, 52);
@@ -132,10 +136,10 @@
             // 
             btnProdotti.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             btnProdotti.Image = Properties.Resources.prodotti_24;
-            btnProdotti.Location = new Point(286, 65);
+            btnProdotti.Location = new Point(324, 59);
             btnProdotti.Margin = new Padding(3, 2, 3, 2);
             btnProdotti.Name = "btnProdotti";
-            btnProdotti.Size = new Size(131, 52);
+            btnProdotti.Size = new Size(150, 52);
             btnProdotti.TabIndex = 2;
             btnProdotti.Text = "PRODOTTI";
             btnProdotti.TextAlign = ContentAlignment.BottomCenter;
@@ -147,10 +151,10 @@
             // 
             btnFornitori.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             btnFornitori.Image = Properties.Resources.fornitore_24;
-            btnFornitori.Location = new Point(149, 65);
+            btnFornitori.Location = new Point(168, 59);
             btnFornitori.Margin = new Padding(3, 2, 3, 2);
             btnFornitori.Name = "btnFornitori";
-            btnFornitori.Size = new Size(131, 52);
+            btnFornitori.Size = new Size(150, 52);
             btnFornitori.TabIndex = 1;
             btnFornitori.Text = "FORNITORI";
             btnFornitori.TextAlign = ContentAlignment.BottomCenter;
@@ -163,7 +167,7 @@
             btnStatistiche.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btnStatistiche.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             btnStatistiche.Image = Properties.Resources.statistiche_24;
-            btnStatistiche.Location = new Point(802, 64);
+            btnStatistiche.Location = new Point(804, 59);
             btnStatistiche.Margin = new Padding(3, 2, 3, 2);
             btnStatistiche.Name = "btnStatistiche";
             btnStatistiche.Size = new Size(131, 52);
@@ -172,7 +176,6 @@
             btnStatistiche.TextAlign = ContentAlignment.BottomCenter;
             btnStatistiche.TextImageRelation = TextImageRelation.ImageAboveText;
             btnStatistiche.UseVisualStyleBackColor = true;
-            btnStatistiche.Visible = false;
             btnStatistiche.Click += btnStatistiche_Click;
             // 
             // btnStampa
@@ -180,7 +183,7 @@
             btnStampa.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btnStampa.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             btnStampa.Image = Properties.Resources.printerImage;
-            btnStampa.Location = new Point(940, 64);
+            btnStampa.Location = new Point(941, 59);
             btnStampa.Margin = new Padding(3, 2, 3, 2);
             btnStampa.Name = "btnStampa";
             btnStampa.Size = new Size(131, 52);
@@ -189,14 +192,13 @@
             btnStampa.TextAlign = ContentAlignment.BottomCenter;
             btnStampa.TextImageRelation = TextImageRelation.ImageAboveText;
             btnStampa.UseVisualStyleBackColor = true;
-            btnStampa.Visible = false;
             // 
             // btnOpzioni
             // 
             btnOpzioni.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             btnOpzioni.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             btnOpzioni.Image = Properties.Resources.settingsImage;
-            btnOpzioni.Location = new Point(423, 478);
+            btnOpzioni.Location = new Point(423, 553);
             btnOpzioni.Margin = new Padding(3, 2, 3, 2);
             btnOpzioni.Name = "btnOpzioni";
             btnOpzioni.Size = new Size(131, 52);
@@ -207,23 +209,11 @@
             btnOpzioni.UseVisualStyleBackColor = true;
             btnOpzioni.Click += btnOpzioni_Click;
             // 
-            // pnlSearch
-            // 
-            pnlSearch.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            pnlSearch.BackColor = Color.White;
-            pnlSearch.BorderStyle = BorderStyle.FixedSingle;
-            pnlSearch.Controls.Add(searchImage);
-            pnlSearch.Controls.Add(txtSearch);
-            pnlSearch.Location = new Point(12, 16);
-            pnlSearch.Name = "pnlSearch";
-            pnlSearch.Size = new Size(1060, 44);
-            pnlSearch.TabIndex = 22;
-            // 
             // searchImage
             // 
             searchImage.BackColor = Color.White;
             searchImage.Image = Properties.Resources.searchWhiteImage;
-            searchImage.Location = new Point(8, 9);
+            searchImage.Location = new Point(12, 27);
             searchImage.Margin = new Padding(3, 2, 3, 2);
             searchImage.Name = "searchImage";
             searchImage.Size = new Size(24, 24);
@@ -236,10 +226,10 @@
             txtSearch.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             txtSearch.BorderStyle = BorderStyle.None;
             txtSearch.Font = new Font("Corbel", 14F);
-            txtSearch.Location = new Point(33, 10);
+            txtSearch.Location = new Point(12, 27);
             txtSearch.Margin = new Padding(3, 2, 3, 2);
             txtSearch.Name = "txtSearch";
-            txtSearch.Size = new Size(1022, 23);
+            txtSearch.Size = new Size(1060, 23);
             txtSearch.TabIndex = 1;
             txtSearch.TabStop = false;
             txtSearch.TextAlign = HorizontalAlignment.Center;
@@ -259,10 +249,10 @@
             // 
             btnClienti.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             btnClienti.Image = Properties.Resources.clienti;
-            btnClienti.Location = new Point(12, 65);
+            btnClienti.Location = new Point(12, 59);
             btnClienti.Margin = new Padding(3, 2, 3, 2);
             btnClienti.Name = "btnClienti";
-            btnClienti.Size = new Size(131, 52);
+            btnClienti.Size = new Size(150, 52);
             btnClienti.TabIndex = 0;
             btnClienti.Text = "CLIENTI";
             btnClienti.TextAlign = ContentAlignment.BottomCenter;
@@ -274,10 +264,10 @@
             // 
             btnServizi.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             btnServizi.Image = Properties.Resources.serviziEstetici;
-            btnServizi.Location = new Point(423, 64);
+            btnServizi.Location = new Point(480, 59);
             btnServizi.Margin = new Padding(3, 2, 3, 2);
             btnServizi.Name = "btnServizi";
-            btnServizi.Size = new Size(131, 52);
+            btnServizi.Size = new Size(150, 52);
             btnServizi.TabIndex = 24;
             btnServizi.Text = "SERVIZI";
             btnServizi.TextAlign = ContentAlignment.BottomCenter;
@@ -285,16 +275,57 @@
             btnServizi.UseVisualStyleBackColor = true;
             btnServizi.Click += btnServizi_Click;
             // 
+            // pnlLine
+            // 
+            pnlLine.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            pnlLine.BackColor = Color.DarkGray;
+            pnlLine.Location = new Point(12, 547);
+            pnlLine.Name = "pnlLine";
+            pnlLine.Size = new Size(1059, 1);
+            pnlLine.TabIndex = 25;
+            // 
+            // pnlRight
+            // 
+            pnlRight.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
+            pnlRight.BackColor = Color.DarkGray;
+            pnlRight.Location = new Point(1070, 123);
+            pnlRight.Name = "pnlRight";
+            pnlRight.Size = new Size(1, 425);
+            pnlRight.TabIndex = 26;
+            // 
+            // pnlLeft
+            // 
+            pnlLeft.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
+            pnlLeft.BackColor = Color.DarkGray;
+            pnlLeft.Location = new Point(12, 123);
+            pnlLeft.Name = "pnlLeft";
+            pnlLeft.Size = new Size(1, 425);
+            pnlLeft.TabIndex = 28;
+            // 
+            // pnlUp
+            // 
+            pnlUp.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            pnlUp.BackColor = Color.DarkGray;
+            pnlUp.Location = new Point(12, 123);
+            pnlUp.Name = "pnlUp";
+            pnlUp.Size = new Size(1059, 1);
+            pnlUp.TabIndex = 26;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1084, 539);
+            ClientSize = new Size(1084, 614);
+            Controls.Add(pnlLine);
+            Controls.Add(pnlUp);
+            Controls.Add(pnlLeft);
+            Controls.Add(pnlRight);
+            Controls.Add(searchImage);
             Controls.Add(btnServizi);
+            Controls.Add(txtSearch);
             Controls.Add(dgvData);
             Controls.Add(btnClienti);
             Controls.Add(pnlTop);
-            Controls.Add(pnlSearch);
             Controls.Add(btnOpzioni);
             Controls.Add(btnStatistiche);
             Controls.Add(btnStampa);
@@ -314,10 +345,9 @@
             WindowState = FormWindowState.Maximized;
             KeyPress += MainForm_KeyPress;
             ((System.ComponentModel.ISupportInitialize)dgvData).EndInit();
-            pnlSearch.ResumeLayout(false);
-            pnlSearch.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)searchImage).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -331,11 +361,14 @@
         private Button btnStatistiche;
         private Button btnStampa;
         private Button btnOpzioni;
-        private Panel pnlSearch;
         private PictureBox searchImage;
         private TextBox txtSearch;
         private Panel pnlTop;
         private Button btnClienti;
         private Button btnServizi;
+        private Panel pnlLine;
+        private Panel pnlRight;
+        private Panel pnlLeft;
+        private Panel pnlUp;
     }
 }
