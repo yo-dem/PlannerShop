@@ -49,9 +49,6 @@
 
             dgvData.EnableHeadersVisualStyles = false;
 
-            //dgvData.BackgroundColor = Color.FromArgb(240, 240, 240);
-            //dgvData.BorderStyle = BorderStyle.None;
-
             // Griglie sottili stile Excel
             dgvData.CellBorderStyle = DataGridViewCellBorderStyle.Single;
             dgvData.GridColor = Color.FromArgb(210, 210, 210);
@@ -67,7 +64,7 @@
 
             // Righe
             dgvData.RowHeadersVisible = true;
-            dgvData.RowHeadersWidth = 131;
+            dgvData.RowHeadersWidth = 180;
             dgvData.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
 
             // Colori di selezione (invariati)

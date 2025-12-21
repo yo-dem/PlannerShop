@@ -136,10 +136,10 @@
             // 
             btnProdotti.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             btnProdotti.Image = Properties.Resources.prodotti_24;
-            btnProdotti.Location = new Point(324, 59);
+            btnProdotti.Location = new Point(384, 59);
             btnProdotti.Margin = new Padding(3, 2, 3, 2);
             btnProdotti.Name = "btnProdotti";
-            btnProdotti.Size = new Size(150, 52);
+            btnProdotti.Size = new Size(180, 52);
             btnProdotti.TabIndex = 2;
             btnProdotti.Text = "PRODOTTI";
             btnProdotti.TextAlign = ContentAlignment.BottomCenter;
@@ -151,10 +151,10 @@
             // 
             btnFornitori.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             btnFornitori.Image = Properties.Resources.fornitore_24;
-            btnFornitori.Location = new Point(168, 59);
+            btnFornitori.Location = new Point(198, 59);
             btnFornitori.Margin = new Padding(3, 2, 3, 2);
             btnFornitori.Name = "btnFornitori";
-            btnFornitori.Size = new Size(150, 52);
+            btnFornitori.Size = new Size(180, 52);
             btnFornitori.TabIndex = 1;
             btnFornitori.Text = "FORNITORI";
             btnFornitori.TextAlign = ContentAlignment.BottomCenter;
@@ -252,7 +252,7 @@
             btnClienti.Location = new Point(12, 59);
             btnClienti.Margin = new Padding(3, 2, 3, 2);
             btnClienti.Name = "btnClienti";
-            btnClienti.Size = new Size(150, 52);
+            btnClienti.Size = new Size(180, 52);
             btnClienti.TabIndex = 0;
             btnClienti.Text = "CLIENTI";
             btnClienti.TextAlign = ContentAlignment.BottomCenter;
@@ -264,10 +264,10 @@
             // 
             btnServizi.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             btnServizi.Image = Properties.Resources.serviziEstetici;
-            btnServizi.Location = new Point(480, 59);
+            btnServizi.Location = new Point(570, 59);
             btnServizi.Margin = new Padding(3, 2, 3, 2);
             btnServizi.Name = "btnServizi";
-            btnServizi.Size = new Size(150, 52);
+            btnServizi.Size = new Size(180, 52);
             btnServizi.TabIndex = 24;
             btnServizi.Text = "SERVIZI";
             btnServizi.TextAlign = ContentAlignment.BottomCenter;
