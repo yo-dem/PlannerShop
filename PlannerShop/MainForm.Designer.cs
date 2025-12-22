@@ -64,6 +64,7 @@
             dgvData.RowHeadersWidth = 51;
             dgvData.Size = new Size(1059, 425);
             dgvData.TabIndex = 5;
+            dgvData.DataBindingComplete += DgvData_DataBindingComplete;
             dgvData.KeyDown += dgvData_KeyDown;
             dgvData.MouseClick += dgvData_MouseClick;
             dgvData.MouseDoubleClick += dgvData_MouseDoubleClick;
