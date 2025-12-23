@@ -656,6 +656,8 @@ namespace PlannerShop
                     {
                         row.DefaultCellStyle.ForeColor = Color.Red;
                         row.DefaultCellStyle.Font = new Font(dgvData.Font, FontStyle.Bold);
+                        row.DefaultCellStyle.SelectionBackColor = Color.DarkRed;
+                        row.DefaultCellStyle.SelectionForeColor = Color.White;
                     }
                 }
             }

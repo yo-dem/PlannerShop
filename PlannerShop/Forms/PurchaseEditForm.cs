@@ -21,7 +21,7 @@ namespace PlannerShop.Forms
             timeStamp = DateTime.Now;
 
             // Copie locali
-            dtProdottiTemp = ModelProdotti.getProdotti().Copy();
+            dtProdottiTemp = ModelProdotti.getExistingProdotti().Copy();
             dtAcquistiTemp = ModelAcquisti.getAcquistiByIdClienteAndTimestamp(idCliente, timeStamp.ToString()).Copy();
 
             dgvData.DataSource = dtProdottiTemp;
@@ -347,7 +347,7 @@ namespace PlannerShop.Forms
                 newAcq["TOTALE"] = totaleVendita.ToString("F2") + "€";
 
 
-                
+
 
                 newAcq["ALIQUOTA"] = aliquota;
                 newAcq["DATA"] = data;
@@ -565,6 +565,15 @@ namespace PlannerShop.Forms
             }
         }
 
+        private void PurchaseEditForm_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (char.IsLetterOrDigit(e.KeyChar) || char.IsPunctuation(e.KeyChar) || char.IsSymbol(e.KeyChar))
+            {
+                txtSearch.Focus();
+                txtSearch.AppendText(e.KeyChar.ToString());
+                e.Handled = true;
+            }
+        }
     }
 }
 

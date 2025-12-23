@@ -30,24 +30,23 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PurchaseEditForm));
             dgvData = new DataGridView();
-            searchImage = new PictureBox();
-            pnlSearch = new Panel();
-            txtSearch = new TextBox();
             grpCliente = new GroupBox();
             lblEmail = new Label();
             lblTelefono = new Label();
             lblIndirizzo = new Label();
             lblName = new Label();
             grpProdotti = new GroupBox();
+            searchImage = new PictureBox();
+            txtSearch = new TextBox();
             grpAcquisti = new GroupBox();
             dgvDataAcquisto = new DataGridView();
             pnlTop = new Panel();
             btnCancel = new Button();
             btnOk = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvData).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)searchImage).BeginInit();
-            pnlSearch.SuspendLayout();
             grpCliente.SuspendLayout();
+            grpProdotti.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)searchImage).BeginInit();
             grpAcquisti.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvDataAcquisto).BeginInit();
             SuspendLayout();
@@ -63,44 +62,6 @@
             dgvData.Size = new Size(914, 170);
             dgvData.TabIndex = 6;
             dgvData.CellDoubleClick += dgvData_CellDoubleClick;
-            // 
-            // searchImage
-            // 
-            searchImage.BackColor = Color.White;
-            searchImage.Image = Properties.Resources.searchWhiteImage;
-            searchImage.Location = new Point(7, 4);
-            searchImage.Margin = new Padding(3, 2, 3, 2);
-            searchImage.Name = "searchImage";
-            searchImage.Size = new Size(24, 24);
-            searchImage.SizeMode = PictureBoxSizeMode.AutoSize;
-            searchImage.TabIndex = 22;
-            searchImage.TabStop = false;
-            // 
-            // pnlSearch
-            // 
-            pnlSearch.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            pnlSearch.BackColor = Color.White;
-            pnlSearch.BorderStyle = BorderStyle.FixedSingle;
-            pnlSearch.Controls.Add(searchImage);
-            pnlSearch.Controls.Add(txtSearch);
-            pnlSearch.Location = new Point(15, 145);
-            pnlSearch.Name = "pnlSearch";
-            pnlSearch.Size = new Size(914, 34);
-            pnlSearch.TabIndex = 23;
-            // 
-            // txtSearch
-            // 
-            txtSearch.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            txtSearch.BorderStyle = BorderStyle.None;
-            txtSearch.Font = new Font("Corbel", 14F);
-            txtSearch.Location = new Point(38, 5);
-            txtSearch.Margin = new Padding(3, 2, 3, 2);
-            txtSearch.Name = "txtSearch";
-            txtSearch.Size = new Size(872, 23);
-            txtSearch.TabIndex = 1;
-            txtSearch.TabStop = false;
-            txtSearch.TextAlign = HorizontalAlignment.Center;
-            txtSearch.TextChanged += txtSearch_TextChanged;
             // 
             // grpCliente
             // 
@@ -158,6 +119,8 @@
             // grpProdotti
             // 
             grpProdotti.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            grpProdotti.Controls.Add(searchImage);
+            grpProdotti.Controls.Add(txtSearch);
             grpProdotti.Location = new Point(10, 125);
             grpProdotti.Margin = new Padding(3, 2, 3, 2);
             grpProdotti.Name = "grpProdotti";
@@ -166,6 +129,32 @@
             grpProdotti.TabIndex = 25;
             grpProdotti.TabStop = false;
             grpProdotti.Text = "PRODOTTI";
+            // 
+            // searchImage
+            // 
+            searchImage.BackColor = Color.White;
+            searchImage.Image = Properties.Resources.searchWhiteImage;
+            searchImage.Location = new Point(5, 19);
+            searchImage.Margin = new Padding(3, 2, 3, 2);
+            searchImage.Name = "searchImage";
+            searchImage.Size = new Size(24, 24);
+            searchImage.SizeMode = PictureBoxSizeMode.AutoSize;
+            searchImage.TabIndex = 22;
+            searchImage.TabStop = false;
+            // 
+            // txtSearch
+            // 
+            txtSearch.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            txtSearch.BorderStyle = BorderStyle.None;
+            txtSearch.Font = new Font("Corbel", 14F);
+            txtSearch.Location = new Point(5, 20);
+            txtSearch.Margin = new Padding(3, 2, 3, 2);
+            txtSearch.Name = "txtSearch";
+            txtSearch.Size = new Size(913, 23);
+            txtSearch.TabIndex = 1;
+            txtSearch.TabStop = false;
+            txtSearch.TextAlign = HorizontalAlignment.Center;
+            txtSearch.TextChanged += txtSearch_TextChanged;
             // 
             // grpAcquisti
             // 
@@ -206,10 +195,10 @@
             btnCancel.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             btnCancel.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             btnCancel.ForeColor = Color.Red;
-            btnCancel.Location = new Point(12, 562);
+            btnCancel.Location = new Point(10, 562);
             btnCancel.Margin = new Padding(3, 2, 3, 2);
             btnCancel.Name = "btnCancel";
-            btnCancel.Size = new Size(186, 68);
+            btnCancel.Size = new Size(188, 68);
             btnCancel.TabIndex = 27;
             btnCancel.TabStop = false;
             btnCancel.Text = "ANNULLA";
@@ -243,22 +232,23 @@
             Controls.Add(pnlTop);
             Controls.Add(grpAcquisti);
             Controls.Add(grpCliente);
-            Controls.Add(pnlSearch);
             Controls.Add(dgvData);
             Controls.Add(grpProdotti);
             Icon = (Icon)resources.GetObject("$this.Icon");
+            KeyPreview = true;
             Margin = new Padding(3, 2, 3, 2);
             MinimumSize = new Size(964, 562);
             Name = "PurchaseEditForm";
             StartPosition = FormStartPosition.CenterParent;
             Text = "GESTIONE ACQUISTI";
             WindowState = FormWindowState.Maximized;
+            KeyPress += PurchaseEditForm_KeyPress;
             ((System.ComponentModel.ISupportInitialize)dgvData).EndInit();
-            ((System.ComponentModel.ISupportInitialize)searchImage).EndInit();
-            pnlSearch.ResumeLayout(false);
-            pnlSearch.PerformLayout();
             grpCliente.ResumeLayout(false);
             grpCliente.PerformLayout();
+            grpProdotti.ResumeLayout(false);
+            grpProdotti.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)searchImage).EndInit();
             grpAcquisti.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dgvDataAcquisto).EndInit();
             ResumeLayout(false);
@@ -267,9 +257,6 @@
         #endregion
 
         private DataGridView dgvData;
-        private PictureBox searchImage;
-        private Panel pnlSearch;
-        private TextBox txtSearch;
         private GroupBox grpCliente;
         private GroupBox grpProdotti;
         private GroupBox grpAcquisti;
@@ -281,5 +268,7 @@
         private Panel pnlTop;
         private Button btnCancel;
         private Button btnOk;
+        private PictureBox searchImage;
+        private TextBox txtSearch;
     }
 }

@@ -16,6 +16,11 @@ namespace PlannerShop.Data
             return DBUtility.getDBData("SELECT * FROM TPRODOTTI ORDER BY IDPRODOTTO DESC");
         }
 
+        public static DataTable getExistingProdotti()
+        {
+            return DBUtility.getDBData("SELECT * FROM TPRODOTTI WHERE QNT <> '0' ORDER BY IDPRODOTTO DESC");
+        }
+
         public static DataTable searchProdotti(string searchTerm)
         {
             string sql = @"SELECT * FROM TPRODOTTI
