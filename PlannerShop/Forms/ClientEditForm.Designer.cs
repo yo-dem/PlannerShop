@@ -87,10 +87,11 @@
             dtpCompleanno.MinDate = new DateTime(2000, 1, 1, 0, 0, 0, 0);
             dtpCompleanno.Name = "dtpCompleanno";
             dtpCompleanno.RightToLeft = RightToLeft.No;
+            dtpCompleanno.ShowCheckBox = true;
             dtpCompleanno.ShowUpDown = true;
             dtpCompleanno.Size = new Size(177, 23);
             dtpCompleanno.TabIndex = 6;
-            dtpCompleanno.Value = new DateTime(2000, 1, 1, 0, 0, 0, 0);
+            dtpCompleanno.Value = new DateTime(2000, 12, 31, 0, 0, 0, 0);
             dtpCompleanno.ValueChanged += dtpDataNascita_ValueChanged;
             // 
             // lblNote

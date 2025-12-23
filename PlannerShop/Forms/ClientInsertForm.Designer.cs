@@ -77,6 +77,7 @@
             // 
             // dtpCompleanno
             // 
+            dtpCompleanno.Checked = false;
             dtpCompleanno.CustomFormat = " dd-MM";
             dtpCompleanno.Format = DateTimePickerFormat.Custom;
             dtpCompleanno.Location = new Point(12, 404);
@@ -84,10 +85,11 @@
             dtpCompleanno.MaxDate = new DateTime(2000, 12, 31, 0, 0, 0, 0);
             dtpCompleanno.MinDate = new DateTime(2000, 1, 1, 0, 0, 0, 0);
             dtpCompleanno.Name = "dtpCompleanno";
+            dtpCompleanno.ShowCheckBox = true;
             dtpCompleanno.ShowUpDown = true;
-            dtpCompleanno.Size = new Size(177, 23);
+            dtpCompleanno.Size = new Size(175, 23);
             dtpCompleanno.TabIndex = 6;
-            dtpCompleanno.Value = new DateTime(2000, 1, 1, 0, 0, 0, 0);
+            dtpCompleanno.Value = new DateTime(2000, 12, 31, 0, 0, 0, 0);
             // 
             // lblNote
             // 

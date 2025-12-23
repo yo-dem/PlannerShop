@@ -92,7 +92,8 @@ namespace PlannerShop.Forms
                 txtTelefono.Text = dt.Rows[0]["TELEFONO"].ToString();
                 txtEmail.Text = dt.Rows[0]["EMAIL"].ToString();
                 txtIndirizzo.Text = dt.Rows[0]["INDIRIZZO"].ToString();
-                dtpCompleanno.Text = dt.Rows[0]["COMPLEANNO"].ToString() + "-2000";
+                dtpCompleanno.Text = dt.Rows[0]["COMPLEANNO"].ToString() != string.Empty ? dt.Rows[0]["COMPLEANNO"].ToString() + "-2000" : string.Empty;
+                dtpCompleanno.Checked = dt.Rows[0]["COMPLEANNO"].ToString() != string.Empty;
                 txtNote.Text = dt.Rows[0]["NOTE"].ToString();
             }
         }
@@ -129,7 +130,7 @@ namespace PlannerShop.Forms
                     idCliente,
                     txtNome.Text,
                     txtCognome.Text,
-                    dtpCompleanno.Text,
+                    dtpCompleanno.Checked ? dtpCompleanno.Text : string.Empty,
                     txtIndirizzo.Text.ToUpper(),
                     txtTelefono.Text,
                     txtEmail.Text.ToLower(),

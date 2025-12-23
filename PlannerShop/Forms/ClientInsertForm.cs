@@ -109,7 +109,7 @@ namespace PlannerShop.Forms
                 ModelClienti.addCliente(
                     txtNome.Text,
                     txtCognome.Text,
-                    dtpCompleanno.Text,
+                    dtpCompleanno.Checked ? dtpCompleanno.Text : string.Empty, 
                     txtIndirizzo.Text.ToUpper(),
                     txtTelefono.Text,
                     txtEmail.Text.ToLower(),
@@ -119,6 +119,7 @@ namespace PlannerShop.Forms
                     txtNome.Text = String.Empty;
                     txtCognome.Text = String.Empty;
                     dtpCompleanno.Text = String.Empty;
+                    dtpCompleanno.Checked = false;
                     txtTelefono.Text = String.Empty;
                     txtEmail.Text = String.Empty;
                     txtIndirizzo.Text = String.Empty;
