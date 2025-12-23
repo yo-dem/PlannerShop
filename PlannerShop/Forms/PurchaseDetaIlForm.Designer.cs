@@ -274,7 +274,6 @@
             Name = "PurchaseDetaIlForm";
             StartPosition = FormStartPosition.CenterParent;
             Text = "GESTIONE ACQUISTI - DETTAGLIO";
-            TopMost = true;
             grpPurchaseDetail.ResumeLayout(false);
             grpPurchaseDetail.PerformLayout();
             groupBox1.ResumeLayout(false);

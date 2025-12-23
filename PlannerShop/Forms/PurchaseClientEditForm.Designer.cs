@@ -184,7 +184,6 @@
             Name = "PurchaseClientEditForm";
             StartPosition = FormStartPosition.CenterParent;
             Text = "ACQUISTI CLIENTE";
-            TopMost = true;
             WindowState = FormWindowState.Maximized;
             grpCliente.ResumeLayout(false);
             grpCliente.PerformLayout();

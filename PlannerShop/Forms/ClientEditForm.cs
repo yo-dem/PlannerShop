@@ -161,7 +161,7 @@ namespace PlannerShop.Forms
             DialogResult result = purchaseEditForm.ShowDialog();
             if (result == DialogResult.Cancel)
             {
-                this.Close();
+                //this.Close();
             }
         }
 
@@ -171,7 +171,7 @@ namespace PlannerShop.Forms
             DialogResult result = purchaseClientEditForm.ShowDialog();
             if (result == DialogResult.Cancel)
             {
-                this.Close();
+                //this.Close();
             }
         }
 
