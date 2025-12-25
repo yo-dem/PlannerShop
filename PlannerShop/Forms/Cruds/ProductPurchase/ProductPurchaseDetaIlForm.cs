@@ -2,11 +2,11 @@
 
 namespace PlannerShop.Forms
 {
-    public partial class PurchaseDetaIlForm : Form
+    public partial class ProductPurchaseDetaIlForm : Form
     {
         private DataRow row;
         private DataTable dtCliente;
-        public PurchaseDetaIlForm(DataRow row, DataTable dtCliente)
+        public ProductPurchaseDetaIlForm(DataRow row, DataTable dtCliente)
         {
             InitializeComponent();
             this.row = row;

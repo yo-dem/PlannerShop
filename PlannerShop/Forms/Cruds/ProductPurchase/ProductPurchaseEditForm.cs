@@ -4,7 +4,7 @@ using System.Data;
 
 namespace PlannerShop.Forms
 {
-    public partial class PurchaseEditForm : Form
+    public partial class ProductPurchaseEditForm : Form
     {
         private DataTable dtProdottiTemp;
         private DataTable dtAcquistiTemp;
@@ -13,7 +13,7 @@ namespace PlannerShop.Forms
         DateTime timeStamp;
         string idCliente;
 
-        public PurchaseEditForm(string IdCliente)
+        public ProductPurchaseEditForm(string IdCliente)
         {
             InitializeComponent();
 
@@ -296,7 +296,7 @@ namespace PlannerShop.Forms
 
             DataRow row = dtProdottiTemp.Rows[e.RowIndex];
 
-            PurchaseDetaIlForm purchaseDetailForm = new PurchaseDetaIlForm(row, dtCliente);
+            ProductPurchaseDetaIlForm purchaseDetailForm = new ProductPurchaseDetaIlForm(row, dtCliente);
             DialogResult result = purchaseDetailForm.ShowDialog();
 
             if (result == DialogResult.Cancel)

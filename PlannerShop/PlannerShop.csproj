@@ -14,22 +14,22 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Forms\ClientEditForm.cs">
+    <Compile Update="Forms\Cruds\ClientEditForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Forms\ClientInsertForm.cs">
+    <Compile Update="Forms\Cruds\ClientInsertForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Forms\ServiceEditForm.cs">
+    <Compile Update="Forms\Cruds\ServiceEditForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Forms\ServiceInsertForm.cs">
+    <Compile Update="Forms\Cruds\ServiceInsertForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Forms\SupplierEditForm.cs">
+    <Compile Update="Forms\Cruds\SupplierEditForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Forms\SupplierInsertForm.cs">
+    <Compile Update="Forms\Cruds\SupplierInsertForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Properties\Resources.Designer.cs">

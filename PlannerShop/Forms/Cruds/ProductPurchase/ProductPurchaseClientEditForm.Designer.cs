@@ -1,6 +1,6 @@
 ﻿namespace PlannerShop.Forms
 {
-    partial class PurchaseClientEditForm
+    partial class ProductPurchaseClientEditForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PurchaseClientEditForm));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ProductPurchaseClientEditForm));
             pnlTop = new Panel();
             grpCliente = new GroupBox();
             lblEmail = new Label();

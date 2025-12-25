@@ -1,6 +1,6 @@
 ﻿namespace PlannerShop.Forms
 {
-    partial class PurchaseDetaIlForm
+    partial class ProductPurchaseDetaIlForm
     {
         /// <summary>
         /// Required designer variable.

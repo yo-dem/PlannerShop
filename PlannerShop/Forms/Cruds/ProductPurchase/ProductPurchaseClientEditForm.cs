@@ -3,7 +3,7 @@ using System.Data;
 
 namespace PlannerShop.Forms
 {
-    public partial class PurchaseClientEditForm : Form
+    public partial class ProductPurchaseClientEditForm : Form
     {
         private string idCliente;
         private Dictionary<string, Color> groupColors = new Dictionary<string, Color>();
@@ -13,7 +13,7 @@ namespace PlannerShop.Forms
             Color.FromArgb(225, 225, 225)
         };
 
-        public PurchaseClientEditForm(string idCliente)
+        public ProductPurchaseClientEditForm(string idCliente)
         {
             InitializeComponent();
             this.idCliente = idCliente;
