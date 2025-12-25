@@ -105,7 +105,7 @@ namespace PlannerShop
             idProductColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             idProductColumn.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft;
             idProductColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
-         
+
             var dataProductColumn = dgvData.Columns["DATA"];
             dataProductColumn.DisplayIndex = 1;
             dataProductColumn.Visible = true;
@@ -113,7 +113,7 @@ namespace PlannerShop
             dataProductColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             dataProductColumn.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataProductColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            
+
             var marcaProductColumn = dgvData.Columns["MARCA"];
             marcaProductColumn.DisplayIndex = 2;
             marcaProductColumn.Visible = true;
@@ -121,7 +121,7 @@ namespace PlannerShop
             marcaProductColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             marcaProductColumn.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft;
             marcaProductColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            
+
             var descrizioneProductColumn = dgvData.Columns["DESCRIZIONE"];
             descrizioneProductColumn.DisplayIndex = 3;
             descrizioneProductColumn.Visible = true;
@@ -188,7 +188,7 @@ namespace PlannerShop
             idSupplierColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             idSupplierColumn.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft;
             idSupplierColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            
+
             var nomeSupplierColumn = dgvData.Columns["NOME"];
             nomeSupplierColumn.DisplayIndex = 1;
             nomeSupplierColumn.Visible = true;
@@ -247,7 +247,7 @@ namespace PlannerShop
             idServiceColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             idServiceColumn.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft;
             idServiceColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            
+
             var dataServiceColumn = dgvData.Columns["DATA"];
             dataServiceColumn.DisplayIndex = 1;
             dataServiceColumn.Visible = true;
@@ -330,6 +330,15 @@ namespace PlannerShop
             }
             Utils.SetDataGridStyle(dgvData, true, 40, 40, true);
             SetClientDataGridStructure();
+
+            try
+            {
+                var visibleCell = dgvData.Rows[0].Cells.Cast<DataGridViewCell>().FirstOrDefault(c => c.Visible);
+
+                if (visibleCell != null)
+                    dgvData.CurrentCell = visibleCell;
+            }
+            catch { }
         }
 
         void LoadFornitori(string? searchItem = null)
@@ -348,6 +357,15 @@ namespace PlannerShop
             }
             Utils.SetDataGridStyle(dgvData, true, 40, 40, true);
             SetSupplierDataGridStructure();
+
+            try
+            {
+                var visibleCell = dgvData.Rows[0].Cells.Cast<DataGridViewCell>().FirstOrDefault(c => c.Visible);
+
+                if (visibleCell != null)
+                    dgvData.CurrentCell = visibleCell;
+            }
+            catch { }
         }
 
         void LoadProdotti(string? searchItem = null)
@@ -366,6 +384,15 @@ namespace PlannerShop
             }
             Utils.SetDataGridStyle(dgvData, true, 40, 40, true);
             SetProductDataGridStructure();
+
+            try
+            {
+                var visibleCell = dgvData.Rows[0].Cells.Cast<DataGridViewCell>().FirstOrDefault(c => c.Visible);
+
+                if (visibleCell != null)
+                    dgvData.CurrentCell = visibleCell;
+            }
+            catch { }
         }
 
         void LoadServizi(string? searchItem = null)
@@ -384,6 +411,14 @@ namespace PlannerShop
             }
             Utils.SetDataGridStyle(dgvData, true, 40, 40, true);
             SetServiceDataGridStructure();
+            try
+            {
+                var visibleCell = dgvData.Rows[0].Cells.Cast<DataGridViewCell>().FirstOrDefault(c => c.Visible);
+
+                if (visibleCell != null)
+                    dgvData.CurrentCell = visibleCell;
+            }
+            catch { }
         }
 
         private void btnClienti_Click(object sender, EventArgs e)
@@ -656,8 +691,8 @@ namespace PlannerShop
                     {
                         row.DefaultCellStyle.ForeColor = Color.Red;
                         row.DefaultCellStyle.Font = new Font(dgvData.Font, FontStyle.Bold);
-                        row.DefaultCellStyle.SelectionBackColor = Color.DarkRed;
-                        row.DefaultCellStyle.SelectionForeColor = Color.White;
+                        //row.DefaultCellStyle.SelectionBackColor = Color.DarkRed;
+                        row.DefaultCellStyle.SelectionForeColor = Color.Red;
                     }
                 }
             }
@@ -720,6 +755,11 @@ namespace PlannerShop
                 if (row.Cells[colonnaId].Value?.ToString() == id)
                 {
                     row.Selected = true;
+                    var visibleCell = row.Cells.Cast<DataGridViewCell>().FirstOrDefault(c => c.Visible);
+
+                    if (visibleCell != null)
+                        dgvData.CurrentCell = visibleCell;
+
                     dgvData.FirstDisplayedScrollingRowIndex = displayPos;
                     return;
                 }
