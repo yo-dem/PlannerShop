@@ -364,6 +364,8 @@ namespace PlannerShop.Forms
                 decimal vecchioTotale = decimal.Parse(acq["TOTALE"].ToString().Replace("€", ""));
                 decimal nuovoTotale = decimal.Parse(totale.Replace("€", "").Trim());
                 acq["TOTALE"] = (vecchioTotale + nuovoTotale).ToString("F2") + "€";
+                acq["SCONTO"] = calculateSconto(acq);
+
             }
 
             dgvData.Refresh();
@@ -543,6 +545,7 @@ namespace PlannerShop.Forms
                 e.Handled = true;
             }
         }
+
     }
 }
 

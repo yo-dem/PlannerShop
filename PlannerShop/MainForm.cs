@@ -1,6 +1,7 @@
 ﻿
 using PlannerShop.Data;
 using PlannerShop.Forms;
+using PlannerShop.Forms.Utility;
 
 namespace PlannerShop
 {
@@ -785,6 +786,16 @@ namespace PlannerShop
                 txtSearch.Focus();
                 txtSearch.AppendText(e.KeyChar.ToString());
                 e.Handled = true;
+            }
+        }
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            ClosingForm closeForm = new ClosingForm();
+            var result = closeForm.ShowDialog();
+            if (result != DialogResult.OK)
+            {
+                e.Cancel = true;
             }
         }
 
