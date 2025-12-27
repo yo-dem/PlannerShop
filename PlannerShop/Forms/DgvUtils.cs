@@ -1,6 +1,6 @@
-﻿namespace PlannerShop
+﻿namespace PlannerShop.Forms
 {
-    struct Utils
+    struct DgvUtils
     {
         public static void SetDataGridStyle(
             DataGridView dgvData,

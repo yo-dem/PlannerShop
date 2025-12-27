@@ -27,9 +27,9 @@ namespace PlannerShop.Forms
             dgvData.DataSource = dtProdottiTemp;
             SetProductDataGridStructure();
 
-            Utils.SetDataGridStyle(dgvData, false, 40, 40, true);
+            DgvUtils.SetDataGridStyle(dgvData, false, 40, 40, true);
             dgvData.DefaultCellStyle.SelectionBackColor = dgvData.DefaultCellStyle.BackColor;
-            Utils.SetDataGridStyle(dgvDataAcquisto, false, 40, 40, true);
+            DgvUtils.SetDataGridStyle(dgvDataAcquisto, false, 40, 40, true);
             dgvDataAcquisto.DefaultCellStyle.SelectionBackColor = dgvDataAcquisto.DefaultCellStyle.BackColor;
             loadClienteData();
 
@@ -345,15 +345,12 @@ namespace PlannerShop.Forms
 
                 decimal totaleVendita = decimal.Parse(totale.Replace("€", "").Trim());
                 newAcq["TOTALE"] = totaleVendita.ToString("F2") + "€";
-
-
-
-
                 newAcq["ALIQUOTA"] = aliquota;
                 newAcq["DATA"] = data;
                 newAcq["NOTE"] = note;
                 newAcq["TIMESTAMP"] = timeStamp.ToString();
                 newAcq["QNT"] = qnt;
+                newAcq["SCONTO"] = calculateSconto(newAcq);
 
                 dtAcquistiTemp.Rows.Add(newAcq);
             }
@@ -428,95 +425,55 @@ namespace PlannerShop.Forms
                 return;
             }
 
-            DataTable originalProducts = ModelProdotti.getProdotti();
-
-            foreach (DataRow tempRow in dtProdottiTemp.Rows)
-            {
-                string id = tempRow["IDPRODOTTO"]?.ToString() ?? string.Empty;
-                int qnt = Convert.ToInt32(tempRow["QNT"]);
-
-                string data = tempRow["DATA"]?.ToString() ?? string.Empty;
-                string marca = tempRow["MARCA"]?.ToString() ?? string.Empty;
-                string descrizione = tempRow["DESCRIZIONE"]?.ToString() ?? string.Empty;
-                string aliquota = tempRow["ALIQUOTA"]?.ToString() ?? string.Empty;
-                string prezzoNetto = tempRow["PREZZO_NETTO"]?.ToString() ?? string.Empty;
-                string prezzoIvato = tempRow["PREZZO_IVATO"]?.ToString() ?? string.Empty;
-                string prezzoVendita = tempRow["PREZZO_VENDITA"]?.ToString() ?? string.Empty;
-                string note = tempRow["NOTE"]?.ToString() ?? string.Empty;
-
-                DataRow[] found = originalProducts.Select($"IDPRODOTTO = '{id}'");
-
-                if (found.Length == 0)
-                {
-                    ModelProdotti.addProdotto(
-                        data,
-                        marca,
-                        descrizione,
-                        aliquota,
-                        qnt.ToString(),
-                        prezzoNetto,
-                        prezzoIvato,
-                        prezzoVendita,
-                        note,
-                        id
-                    );
-                }
-                else
-                {
-                    ModelProdotti.updateQuantity(id, qnt);
-                }
-            }
-
-            foreach (DataRow orig in originalProducts.Rows)
-            {
-                string id = orig["IDPRODOTTO"]?.ToString() ?? string.Empty;
-
-                bool stillExists = dtProdottiTemp.AsEnumerable()
-                    .Any(r => r["IDPRODOTTO"].ToString() == id);
-
-                if (!stillExists)
-                {
-                    ModelProdotti.deleteProdotto(id);
-                }
-            }
+            UpdateProductQnt(dtProdottiTemp);
 
             DataTable originalAcquisti =
-                ModelAcquisti.getAcquistiByIdClienteAndTimestamp(idCliente, timeStamp.ToString());
+                ModelAcquisti.getAcquistiByIdClienteAndTimestamp(
+                    idCliente, timeStamp.ToString());
 
-            foreach (DataRow temp in dtAcquistiTemp.Rows)
+            SavePurchase(dtAcquistiTemp, originalAcquisti, idCliente);
+
+            this.Close();
+        }
+
+        private void UpdateProductQnt(DataTable prodottiTemp)
+        {
+            foreach (DataRow row in prodottiTemp.Rows)
             {
-                string idProdotto = temp["IDPRODOTTO"]?.ToString() ?? string.Empty;
-                int qnt = Convert.ToInt32(temp["QNT"]);
+                string id = row["IDPRODOTTO"]?.ToString() ?? string.Empty;
+                int qnt = Convert.ToInt32(row["QNT"]);
 
-                string marca = temp["MARCA"]?.ToString() ?? string.Empty;
-                string descrizione = temp["DESCRIZIONE"]?.ToString() ?? string.Empty;
-                string prezzoNetto = temp["PREZZO_NETTO"]?.ToString() ?? string.Empty;
-                string prezzoIvato = temp["PREZZO_IVATO"]?.ToString() ?? string.Empty;
-                string prezzoVendita = temp["PREZZO_VENDITA"]?.ToString() ?? string.Empty;
-                string totale = temp["TOTALE"]?.ToString() ?? string.Empty;
-                string dataAcquisto = temp["DATA"]?.ToString() ?? string.Empty;
-                string aliquota = temp["ALIQUOTA"]?.ToString() ?? string.Empty;
-                string note = temp["NOTE"]?.ToString() ?? string.Empty;
-                string timeStampValue = temp["TIMESTAMP"]?.ToString() ?? string.Empty;
+                ModelProdotti.updateQuantity(id, qnt);
+            }
+        }
 
-                DataRow[] found = originalAcquisti.Select($"IDPRODOTTO = '{idProdotto}'");
+        private void SavePurchase(DataTable acquistiTemp, DataTable acquistiOriginali, string idCliente)
+        {
+            foreach (DataRow row in acquistiTemp.Rows)
+            {
+                string idProdotto = row["IDPRODOTTO"]?.ToString() ?? string.Empty;
+                int qnt = Convert.ToInt32(row["QNT"]);
+
+                DataRow[] found =
+                    acquistiOriginali.Select($"IDPRODOTTO = '{idProdotto}'");
 
                 if (found.Length == 0)
                 {
                     ModelAcquisti.addAcquisto(
-                        marca,
-                        descrizione,
+                        row["MARCA"]?.ToString() ?? string.Empty,
+                        row["DESCRIZIONE"]?.ToString() ?? string.Empty,
                         qnt.ToString(),
-                        prezzoNetto,
-                        prezzoIvato,
-                        prezzoVendita,
-                        totale,
-                        dataAcquisto,
+                        row["PREZZO_NETTO"]?.ToString() ?? string.Empty,
+                        row["PREZZO_IVATO"]?.ToString() ?? string.Empty,
+                        row["PREZZO_VENDITA"]?.ToString() ?? string.Empty,
+                        row["TOTALE"]?.ToString() ?? string.Empty,
+                        calculateSconto(row),
+                        row["DATA"]?.ToString() ?? string.Empty,
                         idCliente,
                         idProdotto,
-                        aliquota,
-                        note,
-                        timeStampValue
+                        row["ALIQUOTA"]?.ToString() ?? string.Empty,
+                        row["NOTE"]?.ToString() ?? string.Empty,
+                        row["TIMESTAMP"]?.ToString() ?? string.Empty
                     );
                 }
                 else
@@ -524,21 +481,33 @@ namespace PlannerShop.Forms
                     ModelAcquisti.updateQuantity(idProdotto, idCliente, qnt);
                 }
             }
+        }
 
-            foreach (DataRow orig in originalAcquisti.Rows)
-            {
-                string idProdotto = orig["IDPRODOTTO"]?.ToString() ?? string.Empty;
+        private string calculateSconto(DataRow row)
+        {
+            bool okPrezzo = decimal.TryParse(
+                row["PREZZO_VENDITA"]?.ToString()?.Trim().Replace("€", ""),
+                out decimal prezzoUnitario);
 
-                bool stillExists = dtAcquistiTemp.AsEnumerable()
-                    .Any(r => r["IDPRODOTTO"].ToString() == idProdotto);
+            bool okTotale = decimal.TryParse(
+                row["TOTALE"]?.ToString()?.Trim().Replace("€", ""),
+                out decimal totalePagato);
 
-                if (!stillExists)
-                {
-                    ModelAcquisti.deleteAcquisto(idProdotto, idCliente);
-                }
-            }
+            bool okQnt = int.TryParse(
+                row["QNT"]?.ToString(),
+                out int qnt);
 
-            this.Close();
+            if (!okPrezzo || !okTotale || !okQnt || prezzoUnitario <= 0 || qnt <= 0)
+                return "0%";
+
+            decimal totaleTeorico = prezzoUnitario * qnt;
+
+            if (totalePagato >= totaleTeorico)
+                return "0%";
+
+            decimal scontoPercentuale = (totaleTeorico - totalePagato) / totaleTeorico * 100m;
+
+            return scontoPercentuale.ToString("0.00") + "%";
         }
 
         private void btnCancel_Click(object sender, EventArgs e)

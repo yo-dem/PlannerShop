@@ -74,10 +74,10 @@
             btnDelete.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             btnDelete.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             btnDelete.Image = Properties.Resources.trashImage;
-            btnDelete.Location = new Point(384, 560);
+            btnDelete.Location = new Point(384, 550);
             btnDelete.Margin = new Padding(3, 2, 3, 2);
             btnDelete.Name = "btnDelete";
-            btnDelete.Size = new Size(180, 52);
+            btnDelete.Size = new Size(180, 60);
             btnDelete.TabIndex = 8;
             btnDelete.Text = "ELIMINA";
             btnDelete.TextAlign = ContentAlignment.BottomCenter;
@@ -90,10 +90,10 @@
             btnLogout.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             btnLogout.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             btnLogout.Image = Properties.Resources.shutdown_orange;
-            btnLogout.Location = new Point(756, 560);
+            btnLogout.Location = new Point(757, 550);
             btnLogout.Margin = new Padding(3, 2, 3, 2);
             btnLogout.Name = "btnLogout";
-            btnLogout.Size = new Size(315, 52);
+            btnLogout.Size = new Size(315, 60);
             btnLogout.TabIndex = 9;
             btnLogout.Text = "LOGOUT";
             btnLogout.TextAlign = ContentAlignment.BottomCenter;
@@ -106,10 +106,10 @@
             btnEdit.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             btnEdit.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             btnEdit.Image = Properties.Resources.editPageImage;
-            btnEdit.Location = new Point(198, 560);
+            btnEdit.Location = new Point(198, 550);
             btnEdit.Margin = new Padding(3, 2, 3, 2);
             btnEdit.Name = "btnEdit";
-            btnEdit.Size = new Size(180, 52);
+            btnEdit.Size = new Size(180, 60);
             btnEdit.TabIndex = 7;
             btnEdit.Text = "MODIFICA";
             btnEdit.TextAlign = ContentAlignment.BottomCenter;
@@ -122,10 +122,10 @@
             btnInsert.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             btnInsert.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             btnInsert.Image = Properties.Resources.addLiteImage;
-            btnInsert.Location = new Point(12, 560);
+            btnInsert.Location = new Point(12, 550);
             btnInsert.Margin = new Padding(3, 2, 3, 2);
             btnInsert.Name = "btnInsert";
-            btnInsert.Size = new Size(180, 52);
+            btnInsert.Size = new Size(180, 60);
             btnInsert.TabIndex = 6;
             btnInsert.Text = "INSERISCI";
             btnInsert.TextAlign = ContentAlignment.BottomCenter;
@@ -137,10 +137,10 @@
             // 
             btnProdotti.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             btnProdotti.Image = Properties.Resources.prodotti_24;
-            btnProdotti.Location = new Point(384, 59);
+            btnProdotti.Location = new Point(384, 54);
             btnProdotti.Margin = new Padding(3, 2, 3, 2);
             btnProdotti.Name = "btnProdotti";
-            btnProdotti.Size = new Size(180, 59);
+            btnProdotti.Size = new Size(180, 64);
             btnProdotti.TabIndex = 2;
             btnProdotti.Text = "PRODOTTI";
             btnProdotti.TextAlign = ContentAlignment.BottomCenter;
@@ -152,10 +152,10 @@
             // 
             btnFornitori.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             btnFornitori.Image = Properties.Resources.fornitore_24;
-            btnFornitori.Location = new Point(198, 59);
+            btnFornitori.Location = new Point(198, 54);
             btnFornitori.Margin = new Padding(3, 2, 3, 2);
             btnFornitori.Name = "btnFornitori";
-            btnFornitori.Size = new Size(180, 59);
+            btnFornitori.Size = new Size(180, 64);
             btnFornitori.TabIndex = 1;
             btnFornitori.Text = "FORNITORI";
             btnFornitori.TextAlign = ContentAlignment.BottomCenter;
@@ -168,10 +168,10 @@
             btnStatistiche.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btnStatistiche.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             btnStatistiche.Image = Properties.Resources.statistiche_24;
-            btnStatistiche.Location = new Point(1026, 54);
+            btnStatistiche.Location = new Point(1016, 54);
             btnStatistiche.Margin = new Padding(3, 2, 3, 2);
             btnStatistiche.Name = "btnStatistiche";
-            btnStatistiche.Size = new Size(45, 45);
+            btnStatistiche.Size = new Size(55, 64);
             btnStatistiche.TabIndex = 3;
             btnStatistiche.TextAlign = ContentAlignment.BottomCenter;
             btnStatistiche.TextImageRelation = TextImageRelation.ImageAboveText;
@@ -183,10 +183,10 @@
             btnStampa.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btnStampa.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             btnStampa.Image = Properties.Resources.printerImage;
-            btnStampa.Location = new Point(975, 54);
+            btnStampa.Location = new Point(955, 54);
             btnStampa.Margin = new Padding(3, 2, 3, 2);
             btnStampa.Name = "btnStampa";
-            btnStampa.Size = new Size(45, 45);
+            btnStampa.Size = new Size(55, 64);
             btnStampa.TabIndex = 4;
             btnStampa.TextAlign = ContentAlignment.BottomCenter;
             btnStampa.TextImageRelation = TextImageRelation.ImageAboveText;
@@ -197,10 +197,10 @@
             btnOpzioni.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             btnOpzioni.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             btnOpzioni.Image = Properties.Resources.settingsImage;
-            btnOpzioni.Location = new Point(570, 560);
+            btnOpzioni.Location = new Point(570, 550);
             btnOpzioni.Margin = new Padding(3, 2, 3, 2);
             btnOpzioni.Name = "btnOpzioni";
-            btnOpzioni.Size = new Size(180, 52);
+            btnOpzioni.Size = new Size(180, 60);
             btnOpzioni.TabIndex = 5;
             btnOpzioni.Text = "OPZIONI";
             btnOpzioni.TextAlign = ContentAlignment.BottomCenter;
@@ -248,10 +248,10 @@
             // 
             btnClienti.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             btnClienti.Image = Properties.Resources.clienti;
-            btnClienti.Location = new Point(12, 59);
+            btnClienti.Location = new Point(12, 54);
             btnClienti.Margin = new Padding(3, 2, 3, 2);
             btnClienti.Name = "btnClienti";
-            btnClienti.Size = new Size(180, 59);
+            btnClienti.Size = new Size(180, 64);
             btnClienti.TabIndex = 0;
             btnClienti.Text = "CLIENTI";
             btnClienti.TextAlign = ContentAlignment.BottomCenter;
@@ -263,10 +263,10 @@
             // 
             btnServizi.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             btnServizi.Image = Properties.Resources.serviziEstetici;
-            btnServizi.Location = new Point(570, 59);
+            btnServizi.Location = new Point(570, 54);
             btnServizi.Margin = new Padding(3, 2, 3, 2);
             btnServizi.Name = "btnServizi";
-            btnServizi.Size = new Size(180, 60);
+            btnServizi.Size = new Size(180, 65);
             btnServizi.TabIndex = 24;
             btnServizi.Text = "SERVIZI";
             btnServizi.TextAlign = ContentAlignment.BottomCenter;

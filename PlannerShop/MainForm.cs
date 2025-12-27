@@ -328,7 +328,7 @@ namespace PlannerShop
             {
                 dgvData.DataSource = ModelClienti.searchClienti(searchItem);
             }
-            Utils.SetDataGridStyle(dgvData, true, 40, 40, true);
+            DgvUtils.SetDataGridStyle(dgvData, true, 40, 40, true);
             SetClientDataGridStructure();
 
             try
@@ -355,7 +355,7 @@ namespace PlannerShop
             {
                 dgvData.DataSource = ModelFornitori.searchFornitori(searchItem);
             }
-            Utils.SetDataGridStyle(dgvData, true, 40, 40, true);
+            DgvUtils.SetDataGridStyle(dgvData, true, 40, 40, true);
             SetSupplierDataGridStructure();
 
             try
@@ -382,7 +382,7 @@ namespace PlannerShop
             {
                 dgvData.DataSource = ModelProdotti.searchProdotti(searchItem);
             }
-            Utils.SetDataGridStyle(dgvData, true, 40, 40, true);
+            DgvUtils.SetDataGridStyle(dgvData, true, 40, 40, true);
             SetProductDataGridStructure();
 
             try
@@ -409,7 +409,7 @@ namespace PlannerShop
             {
                 dgvData.DataSource = ModelServizi.searchServizi(searchItem);
             }
-            Utils.SetDataGridStyle(dgvData, true, 40, 40, true);
+            DgvUtils.SetDataGridStyle(dgvData, true, 40, 40, true);
             SetServiceDataGridStructure();
             try
             {
