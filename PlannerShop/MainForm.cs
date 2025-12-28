@@ -796,6 +796,12 @@ namespace PlannerShop
             e.FormattingApplied = true;
         }
 
+        private void btnGift_Click(object sender, EventArgs e)
+        {
+            BirthdateForm birthdateForm = new BirthdateForm();
+            birthdateForm.ShowDialog();
+        }
+
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             ClosingForm closeForm = new ClosingForm();
@@ -803,6 +809,31 @@ namespace PlannerShop
             if (result != DialogResult.OK)
             {
                 e.Cancel = true;
+            }
+        }
+
+        private void timerGift_Tick(object sender, EventArgs e)
+        {
+            if (isClienteSelected)
+            {
+                foreach (DataGridViewRow row in dgvData.Rows)
+                {
+                    if (row.Cells["COMPLEANNO"].Value != null)
+                    {
+                        string raw = row.Cells["COMPLEANNO"].Value.ToString()!; // es: "29-10"
+                        var parts = raw.Split('-');
+                        if (!int.TryParse(parts[0], out int giorno) ||
+                            !int.TryParse(parts[1], out int mese))
+                            continue;
+                        DateTime now = DateTime.Now;
+                        if (giorno >= now.Day && mese == now.Month)
+                        {
+                            btnGift.Image = Properties.Resources.gift_red;
+                            return;
+                        }
+                    }
+                }
+                btnGift.Image = Properties.Resources.gift_black;
             }
         }
 
@@ -838,34 +869,5 @@ namespace PlannerShop
             }
         }
 
-        private void timerGift_Tick(object sender, EventArgs e)
-        {
-            if (isClienteSelected)
-            {
-                foreach (DataGridViewRow row in dgvData.Rows)
-                {
-                    if (row.Cells["COMPLEANNO"].Value != null)
-                    {
-                        string raw = row.Cells["COMPLEANNO"].Value.ToString()!; // es: "29-10"
-                        var parts = raw.Split('-');
-                        if (!int.TryParse(parts[0], out int giorno) ||
-                            !int.TryParse(parts[1], out int mese))
-                            continue;
-                        DateTime now = DateTime.Now;
-                        if (giorno >= now.Day && mese == now.Month)
-                        {
-                            btnGift.Image = Properties.Resources.gift_red;
-                            return;
-                        }
-                    }
-                }
-                btnGift.Image = Properties.Resources.gift_black;
-            }
-        }
-
-        private void btnGift_Click(object sender, EventArgs e)
-        {
-            dgvData.DataSource = ModelClienti.searchBirthdayClienti();
-        }
     }
 }
