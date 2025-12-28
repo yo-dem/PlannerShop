@@ -59,8 +59,4 @@
     </None>
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Forms\Cruds\ProductPurchase\" />
-  </ItemGroup>
-
 </Project>

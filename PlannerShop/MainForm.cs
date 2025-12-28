@@ -18,12 +18,12 @@ namespace PlannerShop
         {
             InitializeComponent();
 
-            LoadClienti();
-
             if (ModelPwd.IsEnabled())
                 btnLogout.Visible = true;
             else
                 btnLogout.Visible = false;
+
+            LoadClienti();
 
             btnDefaultColor = Color.White;
             btnClienti.BackColor = Color.FromArgb(90, 192, 192, 255);
@@ -313,7 +313,6 @@ namespace PlannerShop
             noteServiceColumn.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft;
             noteServiceColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
         }
-
 
         void LoadClienti(String? searchItem = null)
         {
@@ -747,6 +746,26 @@ namespace PlannerShop
             }
         }
 
+        private void MainForm_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (char.IsLetterOrDigit(e.KeyChar) || char.IsPunctuation(e.KeyChar) || char.IsSymbol(e.KeyChar))
+            {
+                txtSearch.Focus();
+                txtSearch.AppendText(e.KeyChar.ToString());
+                e.Handled = true;
+            }
+        }
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            ClosingForm closeForm = new ClosingForm();
+            var result = closeForm.ShowDialog();
+            if (result != DialogResult.OK)
+            {
+                e.Cancel = true;
+            }
+        }
+
         private void SelectRowById(String id, String colonnaId, int displayPos)
         {
             dgvData.ClearSelection();
@@ -776,26 +795,6 @@ namespace PlannerShop
             else
             {
                 btnEdit.Enabled = true;
-            }
-        }
-
-        private void MainForm_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (char.IsLetterOrDigit(e.KeyChar) || char.IsPunctuation(e.KeyChar) || char.IsSymbol(e.KeyChar))
-            {
-                txtSearch.Focus();
-                txtSearch.AppendText(e.KeyChar.ToString());
-                e.Handled = true;
-            }
-        }
-
-        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            ClosingForm closeForm = new ClosingForm();
-            var result = closeForm.ShowDialog();
-            if (result != DialogResult.OK)
-            {
-                e.Cancel = true;
             }
         }
 
