@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             dgvData = new DataGridView();
             btnDelete = new Button();
@@ -48,6 +49,8 @@
             pnlRight = new Panel();
             pnlLeft = new Panel();
             pnlUp = new Panel();
+            btnGift = new Button();
+            timerGift = new System.Windows.Forms.Timer(components);
             ((System.ComponentModel.ISupportInitialize)dgvData).BeginInit();
             ((System.ComponentModel.ISupportInitialize)searchImage).BeginInit();
             SuspendLayout();
@@ -64,6 +67,7 @@
             dgvData.RowHeadersWidth = 51;
             dgvData.Size = new Size(1059, 420);
             dgvData.TabIndex = 5;
+            dgvData.CellFormatting += dgvData_CellFormatting;
             dgvData.DataBindingComplete += DgvData_DataBindingComplete;
             dgvData.KeyDown += dgvData_KeyDown;
             dgvData.MouseClick += dgvData_MouseClick;
@@ -90,10 +94,10 @@
             btnLogout.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             btnLogout.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             btnLogout.Image = Properties.Resources.shutdown_orange;
-            btnLogout.Location = new Point(757, 550);
+            btnLogout.Location = new Point(756, 550);
             btnLogout.Margin = new Padding(3, 2, 3, 2);
             btnLogout.Name = "btnLogout";
-            btnLogout.Size = new Size(315, 60);
+            btnLogout.Size = new Size(316, 60);
             btnLogout.TabIndex = 9;
             btnLogout.Text = "LOGOUT";
             btnLogout.TextAlign = ContentAlignment.BottomCenter;
@@ -168,10 +172,10 @@
             btnStatistiche.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btnStatistiche.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             btnStatistiche.Image = Properties.Resources.statistiche_24;
-            btnStatistiche.Location = new Point(1016, 54);
+            btnStatistiche.Location = new Point(1028, 54);
             btnStatistiche.Margin = new Padding(3, 2, 3, 2);
             btnStatistiche.Name = "btnStatistiche";
-            btnStatistiche.Size = new Size(55, 64);
+            btnStatistiche.Size = new Size(44, 64);
             btnStatistiche.TabIndex = 3;
             btnStatistiche.TextAlign = ContentAlignment.BottomCenter;
             btnStatistiche.TextImageRelation = TextImageRelation.ImageAboveText;
@@ -183,10 +187,10 @@
             btnStampa.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btnStampa.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             btnStampa.Image = Properties.Resources.printerImage;
-            btnStampa.Location = new Point(955, 54);
+            btnStampa.Location = new Point(978, 54);
             btnStampa.Margin = new Padding(3, 2, 3, 2);
             btnStampa.Name = "btnStampa";
-            btnStampa.Size = new Size(55, 64);
+            btnStampa.Size = new Size(44, 64);
             btnStampa.TabIndex = 4;
             btnStampa.TextAlign = ContentAlignment.BottomCenter;
             btnStampa.TextImageRelation = TextImageRelation.ImageAboveText;
@@ -310,11 +314,33 @@
             pnlUp.Size = new Size(1059, 1);
             pnlUp.TabIndex = 26;
             // 
+            // btnGift
+            // 
+            btnGift.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnGift.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
+            btnGift.Image = Properties.Resources.gift_black;
+            btnGift.Location = new Point(928, 54);
+            btnGift.Margin = new Padding(3, 2, 3, 2);
+            btnGift.Name = "btnGift";
+            btnGift.Size = new Size(44, 64);
+            btnGift.TabIndex = 29;
+            btnGift.TextAlign = ContentAlignment.BottomCenter;
+            btnGift.TextImageRelation = TextImageRelation.ImageAboveText;
+            btnGift.UseVisualStyleBackColor = true;
+            btnGift.Click += btnGift_Click;
+            // 
+            // timerGift
+            // 
+            timerGift.Enabled = true;
+            timerGift.Interval = 1000;
+            timerGift.Tick += timerGift_Tick;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1084, 621);
+            Controls.Add(btnGift);
             Controls.Add(pnlLine);
             Controls.Add(pnlUp);
             Controls.Add(pnlLeft);
@@ -369,5 +395,7 @@
         private Panel pnlRight;
         private Panel pnlLeft;
         private Panel pnlUp;
+        private Button btnGift;
+        private System.Windows.Forms.Timer timerGift;
     }
 }

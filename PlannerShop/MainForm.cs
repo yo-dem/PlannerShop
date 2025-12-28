@@ -62,7 +62,7 @@ namespace PlannerShop
             dataNascitaClientColumn.HeaderText = "COMPLEANNO";
             dataNascitaClientColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dataNascitaClientColumn.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataNascitaClientColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataNascitaClientColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
 
             var indirizzoSupplierColumn = dgvData.Columns["INDIRIZZO"];
             indirizzoSupplierColumn.DisplayIndex = 4;
@@ -756,6 +756,46 @@ namespace PlannerShop
             }
         }
 
+        private void dgvData_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (dgvData.Columns[e.ColumnIndex].Name != "COMPLEANNO")
+                return;
+
+            if (e.Value == null)
+                return;
+
+            string raw = e.Value.ToString()!; // es: "29-10"
+
+            var parts = raw.Split('-');
+
+            if (!int.TryParse(parts[0], out int giorno) ||
+                !int.TryParse(parts[1], out int mese))
+                return;
+
+            string? nomeMese = mese switch
+            {
+                1 => "Gennaio",
+                2 => "Febbraio",
+                3 => "Marzo",
+                4 => "Aprile",
+                5 => "Maggio",
+                6 => "Giugno",
+                7 => "Luglio",
+                8 => "Agosto",
+                9 => "Settembre",
+                10 => "Ottobre",
+                11 => "Novembre",
+                12 => "Dicembre",
+                _ => null
+            };
+
+            if (nomeMese == null)
+                return;
+
+            e.Value = $"{giorno:00} {nomeMese}";
+            e.FormattingApplied = true;
+        }
+
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             ClosingForm closeForm = new ClosingForm();
@@ -798,5 +838,34 @@ namespace PlannerShop
             }
         }
 
+        private void timerGift_Tick(object sender, EventArgs e)
+        {
+            if (isClienteSelected)
+            {
+                foreach (DataGridViewRow row in dgvData.Rows)
+                {
+                    if (row.Cells["COMPLEANNO"].Value != null)
+                    {
+                        string raw = row.Cells["COMPLEANNO"].Value.ToString()!; // es: "29-10"
+                        var parts = raw.Split('-');
+                        if (!int.TryParse(parts[0], out int giorno) ||
+                            !int.TryParse(parts[1], out int mese))
+                            continue;
+                        DateTime now = DateTime.Now;
+                        if (giorno >= now.Day && mese == now.Month)
+                        {
+                            btnGift.Image = Properties.Resources.gift_red;
+                            return;
+                        }
+                    }
+                }
+                btnGift.Image = Properties.Resources.gift_black;
+            }
+        }
+
+        private void btnGift_Click(object sender, EventArgs e)
+        {
+            dgvData.DataSource = ModelClienti.searchBirthdayClienti();
+        }
     }
 }

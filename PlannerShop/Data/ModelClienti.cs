@@ -26,6 +26,23 @@ namespace PlannerShop.Data
             return DBUtility.GetDBData(sql, parameters);
         }
 
+        public static DataTable searchBirthdayClienti()
+        {
+            return DBUtility.GetDBData(@"
+                SELECT *
+                FROM TCLIENTI
+                WHERE
+                    SUBSTR(TRIM(COMPLEANNO), 4, 2) = STRFTIME('%m', 'now')
+                AND CAST(SUBSTR(TRIM(COMPLEANNO), 1, 2) AS INTEGER)
+                    BETWEEN CAST(STRFTIME('%d', 'now') AS INTEGER)
+                        AND CAST(STRFTIME('%d', 'now', 'start of month', '+1 month', '-1 day') AS INTEGER)
+                ORDER BY
+                    CAST(SUBSTR(TRIM(COMPLEANNO), 1, 2) AS INTEGER),
+                    IDCLIENTE DESC
+            ");
+        }
+
+
         public static void addCliente(
             string nome,
             string cognome,
@@ -85,5 +102,6 @@ namespace PlannerShop.Data
         {
             DBUtility.SetDBData("DELETE FROM TCLIENTI WHERE IDCLIENTE=@id", new Dictionary<string, object?> { { "@id", idCliente } });
         }
+
     }
 }
