@@ -28,6 +28,20 @@ namespace PlannerShop.Data
                 new Dictionary<string, object?> { { "@idCliente", idCliente }, { "@idProdotto", idProdotto } });
         }
 
+        public static DataTable searchAcquisti(string searchTerm, string idCliente)
+        {
+            string sql = @"SELECT * FROM TACQUISTI
+                           WHERE ( MARCA LIKE @search OR NOME LIKE @search OR DESCRIZIONE LIKE @search OR ALIQUOTA LIKE @search OR QNT LIKE @search OR PREZZO_NETTO LIKE @search OR PREZZO_IVATO LIKE @search OR PREZZO_VENDITA LIKE @search OR NOTE LIKE @search )
+                           AND IDCLIENTE=@idCliente
+                           ORDER BY IDACQUISTO DESC";
+            var parameters = new Dictionary<string, object?>()
+            {
+                { "@search", "%" + searchTerm + "%" },
+                { "@idCliente", idCliente }
+            };
+            return DBUtility.getDBData(sql, parameters);
+        }
+
         public static void addAcquisto(
             string marca,
             string nome,

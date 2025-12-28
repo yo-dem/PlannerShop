@@ -48,8 +48,6 @@ namespace PlannerShop.Forms
 
         void SetPurchaseDataGridStructure()
         {
-            int fontSize = 10;
-
             var idPurchaseColumn = dgvDataAcquisto.Columns["IDACQUISTO"];
             idPurchaseColumn.DisplayIndex = 0;
             idPurchaseColumn.Visible = false;
@@ -57,7 +55,6 @@ namespace PlannerShop.Forms
             idPurchaseColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.NotSet;
             idPurchaseColumn.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft;
             idPurchaseColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            idPurchaseColumn.DefaultCellStyle.Font = new Font("Corbel", fontSize, FontStyle.Regular);
 
             var marcaPurchaseColumnn = dgvDataAcquisto.Columns["MARCA"];
             marcaPurchaseColumnn.DisplayIndex = 1;
@@ -66,7 +63,6 @@ namespace PlannerShop.Forms
             marcaPurchaseColumnn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             marcaPurchaseColumnn.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft;
             marcaPurchaseColumnn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            marcaPurchaseColumnn.DefaultCellStyle.Font = new Font("Corbel", fontSize, FontStyle.Regular);
 
             var nomePurchaseColumnn = dgvDataAcquisto.Columns["NOME"];
             nomePurchaseColumnn.DisplayIndex = 2;
@@ -75,7 +71,6 @@ namespace PlannerShop.Forms
             nomePurchaseColumnn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             nomePurchaseColumnn.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft;
             nomePurchaseColumnn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            nomePurchaseColumnn.DefaultCellStyle.Font = new Font("Corbel", fontSize, FontStyle.Regular);
 
             var descrizionePurchaseColumnn = dgvDataAcquisto.Columns["DESCRIZIONE"];
             descrizionePurchaseColumnn.DisplayIndex = 3;
@@ -84,7 +79,6 @@ namespace PlannerShop.Forms
             descrizionePurchaseColumnn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             descrizionePurchaseColumnn.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft;
             descrizionePurchaseColumnn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            descrizionePurchaseColumnn.DefaultCellStyle.Font = new Font("Corbel", fontSize, FontStyle.Bold);
 
             var qntPurchaseColumnn = dgvDataAcquisto.Columns["QNT"];
             qntPurchaseColumnn.DisplayIndex = 4;
@@ -93,7 +87,6 @@ namespace PlannerShop.Forms
             qntPurchaseColumnn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             qntPurchaseColumnn.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft;
             qntPurchaseColumnn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            qntPurchaseColumnn.DefaultCellStyle.Font = new Font("Corbel", fontSize, FontStyle.Regular);
 
             var prezzoNettoPurchaseColumn = dgvDataAcquisto.Columns["PREZZO_NETTO"];
             prezzoNettoPurchaseColumn.DisplayIndex = 5;
@@ -102,7 +95,6 @@ namespace PlannerShop.Forms
             prezzoNettoPurchaseColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.NotSet;
             prezzoNettoPurchaseColumn.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft;
             prezzoNettoPurchaseColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            prezzoNettoPurchaseColumn.DefaultCellStyle.Font = new Font("Corbel", fontSize, FontStyle.Regular);
 
             var prezzoIvatoPurchaseColumn = dgvDataAcquisto.Columns["PREZZO_IVATO"];
             prezzoIvatoPurchaseColumn.DisplayIndex = 6;
@@ -111,7 +103,6 @@ namespace PlannerShop.Forms
             prezzoIvatoPurchaseColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.NotSet;
             prezzoIvatoPurchaseColumn.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft;
             prezzoIvatoPurchaseColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            prezzoIvatoPurchaseColumn.DefaultCellStyle.Font = new Font("Corbel", fontSize, FontStyle.Regular);
 
             var prezzoVenditaPurchaseColumn = dgvDataAcquisto.Columns["PREZZO_VENDITA"];
             prezzoVenditaPurchaseColumn.DisplayIndex = 7;
@@ -120,7 +111,6 @@ namespace PlannerShop.Forms
             prezzoVenditaPurchaseColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.NotSet;
             prezzoVenditaPurchaseColumn.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft;
             prezzoVenditaPurchaseColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            prezzoVenditaPurchaseColumn.DefaultCellStyle.Font = new Font("Corbel", fontSize, FontStyle.Regular);
 
             var totalePurchaseColumn = dgvDataAcquisto.Columns["TOTALE"];
             totalePurchaseColumn.DisplayIndex = 8;
@@ -129,7 +119,6 @@ namespace PlannerShop.Forms
             totalePurchaseColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             totalePurchaseColumn.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft;
             totalePurchaseColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            totalePurchaseColumn.DefaultCellStyle.Font = new Font("Corbel", fontSize, FontStyle.Regular);
 
             var dataPurchaseColumn = dgvDataAcquisto.Columns["DATA"];
             dataPurchaseColumn.DisplayIndex = 9;
@@ -138,7 +127,6 @@ namespace PlannerShop.Forms
             dataPurchaseColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.NotSet;
             dataPurchaseColumn.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dataPurchaseColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataPurchaseColumn.DefaultCellStyle.Font = new Font("Corbel", fontSize, FontStyle.Regular);
 
             var idClientPurchaseColumn = dgvDataAcquisto.Columns["IDCLIENTE"];
             idClientPurchaseColumn.DisplayIndex = 10;
@@ -147,7 +135,6 @@ namespace PlannerShop.Forms
             idClientPurchaseColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.NotSet;
             idClientPurchaseColumn.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
             idClientPurchaseColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            idClientPurchaseColumn.DefaultCellStyle.Font = new Font("Corbel", fontSize, FontStyle.Regular);
 
             var idProdottoPurchaseColumn = dgvDataAcquisto.Columns["IDPRODOTTO"];
             idProdottoPurchaseColumn.DisplayIndex = 11;
@@ -156,7 +143,6 @@ namespace PlannerShop.Forms
             idProdottoPurchaseColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.NotSet;
             idProdottoPurchaseColumn.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
             idProdottoPurchaseColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            idProdottoPurchaseColumn.DefaultCellStyle.Font = new Font("Corbel", fontSize, FontStyle.Regular);
 
             var idServizioPurchaseColumn = dgvDataAcquisto.Columns["IDSERVIZIO"];
             idServizioPurchaseColumn.DisplayIndex = 12;
@@ -165,7 +151,6 @@ namespace PlannerShop.Forms
             idServizioPurchaseColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.NotSet;
             idServizioPurchaseColumn.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
             idServizioPurchaseColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            idServizioPurchaseColumn.DefaultCellStyle.Font = new Font("Corbel", fontSize, FontStyle.Regular);
 
             var aliquotaPurchaseColumn = dgvDataAcquisto.Columns["ALIQUOTA"];
             aliquotaPurchaseColumn.DisplayIndex = 13;
@@ -174,7 +159,6 @@ namespace PlannerShop.Forms
             aliquotaPurchaseColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.NotSet;
             aliquotaPurchaseColumn.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
             aliquotaPurchaseColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            aliquotaPurchaseColumn.DefaultCellStyle.Font = new Font("Corbel", fontSize, FontStyle.Regular);
 
             var notePurchaseColumn = dgvDataAcquisto.Columns["NOTE"];
             notePurchaseColumn.DisplayIndex = 14;
@@ -183,7 +167,6 @@ namespace PlannerShop.Forms
             notePurchaseColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.NotSet;
             notePurchaseColumn.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
             notePurchaseColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            notePurchaseColumn.DefaultCellStyle.Font = new Font("Corbel", fontSize, FontStyle.Bold);
 
             var timestampPurchaseColumn = dgvDataAcquisto.Columns["TIMESTAMP"];
             timestampPurchaseColumn.DisplayIndex = 15;
@@ -192,7 +175,6 @@ namespace PlannerShop.Forms
             timestampPurchaseColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             timestampPurchaseColumn.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
             timestampPurchaseColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            timestampPurchaseColumn.DefaultCellStyle.Font = new Font("Corbel", fontSize, FontStyle.Bold);
         }
 
         private void DgvDataAcquisto_RowPrePaint(object? sender, DataGridViewRowPrePaintEventArgs e)
@@ -215,6 +197,19 @@ namespace PlannerShop.Forms
             row.DefaultCellStyle.BackColor = groupColors[timestampValue];
         }
 
+        private void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+            dgvDataAcquisto.DataSource = ModelAcquisti.searchAcquisti(txtSearch.Text, idCliente);
+        }
 
+        private void PurchaseViewForm_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (char.IsLetterOrDigit(e.KeyChar) || char.IsPunctuation(e.KeyChar) || char.IsSymbol(e.KeyChar))
+            {
+                txtSearch.Focus();
+                txtSearch.AppendText(e.KeyChar.ToString());
+                e.Handled = true;
+            }
+        }
     }
 }

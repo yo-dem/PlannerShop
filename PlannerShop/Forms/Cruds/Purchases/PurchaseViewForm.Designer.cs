@@ -36,13 +36,11 @@
             lblIndirizzo = new Label();
             lblName = new Label();
             grpAcquisti = new GroupBox();
-            pnlSearch = new Panel();
             searchImage = new PictureBox();
-            txtSearch = new TextBox();
             dgvDataAcquisto = new DataGridView();
+            txtSearch = new TextBox();
             grpCliente.SuspendLayout();
             grpAcquisti.SuspendLayout();
-            pnlSearch.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)searchImage).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvDataAcquisto).BeginInit();
             SuspendLayout();
@@ -53,7 +51,7 @@
             pnlTop.Dock = DockStyle.Top;
             pnlTop.Location = new Point(0, 0);
             pnlTop.Name = "pnlTop";
-            pnlTop.Size = new Size(948, 10);
+            pnlTop.Size = new Size(984, 10);
             pnlTop.TabIndex = 27;
             // 
             // grpCliente
@@ -67,7 +65,7 @@
             grpCliente.Margin = new Padding(3, 2, 3, 2);
             grpCliente.Name = "grpCliente";
             grpCliente.Padding = new Padding(3, 2, 3, 2);
-            grpCliente.Size = new Size(926, 106);
+            grpCliente.Size = new Size(962, 106);
             grpCliente.TabIndex = 28;
             grpCliente.TabStop = false;
             grpCliente.Text = "CLIENTE";
@@ -112,53 +110,29 @@
             // grpAcquisti
             // 
             grpAcquisti.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            grpAcquisti.Controls.Add(pnlSearch);
+            grpAcquisti.Controls.Add(searchImage);
             grpAcquisti.Controls.Add(dgvDataAcquisto);
+            grpAcquisti.Controls.Add(txtSearch);
             grpAcquisti.Location = new Point(10, 125);
             grpAcquisti.Margin = new Padding(3, 2, 3, 2);
             grpAcquisti.Name = "grpAcquisti";
             grpAcquisti.Padding = new Padding(3, 2, 3, 2);
-            grpAcquisti.Size = new Size(926, 428);
+            grpAcquisti.Size = new Size(962, 428);
             grpAcquisti.TabIndex = 29;
             grpAcquisti.TabStop = false;
             grpAcquisti.Text = "ACQUISTI";
-            // 
-            // pnlSearch
-            // 
-            pnlSearch.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            pnlSearch.BackColor = Color.White;
-            pnlSearch.BorderStyle = BorderStyle.FixedSingle;
-            pnlSearch.Controls.Add(searchImage);
-            pnlSearch.Controls.Add(txtSearch);
-            pnlSearch.Location = new Point(6, 21);
-            pnlSearch.Name = "pnlSearch";
-            pnlSearch.Size = new Size(914, 34);
-            pnlSearch.TabIndex = 24;
             // 
             // searchImage
             // 
             searchImage.BackColor = Color.White;
             searchImage.Image = Properties.Resources.searchWhiteImage;
-            searchImage.Location = new Point(7, 4);
+            searchImage.Location = new Point(6, 19);
             searchImage.Margin = new Padding(3, 2, 3, 2);
             searchImage.Name = "searchImage";
             searchImage.Size = new Size(24, 24);
             searchImage.SizeMode = PictureBoxSizeMode.AutoSize;
             searchImage.TabIndex = 22;
             searchImage.TabStop = false;
-            // 
-            // txtSearch
-            // 
-            txtSearch.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            txtSearch.BorderStyle = BorderStyle.None;
-            txtSearch.Font = new Font("Corbel", 14F);
-            txtSearch.Location = new Point(37, 5);
-            txtSearch.Margin = new Padding(3, 2, 3, 2);
-            txtSearch.Name = "txtSearch";
-            txtSearch.Size = new Size(872, 23);
-            txtSearch.TabIndex = 1;
-            txtSearch.TabStop = false;
-            txtSearch.TextAlign = HorizontalAlignment.Center;
             // 
             // dgvDataAcquisto
             // 
@@ -168,28 +142,42 @@
             dgvDataAcquisto.Margin = new Padding(3, 2, 3, 2);
             dgvDataAcquisto.Name = "dgvDataAcquisto";
             dgvDataAcquisto.RowHeadersWidth = 51;
-            dgvDataAcquisto.Size = new Size(914, 364);
+            dgvDataAcquisto.Size = new Size(950, 364);
             dgvDataAcquisto.TabIndex = 7;
             // 
-            // PurchaseClientEditForm
+            // txtSearch
+            // 
+            txtSearch.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            txtSearch.BorderStyle = BorderStyle.None;
+            txtSearch.Font = new Font("Corbel", 14F);
+            txtSearch.Location = new Point(6, 20);
+            txtSearch.Margin = new Padding(3, 2, 3, 2);
+            txtSearch.Name = "txtSearch";
+            txtSearch.Size = new Size(950, 23);
+            txtSearch.TabIndex = 1;
+            txtSearch.TabStop = false;
+            txtSearch.TextAlign = HorizontalAlignment.Center;
+            txtSearch.TextChanged += txtSearch_TextChanged;
+            // 
+            // PurchaseViewForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(948, 640);
+            ClientSize = new Size(984, 640);
             Controls.Add(grpAcquisti);
             Controls.Add(grpCliente);
             Controls.Add(pnlTop);
             Icon = (Icon)resources.GetObject("$this.Icon");
-            MinimumSize = new Size(964, 679);
-            Name = "PurchaseClientEditForm";
+            KeyPreview = true;
+            MinimumSize = new Size(1000, 679);
+            Name = "PurchaseViewForm";
             StartPosition = FormStartPosition.CenterParent;
             Text = "ACQUISTI CLIENTE";
-            WindowState = FormWindowState.Maximized;
+            KeyPress += PurchaseViewForm_KeyPress;
             grpCliente.ResumeLayout(false);
             grpCliente.PerformLayout();
             grpAcquisti.ResumeLayout(false);
-            pnlSearch.ResumeLayout(false);
-            pnlSearch.PerformLayout();
+            grpAcquisti.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)searchImage).EndInit();
             ((System.ComponentModel.ISupportInitialize)dgvDataAcquisto).EndInit();
             ResumeLayout(false);
@@ -205,7 +193,6 @@
         private Label lblName;
         private GroupBox grpAcquisti;
         private DataGridView dgvDataAcquisto;
-        private Panel pnlSearch;
         private PictureBox searchImage;
         private TextBox txtSearch;
     }
