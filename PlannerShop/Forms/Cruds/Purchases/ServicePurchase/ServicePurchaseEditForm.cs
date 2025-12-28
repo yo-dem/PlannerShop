@@ -92,6 +92,12 @@ namespace PlannerShop.Forms
         // EVENTI
         // =========================
 
+        private void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+            dtServiziTemp = ModelServizi.searchServizi(txtSearch.Text);
+            dgvData.DataSource = dtServiziTemp;
+        }
+
         private void dgvData_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0) return;
@@ -144,9 +150,7 @@ namespace PlannerShop.Forms
             dtAcquistiTemp.Rows.Remove(row);
         }
 
-        private void dgvDataAcquisto_CellFormatting(
-            object sender,
-            DataGridViewCellFormattingEventArgs e)
+        private void dgvDataAcquisto_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             if (e.RowIndex < 0) return;
 
@@ -180,7 +184,7 @@ namespace PlannerShop.Forms
                     timeStamp.ToString()
                 );
 
-            SavePurchase(dtAcquistiTemp, originali);
+            SaveServicePurchase(dtAcquistiTemp, originali);
             Close();
         }
 
@@ -193,9 +197,7 @@ namespace PlannerShop.Forms
         // SALVATAGGIO
         // =========================
 
-        private void SavePurchase(
-            DataTable acquistiTemp,
-            DataTable acquistiOriginali)
+        private void SaveServicePurchase(DataTable acquistiTemp, DataTable acquistiOriginali)
         {
             foreach (DataRow row in acquistiTemp.Rows)
             {
@@ -470,12 +472,6 @@ namespace PlannerShop.Forms
             timestampPurchaseColumn.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
             timestampPurchaseColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             timestampPurchaseColumn.DefaultCellStyle.Font = new Font("Corbel", fontSize, FontStyle.Bold);
-        }
-
-        private void txtSearch_TextChanged(object sender, EventArgs e)
-        {
-            dtServiziTemp = ModelServizi.searchServizi(txtSearch.Text);
-            dgvData.DataSource = dtServiziTemp;
         }
 
         private void PurchaseEditForm_KeyPress(object sender, KeyPressEventArgs e)
