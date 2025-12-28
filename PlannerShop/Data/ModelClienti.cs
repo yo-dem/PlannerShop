@@ -6,12 +6,12 @@ namespace PlannerShop.Data
     {
         public static DataTable getClienteById(string idCliente)
         {
-            return DBUtility.getDBData("SELECT * FROM TCLIENTI WHERE IDCLIENTE=@id", new Dictionary<string, object?> { { "@id", idCliente } });
+            return DBUtility.GetDBData("SELECT * FROM TCLIENTI WHERE IDCLIENTE=@id", new Dictionary<string, object?> { { "@id", idCliente } });
         }
 
         public static DataTable getClienti()
         {
-            return DBUtility.getDBData("SELECT * FROM TCLIENTI ORDER BY IDCLIENTE DESC");
+            return DBUtility.GetDBData("SELECT * FROM TCLIENTI ORDER BY IDCLIENTE DESC");
         }
 
         public static DataTable searchClienti(string searchTerm)
@@ -23,7 +23,7 @@ namespace PlannerShop.Data
             {
                 { "@term", "%" + searchTerm + "%" }
             };
-            return DBUtility.getDBData(sql, parameters);
+            return DBUtility.GetDBData(sql, parameters);
         }
 
         public static void addCliente(
@@ -49,7 +49,7 @@ namespace PlannerShop.Data
                 { "@note", note }
             };
 
-            DBUtility.setDBData(sql, parameters);
+            DBUtility.SetDBData(sql, parameters);
         }
 
         public static void editCliente(
@@ -78,12 +78,12 @@ namespace PlannerShop.Data
                 { "@id", idCliente }
             };
 
-            DBUtility.setDBData(sql, parameters);
+            DBUtility.SetDBData(sql, parameters);
         }
 
         public static void deleteCliente(string? idCliente)
         {
-            DBUtility.setDBData("DELETE FROM TCLIENTI WHERE IDCLIENTE=@id", new Dictionary<string, object?> { { "@id", idCliente } });
+            DBUtility.SetDBData("DELETE FROM TCLIENTI WHERE IDCLIENTE=@id", new Dictionary<string, object?> { { "@id", idCliente } });
         }
     }
 }

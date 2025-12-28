@@ -8,17 +8,17 @@ namespace PlannerShop.Data
         
         public static DataTable getProdottoById(string idProdotto)
         {
-            return DBUtility.getDBData("SELECT * FROM TPRODOTTI WHERE IDPRODOTTO=@id", new Dictionary<string, object?> { { "@id", idProdotto } });
+            return DBUtility.GetDBData("SELECT * FROM TPRODOTTI WHERE IDPRODOTTO=@id", new Dictionary<string, object?> { { "@id", idProdotto } });
         }
 
         public static DataTable getProdotti()
         {
-            return DBUtility.getDBData("SELECT * FROM TPRODOTTI ORDER BY IDPRODOTTO DESC");
+            return DBUtility.GetDBData("SELECT * FROM TPRODOTTI ORDER BY IDPRODOTTO DESC");
         }
 
         public static DataTable getExistingProdotti()
         {
-            return DBUtility.getDBData("SELECT * FROM TPRODOTTI WHERE QNT <> '0' ORDER BY IDPRODOTTO DESC");
+            return DBUtility.GetDBData("SELECT * FROM TPRODOTTI WHERE QNT <> '0' ORDER BY IDPRODOTTO DESC");
         }
 
         public static DataTable searchProdotti(string searchTerm)
@@ -30,7 +30,7 @@ namespace PlannerShop.Data
             {
                 { "@search", "%" + searchTerm + "%" }
             };
-            return DBUtility.getDBData(sql, parameters);
+            return DBUtility.GetDBData(sql, parameters);
         }
 
         public static void addProdotto(
@@ -63,7 +63,7 @@ namespace PlannerShop.Data
                 { "@idProd", idProdotto ?? (object?)DBNull.Value }
             };
 
-            DBUtility.setDBData(sql, parameters);
+            DBUtility.SetDBData(sql, parameters);
         }
 
         public static void editProdotto(
@@ -96,19 +96,19 @@ namespace PlannerShop.Data
                 { "@idProd", idProdotto }
             };
 
-            DBUtility.setDBData(sql, parameters);
+            DBUtility.SetDBData(sql, parameters);
         }
 
         public static void updateQuantity(string idProdotto, int newQnt)
         {
             string sql = @"UPDATE TPRODOTTI SET QNT = @newQnt WHERE IDPRODOTTO = @id";
-            DBUtility.setDBData(sql, new Dictionary<string, object?> { { "@newQnt", newQnt }, { "@id", idProdotto } });
+            DBUtility.SetDBData(sql, new Dictionary<string, object?> { { "@newQnt", newQnt }, { "@id", idProdotto } });
         }
 
         public static void deleteProdotto(string? idProdotto)
         {
             string sql = @"DELETE FROM TPRODOTTI WHERE IDPRODOTTO=@id";
-            DBUtility.setDBData(sql, new Dictionary<string, object?> { { "@id", idProdotto } });
+            DBUtility.SetDBData(sql, new Dictionary<string, object?> { { "@id", idProdotto } });
         }
     }
 }

@@ -8,12 +8,12 @@ namespace PlannerShop.Data
         
         public static DataTable getServizioById(string idServizio)
         {
-            return DBUtility.getDBData("SELECT * FROM TSERVIZI WHERE IDSERVIZIO=@id", new Dictionary<string, object?> { { "@id", idServizio } });
+            return DBUtility.GetDBData("SELECT * FROM TSERVIZI WHERE IDSERVIZIO=@id", new Dictionary<string, object?> { { "@id", idServizio } });
         }
 
         public static DataTable getServizi()
         {
-            return DBUtility.getDBData("SELECT * FROM TSERVIZI ORDER BY IDSERVIZIO DESC");
+            return DBUtility.GetDBData("SELECT * FROM TSERVIZI ORDER BY IDSERVIZIO DESC");
         }
 
         public static DataTable searchServizi(string searchTerm)
@@ -25,7 +25,7 @@ namespace PlannerShop.Data
             {
                 { "@search", "%" + searchTerm + "%" }
             };
-            return DBUtility.getDBData(sql, parameters);
+            return DBUtility.GetDBData(sql, parameters);
         }
 
         public static void addServizio(
@@ -56,7 +56,7 @@ namespace PlannerShop.Data
                 { "@idServ", idServizio ?? (object?)DBNull.Value }
             };
 
-            DBUtility.setDBData(sql, parameters);
+            DBUtility.SetDBData(sql, parameters);
         }
 
         public static void editServizio(
@@ -87,13 +87,13 @@ namespace PlannerShop.Data
                 { "@idServ", idServizio }
             };
 
-            DBUtility.setDBData(sql, parameters);
+            DBUtility.SetDBData(sql, parameters);
         }
 
         public static void deleteServizio(string idServizio)
         {
             string sql = @"DELETE FROM TSERVIZI WHERE IDSERVIZIO=@idServ";
-            DBUtility.setDBData(sql, new Dictionary<string, object?> { { "@idServ", idServizio } });
+            DBUtility.SetDBData(sql, new Dictionary<string, object?> { { "@idServ", idServizio } });
         }
     }
 }

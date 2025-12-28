@@ -6,22 +6,22 @@ namespace PlannerShop.Data
     {
         public static bool GetAccess(string data)
         {
-            DataTable dt = DBUtility.getDBData("SELECT * FROM TPWD WHERE PASSWORD = @pwd", new Dictionary<string, object?> { { "@pwd", data } });
+            DataTable dt = DBUtility.GetDBData("SELECT * FROM TPWD WHERE PASSWORD = @pwd", new Dictionary<string, object?> { { "@pwd", data } });
             return dt.Rows.Count > 0;
         }
         public static void ChangePwd(string newPin)
         {
-            DBUtility.setDBData("UPDATE TPwd SET Password=@pwd WHERE idPwd='1'", new Dictionary<string, object?> { { "@pwd", newPin } });
+            DBUtility.SetDBData("UPDATE TPwd SET Password=@pwd WHERE idPwd='1'", new Dictionary<string, object?> { { "@pwd", newPin } });
         }
         public static bool IsEnabled()
         {
-            DataTable dt = DBUtility.getDBData("SELECT ENABLED FROM TPWD");
+            DataTable dt = DBUtility.GetDBData("SELECT ENABLED FROM TPWD");
             if (dt.Rows.Count == 0) return false;
             return dt.Rows[0][0].ToString()?.ToUpper() == "TRUE";
         }
         public static void SetEnabled(bool b)
         {
-            DBUtility.setDBData("UPDATE TPwd SET ENABLED=@val", new Dictionary<string, object?> { { "@val", b ? "TRUE" : "FALSE" } });
+            DBUtility.SetDBData("UPDATE TPwd SET ENABLED=@val", new Dictionary<string, object?> { { "@val", b ? "TRUE" : "FALSE" } });
         }
     }
 }

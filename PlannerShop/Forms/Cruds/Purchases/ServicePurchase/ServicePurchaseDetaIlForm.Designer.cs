@@ -263,7 +263,6 @@
         private Button btnCancel;
         private Button btnOk;
         private Label lblSconto;
-        private Label lblQnt;
         private GroupBox grpPurchaseDetail;
         private GroupBox groupBox1;
         private Label lblEmail;

@@ -6,11 +6,11 @@
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
-    <ApplicationIcon>easyPlannerImage.ico</ApplicationIcon>
+    <ApplicationIcon>Resources\easyPlannerImage.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="easyPlannerImage.ico" />
+    <Content Include="Resources\easyPlannerImage.ico" />
   </ItemGroup>
 
   <ItemGroup>

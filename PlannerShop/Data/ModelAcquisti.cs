@@ -7,24 +7,24 @@ namespace PlannerShop.Data
     {
         public static DataTable getAcquistoById(string idAcquisto)
         {
-            return DBUtility.getDBData("SELECT * FROM TACQUISTI WHERE IDACQUISTO=@id", new Dictionary<string, object?> { { "@id", idAcquisto } });
+            return DBUtility.GetDBData("SELECT * FROM TACQUISTI WHERE IDACQUISTO=@id", new Dictionary<string, object?> { { "@id", idAcquisto } });
         }
 
         public static DataTable getAcquistiByIdClienteAndTimestamp(string idCliente, string timeStamp)
         {
-            return DBUtility.getDBData("SELECT * FROM TACQUISTI WHERE IDCLIENTE=@idCliente AND TIMESTAMP=@ts ORDER BY IDACQUISTO DESC",
+            return DBUtility.GetDBData("SELECT * FROM TACQUISTI WHERE IDCLIENTE=@idCliente AND TIMESTAMP=@ts ORDER BY IDACQUISTO DESC",
                 new Dictionary<string, object?> { { "@idCliente", idCliente }, { "@ts", timeStamp } });
         }
 
         public static DataTable getAcquistiByIdCliente(string idCliente)
         {
-            return DBUtility.getDBData("SELECT * FROM TACQUISTI WHERE IDCLIENTE=@idCliente ORDER BY IDACQUISTO DESC",
+            return DBUtility.GetDBData("SELECT * FROM TACQUISTI WHERE IDCLIENTE=@idCliente ORDER BY IDACQUISTO DESC",
                 new Dictionary<string, object?> { { "@idCliente", idCliente } });
         }
 
         public static DataTable getAcquistiByIdClienteAndProductId(string idCliente, string idProdotto)
         {
-            return DBUtility.getDBData("SELECT * FROM TACQUISTI WHERE IDCLIENTE=@idCliente AND IDPRODOTTO=@idProdotto ORDER BY IDACQUISTO DESC",
+            return DBUtility.GetDBData("SELECT * FROM TACQUISTI WHERE IDCLIENTE=@idCliente AND IDPRODOTTO=@idProdotto ORDER BY IDACQUISTO DESC",
                 new Dictionary<string, object?> { { "@idCliente", idCliente }, { "@idProdotto", idProdotto } });
         }
 
@@ -39,7 +39,7 @@ namespace PlannerShop.Data
                 { "@search", "%" + searchTerm + "%" },
                 { "@idCliente", idCliente }
             };
-            return DBUtility.getDBData(sql, parameters);
+            return DBUtility.GetDBData(sql, parameters);
         }
 
         public static void addAcquisto(
@@ -88,19 +88,19 @@ namespace PlannerShop.Data
                 { "@ts", timeStamp }
             };
 
-            DBUtility.setDBData(sql, parameters);
+            DBUtility.SetDBData(sql, parameters);
         }
 
         public static void updateQuantity(string idProdotto, string idCliente, int newQnt)
         {
             string sql = @"UPDATE TACQUISTI SET QNT = @newQnt WHERE IDPRODOTTO = @idProd AND IDCLIENTE = @idClient";
-            DBUtility.setDBData(sql, new Dictionary<string, object?> { { "@newQnt", newQnt }, { "@idProd", idProdotto }, { "@idClient", idCliente } });
+            DBUtility.SetDBData(sql, new Dictionary<string, object?> { { "@newQnt", newQnt }, { "@idProd", idProdotto }, { "@idClient", idCliente } });
         }
 
         public static void deleteAcquisto(string? idProdotto, string? idCliente)
         {
             string sql = @"DELETE FROM TACQUISTI WHERE IDPRODOTTO=@idProd AND IDCLIENTE=@idClient";
-            DBUtility.setDBData(sql, new Dictionary<string, object?> { { "@idProd", idProdotto }, { "@idClient", idCliente } });
+            DBUtility.SetDBData(sql, new Dictionary<string, object?> { { "@idProd", idProdotto }, { "@idClient", idCliente } });
         }
     }
 }

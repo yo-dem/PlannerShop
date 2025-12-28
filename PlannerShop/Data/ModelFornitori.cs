@@ -6,12 +6,12 @@ namespace PlannerShop.Data
     {
         public static DataTable getFornitoreById(string idFornitore)
         {
-            return DBUtility.getDBData("SELECT * FROM TFORNITORI WHERE IDFORNITORE=@id", new Dictionary<string, object?> { { "@id", idFornitore } });
+            return DBUtility.GetDBData("SELECT * FROM TFORNITORI WHERE IDFORNITORE=@id", new Dictionary<string, object?> { { "@id", idFornitore } });
         }
 
         public static DataTable getFornitori()
         {
-            return DBUtility.getDBData("SELECT * FROM TFORNITORI ORDER BY IDFORNITORE DESC");
+            return DBUtility.GetDBData("SELECT * FROM TFORNITORI ORDER BY IDFORNITORE DESC");
         }
 
         public static DataTable searchFornitori(string searchTerm)
@@ -23,7 +23,7 @@ namespace PlannerShop.Data
             {
                 { "@search", "%" + searchTerm + "%" }
             };
-            return DBUtility.getDBData(sql, parameters);
+            return DBUtility.GetDBData(sql, parameters);
         }
 
         public static void addFornitore(
@@ -47,7 +47,7 @@ namespace PlannerShop.Data
                 { "@note", note }
             };
 
-            DBUtility.setDBData(sql, parameters);
+            DBUtility.SetDBData(sql, parameters);
         }
 
         public static void editFornitore(
@@ -73,12 +73,12 @@ namespace PlannerShop.Data
                 { "@id", idFornitore }
             };
 
-            DBUtility.setDBData(sql, parameters);
+            DBUtility.SetDBData(sql, parameters);
         }
 
         public static void deleteFornitore(string? idFornitore)
         {
-            DBUtility.setDBData("DELETE FROM TFORNITORI WHERE IDFORNITORE=@id", new Dictionary<string, object?> { { "@id", idFornitore } });
+            DBUtility.SetDBData("DELETE FROM TFORNITORI WHERE IDFORNITORE=@id", new Dictionary<string, object?> { { "@id", idFornitore } });
         }
     }
 }

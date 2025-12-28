@@ -48,7 +48,7 @@ namespace PlannerShop.Data
 
         private static string GetMostCommonValue(string column, string table)
         {
-            DataTable dt = DBUtility.getDBData($"SELECT {column}, COUNT(*) as Count FROM {table} GROUP BY {column} ORDER BY Count DESC LIMIT 1");
+            DataTable dt = DBUtility.GetDBData($"SELECT {column}, COUNT(*) as Count FROM {table} GROUP BY {column} ORDER BY Count DESC LIMIT 1");
             return dt.Rows.Count > 0 ? dt.Rows[0][column].ToString() : "N/A";
         }
 
