@@ -20,6 +20,9 @@
     <Compile Update="Forms\Cruds\ClientInsertForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Forms\Cruds\Purchases\ServicePurchase\ServicePurchaseDetaIlForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Forms\Cruds\ServiceEditForm.cs">
       <SubType>Form</SubType>
     </Compile>

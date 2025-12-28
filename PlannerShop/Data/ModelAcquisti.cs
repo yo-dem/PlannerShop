@@ -30,6 +30,7 @@ namespace PlannerShop.Data
 
         public static void addAcquisto(
             string marca,
+            string nome,
             string descrizione,
             string qnt,
             string prezzoNetto,
@@ -40,17 +41,23 @@ namespace PlannerShop.Data
             string dataAcquisto,
             string idCliente,
             string idProdotto,
+            string idServizio,
             string aliquota,
             string note,
             string timeStamp)
         {
 
-            string sql = @"INSERT INTO TACQUISTI (MARCA,DESCRIZIONE,QNT,PREZZO_NETTO,PREZZO_IVATO,PREZZO_VENDITA,TOTALE,SCONTO,DATA,IDCLIENTE,IDPRODOTTO,ALIQUOTA,NOTE,TIMESTAMP)
-                           VALUES(@marca,@descr,@qnt,@pn,@pi,@pv,@pt,@sconto,@data,@idCliente,@idProd,@aliq,@note,@ts)";
+            string sql = @"INSERT INTO TACQUISTI (MARCA,NOME,DESCRIZIONE,QNT,PREZZO_NETTO,PREZZO_IVATO,PREZZO_VENDITA,TOTALE,SCONTO,DATA,IDCLIENTE,IDPRODOTTO,IDSERVIZIO,ALIQUOTA,NOTE,TIMESTAMP)
+                           VALUES(@marca,@nome,@descr,@qnt,@pn,@pi,@pv,@pt,@sconto,@data,@idCliente,@idProd,@idServ,@aliq,@note,@ts)";
+
+            object? idProdParam = string.IsNullOrWhiteSpace(idProdotto) ? DBNull.Value : int.Parse(idProdotto);
+
+            object? idServParam = string.IsNullOrWhiteSpace(idServizio) ? DBNull.Value : int.Parse(idServizio);
 
             var parameters = new Dictionary<string, object?>()
             {
                 { "@marca", marca },
+                { "@nome", nome },
                 { "@descr", descrizione },
                 { "@qnt", qnt },
                 { "@pn", prezzoNetto },
@@ -60,7 +67,8 @@ namespace PlannerShop.Data
                 { "@sconto", sconto },
                 { "@data", dataAcquisto },
                 { "@idCliente", int.Parse(idCliente) },
-                { "@idProd", int.Parse(idProdotto) },
+                { "@idProd", idProdParam },
+                { "@idServ", idServParam },
                 { "@aliq", aliquota },
                 { "@note", note },
                 { "@ts", timeStamp }

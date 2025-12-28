@@ -165,8 +165,17 @@ namespace PlannerShop.Forms
             marcaPurchaseColumnn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
             marcaPurchaseColumnn.DefaultCellStyle.Font = new Font("Corbel", fontSize, FontStyle.Regular);
 
+            var nomePurchaseColumnn = dgvDataAcquisto.Columns["NOME"];
+            nomePurchaseColumnn.DisplayIndex = 2;
+            nomePurchaseColumnn.Visible = false;
+            nomePurchaseColumnn.HeaderText = "NOME";
+            nomePurchaseColumnn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            nomePurchaseColumnn.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            nomePurchaseColumnn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            nomePurchaseColumnn.DefaultCellStyle.Font = new Font("Corbel", fontSize, FontStyle.Regular);
+
             var descrizionePurchaseColumnn = dgvDataAcquisto.Columns["DESCRIZIONE"];
-            descrizionePurchaseColumnn.DisplayIndex = 2;
+            descrizionePurchaseColumnn.DisplayIndex = 3;
             descrizionePurchaseColumnn.Visible = true;
             descrizionePurchaseColumnn.HeaderText = "DESCRIZIONE";
             descrizionePurchaseColumnn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
@@ -175,7 +184,7 @@ namespace PlannerShop.Forms
             descrizionePurchaseColumnn.DefaultCellStyle.Font = new Font("Corbel", fontSize, FontStyle.Bold);
 
             var qntPurchaseColumnn = dgvDataAcquisto.Columns["QNT"];
-            qntPurchaseColumnn.DisplayIndex = 3;
+            qntPurchaseColumnn.DisplayIndex = 4;
             qntPurchaseColumnn.Visible = true;
             qntPurchaseColumnn.HeaderText = "QNT";
             qntPurchaseColumnn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
@@ -184,7 +193,7 @@ namespace PlannerShop.Forms
             qntPurchaseColumnn.DefaultCellStyle.Font = new Font("Corbel", fontSize, FontStyle.Regular);
 
             var prezzoNettoPurchaseColumn = dgvDataAcquisto.Columns["PREZZO_NETTO"];
-            prezzoNettoPurchaseColumn.DisplayIndex = 4;
+            prezzoNettoPurchaseColumn.DisplayIndex = 5;
             prezzoNettoPurchaseColumn.Visible = true;
             prezzoNettoPurchaseColumn.HeaderText = "NETTO";
             prezzoNettoPurchaseColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
@@ -193,7 +202,7 @@ namespace PlannerShop.Forms
             prezzoNettoPurchaseColumn.DefaultCellStyle.Font = new Font("Corbel", fontSize, FontStyle.Regular);
 
             var prezzoIvatoPurchaseColumn = dgvDataAcquisto.Columns["PREZZO_IVATO"];
-            prezzoIvatoPurchaseColumn.DisplayIndex = 5;
+            prezzoIvatoPurchaseColumn.DisplayIndex = 6;
             prezzoIvatoPurchaseColumn.Visible = true;
             prezzoIvatoPurchaseColumn.HeaderText = "IVATO";
             prezzoIvatoPurchaseColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
@@ -202,7 +211,7 @@ namespace PlannerShop.Forms
             prezzoIvatoPurchaseColumn.DefaultCellStyle.Font = new Font("Corbel", fontSize, FontStyle.Regular);
 
             var prezzoVenditaPurchaseColumn = dgvDataAcquisto.Columns["PREZZO_VENDITA"];
-            prezzoVenditaPurchaseColumn.DisplayIndex = 6;
+            prezzoVenditaPurchaseColumn.DisplayIndex = 7;
             prezzoVenditaPurchaseColumn.Visible = false;
             prezzoVenditaPurchaseColumn.HeaderText = "VENDITA";
             prezzoVenditaPurchaseColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
@@ -210,18 +219,18 @@ namespace PlannerShop.Forms
             prezzoVenditaPurchaseColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             prezzoVenditaPurchaseColumn.DefaultCellStyle.Font = new Font("Corbel", fontSize, FontStyle.Regular);
 
-            dgvDataAcquisto.Columns.Add("PREZZO_TOTALE", "PREZZO STANDARD");
+            dgvDataAcquisto.Columns.Add("PREZZO_TOTALE", "PREZZO");
             var totalePrezzoPurchaseColumn = dgvDataAcquisto.Columns["PREZZO_TOTALE"];
-            totalePrezzoPurchaseColumn.DisplayIndex = 6;
+            totalePrezzoPurchaseColumn.DisplayIndex = 8;
             totalePrezzoPurchaseColumn.Visible = true;
-            totalePrezzoPurchaseColumn.HeaderText = "PREZZO STANDARD";
+            totalePrezzoPurchaseColumn.HeaderText = "PREZZO";
             totalePrezzoPurchaseColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             totalePrezzoPurchaseColumn.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft;
             totalePrezzoPurchaseColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             totalePrezzoPurchaseColumn.DefaultCellStyle.Font = new Font("Corbel", fontSize, FontStyle.Regular);
 
             var totalePurchaseColumn = dgvDataAcquisto.Columns["TOTALE"];
-            totalePurchaseColumn.DisplayIndex = 7;
+            totalePurchaseColumn.DisplayIndex = 9;
             totalePurchaseColumn.Visible = true;
             totalePurchaseColumn.HeaderText = "TOTALE";
             totalePurchaseColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
@@ -230,7 +239,7 @@ namespace PlannerShop.Forms
             totalePurchaseColumn.DefaultCellStyle.Font = new Font("Corbel", fontSize, FontStyle.Regular);
 
             var dataPurchaseColumn = dgvDataAcquisto.Columns["DATA"];
-            dataPurchaseColumn.DisplayIndex = 8;
+            dataPurchaseColumn.DisplayIndex = 10;
             dataPurchaseColumn.Visible = false;
             dataPurchaseColumn.HeaderText = "DATA";
             dataPurchaseColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
@@ -239,7 +248,7 @@ namespace PlannerShop.Forms
             dataPurchaseColumn.DefaultCellStyle.Font = new Font("Corbel", fontSize, FontStyle.Regular);
 
             var idClientPurchaseColumn = dgvDataAcquisto.Columns["IDCLIENTE"];
-            idClientPurchaseColumn.DisplayIndex = 9;
+            idClientPurchaseColumn.DisplayIndex = 11;
             idClientPurchaseColumn.Visible = false;
             idClientPurchaseColumn.HeaderText = "IDCLIENTE";
             idClientPurchaseColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
@@ -248,7 +257,7 @@ namespace PlannerShop.Forms
             idClientPurchaseColumn.DefaultCellStyle.Font = new Font("Corbel", fontSize, FontStyle.Regular);
 
             var idProdottoPurchaseColumn = dgvDataAcquisto.Columns["IDPRODOTTO"];
-            idProdottoPurchaseColumn.DisplayIndex = 10;
+            idProdottoPurchaseColumn.DisplayIndex = 12;
             idProdottoPurchaseColumn.Visible = false;
             idProdottoPurchaseColumn.HeaderText = "IDPRODOTTO";
             idProdottoPurchaseColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
@@ -256,8 +265,17 @@ namespace PlannerShop.Forms
             idProdottoPurchaseColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             idProdottoPurchaseColumn.DefaultCellStyle.Font = new Font("Corbel", fontSize, FontStyle.Regular);
 
+            var idServizioPurchaseColumn = dgvDataAcquisto.Columns["IDSERVIZIO"];
+            idServizioPurchaseColumn.DisplayIndex = 13;
+            idServizioPurchaseColumn.Visible = false;
+            idServizioPurchaseColumn.HeaderText = "IDSERVIZIO";
+            idServizioPurchaseColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            idServizioPurchaseColumn.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            idServizioPurchaseColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            idServizioPurchaseColumn.DefaultCellStyle.Font = new Font("Corbel", fontSize, FontStyle.Regular);
+
             var aliquotaPurchaseColumn = dgvDataAcquisto.Columns["ALIQUOTA"];
-            aliquotaPurchaseColumn.DisplayIndex = 11;
+            aliquotaPurchaseColumn.DisplayIndex = 14;
             aliquotaPurchaseColumn.Visible = false;
             aliquotaPurchaseColumn.HeaderText = "IVA";
             aliquotaPurchaseColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
@@ -266,7 +284,7 @@ namespace PlannerShop.Forms
             aliquotaPurchaseColumn.DefaultCellStyle.Font = new Font("Corbel", fontSize, FontStyle.Regular);
 
             var notePurchaseColumn = dgvDataAcquisto.Columns["NOTE"];
-            notePurchaseColumn.DisplayIndex = 12;
+            notePurchaseColumn.DisplayIndex = 15;
             notePurchaseColumn.Visible = false;
             notePurchaseColumn.HeaderText = "NOTE";
             notePurchaseColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
@@ -275,7 +293,7 @@ namespace PlannerShop.Forms
             notePurchaseColumn.DefaultCellStyle.Font = new Font("Corbel", fontSize, FontStyle.Bold);
 
             var timestampPurchaseColumn = dgvDataAcquisto.Columns["TIMESTAMP"];
-            timestampPurchaseColumn.DisplayIndex = 13;
+            timestampPurchaseColumn.DisplayIndex = 16;
             timestampPurchaseColumn.Visible = false;
             timestampPurchaseColumn.HeaderText = "TIMESTAMP";
             timestampPurchaseColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
@@ -421,48 +439,58 @@ namespace PlannerShop.Forms
 
         private void btnOk_Click(object sender, EventArgs e)
         {
-            if (dgvDataAcquisto.Rows.Count == 0)
+            if (dtAcquistiTemp.Rows.Count == 0)
             {
-                this.DialogResult = DialogResult.Cancel;
+                DialogResult = DialogResult.Cancel;
                 return;
             }
 
-            UpdateProductQnt(dtProdottiTemp);
+            UpdateProductStock(dtProdottiTemp);
 
             DataTable originalAcquisti =
                 ModelAcquisti.getAcquistiByIdClienteAndTimestamp(
-                    idCliente, timeStamp.ToString());
+                    idCliente,
+                    timeStamp.ToString()
+                );
 
-            SavePurchase(dtAcquistiTemp, originalAcquisti, idCliente);
+            SaveProductPurchases(dtAcquistiTemp, originalAcquisti, idCliente);
 
-            this.Close();
+            Close();
         }
 
-        private void UpdateProductQnt(DataTable prodottiTemp)
+
+        private void UpdateProductStock(DataTable prodottiTemp)
         {
             foreach (DataRow row in prodottiTemp.Rows)
             {
-                string id = row["IDPRODOTTO"]?.ToString() ?? string.Empty;
-                int qnt = Convert.ToInt32(row["QNT"]);
+                string idProdotto = row["IDPRODOTTO"]?.ToString() ?? string.Empty;
 
-                ModelProdotti.updateQuantity(id, qnt);
+                if (!int.TryParse(row["QNT"]?.ToString(), out int qnt))
+                    continue;
+
+                ModelProdotti.updateQuantity(idProdotto, qnt);
             }
         }
 
-        private void SavePurchase(DataTable acquistiTemp, DataTable acquistiOriginali, string idCliente)
+
+        private void SaveProductPurchases(DataTable acquistiTemp, DataTable acquistiOriginali, string idCliente)
         {
             foreach (DataRow row in acquistiTemp.Rows)
             {
                 string idProdotto = row["IDPRODOTTO"]?.ToString() ?? string.Empty;
-                int qnt = Convert.ToInt32(row["QNT"]);
 
-                DataRow[] found =
-                    acquistiOriginali.Select($"IDPRODOTTO = '{idProdotto}'");
+                if (!int.TryParse(row["QNT"]?.ToString(), out int qnt) || qnt <= 0)
+                    continue;
 
-                if (found.Length == 0)
+                bool exists = acquistiOriginali
+                    .Select($"IDPRODOTTO = '{idProdotto}'")
+                    .Length > 0;
+
+                if (!exists)
                 {
                     ModelAcquisti.addAcquisto(
                         row["MARCA"]?.ToString() ?? string.Empty,
+                        string.Empty, // NOME non usato per prodotti
                         row["DESCRIZIONE"]?.ToString() ?? string.Empty,
                         qnt.ToString(),
                         row["PREZZO_NETTO"]?.ToString() ?? string.Empty,
@@ -473,6 +501,7 @@ namespace PlannerShop.Forms
                         row["DATA"]?.ToString() ?? string.Empty,
                         idCliente,
                         idProdotto,
+                        string.Empty, // IDSERVIZIO = NULL
                         row["ALIQUOTA"]?.ToString() ?? string.Empty,
                         row["NOTE"]?.ToString() ?? string.Empty,
                         row["TIMESTAMP"]?.ToString() ?? string.Empty
@@ -485,31 +514,30 @@ namespace PlannerShop.Forms
             }
         }
 
+
         private string calculateSconto(DataRow row)
         {
-            bool okPrezzo = decimal.TryParse(
-                row["PREZZO_VENDITA"]?.ToString()?.Trim().Replace("€", ""),
-                out decimal prezzoUnitario);
-
-            bool okTotale = decimal.TryParse(
-                row["TOTALE"]?.ToString()?.Trim().Replace("€", ""),
-                out decimal totalePagato);
-
-            bool okQnt = int.TryParse(
-                row["QNT"]?.ToString(),
-                out int qnt);
-
-            if (!okPrezzo || !okTotale || !okQnt || prezzoUnitario <= 0 || qnt <= 0)
+            if (!decimal.TryParse(
+                    row["PREZZO_VENDITA"]?.ToString()?.Replace("€", "").Trim(),
+                    out decimal prezzoUnitario) ||
+                !decimal.TryParse(
+                    row["TOTALE"]?.ToString()?.Replace("€", "").Trim(),
+                    out decimal totalePagato) ||
+                !int.TryParse(row["QNT"]?.ToString(), out int qnt) ||
+                prezzoUnitario <= 0 || qnt <= 0)
+            {
                 return "0%";
+            }
 
             decimal totaleTeorico = prezzoUnitario * qnt;
 
             if (totalePagato >= totaleTeorico)
                 return "0%";
 
-            decimal scontoPercentuale = (totaleTeorico - totalePagato) / totaleTeorico * 100m;
+            decimal sconto =
+                (totaleTeorico - totalePagato) / totaleTeorico * 100m;
 
-            return scontoPercentuale.ToString("0.00") + "%";
+            return sconto.ToString("0.00") + "%";
         }
 
         private void btnCancel_Click(object sender, EventArgs e)

@@ -82,7 +82,6 @@ namespace PlannerShop.Forms
             bool res0 = true;
             bool res1 = true;
             bool res2 = true;
-            bool res3 = true;
 
             if (String.IsNullOrEmpty(txtNome.Text))
             {

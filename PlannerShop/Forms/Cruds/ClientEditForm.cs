@@ -155,7 +155,7 @@ namespace PlannerShop.Forms
             catch { }
         }
 
-        private void btnPurchase_Click(object sender, EventArgs e)
+        private void btnProductPurchase_Click(object sender, EventArgs e)
         {
             ProductPurchaseEditForm purchaseEditForm = new ProductPurchaseEditForm(idCliente);
             DialogResult result = purchaseEditForm.ShowDialog();
@@ -165,9 +165,19 @@ namespace PlannerShop.Forms
             }
         }
 
+        private void btnServicePurchase_Click(object sender, EventArgs e)
+        {
+            ServicePurchaseEditForm purchaseEditForm = new ServicePurchaseEditForm(idCliente);
+            DialogResult result = purchaseEditForm.ShowDialog();
+            if (result == DialogResult.Cancel)
+            {
+                //this.Close();
+            }
+        }
+
         private void btnViewPurchase_Click(object sender, EventArgs e)
         {
-            ProductPurchaseClientEditForm purchaseClientEditForm = new ProductPurchaseClientEditForm(idCliente);
+            PurchaseViewForm purchaseClientEditForm = new PurchaseViewForm(idCliente);
             DialogResult result = purchaseClientEditForm.ShowDialog();
             if (result == DialogResult.Cancel)
             {

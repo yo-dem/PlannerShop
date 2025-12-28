@@ -1,6 +1,6 @@
 ﻿namespace PlannerShop.Forms
 {
-    partial class ProductPurchaseEditForm
+    partial class ServicePurchaseEditForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,14 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ProductPurchaseEditForm));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ServicePurchaseEditForm));
             dgvData = new DataGridView();
             grpCliente = new GroupBox();
             lblEmail = new Label();
             lblTelefono = new Label();
             lblIndirizzo = new Label();
             lblName = new Label();
-            grpProdotti = new GroupBox();
+            grpServizi = new GroupBox();
             searchImage = new PictureBox();
             txtSearch = new TextBox();
             grpAcquisti = new GroupBox();
@@ -45,7 +45,7 @@
             btnOk = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvData).BeginInit();
             grpCliente.SuspendLayout();
-            grpProdotti.SuspendLayout();
+            grpServizi.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)searchImage).BeginInit();
             grpAcquisti.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvDataAcquisto).BeginInit();
@@ -59,7 +59,7 @@
             dgvData.Margin = new Padding(3, 2, 3, 2);
             dgvData.Name = "dgvData";
             dgvData.RowHeadersWidth = 51;
-            dgvData.Size = new Size(920, 171);
+            dgvData.Size = new Size(950, 171);
             dgvData.TabIndex = 6;
             dgvData.CellDoubleClick += dgvData_CellDoubleClick;
             // 
@@ -74,7 +74,7 @@
             grpCliente.Margin = new Padding(3, 2, 3, 2);
             grpCliente.Name = "grpCliente";
             grpCliente.Padding = new Padding(3, 2, 3, 2);
-            grpCliente.Size = new Size(932, 106);
+            grpCliente.Size = new Size(962, 106);
             grpCliente.TabIndex = 24;
             grpCliente.TabStop = false;
             grpCliente.Text = "CLIENTE";
@@ -116,19 +116,19 @@
             lblName.TabIndex = 0;
             lblName.Text = "NOME";
             // 
-            // grpProdotti
+            // grpServizi
             // 
-            grpProdotti.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            grpProdotti.Controls.Add(searchImage);
-            grpProdotti.Controls.Add(txtSearch);
-            grpProdotti.Location = new Point(10, 125);
-            grpProdotti.Margin = new Padding(3, 2, 3, 2);
-            grpProdotti.Name = "grpProdotti";
-            grpProdotti.Padding = new Padding(3, 2, 3, 2);
-            grpProdotti.Size = new Size(932, 234);
-            grpProdotti.TabIndex = 25;
-            grpProdotti.TabStop = false;
-            grpProdotti.Text = "PRODOTTI";
+            grpServizi.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            grpServizi.Controls.Add(searchImage);
+            grpServizi.Controls.Add(txtSearch);
+            grpServizi.Location = new Point(10, 125);
+            grpServizi.Margin = new Padding(3, 2, 3, 2);
+            grpServizi.Name = "grpServizi";
+            grpServizi.Padding = new Padding(3, 2, 3, 2);
+            grpServizi.Size = new Size(962, 234);
+            grpServizi.TabIndex = 25;
+            grpServizi.TabStop = false;
+            grpServizi.Text = "SERVIZI";
             // 
             // searchImage
             // 
@@ -150,7 +150,7 @@
             txtSearch.Location = new Point(5, 20);
             txtSearch.Margin = new Padding(3, 2, 3, 2);
             txtSearch.Name = "txtSearch";
-            txtSearch.Size = new Size(919, 23);
+            txtSearch.Size = new Size(949, 23);
             txtSearch.TabIndex = 1;
             txtSearch.TabStop = false;
             txtSearch.TextAlign = HorizontalAlignment.Center;
@@ -164,7 +164,7 @@
             grpAcquisti.Margin = new Padding(3, 2, 3, 2);
             grpAcquisti.Name = "grpAcquisti";
             grpAcquisti.Padding = new Padding(3, 2, 3, 2);
-            grpAcquisti.Size = new Size(932, 189);
+            grpAcquisti.Size = new Size(962, 189);
             grpAcquisti.TabIndex = 25;
             grpAcquisti.TabStop = false;
             grpAcquisti.Text = "ACQUISTI";
@@ -177,7 +177,7 @@
             dgvDataAcquisto.Margin = new Padding(3, 2, 3, 2);
             dgvDataAcquisto.Name = "dgvDataAcquisto";
             dgvDataAcquisto.RowHeadersWidth = 51;
-            dgvDataAcquisto.Size = new Size(922, 164);
+            dgvDataAcquisto.Size = new Size(952, 164);
             dgvDataAcquisto.TabIndex = 7;
             dgvDataAcquisto.CellDoubleClick += dgvDataAcquisto_CellDoubleClick;
             // 
@@ -187,7 +187,7 @@
             pnlTop.Dock = DockStyle.Top;
             pnlTop.Location = new Point(0, 0);
             pnlTop.Name = "pnlTop";
-            pnlTop.Size = new Size(954, 10);
+            pnlTop.Size = new Size(984, 10);
             pnlTop.TabIndex = 26;
             // 
             // btnCancel
@@ -214,7 +214,7 @@
             btnOk.Location = new Point(204, 563);
             btnOk.Margin = new Padding(3, 2, 3, 2);
             btnOk.Name = "btnOk";
-            btnOk.Size = new Size(738, 68);
+            btnOk.Size = new Size(768, 68);
             btnOk.TabIndex = 28;
             btnOk.Text = "SALVA MODIFICHE";
             btnOk.TextAlign = ContentAlignment.BottomCenter;
@@ -222,31 +222,31 @@
             btnOk.UseVisualStyleBackColor = true;
             btnOk.Click += btnOk_Click;
             // 
-            // PurchaseEditForm
+            // ServicePurchaseEditForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(954, 641);
+            ClientSize = new Size(984, 641);
             Controls.Add(btnCancel);
             Controls.Add(btnOk);
             Controls.Add(pnlTop);
             Controls.Add(grpAcquisti);
             Controls.Add(grpCliente);
             Controls.Add(dgvData);
-            Controls.Add(grpProdotti);
+            Controls.Add(grpServizi);
             Icon = (Icon)resources.GetObject("$this.Icon");
             KeyPreview = true;
             Margin = new Padding(3, 2, 3, 2);
             MinimumSize = new Size(970, 680);
-            Name = "PurchaseEditForm";
+            Name = "ServicePurchaseEditForm";
             StartPosition = FormStartPosition.CenterParent;
             Text = "GESTIONE ACQUISTI";
             KeyPress += PurchaseEditForm_KeyPress;
             ((System.ComponentModel.ISupportInitialize)dgvData).EndInit();
             grpCliente.ResumeLayout(false);
             grpCliente.PerformLayout();
-            grpProdotti.ResumeLayout(false);
-            grpProdotti.PerformLayout();
+            grpServizi.ResumeLayout(false);
+            grpServizi.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)searchImage).EndInit();
             grpAcquisti.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dgvDataAcquisto).EndInit();
@@ -257,7 +257,7 @@
 
         private DataGridView dgvData;
         private GroupBox grpCliente;
-        private GroupBox grpProdotti;
+        private GroupBox grpServizi;
         private GroupBox grpAcquisti;
         private DataGridView dgvDataAcquisto;
         private Label lblName;
