@@ -33,13 +33,6 @@ namespace PlannerShop.Forms
             DgvUtils.SetDataGridStyle(dgvData, false, 40, 40, true);
             DgvUtils.SetDataGridStyle(dgvDataAcquisto, false, 40, 40, true);
 
-            dgvData.DefaultCellStyle.SelectionBackColor =
-                dgvData.DefaultCellStyle.BackColor;
-            dgvDataAcquisto.DefaultCellStyle.SelectionBackColor =
-                dgvDataAcquisto.DefaultCellStyle.BackColor;
-
-            dgvDataAcquisto.CellFormatting += dgvDataAcquisto_CellFormatting;
-
             LoadClienteData();
         }
 
@@ -229,7 +222,7 @@ namespace PlannerShop.Forms
             }
         }
 
-        void SetServiceDataGridStructure()
+        private void SetServiceDataGridStructure()
         {
             int fontSize = 10;
 
@@ -315,7 +308,7 @@ namespace PlannerShop.Forms
             noteServiceColumn.DefaultCellStyle.Font = new Font("Corbel", fontSize, FontStyle.Bold);
         }
 
-        void SetPurchaseDataGridStructure()
+        private void SetPurchaseDataGridStructure()
         {
             int fontSize = 10;
 

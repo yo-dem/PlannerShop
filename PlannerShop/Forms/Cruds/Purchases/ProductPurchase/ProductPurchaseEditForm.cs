@@ -28,14 +28,10 @@ namespace PlannerShop.Forms
             dgvDataAcquisto.DataSource = dtAcquistiTemp;
 
             DgvUtils.SetDataGridStyle(dgvData, false, 40, 40, true);
-            dgvData.DefaultCellStyle.SelectionBackColor = dgvData.DefaultCellStyle.BackColor;
             DgvUtils.SetDataGridStyle(dgvDataAcquisto, false, 40, 40, true);
-            dgvDataAcquisto.DefaultCellStyle.SelectionBackColor = dgvDataAcquisto.DefaultCellStyle.BackColor;
 
             SetProductDataGridStructure();
             SetPurchaseDataGridStructure();
-
-            dgvDataAcquisto.CellFormatting += dgvDataAcquisto_CellFormatting;
 
             LoadClienteData();
         }
@@ -330,7 +326,7 @@ namespace PlannerShop.Forms
             }
         }
 
-        void SetProductDataGridStructure()
+        private void SetProductDataGridStructure()
         {
             var idProductColumn = dgvData.Columns["IDPRODOTTO"];
             idProductColumn.DisplayIndex = 0;
@@ -413,7 +409,7 @@ namespace PlannerShop.Forms
             noteProductionColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
         }
 
-        void SetPurchaseDataGridStructure()
+        private void SetPurchaseDataGridStructure()
         {
             var idPurchaseColumn = dgvDataAcquisto.Columns["IDACQUISTO"];
             idPurchaseColumn.DisplayIndex = 0;
