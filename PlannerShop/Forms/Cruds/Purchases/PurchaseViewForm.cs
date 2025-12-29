@@ -6,13 +6,7 @@ namespace PlannerShop.Forms
     public partial class PurchaseViewForm : Form
     {
         private string idCliente;
-        private Dictionary<string, Color> groupColors = new Dictionary<string, Color>();
-        private Color[] palette = new Color[]
-        {
-            Color.White,
-            Color.FromArgb(225, 225, 225)
-        };
-
+        
         public PurchaseViewForm(string idCliente)
         {
             InitializeComponent();
@@ -25,15 +19,13 @@ namespace PlannerShop.Forms
 
             foreach (DataRow item in dtAcquistiTemp.Rows)
             {
-                item["TIMESTAMP"] = item["TIMESTAMP"].ToString().Split(' ')[0];
+                item["TIMESTAMP"] = item["TIMESTAMP"]?.ToString()?.Split(' ')[0];
             }
 
             dgvDataAcquisto.DataSource = dtAcquistiTemp;
             DgvUtils.SetDataGridStyle(dgvDataAcquisto, false, 40, 40, false);
             dgvDataAcquisto.DefaultCellStyle.SelectionBackColor = dgvDataAcquisto.DefaultCellStyle.BackColor;
             SetPurchaseDataGridStructure();
-
-            dgvDataAcquisto.RowPrePaint += DgvDataAcquisto_RowPrePaint;
 
         }
 
@@ -56,8 +48,18 @@ namespace PlannerShop.Forms
             idPurchaseColumn.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft;
             idPurchaseColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
 
+            dgvDataAcquisto.Columns.Add("TIPOLOGIA", "TIPOLOGIA");
+            var marcaTypeColumnn = dgvDataAcquisto.Columns["TIPOLOGIA"];
+            marcaTypeColumnn.DisplayIndex = 1;
+            marcaTypeColumnn.Visible = true;
+            marcaTypeColumnn.HeaderText = "";
+            marcaTypeColumnn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            marcaTypeColumnn.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            marcaTypeColumnn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            marcaTypeColumnn.DefaultCellStyle.Font = new Font(dgvDataAcquisto.Font, FontStyle.Bold);
+
             var marcaPurchaseColumnn = dgvDataAcquisto.Columns["MARCA"];
-            marcaPurchaseColumnn.DisplayIndex = 1;
+            marcaPurchaseColumnn.DisplayIndex = 2;
             marcaPurchaseColumnn.Visible = true;
             marcaPurchaseColumnn.HeaderText = "MARCA";
             marcaPurchaseColumnn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
@@ -65,7 +67,7 @@ namespace PlannerShop.Forms
             marcaPurchaseColumnn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
 
             var nomePurchaseColumnn = dgvDataAcquisto.Columns["NOME"];
-            nomePurchaseColumnn.DisplayIndex = 2;
+            nomePurchaseColumnn.DisplayIndex = 3;
             nomePurchaseColumnn.Visible = true;
             nomePurchaseColumnn.HeaderText = "NOME";
             nomePurchaseColumnn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
@@ -73,15 +75,15 @@ namespace PlannerShop.Forms
             nomePurchaseColumnn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
 
             var descrizionePurchaseColumnn = dgvDataAcquisto.Columns["DESCRIZIONE"];
-            descrizionePurchaseColumnn.DisplayIndex = 3;
+            descrizionePurchaseColumnn.DisplayIndex = 4;
             descrizionePurchaseColumnn.Visible = true;
             descrizionePurchaseColumnn.HeaderText = "DESCRIZIONE";
-            descrizionePurchaseColumnn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            descrizionePurchaseColumnn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             descrizionePurchaseColumnn.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft;
             descrizionePurchaseColumnn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
 
             var qntPurchaseColumnn = dgvDataAcquisto.Columns["QNT"];
-            qntPurchaseColumnn.DisplayIndex = 4;
+            qntPurchaseColumnn.DisplayIndex = 5;
             qntPurchaseColumnn.Visible = true;
             qntPurchaseColumnn.HeaderText = "QNT";
             qntPurchaseColumnn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
@@ -89,7 +91,7 @@ namespace PlannerShop.Forms
             qntPurchaseColumnn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
 
             var prezzoNettoPurchaseColumn = dgvDataAcquisto.Columns["PREZZO_NETTO"];
-            prezzoNettoPurchaseColumn.DisplayIndex = 5;
+            prezzoNettoPurchaseColumn.DisplayIndex = 6;
             prezzoNettoPurchaseColumn.Visible = false;
             prezzoNettoPurchaseColumn.HeaderText = "NETTO";
             prezzoNettoPurchaseColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.NotSet;
@@ -97,7 +99,7 @@ namespace PlannerShop.Forms
             prezzoNettoPurchaseColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
 
             var prezzoIvatoPurchaseColumn = dgvDataAcquisto.Columns["PREZZO_IVATO"];
-            prezzoIvatoPurchaseColumn.DisplayIndex = 6;
+            prezzoIvatoPurchaseColumn.DisplayIndex = 7;
             prezzoIvatoPurchaseColumn.Visible = false;
             prezzoIvatoPurchaseColumn.HeaderText = "IVATO";
             prezzoIvatoPurchaseColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.NotSet;
@@ -105,7 +107,7 @@ namespace PlannerShop.Forms
             prezzoIvatoPurchaseColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
 
             var prezzoVenditaPurchaseColumn = dgvDataAcquisto.Columns["PREZZO_VENDITA"];
-            prezzoVenditaPurchaseColumn.DisplayIndex = 7;
+            prezzoVenditaPurchaseColumn.DisplayIndex = 8;
             prezzoVenditaPurchaseColumn.Visible = false;
             prezzoVenditaPurchaseColumn.HeaderText = "VENDITA";
             prezzoVenditaPurchaseColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.NotSet;
@@ -113,7 +115,7 @@ namespace PlannerShop.Forms
             prezzoVenditaPurchaseColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
 
             var totalePurchaseColumn = dgvDataAcquisto.Columns["TOTALE"];
-            totalePurchaseColumn.DisplayIndex = 8;
+            totalePurchaseColumn.DisplayIndex = 9;
             totalePurchaseColumn.Visible = true;
             totalePurchaseColumn.HeaderText = "TOTALE";
             totalePurchaseColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
@@ -121,7 +123,7 @@ namespace PlannerShop.Forms
             totalePurchaseColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
 
             var dataPurchaseColumn = dgvDataAcquisto.Columns["DATA"];
-            dataPurchaseColumn.DisplayIndex = 9;
+            dataPurchaseColumn.DisplayIndex = 10;
             dataPurchaseColumn.Visible = false;
             dataPurchaseColumn.HeaderText = "DATA";
             dataPurchaseColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.NotSet;
@@ -129,7 +131,7 @@ namespace PlannerShop.Forms
             dataPurchaseColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
 
             var idClientPurchaseColumn = dgvDataAcquisto.Columns["IDCLIENTE"];
-            idClientPurchaseColumn.DisplayIndex = 10;
+            idClientPurchaseColumn.DisplayIndex = 11;
             idClientPurchaseColumn.Visible = false;
             idClientPurchaseColumn.HeaderText = "IDCLIENTE";
             idClientPurchaseColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.NotSet;
@@ -137,7 +139,7 @@ namespace PlannerShop.Forms
             idClientPurchaseColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
 
             var idProdottoPurchaseColumn = dgvDataAcquisto.Columns["IDPRODOTTO"];
-            idProdottoPurchaseColumn.DisplayIndex = 11;
+            idProdottoPurchaseColumn.DisplayIndex = 12;
             idProdottoPurchaseColumn.Visible = false;
             idProdottoPurchaseColumn.HeaderText = "IDPRODOTTO";
             idProdottoPurchaseColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.NotSet;
@@ -145,7 +147,7 @@ namespace PlannerShop.Forms
             idProdottoPurchaseColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
 
             var idServizioPurchaseColumn = dgvDataAcquisto.Columns["IDSERVIZIO"];
-            idServizioPurchaseColumn.DisplayIndex = 12;
+            idServizioPurchaseColumn.DisplayIndex = 13;
             idServizioPurchaseColumn.Visible = false;
             idServizioPurchaseColumn.HeaderText = "IDSERVIZIO";
             idServizioPurchaseColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.NotSet;
@@ -153,7 +155,7 @@ namespace PlannerShop.Forms
             idServizioPurchaseColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
 
             var aliquotaPurchaseColumn = dgvDataAcquisto.Columns["ALIQUOTA"];
-            aliquotaPurchaseColumn.DisplayIndex = 13;
+            aliquotaPurchaseColumn.DisplayIndex = 14;
             aliquotaPurchaseColumn.Visible = false;
             aliquotaPurchaseColumn.HeaderText = "IVA";
             aliquotaPurchaseColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.NotSet;
@@ -161,7 +163,7 @@ namespace PlannerShop.Forms
             aliquotaPurchaseColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
 
             var notePurchaseColumn = dgvDataAcquisto.Columns["NOTE"];
-            notePurchaseColumn.DisplayIndex = 14;
+            notePurchaseColumn.DisplayIndex = 15;
             notePurchaseColumn.Visible = false;
             notePurchaseColumn.HeaderText = "NOTE";
             notePurchaseColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.NotSet;
@@ -169,32 +171,12 @@ namespace PlannerShop.Forms
             notePurchaseColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
 
             var timestampPurchaseColumn = dgvDataAcquisto.Columns["TIMESTAMP"];
-            timestampPurchaseColumn.DisplayIndex = 15;
+            timestampPurchaseColumn.DisplayIndex = 16;
             timestampPurchaseColumn.Visible = true;
             timestampPurchaseColumn.HeaderText = "DATA";
             timestampPurchaseColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            timestampPurchaseColumn.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            timestampPurchaseColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-        }
-
-        private void DgvDataAcquisto_RowPrePaint(object? sender, DataGridViewRowPrePaintEventArgs e)
-        {
-            if (e.RowIndex < 0) return;
-
-            var row = dgvDataAcquisto.Rows[e.RowIndex];
-            var timestampValue = row.Cells["TIMESTAMP"].Value?.ToString();
-
-            if (string.IsNullOrEmpty(timestampValue))
-                return;
-
-            // Se questo timestamp non ha ancora un colore associato, glielo diamo
-            if (!groupColors.ContainsKey(timestampValue))
-            {
-                Color nextColor = palette[groupColors.Count % palette.Length];
-                groupColors[timestampValue] = nextColor;
-            }
-
-            row.DefaultCellStyle.BackColor = groupColors[timestampValue];
+            timestampPurchaseColumn.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            timestampPurchaseColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
         }
 
         private void txtSearch_TextChanged(object sender, EventArgs e)
@@ -211,5 +193,33 @@ namespace PlannerShop.Forms
                 e.Handled = true;
             }
         }
+
+        private void dgvDataAcquisto_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            try
+            {
+                foreach (DataGridViewRow row in dgvDataAcquisto.Rows)
+                {
+                    if (row.Cells["MARCA"]?.Value?.ToString() == string.Empty)
+                    {
+                        row.Cells["TIPOLOGIA"].Value = "SERVIZIO";
+                        row.Cells["MARCA"].Value = "//";
+                    }
+                    if (row.Cells["NOME"]?.Value?.ToString() == string.Empty)
+                    {
+                        row.Cells["TIPOLOGIA"].Value = "PRODOTTO";
+                        row.Cells["NOME"].Value = "//";
+                    }
+                    if (row.Cells["QNT"]?.Value?.ToString() == string.Empty)
+                    {
+                        row.Cells["TIPOLOGIA"].Value = "SERVIZIO";
+                        row.Cells["QNT"].Value = "//";
+                    }
+                }
+            }
+            catch
+            { }
+        }
+    
     }
 }

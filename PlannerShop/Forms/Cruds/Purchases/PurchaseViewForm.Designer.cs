@@ -51,7 +51,7 @@
             pnlTop.Dock = DockStyle.Top;
             pnlTop.Location = new Point(0, 0);
             pnlTop.Name = "pnlTop";
-            pnlTop.Size = new Size(984, 10);
+            pnlTop.Size = new Size(1184, 10);
             pnlTop.TabIndex = 27;
             // 
             // grpCliente
@@ -65,7 +65,7 @@
             grpCliente.Margin = new Padding(3, 2, 3, 2);
             grpCliente.Name = "grpCliente";
             grpCliente.Padding = new Padding(3, 2, 3, 2);
-            grpCliente.Size = new Size(962, 106);
+            grpCliente.Size = new Size(1162, 124);
             grpCliente.TabIndex = 28;
             grpCliente.TabStop = false;
             grpCliente.Text = "CLIENTE";
@@ -73,37 +73,40 @@
             // lblEmail
             // 
             lblEmail.AutoSize = true;
-            lblEmail.Location = new Point(6, 61);
+            lblEmail.Font = new Font("Segoe UI", 10F);
+            lblEmail.Location = new Point(6, 103);
             lblEmail.Name = "lblEmail";
-            lblEmail.Size = new Size(41, 15);
+            lblEmail.Size = new Size(49, 19);
             lblEmail.TabIndex = 4;
             lblEmail.Text = "EMAIL";
             // 
             // lblTelefono
             // 
             lblTelefono.AutoSize = true;
-            lblTelefono.Location = new Point(6, 46);
+            lblTelefono.Font = new Font("Segoe UI", 10F);
+            lblTelefono.Location = new Point(5, 84);
             lblTelefono.Name = "lblTelefono";
-            lblTelefono.Size = new Size(65, 15);
+            lblTelefono.Size = new Size(76, 19);
             lblTelefono.TabIndex = 3;
             lblTelefono.Text = "TELEFONO";
             // 
             // lblIndirizzo
             // 
             lblIndirizzo.AutoSize = true;
-            lblIndirizzo.Font = new Font("Segoe UI", 8F, FontStyle.Bold);
-            lblIndirizzo.Location = new Point(6, 33);
+            lblIndirizzo.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            lblIndirizzo.Location = new Point(5, 65);
             lblIndirizzo.Name = "lblIndirizzo";
-            lblIndirizzo.Size = new Size(62, 13);
+            lblIndirizzo.Size = new Size(80, 19);
             lblIndirizzo.TabIndex = 2;
             lblIndirizzo.Text = "INDIRIZZO";
             // 
             // lblName
             // 
             lblName.AutoSize = true;
-            lblName.Location = new Point(6, 18);
+            lblName.Font = new Font("Segoe UI", 10F);
+            lblName.Location = new Point(5, 46);
             lblName.Name = "lblName";
-            lblName.Size = new Size(42, 15);
+            lblName.Size = new Size(50, 19);
             lblName.TabIndex = 0;
             lblName.Text = "NOME";
             // 
@@ -113,11 +116,11 @@
             grpAcquisti.Controls.Add(searchImage);
             grpAcquisti.Controls.Add(dgvDataAcquisto);
             grpAcquisti.Controls.Add(txtSearch);
-            grpAcquisti.Location = new Point(10, 125);
+            grpAcquisti.Location = new Point(10, 143);
             grpAcquisti.Margin = new Padding(3, 2, 3, 2);
             grpAcquisti.Name = "grpAcquisti";
             grpAcquisti.Padding = new Padding(3, 2, 3, 2);
-            grpAcquisti.Size = new Size(962, 428);
+            grpAcquisti.Size = new Size(1162, 410);
             grpAcquisti.TabIndex = 29;
             grpAcquisti.TabStop = false;
             grpAcquisti.Text = "ACQUISTI";
@@ -142,8 +145,9 @@
             dgvDataAcquisto.Margin = new Padding(3, 2, 3, 2);
             dgvDataAcquisto.Name = "dgvDataAcquisto";
             dgvDataAcquisto.RowHeadersWidth = 51;
-            dgvDataAcquisto.Size = new Size(950, 364);
+            dgvDataAcquisto.Size = new Size(1150, 346);
             dgvDataAcquisto.TabIndex = 7;
+            dgvDataAcquisto.DataBindingComplete += dgvDataAcquisto_DataBindingComplete;
             // 
             // txtSearch
             // 
@@ -153,7 +157,7 @@
             txtSearch.Location = new Point(6, 20);
             txtSearch.Margin = new Padding(3, 2, 3, 2);
             txtSearch.Name = "txtSearch";
-            txtSearch.Size = new Size(950, 23);
+            txtSearch.Size = new Size(1150, 23);
             txtSearch.TabIndex = 1;
             txtSearch.TabStop = false;
             txtSearch.TextAlign = HorizontalAlignment.Center;
@@ -163,13 +167,13 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(984, 640);
+            ClientSize = new Size(1184, 640);
             Controls.Add(grpAcquisti);
             Controls.Add(grpCliente);
             Controls.Add(pnlTop);
             Icon = (Icon)resources.GetObject("$this.Icon");
             KeyPreview = true;
-            MinimumSize = new Size(1000, 679);
+            MinimumSize = new Size(1100, 679);
             Name = "PurchaseViewForm";
             StartPosition = FormStartPosition.CenterParent;
             Text = "ACQUISTI CLIENTE";

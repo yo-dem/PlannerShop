@@ -87,7 +87,7 @@ namespace PlannerShop.Forms
         private void btnOk_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.OK;
-            this.Hide();
+            this.Close();
         }
 
         private void btnCancel_Click(object sender, EventArgs e)

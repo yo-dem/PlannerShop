@@ -31,10 +31,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ServicePurchaseEditForm));
             dgvData = new DataGridView();
             grpCliente = new GroupBox();
-            lblEmail = new Label();
-            lblTelefono = new Label();
-            lblIndirizzo = new Label();
-            lblName = new Label();
             grpServizi = new GroupBox();
             searchImage = new PictureBox();
             txtSearch = new TextBox();
@@ -43,6 +39,10 @@
             pnlTop = new Panel();
             btnCancel = new Button();
             btnOk = new Button();
+            lblEmail = new Label();
+            lblTelefono = new Label();
+            lblIndirizzo = new Label();
+            lblName = new Label();
             ((System.ComponentModel.ISupportInitialize)dgvData).BeginInit();
             grpCliente.SuspendLayout();
             grpServizi.SuspendLayout();
@@ -78,43 +78,6 @@
             grpCliente.TabIndex = 24;
             grpCliente.TabStop = false;
             grpCliente.Text = "CLIENTE";
-            // 
-            // lblEmail
-            // 
-            lblEmail.AutoSize = true;
-            lblEmail.Location = new Point(6, 61);
-            lblEmail.Name = "lblEmail";
-            lblEmail.Size = new Size(41, 15);
-            lblEmail.TabIndex = 4;
-            lblEmail.Text = "EMAIL";
-            // 
-            // lblTelefono
-            // 
-            lblTelefono.AutoSize = true;
-            lblTelefono.Location = new Point(6, 46);
-            lblTelefono.Name = "lblTelefono";
-            lblTelefono.Size = new Size(65, 15);
-            lblTelefono.TabIndex = 3;
-            lblTelefono.Text = "TELEFONO";
-            // 
-            // lblIndirizzo
-            // 
-            lblIndirizzo.AutoSize = true;
-            lblIndirizzo.Font = new Font("Segoe UI", 8F, FontStyle.Bold);
-            lblIndirizzo.Location = new Point(6, 33);
-            lblIndirizzo.Name = "lblIndirizzo";
-            lblIndirizzo.Size = new Size(62, 13);
-            lblIndirizzo.TabIndex = 2;
-            lblIndirizzo.Text = "INDIRIZZO";
-            // 
-            // lblName
-            // 
-            lblName.AutoSize = true;
-            lblName.Location = new Point(6, 18);
-            lblName.Name = "lblName";
-            lblName.Size = new Size(42, 15);
-            lblName.TabIndex = 0;
-            lblName.Text = "NOME";
             // 
             // grpServizi
             // 
@@ -222,6 +185,46 @@
             btnOk.UseVisualStyleBackColor = true;
             btnOk.Click += btnOk_Click;
             // 
+            // lblEmail
+            // 
+            lblEmail.AutoSize = true;
+            lblEmail.Font = new Font("Segoe UI", 10F);
+            lblEmail.Location = new Point(6, 85);
+            lblEmail.Name = "lblEmail";
+            lblEmail.Size = new Size(49, 19);
+            lblEmail.TabIndex = 8;
+            lblEmail.Text = "EMAIL";
+            // 
+            // lblTelefono
+            // 
+            lblTelefono.AutoSize = true;
+            lblTelefono.Font = new Font("Segoe UI", 10F);
+            lblTelefono.Location = new Point(5, 66);
+            lblTelefono.Name = "lblTelefono";
+            lblTelefono.Size = new Size(76, 19);
+            lblTelefono.TabIndex = 7;
+            lblTelefono.Text = "TELEFONO";
+            // 
+            // lblIndirizzo
+            // 
+            lblIndirizzo.AutoSize = true;
+            lblIndirizzo.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            lblIndirizzo.Location = new Point(5, 47);
+            lblIndirizzo.Name = "lblIndirizzo";
+            lblIndirizzo.Size = new Size(80, 19);
+            lblIndirizzo.TabIndex = 6;
+            lblIndirizzo.Text = "INDIRIZZO";
+            // 
+            // lblName
+            // 
+            lblName.AutoSize = true;
+            lblName.Font = new Font("Segoe UI", 10F);
+            lblName.Location = new Point(5, 28);
+            lblName.Name = "lblName";
+            lblName.Size = new Size(50, 19);
+            lblName.TabIndex = 5;
+            lblName.Text = "NOME";
+            // 
             // ServicePurchaseEditForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -260,14 +263,14 @@
         private GroupBox grpServizi;
         private GroupBox grpAcquisti;
         private DataGridView dgvDataAcquisto;
-        private Label lblName;
-        private Label lblIndirizzo;
-        private Label lblTelefono;
-        private Label lblEmail;
         private Panel pnlTop;
         private Button btnCancel;
         private Button btnOk;
         private PictureBox searchImage;
         private TextBox txtSearch;
+        private Label lblEmail;
+        private Label lblTelefono;
+        private Label lblIndirizzo;
+        private Label lblName;
     }
 }
