@@ -24,9 +24,10 @@ namespace PlannerShop.Forms
 
             dgvDataAcquisto.DataSource = dtAcquistiTemp;
             DgvUtils.SetDataGridStyle(dgvDataAcquisto, false, 40, 40, false);
-            dgvDataAcquisto.DefaultCellStyle.SelectionBackColor = dgvDataAcquisto.DefaultCellStyle.BackColor;
             SetPurchaseDataGridStructure();
 
+            dgvDataAcquisto.DefaultCellStyle.SelectionBackColor = dgvDataAcquisto.DefaultCellStyle.BackColor;
+            
         }
 
         private void loadClienteData()
@@ -170,14 +171,25 @@ namespace PlannerShop.Forms
             notePurchaseColumn.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
             notePurchaseColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
 
+            var scontoPurchaseColumn = dgvDataAcquisto.Columns["SCONTO"];
+            scontoPurchaseColumn.DisplayIndex = 16;
+            scontoPurchaseColumn.Visible = true;
+            scontoPurchaseColumn.HeaderText = "SCONTO";
+            scontoPurchaseColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            scontoPurchaseColumn.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            scontoPurchaseColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+
             var timestampPurchaseColumn = dgvDataAcquisto.Columns["TIMESTAMP"];
-            timestampPurchaseColumn.DisplayIndex = 16;
+            timestampPurchaseColumn.DisplayIndex = 17;
             timestampPurchaseColumn.Visible = true;
             timestampPurchaseColumn.HeaderText = "DATA";
             timestampPurchaseColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             timestampPurchaseColumn.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft;
             timestampPurchaseColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+
         }
+
+
 
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
