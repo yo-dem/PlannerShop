@@ -120,7 +120,7 @@
             grpAcquisti.Margin = new Padding(3, 2, 3, 2);
             grpAcquisti.Name = "grpAcquisti";
             grpAcquisti.Padding = new Padding(3, 2, 3, 2);
-            grpAcquisti.Size = new Size(1162, 410);
+            grpAcquisti.Size = new Size(1162, 481);
             grpAcquisti.TabIndex = 29;
             grpAcquisti.TabStop = false;
             grpAcquisti.Text = "ACQUISTI";
@@ -145,7 +145,7 @@
             dgvDataAcquisto.Margin = new Padding(3, 2, 3, 2);
             dgvDataAcquisto.Name = "dgvDataAcquisto";
             dgvDataAcquisto.RowHeadersWidth = 51;
-            dgvDataAcquisto.Size = new Size(1150, 346);
+            dgvDataAcquisto.Size = new Size(1150, 417);
             dgvDataAcquisto.TabIndex = 7;
             dgvDataAcquisto.DataBindingComplete += dgvDataAcquisto_DataBindingComplete;
             // 
@@ -167,7 +167,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1184, 640);
+            ClientSize = new Size(1184, 711);
             Controls.Add(grpAcquisti);
             Controls.Add(grpCliente);
             Controls.Add(pnlTop);

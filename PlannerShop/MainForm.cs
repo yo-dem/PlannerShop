@@ -11,6 +11,7 @@ namespace PlannerShop
         bool isFornitoreSelected = false;
         bool isProdottoSelected = false;
         bool isServizioSelected = false;
+        int rowHeight = 40;
 
         Color btnDefaultColor;
 
@@ -328,7 +329,7 @@ namespace PlannerShop
             {
                 dgvData.DataSource = ModelClienti.searchClienti(searchItem);
             }
-            DgvUtils.SetDataGridStyle(dgvData, true, 40, 40, true);
+            DgvUtils.SetDataGridStyle(dgvData, true, 40, rowHeight, true);
             SetClientDataGridStructure();
 
             try
@@ -355,7 +356,7 @@ namespace PlannerShop
             {
                 dgvData.DataSource = ModelFornitori.searchFornitori(searchItem);
             }
-            DgvUtils.SetDataGridStyle(dgvData, true, 40, 40, true);
+            DgvUtils.SetDataGridStyle(dgvData, true, 40, rowHeight, true);
             SetSupplierDataGridStructure();
 
             try
@@ -382,7 +383,7 @@ namespace PlannerShop
             {
                 dgvData.DataSource = ModelProdotti.searchProdotti(searchItem);
             }
-            DgvUtils.SetDataGridStyle(dgvData, true, 40, 40, true);
+            DgvUtils.SetDataGridStyle(dgvData, true, 40, rowHeight, true);
             SetProductDataGridStructure();
 
             try
@@ -409,7 +410,7 @@ namespace PlannerShop
             {
                 dgvData.DataSource = ModelServizi.searchServizi(searchItem);
             }
-            DgvUtils.SetDataGridStyle(dgvData, true, 40, 40, true);
+            DgvUtils.SetDataGridStyle(dgvData, true, 40, rowHeight, true);
             SetServiceDataGridStructure();
             try
             {
@@ -758,42 +759,49 @@ namespace PlannerShop
 
         private void dgvData_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (dgvData.Columns[e.ColumnIndex].Name != "COMPLEANNO")
-                return;
-
             if (e.Value == null)
                 return;
 
-            string raw = e.Value.ToString()!; // es: "29-10"
-
-            var parts = raw.Split('-');
-
-            if (!int.TryParse(parts[0], out int giorno) ||
-                !int.TryParse(parts[1], out int mese))
-                return;
-
-            string? nomeMese = mese switch
+            if (dgvData.Columns[e.ColumnIndex].Name == "COMPLEANNO")
             {
-                1 => "Gennaio",
-                2 => "Febbraio",
-                3 => "Marzo",
-                4 => "Aprile",
-                5 => "Maggio",
-                6 => "Giugno",
-                7 => "Luglio",
-                8 => "Agosto",
-                9 => "Settembre",
-                10 => "Ottobre",
-                11 => "Novembre",
-                12 => "Dicembre",
-                _ => null
-            };
+                string raw = e.Value.ToString()!; 
+                var parts = raw.Split('-');
 
-            if (nomeMese == null)
-                return;
+                if (!int.TryParse(parts[0], out int giorno) ||
+                    !int.TryParse(parts[1], out int mese))
+                    return;
 
-            e.Value = $"{giorno:00} {nomeMese}";
-            e.FormattingApplied = true;
+                string? nomeMese = mese switch
+                {
+                    1 => "Gennaio",
+                    2 => "Febbraio",
+                    3 => "Marzo",
+                    4 => "Aprile",
+                    5 => "Maggio",
+                    6 => "Giugno",
+                    7 => "Luglio",
+                    8 => "Agosto",
+                    9 => "Settembre",
+                    10 => "Ottobre",
+                    11 => "Novembre",
+                    12 => "Dicembre",
+                    _ => null
+                };
+
+                if (nomeMese == null)
+                    return;
+
+                e.Value = $"{giorno:00} {nomeMese}";
+                e.FormattingApplied = true;
+            }
+            if (dgvData.Columns[e.ColumnIndex].Name == "NOME" 
+                || dgvData.Columns[e.ColumnIndex].Name == "COGNOME"
+                || dgvData.Columns[e.ColumnIndex].Name == "MARCA"
+                || dgvData.Columns[e.ColumnIndex].Name == "DESCRIZIONE")
+            {
+                e.Value = e.Value.ToString()!.ToUpper();
+                e.FormattingApplied = true;
+            }
         }
 
         private void btnGift_Click(object sender, EventArgs e)
@@ -866,6 +874,48 @@ namespace PlannerShop
             else
             {
                 btnEdit.Enabled = true;
+            }
+        }
+
+        private void btnZoomOut_Click(object sender, EventArgs e)
+        {
+            this.rowHeight -= 20;
+            if (this.rowHeight <= 20)
+                this.rowHeight = 20;
+            DgvUtils.SetDataGridStyle(dgvData, true, 40, rowHeight, true);
+            LoadSelected();
+        }
+
+        private void btnZoomIn_Click(object sender, EventArgs e)
+        {
+            this.rowHeight += 20;
+            if (this.rowHeight >= 60)
+                this.rowHeight = 60;
+            DgvUtils.SetDataGridStyle(dgvData, true, 40, rowHeight, true);
+            LoadSelected();
+        }
+
+        private void LoadSelected()
+        {
+            if (isClienteSelected)
+            {
+                SetClientDataGridStructure();
+                LoadClienti(txtSearch.Text);
+            }
+            if (isFornitoreSelected)
+            {
+                SetSupplierDataGridStructure();
+                LoadFornitori(txtSearch.Text);
+            }
+            if (isProdottoSelected)
+            {
+                SetProductDataGridStructure();
+                LoadProdotti(txtSearch.Text);
+            }
+            if (isServizioSelected)
+            {
+                SetServiceDataGridStructure();
+                LoadServizi(txtSearch.Text);
             }
         }
 

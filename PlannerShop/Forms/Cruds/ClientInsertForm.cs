@@ -106,8 +106,8 @@ namespace PlannerShop.Forms
             if (InputCheck())
             {
                 ModelClienti.addCliente(
-                    txtNome.Text,
-                    txtCognome.Text,
+                    txtNome.Text.ToUpper(),
+                    txtCognome.Text.ToUpper(),
                     dtpCompleanno.Checked ? dtpCompleanno.Text : string.Empty, 
                     txtIndirizzo.Text.ToUpper(),
                     txtTelefono.Text,

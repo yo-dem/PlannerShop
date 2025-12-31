@@ -51,6 +51,8 @@
             pnlUp = new Panel();
             btnGift = new Button();
             timerGift = new System.Windows.Forms.Timer(components);
+            btnZoomOut = new Button();
+            btnZoomIn = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvData).BeginInit();
             ((System.ComponentModel.ISupportInitialize)searchImage).BeginInit();
             SuspendLayout();
@@ -170,12 +172,18 @@
             // btnStatistiche
             // 
             btnStatistiche.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnStatistiche.FlatAppearance.BorderColor = Color.White;
+            btnStatistiche.FlatAppearance.BorderSize = 0;
+            btnStatistiche.FlatAppearance.CheckedBackColor = Color.White;
+            btnStatistiche.FlatAppearance.MouseDownBackColor = Color.White;
+            btnStatistiche.FlatAppearance.MouseOverBackColor = Color.White;
+            btnStatistiche.FlatStyle = FlatStyle.Flat;
             btnStatistiche.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
-            btnStatistiche.Image = Properties.Resources.statistiche_24;
-            btnStatistiche.Location = new Point(1028, 54);
+            btnStatistiche.Image = (Image)resources.GetObject("btnStatistiche.Image");
+            btnStatistiche.Location = new Point(1043, 90);
             btnStatistiche.Margin = new Padding(3, 2, 3, 2);
             btnStatistiche.Name = "btnStatistiche";
-            btnStatistiche.Size = new Size(44, 64);
+            btnStatistiche.Size = new Size(28, 28);
             btnStatistiche.TabIndex = 3;
             btnStatistiche.TextAlign = ContentAlignment.BottomCenter;
             btnStatistiche.TextImageRelation = TextImageRelation.ImageAboveText;
@@ -185,12 +193,18 @@
             // btnStampa
             // 
             btnStampa.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnStampa.FlatAppearance.BorderColor = Color.White;
+            btnStampa.FlatAppearance.BorderSize = 0;
+            btnStampa.FlatAppearance.CheckedBackColor = Color.White;
+            btnStampa.FlatAppearance.MouseDownBackColor = Color.White;
+            btnStampa.FlatAppearance.MouseOverBackColor = Color.White;
+            btnStampa.FlatStyle = FlatStyle.Flat;
             btnStampa.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             btnStampa.Image = Properties.Resources.printerImage;
-            btnStampa.Location = new Point(978, 54);
+            btnStampa.Location = new Point(1009, 90);
             btnStampa.Margin = new Padding(3, 2, 3, 2);
             btnStampa.Name = "btnStampa";
-            btnStampa.Size = new Size(44, 64);
+            btnStampa.Size = new Size(28, 28);
             btnStampa.TabIndex = 4;
             btnStampa.TextAlign = ContentAlignment.BottomCenter;
             btnStampa.TextImageRelation = TextImageRelation.ImageAboveText;
@@ -317,12 +331,17 @@
             // btnGift
             // 
             btnGift.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnGift.FlatAppearance.BorderColor = Color.White;
+            btnGift.FlatAppearance.BorderSize = 0;
+            btnGift.FlatAppearance.MouseDownBackColor = Color.White;
+            btnGift.FlatAppearance.MouseOverBackColor = Color.White;
+            btnGift.FlatStyle = FlatStyle.Flat;
             btnGift.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             btnGift.Image = Properties.Resources.gift_black;
-            btnGift.Location = new Point(928, 54);
+            btnGift.Location = new Point(975, 90);
             btnGift.Margin = new Padding(3, 2, 3, 2);
             btnGift.Name = "btnGift";
-            btnGift.Size = new Size(44, 64);
+            btnGift.Size = new Size(28, 28);
             btnGift.TabIndex = 29;
             btnGift.TextAlign = ContentAlignment.BottomCenter;
             btnGift.TextImageRelation = TextImageRelation.ImageAboveText;
@@ -335,11 +354,53 @@
             timerGift.Interval = 1000;
             timerGift.Tick += timerGift_Tick;
             // 
+            // btnZoomOut
+            // 
+            btnZoomOut.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnZoomOut.FlatAppearance.BorderColor = Color.White;
+            btnZoomOut.FlatAppearance.BorderSize = 0;
+            btnZoomOut.FlatAppearance.MouseDownBackColor = Color.White;
+            btnZoomOut.FlatAppearance.MouseOverBackColor = Color.White;
+            btnZoomOut.FlatStyle = FlatStyle.Flat;
+            btnZoomOut.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
+            btnZoomOut.Image = Properties.Resources.zoomOut;
+            btnZoomOut.Location = new Point(907, 90);
+            btnZoomOut.Margin = new Padding(3, 2, 3, 2);
+            btnZoomOut.Name = "btnZoomOut";
+            btnZoomOut.Size = new Size(28, 28);
+            btnZoomOut.TabIndex = 30;
+            btnZoomOut.TextAlign = ContentAlignment.BottomCenter;
+            btnZoomOut.TextImageRelation = TextImageRelation.ImageAboveText;
+            btnZoomOut.UseVisualStyleBackColor = true;
+            btnZoomOut.Click += btnZoomOut_Click;
+            // 
+            // btnZoomIn
+            // 
+            btnZoomIn.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnZoomIn.FlatAppearance.BorderColor = Color.White;
+            btnZoomIn.FlatAppearance.BorderSize = 0;
+            btnZoomIn.FlatAppearance.MouseDownBackColor = Color.White;
+            btnZoomIn.FlatAppearance.MouseOverBackColor = Color.White;
+            btnZoomIn.FlatStyle = FlatStyle.Flat;
+            btnZoomIn.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
+            btnZoomIn.Image = Properties.Resources.zoomIn;
+            btnZoomIn.Location = new Point(941, 90);
+            btnZoomIn.Margin = new Padding(3, 2, 3, 2);
+            btnZoomIn.Name = "btnZoomIn";
+            btnZoomIn.Size = new Size(28, 28);
+            btnZoomIn.TabIndex = 31;
+            btnZoomIn.TextAlign = ContentAlignment.BottomCenter;
+            btnZoomIn.TextImageRelation = TextImageRelation.ImageAboveText;
+            btnZoomIn.UseVisualStyleBackColor = true;
+            btnZoomIn.Click += btnZoomIn_Click;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1084, 621);
+            Controls.Add(btnZoomIn);
+            Controls.Add(btnZoomOut);
             Controls.Add(btnGift);
             Controls.Add(pnlLine);
             Controls.Add(pnlUp);
@@ -397,5 +458,7 @@
         private Panel pnlUp;
         private Button btnGift;
         private System.Windows.Forms.Timer timerGift;
+        private Button btnZoomOut;
+        private Button btnZoomIn;
     }
 }

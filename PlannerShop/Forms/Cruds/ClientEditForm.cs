@@ -128,8 +128,8 @@ namespace PlannerShop.Forms
             {
                 ModelClienti.editCliente(
                     idCliente,
-                    txtNome.Text,
-                    txtCognome.Text,
+                    txtNome.Text.ToUpper(),
+                    txtCognome.Text.ToUpper(),
                     dtpCompleanno.Checked ? dtpCompleanno.Text : string.Empty,
                     txtIndirizzo.Text.ToUpper(),
                     txtTelefono.Text,
