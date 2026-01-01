@@ -145,7 +145,6 @@ namespace PlannerShop.Forms
                 newAcq["PREZZO_NETTO"] = prezzoNetto;
                 newAcq["PREZZO_IVATO"] = prezzoIvato;
                 newAcq["PREZZO_VENDITA"] = prezzoVendita;
-
                 newAcq["TOTALE"] = totale;
                 newAcq["ALIQUOTA"] = aliquota;
                 newAcq["DATA"] = data;
@@ -225,21 +224,25 @@ namespace PlannerShop.Forms
         {
             if (e.RowIndex < 0) return;
 
-            if (dgvDataAcquisto.Columns[e.ColumnIndex].Name == "PREZZO_TOTALE")
-            {
-                var drv = dgvDataAcquisto.Rows[e.RowIndex].DataBoundItem as DataRowView;
-                if (drv == null) return;
+            if (dgvDataAcquisto.Columns[e.ColumnIndex].Name != "PREZZO_TOTALE")
+                return;
 
-                if (!TryParseEuro(drv["PREZZO_VENDITA"], out decimal prezzoVendita))
-                    return;
+            var drv =
+                dgvDataAcquisto.Rows[e.RowIndex]
+                    .DataBoundItem as DataRowView;
 
-                int qnt = Convert.ToInt32(drv["QNT"]);
+            if (drv == null) return;
 
-                decimal totale = prezzoVendita * qnt;
+            if (!TryParseEuro(drv["PREZZO_VENDITA"], out decimal prezzoVendita))
+                return;
 
-                e.Value = totale.ToString("F2") + " €";
-                e.FormattingApplied = true;
-            }
+            int qnt = Convert.ToInt32(drv["QNT"]);
+
+            decimal totale = prezzoVendita * qnt;
+
+            e.Value = totale.ToString("F2") + " €";
+            e.FormattingApplied = true;
+
         }
 
         private void btnOk_Click(object sender, EventArgs e)

@@ -62,7 +62,6 @@
             dgvData.Size = new Size(950, 171);
             dgvData.TabIndex = 6;
             dgvData.CellDoubleClick += dgvData_CellDoubleClick;
-            dgvData.CellFormatting += dgvDataAcquisto_CellFormatting;
             // 
             // grpCliente
             // 
@@ -184,6 +183,7 @@
             dgvDataAcquisto.Size = new Size(952, 164);
             dgvDataAcquisto.TabIndex = 7;
             dgvDataAcquisto.CellDoubleClick += dgvDataAcquisto_CellDoubleClick;
+            dgvDataAcquisto.CellFormatting += dgvDataAcquisto_CellFormatting;
             // 
             // pnlTop
             // 

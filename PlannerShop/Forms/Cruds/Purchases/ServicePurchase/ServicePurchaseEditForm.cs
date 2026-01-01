@@ -116,14 +116,7 @@ namespace PlannerShop.Forms
             newAcq["DATA"] = row["DATA"];
             newAcq["NOTE"] = row["NOTE"];
             newAcq["TIMESTAMP"] = timeStamp.ToString();
-
-            decimal totale = decimal.Parse(
-                detailForm.lblTotaleCalcolato.Text
-                    .Replace("€", "")
-                    .Trim()
-            );
-
-            newAcq["TOTALE"] = totale.ToString("F2") + " €";
+            newAcq["TOTALE"] = detailForm.lblTotaleCalcolato.Text;
             newAcq["SCONTO"] = CalculateSconto(newAcq);
 
             dtAcquistiTemp.Rows.Add(newAcq);
