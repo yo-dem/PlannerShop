@@ -52,7 +52,7 @@
             btnZoomOut = new Button();
             btnZoomIn = new Button();
             pnlTop = new Panel();
-            button1 = new Button();
+            btnAgenda = new Button();
             btnOpzioni = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvData).BeginInit();
             ((System.ComponentModel.ISupportInitialize)searchImage).BeginInit();
@@ -378,22 +378,22 @@
             pnlTop.Name = "pnlTop";
             pnlTop.Size = new Size(1084, 10);
             pnlTop.TabIndex = 33;
-            pnlTop.Visible = false;
             // 
-            // button1
+            // btnAgenda
             // 
-            button1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            button1.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
-            button1.Image = (Image)resources.GetObject("button1.Image");
-            button1.Location = new Point(1009, 85);
-            button1.Margin = new Padding(3, 2, 3, 2);
-            button1.Name = "button1";
-            button1.Size = new Size(63, 55);
-            button1.TabIndex = 4;
-            button1.Text = "AGENDA";
-            button1.TextAlign = ContentAlignment.BottomCenter;
-            button1.TextImageRelation = TextImageRelation.ImageAboveText;
-            button1.UseVisualStyleBackColor = true;
+            btnAgenda.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnAgenda.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
+            btnAgenda.Image = (Image)resources.GetObject("btnAgenda.Image");
+            btnAgenda.Location = new Point(1009, 85);
+            btnAgenda.Margin = new Padding(3, 2, 3, 2);
+            btnAgenda.Name = "btnAgenda";
+            btnAgenda.Size = new Size(63, 55);
+            btnAgenda.TabIndex = 4;
+            btnAgenda.Text = "AGENDA";
+            btnAgenda.TextAlign = ContentAlignment.BottomCenter;
+            btnAgenda.TextImageRelation = TextImageRelation.ImageAboveText;
+            btnAgenda.UseVisualStyleBackColor = true;
+            btnAgenda.Click += btnAgenda_Click;
             // 
             // btnOpzioni
             // 
@@ -422,7 +422,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1084, 631);
             Controls.Add(btnOpzioni);
-            Controls.Add(button1);
+            Controls.Add(btnAgenda);
             Controls.Add(pnlTop);
             Controls.Add(btnZoomIn);
             Controls.Add(btnZoomOut);
@@ -482,7 +482,7 @@
         private Button btnZoomOut;
         private Button btnZoomIn;
         private Panel pnlTop;
-        private Button button1;
+        private Button btnAgenda;
         private Button btnOpzioni;
     }
 }

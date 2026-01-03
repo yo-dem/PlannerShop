@@ -1,6 +1,7 @@
 ﻿
 using PlannerShop.Data;
 using PlannerShop.Forms;
+using PlannerShop.Forms.Agenda;
 using PlannerShop.Forms.Utility;
 
 namespace PlannerShop
@@ -764,7 +765,7 @@ namespace PlannerShop
 
             if (dgvData.Columns[e.ColumnIndex].Name == "COMPLEANNO")
             {
-                string raw = e.Value.ToString()!; 
+                string raw = e.Value.ToString()!;
                 var parts = raw.Split('-');
 
                 if (!int.TryParse(parts[0], out int giorno) ||
@@ -794,7 +795,7 @@ namespace PlannerShop
                 e.Value = $"{giorno:00} {nomeMese}";
                 e.FormattingApplied = true;
             }
-            if (dgvData.Columns[e.ColumnIndex].Name == "NOME" 
+            if (dgvData.Columns[e.ColumnIndex].Name == "NOME"
                 || dgvData.Columns[e.ColumnIndex].Name == "COGNOME"
                 || dgvData.Columns[e.ColumnIndex].Name == "MARCA"
                 || dgvData.Columns[e.ColumnIndex].Name == "DESCRIZIONE")
@@ -919,5 +920,11 @@ namespace PlannerShop
             }
         }
 
+        private void btnAgenda_Click(object sender, EventArgs e)
+        {
+            //AgendaForm agendaForm = new AgendaForm();
+            AgendaDgvForm agendaForm = new AgendaDgvForm();
+            agendaForm.ShowDialog();
+        }
     }
 }

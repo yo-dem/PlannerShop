@@ -129,10 +129,10 @@
   <metadata name="timerGift.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
-  <data name="button1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="btnAgenda.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        EAAACxABrSO9dQAAAMxJREFUSEvtlc0KwjAQhEcfQe/6XuqL+nOy+E56UgYSWCamk0RP4gcL3WRmW7bt
+        DQAACw0B7QfALAAAAMxJREFUSEvtlc0KwjAQhEcfQe/6XuqL+nOy+E56UgYSWCamk0RP4gcL3WRmW7bt
         Bvh1bgAmXQy4/VnWAJ4peK24/bdsAVwAPIK5Neg5A9ho0QiLq7E3Tlo0MvLkGqxRRcWjUSULVrrRQHzp
         VazAYP0q0O/c5eovUAHN145c/QVWYLB+KwgsARxSLNKa9atAexxzFs76fVpTf4EKtMcx/8oN5mBbWHj3
         SYt6sf48i5rHbyD/yXfdiHDc5qcYjdlpyvOAgpGpSs/RnQd/Cl4hqK9Tft8v7gAAAABJRU5ErkJggg==
