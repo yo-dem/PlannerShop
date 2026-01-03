@@ -317,21 +317,17 @@ namespace PlannerShop.Forms.Agenda
 
                 using var pen = new Pen(Color.FromArgb(210, 210, 210));
 
-                // Bordi superiori, inferiori e destri
-                e.Graphics?.DrawLine(pen, e.CellBounds.Left, e.CellBounds.Top, e.CellBounds.Right, e.CellBounds.Top);         // Top
-                e.Graphics?.DrawLine(pen, e.CellBounds.Left, e.CellBounds.Bottom - 1, e.CellBounds.Right, e.CellBounds.Bottom - 1); // Bottom
-                e.Graphics?.DrawLine(pen, e.CellBounds.Right - 1, e.CellBounds.Top, e.CellBounds.Right - 1, e.CellBounds.Bottom); // Right
-                e.Graphics?.DrawLine(pen, e.CellBounds.Left - 1, e.CellBounds.Top, e.CellBounds.Left -1, e.CellBounds.Bottom); // Left
+                // Bordi
+                e.Graphics?.DrawLine(pen, e.CellBounds.Left, e.CellBounds.Top, e.CellBounds.Right, e.CellBounds.Top);
+                e.Graphics?.DrawLine(pen, e.CellBounds.Left, e.CellBounds.Bottom - 1, e.CellBounds.Right, e.CellBounds.Bottom - 1);
+                e.Graphics?.DrawLine(pen, e.CellBounds.Right - 1, e.CellBounds.Top, e.CellBounds.Right - 1, e.CellBounds.Bottom);
+                e.Graphics?.DrawLine(pen, e.CellBounds.Left - 1, e.CellBounds.Top, e.CellBounds.Left - 1, e.CellBounds.Bottom);
 
-                if (e.ColumnIndex == 0) // COLONNA ORA
+                if (e.ColumnIndex == 0) // ORA
                 {
-                    // Solo sfondo e bordi, niente testo
                     e.Graphics?.FillRectangle(backBrush, e.CellBounds);
-                    e.Graphics?.DrawLine(pen, e.CellBounds.Left, e.CellBounds.Bottom - 1, e.CellBounds.Right, e.CellBounds.Bottom - 1); // Bottom
-
-
                 }
-                else // COLONNE GIORNI
+                else // GIORNI
                 {
                     string? text = e.FormattedValue?.ToString();
                     if (!string.IsNullOrEmpty(text))
@@ -342,23 +338,50 @@ namespace PlannerShop.Forms.Agenda
 
                         int lineHeight = e.CellBounds.Height / 2;
 
-                        // Riga giorno (bold, left)
+                        // Determiniamo il giorno della settimana dalla colonna
+                        DayOfWeek? dow = null;
+                        if (DateTime.TryParseExact(dgvData.Columns[e.ColumnIndex].Name, "yyyyMMdd", CultureInfo.InvariantCulture,
+                                                   DateTimeStyles.None, out DateTime colDate))
+                        {
+                            dow = colDate.DayOfWeek;
+                        }
+
+                        Font dayFont = e.CellStyle?.Font ?? dgvData.Font;
+                        Color dayColor = Color.Black;
+
+                        Font dateFont = e.CellStyle?.Font ?? dgvData.Font;
+                        Color dateColor = Color.Black;
+
+                        // Se weekend, cambiamo font
+                        if (dow == DayOfWeek.Saturday || dow == DayOfWeek.Sunday)
+                        {
+                            dayFont = new Font(dayFont, FontStyle.Bold);
+                            dayColor = Color.Red;
+                            dateFont = new Font(dateFont, FontStyle.Italic);
+                        }
+                        else
+                        {
+                            dayFont = new Font(dayFont, FontStyle.Bold);
+                            dayColor = Color.Black;
+                        }
+
+                        // Riga giorno
                         TextRenderer.DrawText(
                             e.Graphics!,
                             dayName,
-                            new Font(e?.CellStyle?.Font ?? dgvData.Font, FontStyle.Bold),
+                            dayFont,
                             new Rectangle(e.CellBounds.Left + 4, e.CellBounds.Top, e.CellBounds.Width - 8, lineHeight),
-                            Color.Black,
+                            dayColor,
                             TextFormatFlags.Left | TextFormatFlags.VerticalCenter
                         );
 
-                        // Riga data (normale, left)
+                        // Riga data (normale)
                         TextRenderer.DrawText(
                             e.Graphics!,
                             dayDate,
-                            e?.CellStyle?.Font,
+                            dateFont,
                             new Rectangle(e.CellBounds.Left + 4, e.CellBounds.Top + lineHeight, e.CellBounds.Width - 8, lineHeight),
-                            Color.Black,
+                            dateColor,
                             TextFormatFlags.Left | TextFormatFlags.VerticalCenter
                         );
                     }
@@ -367,8 +390,6 @@ namespace PlannerShop.Forms.Agenda
                 e.Handled = true;
             }
         }
-
-
 
         /// <summary>
         /// Handles the CellClick event for the data grid, toggling the expanded or collapsed state of an hour group
