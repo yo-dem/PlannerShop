@@ -51,28 +51,9 @@
             btnZoomIn = new Button();
             btnAgenda = new Button();
             btnOpzioni = new Button();
-            menuStrip = new MenuStrip();
-            vISTAToolStripMenuItem = new ToolStripMenuItem();
-            clientiToolStripMenuItem = new ToolStripMenuItem();
-            fornitoriToolStripMenuItem = new ToolStripMenuItem();
-            prodottiToolStripMenuItem = new ToolStripMenuItem();
-            serviziToolStripMenuItem = new ToolStripMenuItem();
-            sTRUMENTIToolStripMenuItem = new ToolStripMenuItem();
-            zoomToolStripMenuItem = new ToolStripMenuItem();
-            piùSpazioToolStripMenuItem = new ToolStripMenuItem();
-            menoSpazioToolStripMenuItem = new ToolStripMenuItem();
-            opzioniToolStripMenuItem = new ToolStripMenuItem();
-            statisticheToolStripMenuItem = new ToolStripMenuItem();
-            compleanniToolStripMenuItem = new ToolStripMenuItem();
-            toolStripMenuItem1 = new ToolStripSeparator();
-            stampeToolStripMenuItem = new ToolStripMenuItem();
-            rICERCAAVANZATAToolStripMenuItem = new ToolStripMenuItem();
-            pLANNERSHOPToolStripMenuItem = new ToolStripMenuItem();
-            versioneToolStripMenuItem = new ToolStripMenuItem();
             txtSearch = new TextBox();
             searchImage = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)dgvData).BeginInit();
-            menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)searchImage).BeginInit();
             SuspendLayout();
             // 
@@ -82,11 +63,11 @@
             dgvData.BackgroundColor = SystemColors.Control;
             dgvData.BorderStyle = BorderStyle.None;
             dgvData.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvData.Location = new Point(12, 145);
+            dgvData.Location = new Point(12, 100);
             dgvData.Margin = new Padding(3, 2, 3, 2);
             dgvData.Name = "dgvData";
             dgvData.RowHeadersWidth = 51;
-            dgvData.Size = new Size(1059, 410);
+            dgvData.Size = new Size(1059, 450);
             dgvData.TabIndex = 5;
             dgvData.CellFormatting += dgvData_CellFormatting;
             dgvData.DataBindingComplete += DgvData_DataBindingComplete;
@@ -163,12 +144,12 @@
             btnProdotti.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             btnProdotti.Image = Properties.Resources.prodotti_24;
             btnProdotti.ImageAlign = ContentAlignment.MiddleRight;
-            btnProdotti.Location = new Point(384, 106);
+            btnProdotti.Location = new Point(384, 60);
             btnProdotti.Margin = new Padding(3, 2, 3, 2);
             btnProdotti.Name = "btnProdotti";
             btnProdotti.Size = new Size(180, 35);
             btnProdotti.TabIndex = 2;
-            btnProdotti.Text = "PRODOTTI";
+            btnProdotti.Text = " PRODOTTI";
             btnProdotti.TextImageRelation = TextImageRelation.ImageBeforeText;
             btnProdotti.UseVisualStyleBackColor = true;
             btnProdotti.Click += btnProdotti_Click;
@@ -178,12 +159,12 @@
             btnFornitori.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             btnFornitori.Image = Properties.Resources.fornitore_24;
             btnFornitori.ImageAlign = ContentAlignment.MiddleRight;
-            btnFornitori.Location = new Point(198, 106);
+            btnFornitori.Location = new Point(198, 60);
             btnFornitori.Margin = new Padding(3, 2, 3, 2);
             btnFornitori.Name = "btnFornitori";
             btnFornitori.Size = new Size(180, 35);
             btnFornitori.TabIndex = 1;
-            btnFornitori.Text = "FORNITORI";
+            btnFornitori.Text = " FORNITORI";
             btnFornitori.TextImageRelation = TextImageRelation.ImageBeforeText;
             btnFornitori.UseVisualStyleBackColor = true;
             btnFornitori.Click += btnFornitori_Click;
@@ -199,7 +180,7 @@
             btnStatistiche.FlatStyle = FlatStyle.Flat;
             btnStatistiche.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             btnStatistiche.Image = (Image)resources.GetObject("btnStatistiche.Image");
-            btnStatistiche.Location = new Point(950, 26);
+            btnStatistiche.Location = new Point(949, 69);
             btnStatistiche.Margin = new Padding(3, 2, 3, 2);
             btnStatistiche.Name = "btnStatistiche";
             btnStatistiche.Size = new Size(26, 26);
@@ -220,7 +201,7 @@
             btnStampa.FlatStyle = FlatStyle.Flat;
             btnStampa.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             btnStampa.Image = Properties.Resources.printerImage;
-            btnStampa.Location = new Point(982, 26);
+            btnStampa.Location = new Point(981, 69);
             btnStampa.Margin = new Padding(3, 2, 3, 2);
             btnStampa.Name = "btnStampa";
             btnStampa.Size = new Size(26, 26);
@@ -234,12 +215,12 @@
             btnClienti.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             btnClienti.Image = Properties.Resources.clienti;
             btnClienti.ImageAlign = ContentAlignment.MiddleRight;
-            btnClienti.Location = new Point(12, 106);
+            btnClienti.Location = new Point(12, 60);
             btnClienti.Margin = new Padding(3, 2, 3, 2);
             btnClienti.Name = "btnClienti";
             btnClienti.Size = new Size(180, 35);
             btnClienti.TabIndex = 0;
-            btnClienti.Text = "CLIENTI";
+            btnClienti.Text = " CLIENTI";
             btnClienti.TextImageRelation = TextImageRelation.ImageBeforeText;
             btnClienti.UseVisualStyleBackColor = true;
             btnClienti.Click += btnClienti_Click;
@@ -249,12 +230,12 @@
             btnServizi.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             btnServizi.Image = Properties.Resources.serviziEstetici;
             btnServizi.ImageAlign = ContentAlignment.MiddleRight;
-            btnServizi.Location = new Point(570, 106);
+            btnServizi.Location = new Point(570, 60);
             btnServizi.Margin = new Padding(3, 2, 3, 2);
             btnServizi.Name = "btnServizi";
             btnServizi.Size = new Size(180, 35);
             btnServizi.TabIndex = 3;
-            btnServizi.Text = "SERVIZI";
+            btnServizi.Text = " SERVIZI";
             btnServizi.TextImageRelation = TextImageRelation.ImageBeforeText;
             btnServizi.UseVisualStyleBackColor = true;
             btnServizi.Click += btnServizi_Click;
@@ -263,7 +244,7 @@
             // 
             pnlLine.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             pnlLine.BackColor = Color.DarkGray;
-            pnlLine.Location = new Point(12, 554);
+            pnlLine.Location = new Point(12, 550);
             pnlLine.Name = "pnlLine";
             pnlLine.Size = new Size(1059, 1);
             pnlLine.TabIndex = 25;
@@ -272,25 +253,25 @@
             // 
             pnlRight.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
             pnlRight.BackColor = Color.DarkGray;
-            pnlRight.Location = new Point(1070, 146);
+            pnlRight.Location = new Point(1070, 100);
             pnlRight.Name = "pnlRight";
-            pnlRight.Size = new Size(1, 408);
+            pnlRight.Size = new Size(1, 450);
             pnlRight.TabIndex = 26;
             // 
             // pnlLeft
             // 
             pnlLeft.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             pnlLeft.BackColor = Color.DarkGray;
-            pnlLeft.Location = new Point(12, 146);
+            pnlLeft.Location = new Point(12, 100);
             pnlLeft.Name = "pnlLeft";
-            pnlLeft.Size = new Size(1, 408);
+            pnlLeft.Size = new Size(1, 450);
             pnlLeft.TabIndex = 28;
             // 
             // pnlUp
             // 
             pnlUp.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             pnlUp.BackColor = Color.DarkGray;
-            pnlUp.Location = new Point(12, 145);
+            pnlUp.Location = new Point(12, 100);
             pnlUp.Name = "pnlUp";
             pnlUp.Size = new Size(1059, 1);
             pnlUp.TabIndex = 26;
@@ -305,7 +286,7 @@
             btnGift.FlatStyle = FlatStyle.Flat;
             btnGift.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             btnGift.Image = Properties.Resources.gift_black;
-            btnGift.Location = new Point(1014, 26);
+            btnGift.Location = new Point(1013, 69);
             btnGift.Margin = new Padding(3, 2, 3, 2);
             btnGift.Name = "btnGift";
             btnGift.Size = new Size(26, 26);
@@ -331,7 +312,7 @@
             btnZoomOut.FlatStyle = FlatStyle.Flat;
             btnZoomOut.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             btnZoomOut.Image = Properties.Resources.zoomOut;
-            btnZoomOut.Location = new Point(854, 26);
+            btnZoomOut.Location = new Point(853, 69);
             btnZoomOut.Margin = new Padding(3, 2, 3, 2);
             btnZoomOut.Name = "btnZoomOut";
             btnZoomOut.Size = new Size(26, 26);
@@ -351,7 +332,7 @@
             btnZoomIn.FlatStyle = FlatStyle.Flat;
             btnZoomIn.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             btnZoomIn.Image = Properties.Resources.zoomIn;
-            btnZoomIn.Location = new Point(886, 26);
+            btnZoomIn.Location = new Point(885, 69);
             btnZoomIn.Margin = new Padding(3, 2, 3, 2);
             btnZoomIn.Name = "btnZoomIn";
             btnZoomIn.Size = new Size(26, 26);
@@ -371,7 +352,7 @@
             btnAgenda.FlatStyle = FlatStyle.Flat;
             btnAgenda.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             btnAgenda.Image = (Image)resources.GetObject("btnAgenda.Image");
-            btnAgenda.Location = new Point(1046, 26);
+            btnAgenda.Location = new Point(1045, 69);
             btnAgenda.Margin = new Padding(3, 2, 3, 2);
             btnAgenda.Name = "btnAgenda";
             btnAgenda.Size = new Size(26, 26);
@@ -392,7 +373,7 @@
             btnOpzioni.FlatStyle = FlatStyle.Flat;
             btnOpzioni.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             btnOpzioni.Image = Properties.Resources.settingsImage;
-            btnOpzioni.Location = new Point(918, 26);
+            btnOpzioni.Location = new Point(917, 69);
             btnOpzioni.Margin = new Padding(3, 2, 3, 2);
             btnOpzioni.Name = "btnOpzioni";
             btnOpzioni.Size = new Size(26, 26);
@@ -402,132 +383,16 @@
             btnOpzioni.UseVisualStyleBackColor = true;
             btnOpzioni.Click += btnOpzioni_Click;
             // 
-            // menuStrip
-            // 
-            menuStrip.BackColor = SystemColors.Control;
-            menuStrip.Items.AddRange(new ToolStripItem[] { vISTAToolStripMenuItem, sTRUMENTIToolStripMenuItem, rICERCAAVANZATAToolStripMenuItem, pLANNERSHOPToolStripMenuItem });
-            menuStrip.Location = new Point(0, 0);
-            menuStrip.Name = "menuStrip";
-            menuStrip.Size = new Size(1084, 24);
-            menuStrip.TabIndex = 34;
-            menuStrip.Text = "menuStrip1";
-            // 
-            // vISTAToolStripMenuItem
-            // 
-            vISTAToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { clientiToolStripMenuItem, fornitoriToolStripMenuItem, prodottiToolStripMenuItem, serviziToolStripMenuItem });
-            vISTAToolStripMenuItem.Name = "vISTAToolStripMenuItem";
-            vISTAToolStripMenuItem.Size = new Size(49, 20);
-            vISTAToolStripMenuItem.Text = "&VISTA";
-            // 
-            // clientiToolStripMenuItem
-            // 
-            clientiToolStripMenuItem.Name = "clientiToolStripMenuItem";
-            clientiToolStripMenuItem.Size = new Size(172, 22);
-            clientiToolStripMenuItem.Text = "Visualizza Clienti";
-            clientiToolStripMenuItem.Click += clientiToolStripMenuItem_Click;
-            // 
-            // fornitoriToolStripMenuItem
-            // 
-            fornitoriToolStripMenuItem.Name = "fornitoriToolStripMenuItem";
-            fornitoriToolStripMenuItem.Size = new Size(172, 22);
-            fornitoriToolStripMenuItem.Text = "Visualizza Fornitori";
-            // 
-            // prodottiToolStripMenuItem
-            // 
-            prodottiToolStripMenuItem.Name = "prodottiToolStripMenuItem";
-            prodottiToolStripMenuItem.Size = new Size(172, 22);
-            prodottiToolStripMenuItem.Text = "Visualizza Prodotti";
-            // 
-            // serviziToolStripMenuItem
-            // 
-            serviziToolStripMenuItem.Name = "serviziToolStripMenuItem";
-            serviziToolStripMenuItem.Size = new Size(172, 22);
-            serviziToolStripMenuItem.Text = "Visualizza Servizi";
-            // 
-            // sTRUMENTIToolStripMenuItem
-            // 
-            sTRUMENTIToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { zoomToolStripMenuItem, opzioniToolStripMenuItem, statisticheToolStripMenuItem, compleanniToolStripMenuItem, toolStripMenuItem1, stampeToolStripMenuItem });
-            sTRUMENTIToolStripMenuItem.Name = "sTRUMENTIToolStripMenuItem";
-            sTRUMENTIToolStripMenuItem.Size = new Size(83, 20);
-            sTRUMENTIToolStripMenuItem.Text = "&STRUMENTI";
-            // 
-            // zoomToolStripMenuItem
-            // 
-            zoomToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { piùSpazioToolStripMenuItem, menoSpazioToolStripMenuItem });
-            zoomToolStripMenuItem.Name = "zoomToolStripMenuItem";
-            zoomToolStripMenuItem.Size = new Size(164, 22);
-            zoomToolStripMenuItem.Text = "Dimensione celle";
-            // 
-            // piùSpazioToolStripMenuItem
-            // 
-            piùSpazioToolStripMenuItem.Name = "piùSpazioToolStripMenuItem";
-            piùSpazioToolStripMenuItem.Size = new Size(141, 22);
-            piùSpazioToolStripMenuItem.Text = "Più spazio";
-            // 
-            // menoSpazioToolStripMenuItem
-            // 
-            menoSpazioToolStripMenuItem.Name = "menoSpazioToolStripMenuItem";
-            menoSpazioToolStripMenuItem.Size = new Size(141, 22);
-            menoSpazioToolStripMenuItem.Text = "Meno spazio";
-            // 
-            // opzioniToolStripMenuItem
-            // 
-            opzioniToolStripMenuItem.Name = "opzioniToolStripMenuItem";
-            opzioniToolStripMenuItem.Size = new Size(164, 22);
-            opzioniToolStripMenuItem.Text = "Opzioni";
-            // 
-            // statisticheToolStripMenuItem
-            // 
-            statisticheToolStripMenuItem.Name = "statisticheToolStripMenuItem";
-            statisticheToolStripMenuItem.Size = new Size(164, 22);
-            statisticheToolStripMenuItem.Text = "Statistiche";
-            // 
-            // compleanniToolStripMenuItem
-            // 
-            compleanniToolStripMenuItem.Name = "compleanniToolStripMenuItem";
-            compleanniToolStripMenuItem.Size = new Size(164, 22);
-            compleanniToolStripMenuItem.Text = "Compleanni";
-            // 
-            // toolStripMenuItem1
-            // 
-            toolStripMenuItem1.Name = "toolStripMenuItem1";
-            toolStripMenuItem1.Size = new Size(161, 6);
-            // 
-            // stampeToolStripMenuItem
-            // 
-            stampeToolStripMenuItem.Name = "stampeToolStripMenuItem";
-            stampeToolStripMenuItem.Size = new Size(164, 22);
-            stampeToolStripMenuItem.Text = "Stampe";
-            // 
-            // rICERCAAVANZATAToolStripMenuItem
-            // 
-            rICERCAAVANZATAToolStripMenuItem.Name = "rICERCAAVANZATAToolStripMenuItem";
-            rICERCAAVANZATAToolStripMenuItem.Size = new Size(127, 20);
-            rICERCAAVANZATAToolStripMenuItem.Text = "&RICERCA AVANZATA";
-            // 
-            // pLANNERSHOPToolStripMenuItem
-            // 
-            pLANNERSHOPToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { versioneToolStripMenuItem });
-            pLANNERSHOPToolStripMenuItem.Name = "pLANNERSHOPToolStripMenuItem";
-            pLANNERSHOPToolStripMenuItem.Size = new Size(102, 20);
-            pLANNERSHOPToolStripMenuItem.Text = "&PLANNERSHOP";
-            // 
-            // versioneToolStripMenuItem
-            // 
-            versioneToolStripMenuItem.Name = "versioneToolStripMenuItem";
-            versioneToolStripMenuItem.Size = new Size(118, 22);
-            versioneToolStripMenuItem.Text = "Versione";
-            // 
             // txtSearch
             // 
             txtSearch.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             txtSearch.BackColor = Color.White;
             txtSearch.BorderStyle = BorderStyle.None;
-            txtSearch.Font = new Font("Corbel", 18F);
-            txtSearch.Location = new Point(854, 108);
+            txtSearch.Font = new Font("Corbel", 16F);
+            txtSearch.Location = new Point(12, 9);
             txtSearch.Margin = new Padding(0);
             txtSearch.Name = "txtSearch";
-            txtSearch.Size = new Size(217, 30);
+            txtSearch.Size = new Size(1060, 27);
             txtSearch.TabIndex = 1;
             txtSearch.TabStop = false;
             txtSearch.TextAlign = HorizontalAlignment.Center;
@@ -538,7 +403,7 @@
             // 
             searchImage.BackColor = Color.White;
             searchImage.Image = Properties.Resources.searchWhiteImage;
-            searchImage.Location = new Point(858, 111);
+            searchImage.Location = new Point(14, 9);
             searchImage.Margin = new Padding(3, 2, 3, 2);
             searchImage.Name = "searchImage";
             searchImage.Size = new Size(24, 24);
@@ -573,10 +438,8 @@
             Controls.Add(btnLogout);
             Controls.Add(btnEdit);
             Controls.Add(btnInsert);
-            Controls.Add(menuStrip);
             Icon = (Icon)resources.GetObject("$this.Icon");
             KeyPreview = true;
-            MainMenuStrip = menuStrip;
             Margin = new Padding(3, 2, 3, 2);
             MinimumSize = new Size(1100, 670);
             Name = "MainForm";
@@ -585,8 +448,6 @@
             FormClosing += MainForm_FormClosing;
             KeyPress += MainForm_KeyPress;
             ((System.ComponentModel.ISupportInitialize)dgvData).EndInit();
-            menuStrip.ResumeLayout(false);
-            menuStrip.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)searchImage).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -614,24 +475,6 @@
         private Button btnZoomIn;
         private Button btnAgenda;
         private Button btnOpzioni;
-        private MenuStrip menuStrip;
-        private ToolStripMenuItem vISTAToolStripMenuItem;
-        private ToolStripMenuItem clientiToolStripMenuItem;
-        private ToolStripMenuItem fornitoriToolStripMenuItem;
-        private ToolStripMenuItem prodottiToolStripMenuItem;
-        private ToolStripMenuItem serviziToolStripMenuItem;
-        private ToolStripMenuItem sTRUMENTIToolStripMenuItem;
-        private ToolStripMenuItem zoomToolStripMenuItem;
-        private ToolStripMenuItem piùSpazioToolStripMenuItem;
-        private ToolStripMenuItem menoSpazioToolStripMenuItem;
-        private ToolStripMenuItem opzioniToolStripMenuItem;
-        private ToolStripMenuItem statisticheToolStripMenuItem;
-        private ToolStripSeparator toolStripMenuItem1;
-        private ToolStripMenuItem stampeToolStripMenuItem;
-        private ToolStripMenuItem compleanniToolStripMenuItem;
-        private ToolStripMenuItem rICERCAAVANZATAToolStripMenuItem;
-        private ToolStripMenuItem pLANNERSHOPToolStripMenuItem;
-        private ToolStripMenuItem versioneToolStripMenuItem;
         private TextBox txtSearch;
         private PictureBox searchImage;
     }

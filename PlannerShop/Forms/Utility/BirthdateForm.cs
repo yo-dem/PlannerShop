@@ -25,7 +25,7 @@ namespace PlannerShop.Forms.Utility
             idClientColumn.DisplayIndex = 0;
             idClientColumn.Visible = false;
             idClientColumn.HeaderText = "IDCLIENTE";
-            idClientColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            idClientColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             idClientColumn.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft;
             idClientColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
 
@@ -49,13 +49,13 @@ namespace PlannerShop.Forms.Utility
             dataNascitaClientColumn.DisplayIndex = 3;
             dataNascitaClientColumn.Visible = true;
             dataNascitaClientColumn.HeaderText = "COMPLEANNO";
-            dataNascitaClientColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dataNascitaClientColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dataNascitaClientColumn.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataNascitaClientColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
 
             var indirizzoSupplierColumn = dgvData.Columns["INDIRIZZO"];
             indirizzoSupplierColumn.DisplayIndex = 4;
-            indirizzoSupplierColumn.Visible = true;
+            indirizzoSupplierColumn.Visible = false;
             indirizzoSupplierColumn.HeaderText = "INDIRIZZO";
             indirizzoSupplierColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             indirizzoSupplierColumn.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft;
@@ -65,13 +65,13 @@ namespace PlannerShop.Forms.Utility
             telefonoFissoSupplierColumn.DisplayIndex = 5;
             telefonoFissoSupplierColumn.Visible = true;
             telefonoFissoSupplierColumn.HeaderText = "TELEFONO";
-            telefonoFissoSupplierColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            telefonoFissoSupplierColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             telefonoFissoSupplierColumn.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            telefonoFissoSupplierColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            telefonoFissoSupplierColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
 
             var emailSupplierColumn = dgvData.Columns["EMAIL"];
             emailSupplierColumn.DisplayIndex = 6;
-            emailSupplierColumn.Visible = true;
+            emailSupplierColumn.Visible = false;
             emailSupplierColumn.HeaderText = "EMAIL";
             emailSupplierColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             emailSupplierColumn.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft;
@@ -79,7 +79,7 @@ namespace PlannerShop.Forms.Utility
 
             var noteProductColumn = dgvData.Columns["NOTE"];
             noteProductColumn.DisplayIndex = 7;
-            noteProductColumn.Visible = true;
+            noteProductColumn.Visible = false;
             noteProductColumn.HeaderText = "NOTE";
             noteProductColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             noteProductColumn.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft;

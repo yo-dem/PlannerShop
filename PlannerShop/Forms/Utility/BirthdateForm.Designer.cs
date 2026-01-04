@@ -28,20 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            pnlTop = new Panel();
             dgvData = new DataGridView();
             btnAnnulla = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvData).BeginInit();
             SuspendLayout();
-            // 
-            // pnlTop
-            // 
-            pnlTop.BackColor = Color.FromArgb(192, 192, 255);
-            pnlTop.Dock = DockStyle.Top;
-            pnlTop.Location = new Point(0, 0);
-            pnlTop.Name = "pnlTop";
-            pnlTop.Size = new Size(1184, 10);
-            pnlTop.TabIndex = 24;
             // 
             // dgvData
             // 
@@ -53,7 +43,7 @@
             dgvData.Margin = new Padding(3, 2, 3, 2);
             dgvData.Name = "dgvData";
             dgvData.RowHeadersWidth = 51;
-            dgvData.Size = new Size(1156, 203);
+            dgvData.Size = new Size(686, 203);
             dgvData.TabIndex = 25;
             dgvData.CellFormatting += dgvData_CellFormatting;
             // 
@@ -66,7 +56,7 @@
             btnAnnulla.Location = new Point(12, 282);
             btnAnnulla.Margin = new Padding(3, 2, 3, 2);
             btnAnnulla.Name = "btnAnnulla";
-            btnAnnulla.Size = new Size(1156, 68);
+            btnAnnulla.Size = new Size(686, 68);
             btnAnnulla.TabIndex = 26;
             btnAnnulla.TabStop = false;
             btnAnnulla.Text = "CHIUDI";
@@ -79,11 +69,10 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1184, 361);
+            ClientSize = new Size(714, 361);
             Controls.Add(btnAnnulla);
             Controls.Add(dgvData);
-            Controls.Add(pnlTop);
-            MinimumSize = new Size(1200, 400);
+            MinimumSize = new Size(730, 400);
             Name = "BirthdateForm";
             StartPosition = FormStartPosition.CenterParent;
             Text = "GIFT";
@@ -92,8 +81,6 @@
         }
 
         #endregion
-
-        private Panel pnlTop;
         private DataGridView dgvData;
         private Button btnAnnulla;
     }
