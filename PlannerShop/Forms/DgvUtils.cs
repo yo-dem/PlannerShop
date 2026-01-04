@@ -30,7 +30,7 @@
             // Font più piccolo e neutro (Excel-like)
             dgvData.ColumnHeadersDefaultCellStyle.Font = new Font("Arial", 8.5f, FontStyle.Bold);
             dgvData.DefaultCellStyle.Font = new Font("Segoe UI", 8.5f, FontStyle.Regular);
-
+            
             // Padding ridotto (chiave dell’effetto compatto)
             dgvData.DefaultCellStyle.Padding = new Padding(8, 0, 8, 0);
 
@@ -55,7 +55,7 @@
 
             // Header colonne
             dgvData.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
-            dgvData.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(220, 220, 220);
+            dgvData.ColumnHeadersDefaultCellStyle.BackColor = SystemColors.Control;
             dgvData.ColumnHeadersDefaultCellStyle.ForeColor = Color.Black;
             dgvData.ColumnHeadersDefaultCellStyle.SelectionBackColor = dgvData.ColumnHeadersDefaultCellStyle.BackColor;
             

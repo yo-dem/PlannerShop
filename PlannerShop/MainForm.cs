@@ -62,7 +62,7 @@ namespace PlannerShop
             dataNascitaClientColumn.DisplayIndex = 3;
             dataNascitaClientColumn.Visible = true;
             dataNascitaClientColumn.HeaderText = "COMPLEANNO";
-            dataNascitaClientColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dataNascitaClientColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dataNascitaClientColumn.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataNascitaClientColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
 
@@ -78,9 +78,9 @@ namespace PlannerShop
             telefonoFissoSupplierColumn.DisplayIndex = 5;
             telefonoFissoSupplierColumn.Visible = true;
             telefonoFissoSupplierColumn.HeaderText = "TELEFONO";
-            telefonoFissoSupplierColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            telefonoFissoSupplierColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             telefonoFissoSupplierColumn.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            telefonoFissoSupplierColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            telefonoFissoSupplierColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
 
             var emailSupplierColumn = dgvData.Columns["EMAIL"];
             emailSupplierColumn.DisplayIndex = 6;
@@ -105,7 +105,7 @@ namespace PlannerShop
             idProductColumn.DisplayIndex = 0;
             idProductColumn.Visible = false;
             idProductColumn.HeaderText = "IDPRODOTTO";
-            idProductColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            idProductColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             idProductColumn.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft;
             idProductColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
 
@@ -113,7 +113,7 @@ namespace PlannerShop
             dataProductColumn.DisplayIndex = 1;
             dataProductColumn.Visible = true;
             dataProductColumn.HeaderText = "DATA";
-            dataProductColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            dataProductColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dataProductColumn.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataProductColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
 
@@ -121,7 +121,7 @@ namespace PlannerShop
             marcaProductColumn.DisplayIndex = 2;
             marcaProductColumn.Visible = true;
             marcaProductColumn.HeaderText = "MARCA";
-            marcaProductColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            marcaProductColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             marcaProductColumn.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft;
             marcaProductColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
 
@@ -188,7 +188,7 @@ namespace PlannerShop
             idSupplierColumn.DisplayIndex = 0;
             idSupplierColumn.Visible = false;
             idSupplierColumn.HeaderText = "IDFORNITORE";
-            idSupplierColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            idSupplierColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             idSupplierColumn.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft;
             idSupplierColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
 
@@ -196,7 +196,7 @@ namespace PlannerShop
             nomeSupplierColumn.DisplayIndex = 1;
             nomeSupplierColumn.Visible = true;
             nomeSupplierColumn.HeaderText = "NOME";
-            nomeSupplierColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            nomeSupplierColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             nomeSupplierColumn.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft;
             nomeSupplierColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
 
@@ -212,15 +212,15 @@ namespace PlannerShop
             telefonoFissoSupplierColumn.DisplayIndex = 3;
             telefonoFissoSupplierColumn.Visible = true;
             telefonoFissoSupplierColumn.HeaderText = "TELEFONO";
-            telefonoFissoSupplierColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            telefonoFissoSupplierColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             telefonoFissoSupplierColumn.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            telefonoFissoSupplierColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            telefonoFissoSupplierColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
 
             var emailSupplierColumn = dgvData.Columns["EMAIL"];
             emailSupplierColumn.DisplayIndex = 4;
             emailSupplierColumn.Visible = true;
             emailSupplierColumn.HeaderText = "EMAIL";
-            emailSupplierColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            emailSupplierColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             emailSupplierColumn.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft;
             emailSupplierColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
 
@@ -228,7 +228,7 @@ namespace PlannerShop
             ibanSupplierColumn.DisplayIndex = 5;
             ibanSupplierColumn.Visible = false;
             ibanSupplierColumn.HeaderText = "IBAN";
-            ibanSupplierColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            ibanSupplierColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             ibanSupplierColumn.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft;
             ibanSupplierColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
 
@@ -247,7 +247,7 @@ namespace PlannerShop
             idServiceColumn.DisplayIndex = 0;
             idServiceColumn.Visible = false;
             idServiceColumn.HeaderText = "IDSERVIZIO";
-            idServiceColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            idServiceColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             idServiceColumn.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft;
             idServiceColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
 
@@ -255,7 +255,7 @@ namespace PlannerShop
             dataServiceColumn.DisplayIndex = 1;
             dataServiceColumn.Visible = true;
             dataServiceColumn.HeaderText = "DATA";
-            dataServiceColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            dataServiceColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dataServiceColumn.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataServiceColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
 
@@ -263,7 +263,7 @@ namespace PlannerShop
             nomeServiceColumn.DisplayIndex = 2;
             nomeServiceColumn.Visible = true;
             nomeServiceColumn.HeaderText = "NOME";
-            nomeServiceColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            nomeServiceColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             nomeServiceColumn.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft;
             nomeServiceColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
 
@@ -925,6 +925,11 @@ namespace PlannerShop
             //AgendaForm agendaForm = new AgendaForm();
             AgendaDgvForm agendaForm = new AgendaDgvForm();
             agendaForm.ShowDialog();
+        }
+
+        private void clientiToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

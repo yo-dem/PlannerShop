@@ -109,7 +109,7 @@ namespace PlannerShop.Forms.Agenda
             dgvData.ColumnHeadersDefaultCellStyle.Font = new Font(dgvData.Font, FontStyle.Regular);
 
             dgvData.DefaultCellStyle.BackColor = Color.White;
-            dgvData.DefaultCellStyle.SelectionBackColor = Color.FromArgb(230, 230, 250);
+            dgvData.DefaultCellStyle.SelectionBackColor = Color.FromArgb(230, 230, 230);
 
             dgvData.Columns.Clear();
 
@@ -244,10 +244,24 @@ namespace PlannerShop.Forms.Agenda
                     row.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
                 }
 
-                row.DefaultCellStyle.BackColor =
-                    slot.HourGroup % 2 == 0
-                        ? Color.FromArgb(240, 240, 255)
-                        : Color.White;
+                // Ciclo sulle colonne dei giorni (1-7, skip "Ora")
+                for (int colIndex = 1; colIndex <= 7; colIndex++)
+                {
+                    var col = dgvData.Columns[colIndex];
+                    if (DateTime.TryParseExact(col.Name, "yyyyMMdd", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime colDate))
+                    {
+                        if (colDate.DayOfWeek == DayOfWeek.Saturday || colDate.DayOfWeek == DayOfWeek.Sunday)
+                        {
+                            row.Cells[colIndex].Style.BackColor = Color.FromArgb(245, 245, 245); // WEEKEND COLORI
+                        }
+                        else
+                        {
+                            row.Cells[colIndex].Style.BackColor = slot.HourGroup % 2 == 0
+                                ? Color.FromArgb(240, 240, 255)
+                                : Color.White;
+                        }
+                    }
+                }
             }
 
             dgvData.ResumeLayout();
@@ -312,6 +326,8 @@ namespace PlannerShop.Forms.Agenda
         {
             if (e.RowIndex == -1) // HEADER
             {
+                Color backColor = SystemColors.Control;
+
                 using var backBrush = new SolidBrush(SystemColors.Control);
                 e.Graphics?.FillRectangle(backBrush, e.CellBounds);
 
@@ -326,6 +342,7 @@ namespace PlannerShop.Forms.Agenda
                 if (e.ColumnIndex == 0) // ORA
                 {
                     e.Graphics?.FillRectangle(backBrush, e.CellBounds);
+                    e.Graphics?.DrawLine(pen, e.CellBounds.Left, e.CellBounds.Bottom - 1, e.CellBounds.Right, e.CellBounds.Bottom - 1); // Bottom
                 }
                 else // GIORNI
                 {
@@ -340,8 +357,7 @@ namespace PlannerShop.Forms.Agenda
 
                         // Determiniamo il giorno della settimana dalla colonna
                         DayOfWeek? dow = null;
-                        if (DateTime.TryParseExact(dgvData.Columns[e.ColumnIndex].Name, "yyyyMMdd", CultureInfo.InvariantCulture,
-                                                   DateTimeStyles.None, out DateTime colDate))
+                        if (DateTime.TryParseExact(dgvData.Columns[e.ColumnIndex].Name, "yyyyMMdd", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime colDate))
                         {
                             dow = colDate.DayOfWeek;
                         }

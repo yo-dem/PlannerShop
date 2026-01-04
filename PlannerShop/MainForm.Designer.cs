@@ -39,8 +39,6 @@
             btnFornitori = new Button();
             btnStatistiche = new Button();
             btnStampa = new Button();
-            searchImage = new PictureBox();
-            txtSearch = new TextBox();
             btnClienti = new Button();
             btnServizi = new Button();
             pnlLine = new Panel();
@@ -51,10 +49,30 @@
             timerGift = new System.Windows.Forms.Timer(components);
             btnZoomOut = new Button();
             btnZoomIn = new Button();
-            pnlTop = new Panel();
             btnAgenda = new Button();
             btnOpzioni = new Button();
+            menuStrip = new MenuStrip();
+            vISTAToolStripMenuItem = new ToolStripMenuItem();
+            clientiToolStripMenuItem = new ToolStripMenuItem();
+            fornitoriToolStripMenuItem = new ToolStripMenuItem();
+            prodottiToolStripMenuItem = new ToolStripMenuItem();
+            serviziToolStripMenuItem = new ToolStripMenuItem();
+            sTRUMENTIToolStripMenuItem = new ToolStripMenuItem();
+            zoomToolStripMenuItem = new ToolStripMenuItem();
+            piùSpazioToolStripMenuItem = new ToolStripMenuItem();
+            menoSpazioToolStripMenuItem = new ToolStripMenuItem();
+            opzioniToolStripMenuItem = new ToolStripMenuItem();
+            statisticheToolStripMenuItem = new ToolStripMenuItem();
+            compleanniToolStripMenuItem = new ToolStripMenuItem();
+            toolStripMenuItem1 = new ToolStripSeparator();
+            stampeToolStripMenuItem = new ToolStripMenuItem();
+            rICERCAAVANZATAToolStripMenuItem = new ToolStripMenuItem();
+            pLANNERSHOPToolStripMenuItem = new ToolStripMenuItem();
+            versioneToolStripMenuItem = new ToolStripMenuItem();
+            txtSearch = new TextBox();
+            searchImage = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)dgvData).BeginInit();
+            menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)searchImage).BeginInit();
             SuspendLayout();
             // 
@@ -144,14 +162,14 @@
             // 
             btnProdotti.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             btnProdotti.Image = Properties.Resources.prodotti_24;
-            btnProdotti.Location = new Point(384, 85);
+            btnProdotti.ImageAlign = ContentAlignment.MiddleRight;
+            btnProdotti.Location = new Point(384, 106);
             btnProdotti.Margin = new Padding(3, 2, 3, 2);
             btnProdotti.Name = "btnProdotti";
-            btnProdotti.Size = new Size(180, 55);
+            btnProdotti.Size = new Size(180, 35);
             btnProdotti.TabIndex = 2;
             btnProdotti.Text = "PRODOTTI";
-            btnProdotti.TextAlign = ContentAlignment.BottomCenter;
-            btnProdotti.TextImageRelation = TextImageRelation.ImageAboveText;
+            btnProdotti.TextImageRelation = TextImageRelation.ImageBeforeText;
             btnProdotti.UseVisualStyleBackColor = true;
             btnProdotti.Click += btnProdotti_Click;
             // 
@@ -159,32 +177,32 @@
             // 
             btnFornitori.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             btnFornitori.Image = Properties.Resources.fornitore_24;
-            btnFornitori.Location = new Point(198, 85);
+            btnFornitori.ImageAlign = ContentAlignment.MiddleRight;
+            btnFornitori.Location = new Point(198, 106);
             btnFornitori.Margin = new Padding(3, 2, 3, 2);
             btnFornitori.Name = "btnFornitori";
-            btnFornitori.Size = new Size(180, 55);
+            btnFornitori.Size = new Size(180, 35);
             btnFornitori.TabIndex = 1;
             btnFornitori.Text = "FORNITORI";
-            btnFornitori.TextAlign = ContentAlignment.BottomCenter;
-            btnFornitori.TextImageRelation = TextImageRelation.ImageAboveText;
+            btnFornitori.TextImageRelation = TextImageRelation.ImageBeforeText;
             btnFornitori.UseVisualStyleBackColor = true;
             btnFornitori.Click += btnFornitori_Click;
             // 
             // btnStatistiche
             // 
             btnStatistiche.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnStatistiche.FlatAppearance.BorderColor = Color.White;
+            btnStatistiche.FlatAppearance.BorderColor = Color.Black;
             btnStatistiche.FlatAppearance.BorderSize = 0;
             btnStatistiche.FlatAppearance.CheckedBackColor = Color.White;
-            btnStatistiche.FlatAppearance.MouseDownBackColor = Color.White;
+            btnStatistiche.FlatAppearance.MouseDownBackColor = Color.Transparent;
             btnStatistiche.FlatAppearance.MouseOverBackColor = Color.White;
             btnStatistiche.FlatStyle = FlatStyle.Flat;
             btnStatistiche.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             btnStatistiche.Image = (Image)resources.GetObject("btnStatistiche.Image");
-            btnStatistiche.Location = new Point(941, 15);
+            btnStatistiche.Location = new Point(950, 26);
             btnStatistiche.Margin = new Padding(3, 2, 3, 2);
             btnStatistiche.Name = "btnStatistiche";
-            btnStatistiche.Size = new Size(28, 28);
+            btnStatistiche.Size = new Size(26, 26);
             btnStatistiche.TabIndex = 12;
             btnStatistiche.TextAlign = ContentAlignment.BottomCenter;
             btnStatistiche.TextImageRelation = TextImageRelation.ImageAboveText;
@@ -194,62 +212,35 @@
             // btnStampa
             // 
             btnStampa.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnStampa.FlatAppearance.BorderColor = Color.White;
+            btnStampa.FlatAppearance.BorderColor = Color.Black;
             btnStampa.FlatAppearance.BorderSize = 0;
             btnStampa.FlatAppearance.CheckedBackColor = Color.White;
-            btnStampa.FlatAppearance.MouseDownBackColor = Color.White;
+            btnStampa.FlatAppearance.MouseDownBackColor = Color.Transparent;
             btnStampa.FlatAppearance.MouseOverBackColor = Color.White;
             btnStampa.FlatStyle = FlatStyle.Flat;
             btnStampa.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             btnStampa.Image = Properties.Resources.printerImage;
-            btnStampa.Location = new Point(975, 15);
+            btnStampa.Location = new Point(982, 26);
             btnStampa.Margin = new Padding(3, 2, 3, 2);
             btnStampa.Name = "btnStampa";
-            btnStampa.Size = new Size(28, 28);
+            btnStampa.Size = new Size(26, 26);
             btnStampa.TabIndex = 13;
             btnStampa.TextAlign = ContentAlignment.BottomCenter;
             btnStampa.TextImageRelation = TextImageRelation.ImageAboveText;
             btnStampa.UseVisualStyleBackColor = true;
             // 
-            // searchImage
-            // 
-            searchImage.BackColor = Color.White;
-            searchImage.Image = Properties.Resources.searchWhiteImage;
-            searchImage.Location = new Point(12, 57);
-            searchImage.Margin = new Padding(3, 2, 3, 2);
-            searchImage.Name = "searchImage";
-            searchImage.Size = new Size(24, 24);
-            searchImage.SizeMode = PictureBoxSizeMode.AutoSize;
-            searchImage.TabIndex = 22;
-            searchImage.TabStop = false;
-            // 
-            // txtSearch
-            // 
-            txtSearch.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            txtSearch.BorderStyle = BorderStyle.None;
-            txtSearch.Font = new Font("Corbel", 14F);
-            txtSearch.Location = new Point(12, 58);
-            txtSearch.Margin = new Padding(3, 2, 3, 2);
-            txtSearch.Name = "txtSearch";
-            txtSearch.Size = new Size(1059, 23);
-            txtSearch.TabIndex = 1;
-            txtSearch.TabStop = false;
-            txtSearch.TextAlign = HorizontalAlignment.Center;
-            txtSearch.TextChanged += txtSearch_TextChanged;
-            txtSearch.KeyDown += txtSearch_KeyDown;
-            // 
             // btnClienti
             // 
             btnClienti.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             btnClienti.Image = Properties.Resources.clienti;
-            btnClienti.Location = new Point(12, 85);
+            btnClienti.ImageAlign = ContentAlignment.MiddleRight;
+            btnClienti.Location = new Point(12, 106);
             btnClienti.Margin = new Padding(3, 2, 3, 2);
             btnClienti.Name = "btnClienti";
-            btnClienti.Size = new Size(180, 55);
+            btnClienti.Size = new Size(180, 35);
             btnClienti.TabIndex = 0;
             btnClienti.Text = "CLIENTI";
-            btnClienti.TextAlign = ContentAlignment.BottomCenter;
-            btnClienti.TextImageRelation = TextImageRelation.ImageAboveText;
+            btnClienti.TextImageRelation = TextImageRelation.ImageBeforeText;
             btnClienti.UseVisualStyleBackColor = true;
             btnClienti.Click += btnClienti_Click;
             // 
@@ -257,14 +248,14 @@
             // 
             btnServizi.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             btnServizi.Image = Properties.Resources.serviziEstetici;
-            btnServizi.Location = new Point(570, 85);
+            btnServizi.ImageAlign = ContentAlignment.MiddleRight;
+            btnServizi.Location = new Point(570, 106);
             btnServizi.Margin = new Padding(3, 2, 3, 2);
             btnServizi.Name = "btnServizi";
-            btnServizi.Size = new Size(180, 55);
+            btnServizi.Size = new Size(180, 35);
             btnServizi.TabIndex = 3;
             btnServizi.Text = "SERVIZI";
-            btnServizi.TextAlign = ContentAlignment.BottomCenter;
-            btnServizi.TextImageRelation = TextImageRelation.ImageAboveText;
+            btnServizi.TextImageRelation = TextImageRelation.ImageBeforeText;
             btnServizi.UseVisualStyleBackColor = true;
             btnServizi.Click += btnServizi_Click;
             // 
@@ -307,17 +298,17 @@
             // btnGift
             // 
             btnGift.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnGift.FlatAppearance.BorderColor = Color.White;
+            btnGift.FlatAppearance.BorderColor = Color.Black;
             btnGift.FlatAppearance.BorderSize = 0;
-            btnGift.FlatAppearance.MouseDownBackColor = Color.White;
+            btnGift.FlatAppearance.MouseDownBackColor = Color.Transparent;
             btnGift.FlatAppearance.MouseOverBackColor = Color.White;
             btnGift.FlatStyle = FlatStyle.Flat;
             btnGift.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             btnGift.Image = Properties.Resources.gift_black;
-            btnGift.Location = new Point(1009, 15);
+            btnGift.Location = new Point(1014, 26);
             btnGift.Margin = new Padding(3, 2, 3, 2);
             btnGift.Name = "btnGift";
-            btnGift.Size = new Size(28, 28);
+            btnGift.Size = new Size(26, 26);
             btnGift.TabIndex = 14;
             btnGift.TextAlign = ContentAlignment.BottomCenter;
             btnGift.TextImageRelation = TextImageRelation.ImageAboveText;
@@ -333,17 +324,17 @@
             // btnZoomOut
             // 
             btnZoomOut.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnZoomOut.FlatAppearance.BorderColor = Color.White;
+            btnZoomOut.FlatAppearance.BorderColor = Color.Black;
             btnZoomOut.FlatAppearance.BorderSize = 0;
-            btnZoomOut.FlatAppearance.MouseDownBackColor = Color.White;
+            btnZoomOut.FlatAppearance.MouseDownBackColor = Color.Transparent;
             btnZoomOut.FlatAppearance.MouseOverBackColor = Color.White;
             btnZoomOut.FlatStyle = FlatStyle.Flat;
             btnZoomOut.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             btnZoomOut.Image = Properties.Resources.zoomOut;
-            btnZoomOut.Location = new Point(873, 15);
+            btnZoomOut.Location = new Point(854, 26);
             btnZoomOut.Margin = new Padding(3, 2, 3, 2);
             btnZoomOut.Name = "btnZoomOut";
-            btnZoomOut.Size = new Size(28, 28);
+            btnZoomOut.Size = new Size(26, 26);
             btnZoomOut.TabIndex = 10;
             btnZoomOut.TextAlign = ContentAlignment.BottomCenter;
             btnZoomOut.TextImageRelation = TextImageRelation.ImageAboveText;
@@ -353,43 +344,38 @@
             // btnZoomIn
             // 
             btnZoomIn.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnZoomIn.FlatAppearance.BorderColor = Color.White;
+            btnZoomIn.FlatAppearance.BorderColor = Color.Black;
             btnZoomIn.FlatAppearance.BorderSize = 0;
-            btnZoomIn.FlatAppearance.MouseDownBackColor = Color.White;
+            btnZoomIn.FlatAppearance.MouseDownBackColor = Color.Transparent;
             btnZoomIn.FlatAppearance.MouseOverBackColor = Color.White;
             btnZoomIn.FlatStyle = FlatStyle.Flat;
             btnZoomIn.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             btnZoomIn.Image = Properties.Resources.zoomIn;
-            btnZoomIn.Location = new Point(907, 15);
+            btnZoomIn.Location = new Point(886, 26);
             btnZoomIn.Margin = new Padding(3, 2, 3, 2);
             btnZoomIn.Name = "btnZoomIn";
-            btnZoomIn.Size = new Size(28, 28);
+            btnZoomIn.Size = new Size(26, 26);
             btnZoomIn.TabIndex = 11;
             btnZoomIn.TextAlign = ContentAlignment.BottomCenter;
             btnZoomIn.TextImageRelation = TextImageRelation.ImageAboveText;
             btnZoomIn.UseVisualStyleBackColor = true;
             btnZoomIn.Click += btnZoomIn_Click;
             // 
-            // pnlTop
-            // 
-            pnlTop.BackColor = Color.FromArgb(192, 192, 255);
-            pnlTop.Dock = DockStyle.Top;
-            pnlTop.Location = new Point(0, 0);
-            pnlTop.Name = "pnlTop";
-            pnlTop.Size = new Size(1084, 10);
-            pnlTop.TabIndex = 33;
-            // 
             // btnAgenda
             // 
             btnAgenda.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnAgenda.FlatAppearance.BorderColor = Color.Black;
+            btnAgenda.FlatAppearance.BorderSize = 0;
+            btnAgenda.FlatAppearance.MouseDownBackColor = Color.Transparent;
+            btnAgenda.FlatAppearance.MouseOverBackColor = Color.White;
+            btnAgenda.FlatStyle = FlatStyle.Flat;
             btnAgenda.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             btnAgenda.Image = (Image)resources.GetObject("btnAgenda.Image");
-            btnAgenda.Location = new Point(1009, 85);
+            btnAgenda.Location = new Point(1046, 26);
             btnAgenda.Margin = new Padding(3, 2, 3, 2);
             btnAgenda.Name = "btnAgenda";
-            btnAgenda.Size = new Size(63, 55);
+            btnAgenda.Size = new Size(26, 26);
             btnAgenda.TabIndex = 4;
-            btnAgenda.Text = "AGENDA";
             btnAgenda.TextAlign = ContentAlignment.BottomCenter;
             btnAgenda.TextImageRelation = TextImageRelation.ImageAboveText;
             btnAgenda.UseVisualStyleBackColor = true;
@@ -398,32 +384,177 @@
             // btnOpzioni
             // 
             btnOpzioni.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnOpzioni.FlatAppearance.BorderColor = Color.White;
+            btnOpzioni.FlatAppearance.BorderColor = Color.Black;
             btnOpzioni.FlatAppearance.BorderSize = 0;
             btnOpzioni.FlatAppearance.CheckedBackColor = Color.White;
-            btnOpzioni.FlatAppearance.MouseDownBackColor = Color.White;
+            btnOpzioni.FlatAppearance.MouseDownBackColor = Color.Transparent;
             btnOpzioni.FlatAppearance.MouseOverBackColor = Color.White;
             btnOpzioni.FlatStyle = FlatStyle.Flat;
             btnOpzioni.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             btnOpzioni.Image = Properties.Resources.settingsImage;
-            btnOpzioni.Location = new Point(1043, 15);
+            btnOpzioni.Location = new Point(918, 26);
             btnOpzioni.Margin = new Padding(3, 2, 3, 2);
             btnOpzioni.Name = "btnOpzioni";
-            btnOpzioni.Size = new Size(28, 28);
+            btnOpzioni.Size = new Size(26, 26);
             btnOpzioni.TabIndex = 15;
             btnOpzioni.TextAlign = ContentAlignment.BottomCenter;
             btnOpzioni.TextImageRelation = TextImageRelation.ImageAboveText;
             btnOpzioni.UseVisualStyleBackColor = true;
             btnOpzioni.Click += btnOpzioni_Click;
             // 
+            // menuStrip
+            // 
+            menuStrip.BackColor = SystemColors.Control;
+            menuStrip.Items.AddRange(new ToolStripItem[] { vISTAToolStripMenuItem, sTRUMENTIToolStripMenuItem, rICERCAAVANZATAToolStripMenuItem, pLANNERSHOPToolStripMenuItem });
+            menuStrip.Location = new Point(0, 0);
+            menuStrip.Name = "menuStrip";
+            menuStrip.Size = new Size(1084, 24);
+            menuStrip.TabIndex = 34;
+            menuStrip.Text = "menuStrip1";
+            // 
+            // vISTAToolStripMenuItem
+            // 
+            vISTAToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { clientiToolStripMenuItem, fornitoriToolStripMenuItem, prodottiToolStripMenuItem, serviziToolStripMenuItem });
+            vISTAToolStripMenuItem.Name = "vISTAToolStripMenuItem";
+            vISTAToolStripMenuItem.Size = new Size(49, 20);
+            vISTAToolStripMenuItem.Text = "&VISTA";
+            // 
+            // clientiToolStripMenuItem
+            // 
+            clientiToolStripMenuItem.Name = "clientiToolStripMenuItem";
+            clientiToolStripMenuItem.Size = new Size(172, 22);
+            clientiToolStripMenuItem.Text = "Visualizza Clienti";
+            clientiToolStripMenuItem.Click += clientiToolStripMenuItem_Click;
+            // 
+            // fornitoriToolStripMenuItem
+            // 
+            fornitoriToolStripMenuItem.Name = "fornitoriToolStripMenuItem";
+            fornitoriToolStripMenuItem.Size = new Size(172, 22);
+            fornitoriToolStripMenuItem.Text = "Visualizza Fornitori";
+            // 
+            // prodottiToolStripMenuItem
+            // 
+            prodottiToolStripMenuItem.Name = "prodottiToolStripMenuItem";
+            prodottiToolStripMenuItem.Size = new Size(172, 22);
+            prodottiToolStripMenuItem.Text = "Visualizza Prodotti";
+            // 
+            // serviziToolStripMenuItem
+            // 
+            serviziToolStripMenuItem.Name = "serviziToolStripMenuItem";
+            serviziToolStripMenuItem.Size = new Size(172, 22);
+            serviziToolStripMenuItem.Text = "Visualizza Servizi";
+            // 
+            // sTRUMENTIToolStripMenuItem
+            // 
+            sTRUMENTIToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { zoomToolStripMenuItem, opzioniToolStripMenuItem, statisticheToolStripMenuItem, compleanniToolStripMenuItem, toolStripMenuItem1, stampeToolStripMenuItem });
+            sTRUMENTIToolStripMenuItem.Name = "sTRUMENTIToolStripMenuItem";
+            sTRUMENTIToolStripMenuItem.Size = new Size(83, 20);
+            sTRUMENTIToolStripMenuItem.Text = "&STRUMENTI";
+            // 
+            // zoomToolStripMenuItem
+            // 
+            zoomToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { piùSpazioToolStripMenuItem, menoSpazioToolStripMenuItem });
+            zoomToolStripMenuItem.Name = "zoomToolStripMenuItem";
+            zoomToolStripMenuItem.Size = new Size(164, 22);
+            zoomToolStripMenuItem.Text = "Dimensione celle";
+            // 
+            // piùSpazioToolStripMenuItem
+            // 
+            piùSpazioToolStripMenuItem.Name = "piùSpazioToolStripMenuItem";
+            piùSpazioToolStripMenuItem.Size = new Size(141, 22);
+            piùSpazioToolStripMenuItem.Text = "Più spazio";
+            // 
+            // menoSpazioToolStripMenuItem
+            // 
+            menoSpazioToolStripMenuItem.Name = "menoSpazioToolStripMenuItem";
+            menoSpazioToolStripMenuItem.Size = new Size(141, 22);
+            menoSpazioToolStripMenuItem.Text = "Meno spazio";
+            // 
+            // opzioniToolStripMenuItem
+            // 
+            opzioniToolStripMenuItem.Name = "opzioniToolStripMenuItem";
+            opzioniToolStripMenuItem.Size = new Size(164, 22);
+            opzioniToolStripMenuItem.Text = "Opzioni";
+            // 
+            // statisticheToolStripMenuItem
+            // 
+            statisticheToolStripMenuItem.Name = "statisticheToolStripMenuItem";
+            statisticheToolStripMenuItem.Size = new Size(164, 22);
+            statisticheToolStripMenuItem.Text = "Statistiche";
+            // 
+            // compleanniToolStripMenuItem
+            // 
+            compleanniToolStripMenuItem.Name = "compleanniToolStripMenuItem";
+            compleanniToolStripMenuItem.Size = new Size(164, 22);
+            compleanniToolStripMenuItem.Text = "Compleanni";
+            // 
+            // toolStripMenuItem1
+            // 
+            toolStripMenuItem1.Name = "toolStripMenuItem1";
+            toolStripMenuItem1.Size = new Size(161, 6);
+            // 
+            // stampeToolStripMenuItem
+            // 
+            stampeToolStripMenuItem.Name = "stampeToolStripMenuItem";
+            stampeToolStripMenuItem.Size = new Size(164, 22);
+            stampeToolStripMenuItem.Text = "Stampe";
+            // 
+            // rICERCAAVANZATAToolStripMenuItem
+            // 
+            rICERCAAVANZATAToolStripMenuItem.Name = "rICERCAAVANZATAToolStripMenuItem";
+            rICERCAAVANZATAToolStripMenuItem.Size = new Size(127, 20);
+            rICERCAAVANZATAToolStripMenuItem.Text = "&RICERCA AVANZATA";
+            // 
+            // pLANNERSHOPToolStripMenuItem
+            // 
+            pLANNERSHOPToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { versioneToolStripMenuItem });
+            pLANNERSHOPToolStripMenuItem.Name = "pLANNERSHOPToolStripMenuItem";
+            pLANNERSHOPToolStripMenuItem.Size = new Size(102, 20);
+            pLANNERSHOPToolStripMenuItem.Text = "&PLANNERSHOP";
+            // 
+            // versioneToolStripMenuItem
+            // 
+            versioneToolStripMenuItem.Name = "versioneToolStripMenuItem";
+            versioneToolStripMenuItem.Size = new Size(118, 22);
+            versioneToolStripMenuItem.Text = "Versione";
+            // 
+            // txtSearch
+            // 
+            txtSearch.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            txtSearch.BackColor = Color.White;
+            txtSearch.BorderStyle = BorderStyle.None;
+            txtSearch.Font = new Font("Corbel", 18F);
+            txtSearch.Location = new Point(854, 108);
+            txtSearch.Margin = new Padding(0);
+            txtSearch.Name = "txtSearch";
+            txtSearch.Size = new Size(217, 30);
+            txtSearch.TabIndex = 1;
+            txtSearch.TabStop = false;
+            txtSearch.TextAlign = HorizontalAlignment.Center;
+            txtSearch.TextChanged += txtSearch_TextChanged;
+            txtSearch.KeyDown += txtSearch_KeyDown;
+            // 
+            // searchImage
+            // 
+            searchImage.BackColor = Color.White;
+            searchImage.Image = Properties.Resources.searchWhiteImage;
+            searchImage.Location = new Point(858, 111);
+            searchImage.Margin = new Padding(3, 2, 3, 2);
+            searchImage.Name = "searchImage";
+            searchImage.Size = new Size(24, 24);
+            searchImage.SizeMode = PictureBoxSizeMode.AutoSize;
+            searchImage.TabIndex = 22;
+            searchImage.TabStop = false;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1084, 631);
+            Controls.Add(searchImage);
+            Controls.Add(txtSearch);
             Controls.Add(btnOpzioni);
             Controls.Add(btnAgenda);
-            Controls.Add(pnlTop);
             Controls.Add(btnZoomIn);
             Controls.Add(btnZoomOut);
             Controls.Add(btnGift);
@@ -431,9 +562,7 @@
             Controls.Add(pnlUp);
             Controls.Add(pnlLeft);
             Controls.Add(pnlRight);
-            Controls.Add(searchImage);
             Controls.Add(btnServizi);
-            Controls.Add(txtSearch);
             Controls.Add(dgvData);
             Controls.Add(btnClienti);
             Controls.Add(btnStatistiche);
@@ -444,8 +573,10 @@
             Controls.Add(btnLogout);
             Controls.Add(btnEdit);
             Controls.Add(btnInsert);
+            Controls.Add(menuStrip);
             Icon = (Icon)resources.GetObject("$this.Icon");
             KeyPreview = true;
+            MainMenuStrip = menuStrip;
             Margin = new Padding(3, 2, 3, 2);
             MinimumSize = new Size(1100, 670);
             Name = "MainForm";
@@ -454,6 +585,8 @@
             FormClosing += MainForm_FormClosing;
             KeyPress += MainForm_KeyPress;
             ((System.ComponentModel.ISupportInitialize)dgvData).EndInit();
+            menuStrip.ResumeLayout(false);
+            menuStrip.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)searchImage).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -469,8 +602,6 @@
         private Button btnFornitori;
         private Button btnStatistiche;
         private Button btnStampa;
-        private PictureBox searchImage;
-        private TextBox txtSearch;
         private Button btnClienti;
         private Button btnServizi;
         private Panel pnlLine;
@@ -481,8 +612,27 @@
         private System.Windows.Forms.Timer timerGift;
         private Button btnZoomOut;
         private Button btnZoomIn;
-        private Panel pnlTop;
         private Button btnAgenda;
         private Button btnOpzioni;
+        private MenuStrip menuStrip;
+        private ToolStripMenuItem vISTAToolStripMenuItem;
+        private ToolStripMenuItem clientiToolStripMenuItem;
+        private ToolStripMenuItem fornitoriToolStripMenuItem;
+        private ToolStripMenuItem prodottiToolStripMenuItem;
+        private ToolStripMenuItem serviziToolStripMenuItem;
+        private ToolStripMenuItem sTRUMENTIToolStripMenuItem;
+        private ToolStripMenuItem zoomToolStripMenuItem;
+        private ToolStripMenuItem piùSpazioToolStripMenuItem;
+        private ToolStripMenuItem menoSpazioToolStripMenuItem;
+        private ToolStripMenuItem opzioniToolStripMenuItem;
+        private ToolStripMenuItem statisticheToolStripMenuItem;
+        private ToolStripSeparator toolStripMenuItem1;
+        private ToolStripMenuItem stampeToolStripMenuItem;
+        private ToolStripMenuItem compleanniToolStripMenuItem;
+        private ToolStripMenuItem rICERCAAVANZATAToolStripMenuItem;
+        private ToolStripMenuItem pLANNERSHOPToolStripMenuItem;
+        private ToolStripMenuItem versioneToolStripMenuItem;
+        private TextBox txtSearch;
+        private PictureBox searchImage;
     }
 }
