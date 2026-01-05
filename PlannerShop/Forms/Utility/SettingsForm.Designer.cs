@@ -42,9 +42,14 @@
             pnlTop = new Panel();
             groupBox2 = new GroupBox();
             btnBackup = new Button();
+            groupBox3 = new GroupBox();
+            lblEmailResult = new Label();
+            btnSaveMail = new Button();
+            txtEmail = new TextBox();
             Password.SuspendLayout();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
+            groupBox3.SuspendLayout();
             SuspendLayout();
             // 
             // lblOldPassword
@@ -134,7 +139,7 @@
             // groupBox1
             // 
             groupBox1.Controls.Add(chkAccessMode);
-            groupBox1.Location = new Point(10, 339);
+            groupBox1.Location = new Point(10, 478);
             groupBox1.Margin = new Padding(3, 2, 3, 2);
             groupBox1.Name = "groupBox1";
             groupBox1.Padding = new Padding(3, 2, 3, 2);
@@ -161,7 +166,7 @@
             // 
             btnOk.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             btnOk.Image = Properties.Resources.okImage;
-            btnOk.Location = new Point(10, 391);
+            btnOk.Location = new Point(10, 530);
             btnOk.Margin = new Padding(3, 2, 3, 2);
             btnOk.Name = "btnOk";
             btnOk.Size = new Size(404, 51);
@@ -204,11 +209,53 @@
             btnBackup.UseVisualStyleBackColor = true;
             btnBackup.Click += btnBackup_Click;
             // 
+            // groupBox3
+            // 
+            groupBox3.Controls.Add(lblEmailResult);
+            groupBox3.Controls.Add(btnSaveMail);
+            groupBox3.Controls.Add(txtEmail);
+            groupBox3.Location = new Point(10, 339);
+            groupBox3.Margin = new Padding(3, 2, 3, 2);
+            groupBox3.Name = "groupBox3";
+            groupBox3.Padding = new Padding(3, 2, 3, 2);
+            groupBox3.Size = new Size(404, 135);
+            groupBox3.TabIndex = 26;
+            groupBox3.TabStop = false;
+            groupBox3.Text = "EMAIL GESTIONALE";
+            // 
+            // lblEmailResult
+            // 
+            lblEmailResult.Location = new Point(5, 70);
+            lblEmailResult.Name = "lblEmailResult";
+            lblEmailResult.Size = new Size(391, 24);
+            lblEmailResult.TabIndex = 5;
+            lblEmailResult.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // btnSaveMail
+            // 
+            btnSaveMail.Location = new Point(6, 96);
+            btnSaveMail.Margin = new Padding(3, 2, 3, 2);
+            btnSaveMail.Name = "btnSaveMail";
+            btnSaveMail.Size = new Size(392, 35);
+            btnSaveMail.TabIndex = 4;
+            btnSaveMail.Text = "SALVA MAIL";
+            btnSaveMail.UseVisualStyleBackColor = true;
+            btnSaveMail.Click += btnSaveMail_Click;
+            // 
+            // txtEmail
+            // 
+            txtEmail.Location = new Point(6, 21);
+            txtEmail.Name = "txtEmail";
+            txtEmail.Size = new Size(391, 23);
+            txtEmail.TabIndex = 0;
+            txtEmail.TextChanged += txtEmail_TextChanged;
+            // 
             // SettingsForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(425, 453);
+            ClientSize = new Size(425, 592);
+            Controls.Add(groupBox3);
             Controls.Add(groupBox2);
             Controls.Add(pnlTop);
             Controls.Add(btnOk);
@@ -224,6 +271,8 @@
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
             groupBox2.ResumeLayout(false);
+            groupBox3.ResumeLayout(false);
+            groupBox3.PerformLayout();
             ResumeLayout(false);
 
         }
@@ -244,5 +293,9 @@
         private Panel pnlTop;
         private GroupBox groupBox2;
         private Button btnBackup;
+        private GroupBox groupBox3;
+        private TextBox txtEmail;
+        private Label lblEmailResult;
+        private Button btnSaveMail;
     }
 }

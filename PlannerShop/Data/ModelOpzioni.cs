@@ -4,15 +4,13 @@ namespace PlannerShop.Data
 {
     internal struct ModelOpzioni
     {
-        private const string KEY_MAILGEST = "mailgest";
-
-        public static string GetOpzioneMail()
+        public static string GetOpzione(string key)
         {
             string sql = @"SELECT VALUE FROM TOpzioni WHERE KEY = @key";
 
             var parameters = new Dictionary<string, object?>()
             {
-                { "@key", KEY_MAILGEST }
+                { "@key", key }
             };
 
             DataTable dt = DBUtility.GetDBData(sql, parameters);
@@ -23,7 +21,7 @@ namespace PlannerShop.Data
             return dt.Rows[0]["VALUE"]?.ToString() ?? string.Empty;
         }
 
-        public static void SetOpzioneMail(string value)
+        public static void SetOpzione(string key, string value)
         {
             string sql = @"
                 UPDATE TOpzioni
@@ -39,7 +37,7 @@ namespace PlannerShop.Data
 
             var parameters = new Dictionary<string, object?>()
             {
-                { "@key", KEY_MAILGEST },
+                { "@key", key },
                 { "@value", value }
             };
 
