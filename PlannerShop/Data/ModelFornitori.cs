@@ -11,7 +11,7 @@ namespace PlannerShop.Data
 
         public static DataTable getFornitori()
         {
-            return DBUtility.GetDBData("SELECT * FROM TFORNITORI ORDER BY IDFORNITORE DESC");
+            return DBUtility.GetDBData("SELECT * FROM TFORNITORI ORDER BY IDFORNITORE DESC", null);
         }
 
         public static DataTable searchFornitori(string searchTerm)

@@ -13,12 +13,12 @@ namespace PlannerShop.Data
 
         public static DataTable getProdotti()
         {
-            return DBUtility.GetDBData("SELECT * FROM TPRODOTTI ORDER BY IDPRODOTTO DESC");
+            return DBUtility.GetDBData("SELECT * FROM TPRODOTTI ORDER BY IDPRODOTTO DESC", null);
         }
 
         public static DataTable getExistingProdotti()
         {
-            return DBUtility.GetDBData("SELECT * FROM TPRODOTTI WHERE QNT <> '0' ORDER BY IDPRODOTTO DESC");
+            return DBUtility.GetDBData("SELECT * FROM TPRODOTTI WHERE QNT <> '0' ORDER BY IDPRODOTTO DESC", null);
         }
 
         public static DataTable searchProdotti(string searchTerm)

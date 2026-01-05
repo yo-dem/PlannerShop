@@ -13,7 +13,7 @@ namespace PlannerShop.Data
 
         public static DataTable getServizi()
         {
-            return DBUtility.GetDBData("SELECT * FROM TSERVIZI ORDER BY IDSERVIZIO DESC");
+            return DBUtility.GetDBData("SELECT * FROM TSERVIZI ORDER BY IDSERVIZIO DESC", null);
         }
 
         public static DataTable searchServizi(string searchTerm)

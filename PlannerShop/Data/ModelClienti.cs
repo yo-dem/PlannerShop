@@ -11,7 +11,7 @@ namespace PlannerShop.Data
 
         public static DataTable getClienti()
         {
-            return DBUtility.GetDBData("SELECT * FROM TCLIENTI ORDER BY IDCLIENTE DESC");
+            return DBUtility.GetDBData("SELECT * FROM TCLIENTI ORDER BY IDCLIENTE DESC", null);
         }
 
         public static DataTable searchClienti(string searchTerm)
@@ -39,7 +39,7 @@ namespace PlannerShop.Data
                 ORDER BY
                     CAST(SUBSTR(TRIM(COMPLEANNO), 1, 2) AS INTEGER),
                     IDCLIENTE DESC
-            ");
+            ", null);
         }
 
 

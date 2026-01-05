@@ -15,7 +15,7 @@ namespace PlannerShop.Data
         }
         public static bool IsEnabled()
         {
-            DataTable dt = DBUtility.GetDBData("SELECT ENABLED FROM TPWD");
+            DataTable dt = DBUtility.GetDBData("SELECT ENABLED FROM TPWD", null);
             if (dt.Rows.Count == 0) return false;
             return dt.Rows[0][0].ToString()?.ToUpper() == "TRUE";
         }
