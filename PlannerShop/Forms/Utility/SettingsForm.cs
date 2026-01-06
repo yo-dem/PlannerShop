@@ -11,7 +11,12 @@ namespace PlannerShop.Forms
         {
             InitializeComponent();
             chkAccessMode.Checked = ModelPwd.IsEnabled();
+
             txtEmail.Text = ModelOpzioni.GetOpzione("mailgest");
+            txtPassword.Text = ModelOpzioni.GetOpzione("pwdmailgest");
+            txtSmtp.Text = ModelOpzioni.GetOpzione("smtpmailgest");
+            txtPort.Text = ModelOpzioni.GetOpzione("portmailgest");
+
         }
 
         private void btnPasswordChange_Click(object sender, EventArgs e)
@@ -100,6 +105,10 @@ namespace PlannerShop.Forms
             if(!emailNotValid)
             {
                 ModelOpzioni.SetOpzione("mailgest", txtEmail.Text);
+                ModelOpzioni.SetOpzione("pwdmailgest", txtPassword.Text);
+                ModelOpzioni.SetOpzione("smtpmailgest", txtSmtp.Text);
+                ModelOpzioni.SetOpzione("portmailgest", txtPort.Text);
+
                 lblEmailResult.Text = "Email salvata";
             }
         }

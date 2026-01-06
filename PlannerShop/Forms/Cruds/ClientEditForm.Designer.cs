@@ -48,6 +48,7 @@
             btnProductPurchase = new Button();
             btnViewPurchase = new Button();
             btnServicePurchase = new Button();
+            btnMail = new Button();
             SuspendLayout();
             // 
             // lblNome
@@ -275,12 +276,30 @@
             btnServicePurchase.UseVisualStyleBackColor = true;
             btnServicePurchase.Click += btnServicePurchase_Click;
             // 
+            // btnMail
+            // 
+            btnMail.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            btnMail.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
+            btnMail.ForeColor = SystemColors.ControlText;
+            btnMail.Image = Properties.Resources.message;
+            btnMail.Location = new Point(806, 41);
+            btnMail.Margin = new Padding(3, 2, 3, 2);
+            btnMail.Name = "btnMail";
+            btnMail.Size = new Size(125, 37);
+            btnMail.TabIndex = 21;
+            btnMail.Text = "INVIA MAIL";
+            btnMail.TextAlign = ContentAlignment.MiddleRight;
+            btnMail.TextImageRelation = TextImageRelation.TextBeforeImage;
+            btnMail.UseVisualStyleBackColor = true;
+            btnMail.Click += btnMail_Click;
+            // 
             // ClientEditForm
             // 
             AcceptButton = btnOk;
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(948, 523);
+            Controls.Add(btnMail);
             Controls.Add(btnServicePurchase);
             Controls.Add(btnViewPurchase);
             Controls.Add(btnProductPurchase);
@@ -331,5 +350,6 @@
         private Button btnProductPurchase;
         private Button btnViewPurchase;
         private Button btnServicePurchase;
+        private Button btnMail;
     }
 }

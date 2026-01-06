@@ -43,6 +43,13 @@
             groupBox2 = new GroupBox();
             btnBackup = new Button();
             groupBox3 = new GroupBox();
+            lblPort = new Label();
+            txtPort = new TextBox();
+            lblPassword = new Label();
+            txtPassword = new TextBox();
+            lblSmtp = new Label();
+            txtSmtp = new TextBox();
+            lblEmail = new Label();
             lblEmailResult = new Label();
             btnSaveMail = new Button();
             txtEmail = new TextBox();
@@ -139,7 +146,7 @@
             // groupBox1
             // 
             groupBox1.Controls.Add(chkAccessMode);
-            groupBox1.Location = new Point(10, 478);
+            groupBox1.Location = new Point(10, 655);
             groupBox1.Margin = new Padding(3, 2, 3, 2);
             groupBox1.Name = "groupBox1";
             groupBox1.Padding = new Padding(3, 2, 3, 2);
@@ -166,7 +173,7 @@
             // 
             btnOk.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             btnOk.Image = Properties.Resources.okImage;
-            btnOk.Location = new Point(10, 530);
+            btnOk.Location = new Point(10, 707);
             btnOk.Margin = new Padding(3, 2, 3, 2);
             btnOk.Name = "btnOk";
             btnOk.Size = new Size(404, 51);
@@ -211,6 +218,13 @@
             // 
             // groupBox3
             // 
+            groupBox3.Controls.Add(lblPort);
+            groupBox3.Controls.Add(txtPort);
+            groupBox3.Controls.Add(lblPassword);
+            groupBox3.Controls.Add(txtPassword);
+            groupBox3.Controls.Add(lblSmtp);
+            groupBox3.Controls.Add(txtSmtp);
+            groupBox3.Controls.Add(lblEmail);
             groupBox3.Controls.Add(lblEmailResult);
             groupBox3.Controls.Add(btnSaveMail);
             groupBox3.Controls.Add(txtEmail);
@@ -218,22 +232,80 @@
             groupBox3.Margin = new Padding(3, 2, 3, 2);
             groupBox3.Name = "groupBox3";
             groupBox3.Padding = new Padding(3, 2, 3, 2);
-            groupBox3.Size = new Size(404, 135);
+            groupBox3.Size = new Size(404, 312);
             groupBox3.TabIndex = 26;
             groupBox3.TabStop = false;
             groupBox3.Text = "EMAIL GESTIONALE";
             // 
+            // lblPort
+            // 
+            lblPort.AutoSize = true;
+            lblPort.Location = new Point(6, 150);
+            lblPort.Name = "lblPort";
+            lblPort.Size = new Size(43, 15);
+            lblPort.TabIndex = 12;
+            lblPort.Text = "PORTA";
+            // 
+            // txtPort
+            // 
+            txtPort.Location = new Point(6, 168);
+            txtPort.Name = "txtPort";
+            txtPort.Size = new Size(393, 23);
+            txtPort.TabIndex = 11;
+            // 
+            // lblPassword
+            // 
+            lblPassword.AutoSize = true;
+            lblPassword.Location = new Point(6, 62);
+            lblPassword.Name = "lblPassword";
+            lblPassword.Size = new Size(68, 15);
+            lblPassword.TabIndex = 10;
+            lblPassword.Text = "PASSWORD";
+            // 
+            // txtPassword
+            // 
+            txtPassword.Location = new Point(6, 80);
+            txtPassword.Name = "txtPassword";
+            txtPassword.PasswordChar = '*';
+            txtPassword.Size = new Size(393, 23);
+            txtPassword.TabIndex = 9;
+            // 
+            // lblSmtp
+            // 
+            lblSmtp.AutoSize = true;
+            lblSmtp.Location = new Point(6, 106);
+            lblSmtp.Name = "lblSmtp";
+            lblSmtp.Size = new Size(38, 15);
+            lblSmtp.TabIndex = 8;
+            lblSmtp.Text = "SMTP";
+            // 
+            // txtSmtp
+            // 
+            txtSmtp.Location = new Point(6, 124);
+            txtSmtp.Name = "txtSmtp";
+            txtSmtp.Size = new Size(393, 23);
+            txtSmtp.TabIndex = 7;
+            // 
+            // lblEmail
+            // 
+            lblEmail.AutoSize = true;
+            lblEmail.Location = new Point(6, 18);
+            lblEmail.Name = "lblEmail";
+            lblEmail.Size = new Size(41, 15);
+            lblEmail.TabIndex = 6;
+            lblEmail.Text = "EMAIL";
+            // 
             // lblEmailResult
             // 
-            lblEmailResult.Location = new Point(5, 70);
+            lblEmailResult.Location = new Point(6, 247);
             lblEmailResult.Name = "lblEmailResult";
-            lblEmailResult.Size = new Size(391, 24);
+            lblEmailResult.Size = new Size(390, 24);
             lblEmailResult.TabIndex = 5;
             lblEmailResult.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // btnSaveMail
             // 
-            btnSaveMail.Location = new Point(6, 96);
+            btnSaveMail.Location = new Point(6, 273);
             btnSaveMail.Margin = new Padding(3, 2, 3, 2);
             btnSaveMail.Name = "btnSaveMail";
             btnSaveMail.Size = new Size(392, 35);
@@ -244,9 +316,9 @@
             // 
             // txtEmail
             // 
-            txtEmail.Location = new Point(6, 21);
+            txtEmail.Location = new Point(6, 36);
             txtEmail.Name = "txtEmail";
-            txtEmail.Size = new Size(391, 23);
+            txtEmail.Size = new Size(393, 23);
             txtEmail.TabIndex = 0;
             txtEmail.TextChanged += txtEmail_TextChanged;
             // 
@@ -254,7 +326,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(425, 592);
+            ClientSize = new Size(425, 769);
             Controls.Add(groupBox3);
             Controls.Add(groupBox2);
             Controls.Add(pnlTop);
@@ -297,5 +369,12 @@
         private TextBox txtEmail;
         private Label lblEmailResult;
         private Button btnSaveMail;
+        private Label lblPassword;
+        private TextBox txtPassword;
+        private Label lblSmtp;
+        private TextBox txtSmtp;
+        private Label lblEmail;
+        private Label lblPort;
+        private TextBox txtPort;
     }
 }

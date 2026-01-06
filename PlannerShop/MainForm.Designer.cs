@@ -172,7 +172,7 @@
             // btnStatistiche
             // 
             btnStatistiche.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnStatistiche.FlatAppearance.BorderColor = Color.Black;
+            btnStatistiche.FlatAppearance.BorderColor = SystemColors.Control;
             btnStatistiche.FlatAppearance.BorderSize = 0;
             btnStatistiche.FlatAppearance.CheckedBackColor = Color.White;
             btnStatistiche.FlatAppearance.MouseDownBackColor = Color.Transparent;
@@ -180,10 +180,10 @@
             btnStatistiche.FlatStyle = FlatStyle.Flat;
             btnStatistiche.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             btnStatistiche.Image = (Image)resources.GetObject("btnStatistiche.Image");
-            btnStatistiche.Location = new Point(949, 69);
+            btnStatistiche.Location = new Point(941, 67);
             btnStatistiche.Margin = new Padding(3, 2, 3, 2);
             btnStatistiche.Name = "btnStatistiche";
-            btnStatistiche.Size = new Size(26, 26);
+            btnStatistiche.Size = new Size(28, 28);
             btnStatistiche.TabIndex = 12;
             btnStatistiche.TextAlign = ContentAlignment.BottomCenter;
             btnStatistiche.TextImageRelation = TextImageRelation.ImageAboveText;
@@ -193,7 +193,7 @@
             // btnStampa
             // 
             btnStampa.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnStampa.FlatAppearance.BorderColor = Color.Black;
+            btnStampa.FlatAppearance.BorderColor = SystemColors.Control;
             btnStampa.FlatAppearance.BorderSize = 0;
             btnStampa.FlatAppearance.CheckedBackColor = Color.White;
             btnStampa.FlatAppearance.MouseDownBackColor = Color.Transparent;
@@ -201,10 +201,10 @@
             btnStampa.FlatStyle = FlatStyle.Flat;
             btnStampa.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             btnStampa.Image = Properties.Resources.printerImage;
-            btnStampa.Location = new Point(981, 69);
+            btnStampa.Location = new Point(975, 67);
             btnStampa.Margin = new Padding(3, 2, 3, 2);
             btnStampa.Name = "btnStampa";
-            btnStampa.Size = new Size(26, 26);
+            btnStampa.Size = new Size(28, 28);
             btnStampa.TabIndex = 13;
             btnStampa.TextAlign = ContentAlignment.BottomCenter;
             btnStampa.TextImageRelation = TextImageRelation.ImageAboveText;
@@ -279,17 +279,17 @@
             // btnGift
             // 
             btnGift.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnGift.FlatAppearance.BorderColor = Color.Black;
+            btnGift.FlatAppearance.BorderColor = SystemColors.Control;
             btnGift.FlatAppearance.BorderSize = 0;
             btnGift.FlatAppearance.MouseDownBackColor = Color.Transparent;
             btnGift.FlatAppearance.MouseOverBackColor = Color.White;
             btnGift.FlatStyle = FlatStyle.Flat;
             btnGift.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             btnGift.Image = Properties.Resources.gift_black;
-            btnGift.Location = new Point(1013, 69);
+            btnGift.Location = new Point(1009, 67);
             btnGift.Margin = new Padding(3, 2, 3, 2);
             btnGift.Name = "btnGift";
-            btnGift.Size = new Size(26, 26);
+            btnGift.Size = new Size(28, 28);
             btnGift.TabIndex = 14;
             btnGift.TextAlign = ContentAlignment.BottomCenter;
             btnGift.TextImageRelation = TextImageRelation.ImageAboveText;
@@ -305,17 +305,17 @@
             // btnZoomOut
             // 
             btnZoomOut.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnZoomOut.FlatAppearance.BorderColor = Color.Black;
+            btnZoomOut.FlatAppearance.BorderColor = SystemColors.Control;
             btnZoomOut.FlatAppearance.BorderSize = 0;
             btnZoomOut.FlatAppearance.MouseDownBackColor = Color.Transparent;
             btnZoomOut.FlatAppearance.MouseOverBackColor = Color.White;
             btnZoomOut.FlatStyle = FlatStyle.Flat;
             btnZoomOut.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             btnZoomOut.Image = Properties.Resources.zoomOut;
-            btnZoomOut.Location = new Point(853, 69);
+            btnZoomOut.Location = new Point(839, 67);
             btnZoomOut.Margin = new Padding(3, 2, 3, 2);
             btnZoomOut.Name = "btnZoomOut";
-            btnZoomOut.Size = new Size(26, 26);
+            btnZoomOut.Size = new Size(28, 28);
             btnZoomOut.TabIndex = 10;
             btnZoomOut.TextAlign = ContentAlignment.BottomCenter;
             btnZoomOut.TextImageRelation = TextImageRelation.ImageAboveText;
@@ -325,17 +325,17 @@
             // btnZoomIn
             // 
             btnZoomIn.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnZoomIn.FlatAppearance.BorderColor = Color.Black;
+            btnZoomIn.FlatAppearance.BorderColor = SystemColors.Control;
             btnZoomIn.FlatAppearance.BorderSize = 0;
             btnZoomIn.FlatAppearance.MouseDownBackColor = Color.Transparent;
             btnZoomIn.FlatAppearance.MouseOverBackColor = Color.White;
             btnZoomIn.FlatStyle = FlatStyle.Flat;
             btnZoomIn.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             btnZoomIn.Image = Properties.Resources.zoomIn;
-            btnZoomIn.Location = new Point(885, 69);
+            btnZoomIn.Location = new Point(873, 67);
             btnZoomIn.Margin = new Padding(3, 2, 3, 2);
             btnZoomIn.Name = "btnZoomIn";
-            btnZoomIn.Size = new Size(26, 26);
+            btnZoomIn.Size = new Size(28, 28);
             btnZoomIn.TabIndex = 11;
             btnZoomIn.TextAlign = ContentAlignment.BottomCenter;
             btnZoomIn.TextImageRelation = TextImageRelation.ImageAboveText;
@@ -345,17 +345,17 @@
             // btnAgenda
             // 
             btnAgenda.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnAgenda.FlatAppearance.BorderColor = Color.Black;
+            btnAgenda.FlatAppearance.BorderColor = SystemColors.Control;
             btnAgenda.FlatAppearance.BorderSize = 0;
             btnAgenda.FlatAppearance.MouseDownBackColor = Color.Transparent;
             btnAgenda.FlatAppearance.MouseOverBackColor = Color.White;
             btnAgenda.FlatStyle = FlatStyle.Flat;
             btnAgenda.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             btnAgenda.Image = (Image)resources.GetObject("btnAgenda.Image");
-            btnAgenda.Location = new Point(1045, 69);
+            btnAgenda.Location = new Point(1043, 67);
             btnAgenda.Margin = new Padding(3, 2, 3, 2);
             btnAgenda.Name = "btnAgenda";
-            btnAgenda.Size = new Size(26, 26);
+            btnAgenda.Size = new Size(28, 28);
             btnAgenda.TabIndex = 4;
             btnAgenda.TextAlign = ContentAlignment.BottomCenter;
             btnAgenda.TextImageRelation = TextImageRelation.ImageAboveText;
@@ -365,7 +365,7 @@
             // btnOpzioni
             // 
             btnOpzioni.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnOpzioni.FlatAppearance.BorderColor = Color.Black;
+            btnOpzioni.FlatAppearance.BorderColor = SystemColors.Control;
             btnOpzioni.FlatAppearance.BorderSize = 0;
             btnOpzioni.FlatAppearance.CheckedBackColor = Color.White;
             btnOpzioni.FlatAppearance.MouseDownBackColor = Color.Transparent;
@@ -373,10 +373,10 @@
             btnOpzioni.FlatStyle = FlatStyle.Flat;
             btnOpzioni.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             btnOpzioni.Image = Properties.Resources.settingsImage;
-            btnOpzioni.Location = new Point(917, 69);
+            btnOpzioni.Location = new Point(907, 67);
             btnOpzioni.Margin = new Padding(3, 2, 3, 2);
             btnOpzioni.Name = "btnOpzioni";
-            btnOpzioni.Size = new Size(26, 26);
+            btnOpzioni.Size = new Size(28, 28);
             btnOpzioni.TabIndex = 15;
             btnOpzioni.TextAlign = ContentAlignment.BottomCenter;
             btnOpzioni.TextImageRelation = TextImageRelation.ImageAboveText;
