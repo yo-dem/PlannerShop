@@ -278,7 +278,7 @@
             // 
             // btnMail
             // 
-            btnMail.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            btnMail.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btnMail.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             btnMail.ForeColor = SystemColors.ControlText;
             btnMail.Image = Properties.Resources.message;

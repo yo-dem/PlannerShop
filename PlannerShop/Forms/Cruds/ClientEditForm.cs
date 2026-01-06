@@ -9,7 +9,12 @@ namespace PlannerShop.Forms
         string idCliente;
         bool emailNotValid = false;
         public bool isDelete = false;
-        string mailgest = "";
+        string mailgest;
+        string pwdmailgest;
+        string smtpmailgest;
+        string portmailgest;
+
+
 
         public ClientEditForm(string idCliente)
         {
@@ -19,7 +24,15 @@ namespace PlannerShop.Forms
             LoadForm();
 
             this.mailgest = ModelOpzioni.GetOpzione("mailgest");
-            btnMail.Visible = mailgest == "" ? false : true;
+            this.pwdmailgest = ModelOpzioni.GetOpzione("pwdmailgest");
+            this.smtpmailgest = ModelOpzioni.GetOpzione("smtpmailgest");
+            this.portmailgest = ModelOpzioni.GetOpzione("portmailgest");
+
+            btnMail.Visible = (mailgest == string.Empty 
+                || pwdmailgest == string.Empty 
+                || smtpmailgest == string.Empty 
+                || portmailgest == string.Empty) 
+                ? false : true;
         }
 
         private void txtNome_TextChanged(object sender, EventArgs e)
@@ -191,7 +204,7 @@ namespace PlannerShop.Forms
 
         private void btnMail_Click(object sender, EventArgs e)
         {
-            if(String.IsNullOrEmpty(txtEmail.Text) || emailNotValid)
+            if (String.IsNullOrEmpty(txtEmail.Text) || emailNotValid)
             {
                 MessageBox.Show("L'indirizzo email non è valido.", "Errore", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
