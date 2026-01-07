@@ -252,13 +252,13 @@ namespace PlannerShop.Forms.Agenda
                     {
                         if (colDate.DayOfWeek == DayOfWeek.Saturday || colDate.DayOfWeek == DayOfWeek.Sunday)
                         {
-                            row.Cells[colIndex].Style.BackColor = Color.FromArgb(245, 245, 245); // WEEKEND COLORI
+                            row.Cells[colIndex].Style.BackColor = Color.FromArgb(245, 245, 245); // WEEKEND COLORI                        
                         }
                         else
                         {
                             row.Cells[colIndex].Style.BackColor = slot.HourGroup % 2 == 0
                                 ? Color.FromArgb(240, 240, 255)
-                                : Color.White;
+                                : Color.FromArgb(250, 250, 255);
                         }
                     }
                 }
@@ -373,23 +373,25 @@ namespace PlannerShop.Forms.Agenda
                         {
                             dayFont = new Font(dayFont, FontStyle.Bold);
                             dayColor = Color.Red;
-                            dateFont = new Font(dateFont, FontStyle.Italic);
+                            dateFont = new Font(dateFont, FontStyle.Regular | FontStyle.Italic);
                         }
                         else
                         {
                             dayFont = new Font(dayFont, FontStyle.Bold);
                             dayColor = Color.Black;
+                            dateFont = new Font(dateFont, FontStyle.Regular);
                         }
 
-                        // Riga giorno
-                        TextRenderer.DrawText(
-                            e.Graphics!,
-                            dayName,
-                            dayFont,
-                            new Rectangle(e.CellBounds.Left + 4, e.CellBounds.Top, e.CellBounds.Width - 8, lineHeight),
-                            dayColor,
-                            TextFormatFlags.Left | TextFormatFlags.VerticalCenter
-                        );
+                        if (IsTodayColumn(e.ColumnIndex))
+                        {
+                            dateFont = new Font(dateFont, FontStyle.Regular | FontStyle.Italic);
+                            dayFont = new Font(dayFont, FontStyle.Bold);
+                        }
+                        //else
+                        //{
+                        //    dateFont = new Font(dateFont, FontStyle.Regular);
+                        //    dayFont = new Font(dayFont, FontStyle.Bold);
+                        //}
 
                         // Riga data (normale)
                         TextRenderer.DrawText(
@@ -400,11 +402,102 @@ namespace PlannerShop.Forms.Agenda
                             dateColor,
                             TextFormatFlags.Left | TextFormatFlags.VerticalCenter
                         );
+
+                        // Riga giorno
+                        TextRenderer.DrawText(
+                            e.Graphics!,
+                            dayName,
+                            dayFont,
+                            new Rectangle(e.CellBounds.Left + 4, e.CellBounds.Top, e.CellBounds.Width - 8, lineHeight),
+                            dayColor,
+                            TextFormatFlags.Left | TextFormatFlags.VerticalCenter
+                        );
                     }
                 }
 
+                // ===== ENFASI COLONNA "OGGI" =====
+                if (IsTodayColumn(e.ColumnIndex))
+                {
+                    using var todayPen = new Pen(Color.FromArgb(60, 120, 215), 5);
+
+                    // Bordo superiore spesso
+                    e.Graphics!.DrawLine(
+                        todayPen,
+                        e.CellBounds.Left,
+                        e.CellBounds.Bottom,
+                        e.CellBounds.Right,
+                        e.CellBounds.Bottom
+                    );
+                }
                 e.Handled = true;
             }
+
+            // CELLE DATI (non header)
+            if (e.RowIndex >= 0 && IsSaturdayColumn(e.ColumnIndex))
+            {
+                // Lascia disegnare tutto normalmente
+                e.Paint(e.CellBounds, DataGridViewPaintParts.All);
+
+                using var thickPen = new Pen(Color.FromArgb(100, 100, 100), 1);
+
+                // Bordo verticale sinistro
+                e.Graphics!.DrawLine(
+                    thickPen,
+                    e.CellBounds.Left,
+                    e.CellBounds.Top,
+                    e.CellBounds.Left,
+                    e.CellBounds.Bottom
+                );
+
+                e.Handled = true;
+            }
+
+            if (e.RowIndex <= 0 && IsSaturdayColumn(e.ColumnIndex))
+            {
+                using var thickPen = new Pen(Color.FromArgb(100, 100, 100), 1);
+
+                // Bordo verticale sinistro
+                e.Graphics!.DrawLine(
+                    thickPen,
+                    e.CellBounds.Left,
+                    e.CellBounds.Top,
+                    e.CellBounds.Left,
+                    e.CellBounds.Bottom
+                );
+
+                e.Handled = true;
+            }
+
+        }
+
+        private bool IsSaturdayColumn(int columnIndex)
+        {
+            if (columnIndex <= 0) return false; // salta "Ora"
+
+            var col = dgvData.Columns[columnIndex];
+
+            return DateTime.TryParseExact(
+                col.Name,
+                "yyyyMMdd",
+                CultureInfo.InvariantCulture,
+                DateTimeStyles.None,
+                out var date)
+                && (date.DayOfWeek == DayOfWeek.Saturday);
+        }
+
+        private bool IsTodayColumn(int columnIndex)
+        {
+            if (columnIndex <= 0) return false;
+
+            var col = dgvData.Columns[columnIndex];
+
+            return DateTime.TryParseExact(
+                col.Name,
+                "yyyyMMdd",
+                CultureInfo.InvariantCulture,
+                DateTimeStyles.None,
+                out var date)
+                && date.Date == DateTime.Today;
         }
 
         /// <summary>
