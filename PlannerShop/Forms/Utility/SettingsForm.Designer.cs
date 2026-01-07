@@ -53,10 +53,19 @@
             lblEmailResult = new Label();
             btnSaveMail = new Button();
             txtEmail = new TextBox();
+            tabSettings = new TabControl();
+            tabPage1 = new TabPage();
+            tabPage2 = new TabPage();
+            tabPage3 = new TabPage();
+            lblBackupResult = new Label();
             Password.SuspendLayout();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
             groupBox3.SuspendLayout();
+            tabSettings.SuspendLayout();
+            tabPage1.SuspendLayout();
+            tabPage2.SuspendLayout();
+            tabPage3.SuspendLayout();
             SuspendLayout();
             // 
             // lblOldPassword
@@ -77,29 +86,28 @@
             Password.Controls.Add(lblNewPassword);
             Password.Controls.Add(txtOldPassword);
             Password.Controls.Add(lblOldPassword);
-            Password.Location = new Point(10, 26);
+            Password.Location = new Point(6, 5);
             Password.Margin = new Padding(3, 2, 3, 2);
             Password.Name = "Password";
             Password.Padding = new Padding(3, 2, 3, 2);
-            Password.Size = new Size(404, 235);
+            Password.Size = new Size(408, 298);
             Password.TabIndex = 0;
             Password.TabStop = false;
-            Password.Text = "CAMBIO PASSWORD";
             // 
             // lblPasswordResult
             // 
-            lblPasswordResult.Location = new Point(5, 130);
+            lblPasswordResult.Location = new Point(6, 193);
             lblPasswordResult.Name = "lblPasswordResult";
-            lblPasswordResult.Size = new Size(391, 24);
+            lblPasswordResult.Size = new Size(396, 24);
             lblPasswordResult.TabIndex = 0;
             lblPasswordResult.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // btnPasswordReset
             // 
-            btnPasswordReset.Location = new Point(5, 196);
+            btnPasswordReset.Location = new Point(6, 259);
             btnPasswordReset.Margin = new Padding(3, 2, 3, 2);
             btnPasswordReset.Name = "btnPasswordReset";
-            btnPasswordReset.Size = new Size(393, 35);
+            btnPasswordReset.Size = new Size(396, 35);
             btnPasswordReset.TabIndex = 3;
             btnPasswordReset.Text = "RESET";
             btnPasswordReset.UseVisualStyleBackColor = true;
@@ -107,10 +115,10 @@
             // 
             // btnPasswordChange
             // 
-            btnPasswordChange.Location = new Point(5, 156);
+            btnPasswordChange.Location = new Point(6, 219);
             btnPasswordChange.Margin = new Padding(3, 2, 3, 2);
             btnPasswordChange.Name = "btnPasswordChange";
-            btnPasswordChange.Size = new Size(393, 35);
+            btnPasswordChange.Size = new Size(396, 35);
             btnPasswordChange.TabIndex = 2;
             btnPasswordChange.Text = "CAMBIA PASSWORD";
             btnPasswordChange.UseVisualStyleBackColor = true;
@@ -118,17 +126,17 @@
             // 
             // txtNewPassword
             // 
-            txtNewPassword.Location = new Point(6, 77);
+            txtNewPassword.Location = new Point(6, 79);
             txtNewPassword.Margin = new Padding(3, 2, 3, 2);
             txtNewPassword.Name = "txtNewPassword";
             txtNewPassword.PasswordChar = '*';
-            txtNewPassword.Size = new Size(392, 23);
+            txtNewPassword.Size = new Size(396, 23);
             txtNewPassword.TabIndex = 1;
             // 
             // lblNewPassword
             // 
             lblNewPassword.AutoSize = true;
-            lblNewPassword.Location = new Point(6, 60);
+            lblNewPassword.Location = new Point(6, 61);
             lblNewPassword.Name = "lblNewPassword";
             lblNewPassword.Size = new Size(111, 15);
             lblNewPassword.TabIndex = 0;
@@ -140,17 +148,17 @@
             txtOldPassword.Margin = new Padding(3, 2, 3, 2);
             txtOldPassword.Name = "txtOldPassword";
             txtOldPassword.PasswordChar = '*';
-            txtOldPassword.Size = new Size(392, 23);
+            txtOldPassword.Size = new Size(396, 23);
             txtOldPassword.TabIndex = 0;
             // 
             // groupBox1
             // 
             groupBox1.Controls.Add(chkAccessMode);
-            groupBox1.Location = new Point(10, 655);
+            groupBox1.Location = new Point(12, 361);
             groupBox1.Margin = new Padding(3, 2, 3, 2);
             groupBox1.Name = "groupBox1";
             groupBox1.Padding = new Padding(3, 2, 3, 2);
-            groupBox1.Size = new Size(404, 48);
+            groupBox1.Size = new Size(428, 48);
             groupBox1.TabIndex = 1;
             groupBox1.TabStop = false;
             groupBox1.Text = "ACCESSO";
@@ -173,10 +181,10 @@
             // 
             btnOk.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             btnOk.Image = Properties.Resources.okImage;
-            btnOk.Location = new Point(10, 707);
+            btnOk.Location = new Point(12, 413);
             btnOk.Margin = new Padding(3, 2, 3, 2);
             btnOk.Name = "btnOk";
-            btnOk.Size = new Size(404, 51);
+            btnOk.Size = new Size(428, 51);
             btnOk.TabIndex = 6;
             btnOk.Text = "OK";
             btnOk.TextAlign = ContentAlignment.BottomCenter;
@@ -190,27 +198,27 @@
             pnlTop.Dock = DockStyle.Top;
             pnlTop.Location = new Point(0, 0);
             pnlTop.Name = "pnlTop";
-            pnlTop.Size = new Size(425, 10);
+            pnlTop.Size = new Size(452, 10);
             pnlTop.TabIndex = 24;
             // 
             // groupBox2
             // 
+            groupBox2.Controls.Add(lblBackupResult);
             groupBox2.Controls.Add(btnBackup);
-            groupBox2.Location = new Point(10, 265);
+            groupBox2.Location = new Point(6, 5);
             groupBox2.Margin = new Padding(3, 2, 3, 2);
             groupBox2.Name = "groupBox2";
             groupBox2.Padding = new Padding(3, 2, 3, 2);
-            groupBox2.Size = new Size(404, 70);
+            groupBox2.Size = new Size(408, 302);
             groupBox2.TabIndex = 25;
             groupBox2.TabStop = false;
-            groupBox2.Text = "BACKUP ARCHIVIO";
             // 
             // btnBackup
             // 
-            btnBackup.Location = new Point(5, 23);
+            btnBackup.Location = new Point(6, 263);
             btnBackup.Margin = new Padding(3, 2, 3, 2);
             btnBackup.Name = "btnBackup";
-            btnBackup.Size = new Size(394, 35);
+            btnBackup.Size = new Size(396, 35);
             btnBackup.TabIndex = 4;
             btnBackup.Text = "BACKUP";
             btnBackup.UseVisualStyleBackColor = true;
@@ -228,19 +236,18 @@
             groupBox3.Controls.Add(lblEmailResult);
             groupBox3.Controls.Add(btnSaveMail);
             groupBox3.Controls.Add(txtEmail);
-            groupBox3.Location = new Point(10, 339);
+            groupBox3.Location = new Point(6, 5);
             groupBox3.Margin = new Padding(3, 2, 3, 2);
             groupBox3.Name = "groupBox3";
             groupBox3.Padding = new Padding(3, 2, 3, 2);
-            groupBox3.Size = new Size(404, 312);
+            groupBox3.Size = new Size(408, 302);
             groupBox3.TabIndex = 26;
             groupBox3.TabStop = false;
-            groupBox3.Text = "EMAIL GESTIONALE";
             // 
             // lblPort
             // 
             lblPort.AutoSize = true;
-            lblPort.Location = new Point(6, 150);
+            lblPort.Location = new Point(6, 149);
             lblPort.Name = "lblPort";
             lblPort.Size = new Size(43, 15);
             lblPort.TabIndex = 12;
@@ -248,15 +255,15 @@
             // 
             // txtPort
             // 
-            txtPort.Location = new Point(6, 168);
+            txtPort.Location = new Point(6, 167);
             txtPort.Name = "txtPort";
-            txtPort.Size = new Size(393, 23);
+            txtPort.Size = new Size(396, 23);
             txtPort.TabIndex = 11;
             // 
             // lblPassword
             // 
             lblPassword.AutoSize = true;
-            lblPassword.Location = new Point(6, 62);
+            lblPassword.Location = new Point(6, 61);
             lblPassword.Name = "lblPassword";
             lblPassword.Size = new Size(68, 15);
             lblPassword.TabIndex = 10;
@@ -264,16 +271,16 @@
             // 
             // txtPassword
             // 
-            txtPassword.Location = new Point(6, 80);
+            txtPassword.Location = new Point(6, 79);
             txtPassword.Name = "txtPassword";
             txtPassword.PasswordChar = '*';
-            txtPassword.Size = new Size(393, 23);
+            txtPassword.Size = new Size(396, 23);
             txtPassword.TabIndex = 9;
             // 
             // lblSmtp
             // 
             lblSmtp.AutoSize = true;
-            lblSmtp.Location = new Point(6, 106);
+            lblSmtp.Location = new Point(6, 105);
             lblSmtp.Name = "lblSmtp";
             lblSmtp.Size = new Size(38, 15);
             lblSmtp.TabIndex = 8;
@@ -281,9 +288,9 @@
             // 
             // txtSmtp
             // 
-            txtSmtp.Location = new Point(6, 124);
+            txtSmtp.Location = new Point(6, 123);
             txtSmtp.Name = "txtSmtp";
-            txtSmtp.Size = new Size(393, 23);
+            txtSmtp.Size = new Size(396, 23);
             txtSmtp.TabIndex = 7;
             // 
             // lblEmail
@@ -297,18 +304,18 @@
             // 
             // lblEmailResult
             // 
-            lblEmailResult.Location = new Point(6, 247);
+            lblEmailResult.Location = new Point(6, 237);
             lblEmailResult.Name = "lblEmailResult";
-            lblEmailResult.Size = new Size(390, 24);
+            lblEmailResult.Size = new Size(396, 24);
             lblEmailResult.TabIndex = 5;
             lblEmailResult.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // btnSaveMail
             // 
-            btnSaveMail.Location = new Point(6, 273);
+            btnSaveMail.Location = new Point(6, 263);
             btnSaveMail.Margin = new Padding(3, 2, 3, 2);
             btnSaveMail.Name = "btnSaveMail";
-            btnSaveMail.Size = new Size(392, 35);
+            btnSaveMail.Size = new Size(396, 35);
             btnSaveMail.TabIndex = 4;
             btnSaveMail.Text = "SALVA MAIL";
             btnSaveMail.UseVisualStyleBackColor = true;
@@ -316,23 +323,73 @@
             // 
             // txtEmail
             // 
-            txtEmail.Location = new Point(6, 36);
+            txtEmail.Location = new Point(6, 35);
             txtEmail.Name = "txtEmail";
-            txtEmail.Size = new Size(393, 23);
+            txtEmail.Size = new Size(396, 23);
             txtEmail.TabIndex = 0;
             txtEmail.TextChanged += txtEmail_TextChanged;
+            // 
+            // tabSettings
+            // 
+            tabSettings.Controls.Add(tabPage1);
+            tabSettings.Controls.Add(tabPage2);
+            tabSettings.Controls.Add(tabPage3);
+            tabSettings.Location = new Point(12, 16);
+            tabSettings.Name = "tabSettings";
+            tabSettings.SelectedIndex = 0;
+            tabSettings.Size = new Size(428, 340);
+            tabSettings.TabIndex = 27;
+            // 
+            // tabPage1
+            // 
+            tabPage1.Controls.Add(Password);
+            tabPage1.Location = new Point(4, 24);
+            tabPage1.Name = "tabPage1";
+            tabPage1.Padding = new Padding(3);
+            tabPage1.Size = new Size(420, 312);
+            tabPage1.TabIndex = 0;
+            tabPage1.Text = "PASSWORD";
+            tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // tabPage2
+            // 
+            tabPage2.Controls.Add(groupBox3);
+            tabPage2.Location = new Point(4, 24);
+            tabPage2.Name = "tabPage2";
+            tabPage2.Padding = new Padding(3);
+            tabPage2.Size = new Size(420, 312);
+            tabPage2.TabIndex = 1;
+            tabPage2.Text = "EMAIL";
+            tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // tabPage3
+            // 
+            tabPage3.Controls.Add(groupBox2);
+            tabPage3.Location = new Point(4, 24);
+            tabPage3.Name = "tabPage3";
+            tabPage3.Padding = new Padding(3);
+            tabPage3.Size = new Size(420, 312);
+            tabPage3.TabIndex = 2;
+            tabPage3.Text = "BACKUP";
+            tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // lblBackupResult
+            // 
+            lblBackupResult.Location = new Point(6, 237);
+            lblBackupResult.Name = "lblBackupResult";
+            lblBackupResult.Size = new Size(396, 24);
+            lblBackupResult.TabIndex = 6;
+            lblBackupResult.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // SettingsForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(425, 769);
-            Controls.Add(groupBox3);
-            Controls.Add(groupBox2);
+            ClientSize = new Size(452, 479);
+            Controls.Add(tabSettings);
             Controls.Add(pnlTop);
             Controls.Add(btnOk);
             Controls.Add(groupBox1);
-            Controls.Add(Password);
             FormBorderStyle = FormBorderStyle.FixedToolWindow;
             Margin = new Padding(3, 2, 3, 2);
             Name = "SettingsForm";
@@ -345,6 +402,10 @@
             groupBox2.ResumeLayout(false);
             groupBox3.ResumeLayout(false);
             groupBox3.PerformLayout();
+            tabSettings.ResumeLayout(false);
+            tabPage1.ResumeLayout(false);
+            tabPage2.ResumeLayout(false);
+            tabPage3.ResumeLayout(false);
             ResumeLayout(false);
 
         }
@@ -376,5 +437,10 @@
         private Label lblEmail;
         private Label lblPort;
         private TextBox txtPort;
+        private TabControl tabSettings;
+        private TabPage tabPage1;
+        private TabPage tabPage2;
+        private TabPage tabPage3;
+        private Label lblBackupResult;
     }
 }
