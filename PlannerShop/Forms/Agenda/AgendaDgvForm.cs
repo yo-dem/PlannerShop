@@ -67,7 +67,7 @@ namespace PlannerShop.Forms.Agenda
         {
             TSRows = new List<TimeSlotRow>();
 
-            for (int hour = 8; hour <= 21; hour++)
+            for (int hour = 9; hour <= 13; hour++)
             {
                 TSRows.Add(new TimeSlotRow { Start = new TimeSpan(hour, 0, 0), End = new TimeSpan(hour, 15, 0), HourGroup = hour });
                 TSRows.Add(new TimeSlotRow { Start = new TimeSpan(hour, 15, 0), End = new TimeSpan(hour, 30, 0), HourGroup = hour });

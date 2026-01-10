@@ -46,6 +46,7 @@
             dgvData.Size = new Size(686, 203);
             dgvData.TabIndex = 25;
             dgvData.CellFormatting += dgvData_CellFormatting;
+            dgvData.MouseDoubleClick += dgvData_MouseDoubleClick;
             // 
             // btnAnnulla
             // 

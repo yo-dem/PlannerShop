@@ -130,5 +130,24 @@ namespace PlannerShop.Forms.Utility
             e.Value = $"{giorno:00} {nomeMese}";
             e.FormattingApplied = true;
         }
+
+        private void dgvData_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            string? selectedId = dgvData.SelectedRows[0].Cells["IDCLIENTE"].Value?.ToString();
+            if (!String.IsNullOrEmpty(selectedId))
+            {
+                ClientEditForm clientiEditForm = new ClientEditForm(selectedId);
+                clientiEditForm.ShowDialog();
+
+                if (clientiEditForm.isDelete)
+                {
+                    LoadClienti();
+                }
+                else
+                {
+                    LoadClienti();
+                }
+            }
+        }
     }
 }

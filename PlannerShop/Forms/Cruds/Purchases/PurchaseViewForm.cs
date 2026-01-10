@@ -118,7 +118,7 @@ namespace PlannerShop.Forms
             var totalePurchaseColumn = dgvDataAcquisto.Columns["TOTALE"];
             totalePurchaseColumn.DisplayIndex = 9;
             totalePurchaseColumn.Visible = true;
-            totalePurchaseColumn.HeaderText = "TOTALE";
+            totalePurchaseColumn.HeaderText = "PAGATO";
             totalePurchaseColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             totalePurchaseColumn.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft;
             totalePurchaseColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
