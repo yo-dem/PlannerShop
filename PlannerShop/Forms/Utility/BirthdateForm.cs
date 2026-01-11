@@ -133,6 +133,7 @@ namespace PlannerShop.Forms.Utility
 
         private void dgvData_MouseDoubleClick(object sender, MouseEventArgs e)
         {
+            if(dgvData.Rows.Count == 0) return;
             string? selectedId = dgvData.SelectedRows[0].Cells["IDCLIENTE"].Value?.ToString();
             if (!String.IsNullOrEmpty(selectedId))
             {

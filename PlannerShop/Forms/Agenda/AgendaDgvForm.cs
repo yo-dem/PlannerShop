@@ -41,6 +41,8 @@ namespace PlannerShop.Forms.Agenda
             // Aggiorna UI e contenuti per la settimana corrente
             UpdateWeekUI();
 
+            lblTime.Text = DateTime.Now.ToString("HH:mm:ss");
+
             // Eventi
             dgvData.SelectionChanged += dgvData_SelectionChanged;
             dgvData.CellPainting += dgvData_CellPainting;
@@ -67,7 +69,7 @@ namespace PlannerShop.Forms.Agenda
         {
             TSRows = new List<TimeSlotRow>();
 
-            for (int hour = 9; hour <= 13; hour++)
+            for (int hour = 8; hour <= 21; hour++)
             {
                 TSRows.Add(new TimeSlotRow { Start = new TimeSpan(hour, 0, 0), End = new TimeSpan(hour, 15, 0), HourGroup = hour });
                 TSRows.Add(new TimeSlotRow { Start = new TimeSpan(hour, 15, 0), End = new TimeSpan(hour, 30, 0), HourGroup = hour });
@@ -556,6 +558,11 @@ namespace PlannerShop.Forms.Agenda
         {
             _weekStart = GetStartOfWeek(DateTime.Today);
             UpdateWeekUI();
+        }
+
+        private void timerTime_Tick(object sender, EventArgs e)
+        {
+            lblTime.Text = DateTime.Now.ToString("HH:mm:ss");
         }
     }
 }

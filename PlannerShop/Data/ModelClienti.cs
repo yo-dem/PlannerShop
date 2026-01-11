@@ -28,19 +28,13 @@ namespace PlannerShop.Data
 
         public static DataTable searchBirthdayClienti()
         {
-            return DBUtility.GetDBData(@"
-                SELECT *
-                FROM TCLIENTI
-                WHERE
+-             return DBUtility.GetDBData(@"SELECT * FROM TCLIENTI WHERE
                     SUBSTR(TRIM(COMPLEANNO), 4, 2) = STRFTIME('%m', 'now')
-                AND CAST(SUBSTR(TRIM(COMPLEANNO), 1, 2) AS INTEGER)
-                    BETWEEN CAST(STRFTIME('%d', 'now') AS INTEGER)
-                        AND CAST(STRFTIME('%d', 'now', 'start of month', '+1 month', '-1 day') AS INTEGER)
-                ORDER BY
-                    CAST(SUBSTR(TRIM(COMPLEANNO), 1, 2) AS INTEGER),
-                    IDCLIENTE DESC
-            ", null);
+                    ORDER BY
+                   CAST(SUBSTR(TRIM(COMPLEANNO), 1, 2) AS INTEGER),
+                    IDCLIENTE DESC", null);
         }
+
 
 
         public static void addCliente(
