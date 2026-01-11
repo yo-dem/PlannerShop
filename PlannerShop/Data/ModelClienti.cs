@@ -28,7 +28,7 @@ namespace PlannerShop.Data
 
         public static DataTable searchBirthdayClienti()
         {
--             return DBUtility.GetDBData(@"SELECT * FROM TCLIENTI WHERE
+            return DBUtility.GetDBData(@"SELECT * FROM TCLIENTI WHERE
                     SUBSTR(TRIM(COMPLEANNO), 4, 2) = STRFTIME('%m', 'now')
                     ORDER BY
                    CAST(SUBSTR(TRIM(COMPLEANNO), 1, 2) AS INTEGER),

@@ -88,6 +88,7 @@
             // 
             lblTimeSlot.AutoSize = true;
             lblTimeSlot.Font = new Font("Segoe UI", 18F);
+            lblTimeSlot.ForeColor = Color.FromArgb(144, 144, 144);
             lblTimeSlot.Location = new Point(86, 130);
             lblTimeSlot.Name = "lblTimeSlot";
             lblTimeSlot.Size = new Size(134, 32);
@@ -97,14 +98,16 @@
             // 
             // lblTime
             // 
-            lblTime.AutoSize = true;
-            lblTime.Font = new Font("Segoe UI", 32F);
-            lblTime.Location = new Point(12, 71);
+            lblTime.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            lblTime.Font = new Font("Segoe UI", 34F);
+            lblTime.ForeColor = Color.FromArgb(144, 144, 144);
+            lblTime.Location = new Point(9, 51);
+            lblTime.Margin = new Padding(0);
             lblTime.Name = "lblTime";
-            lblTime.Size = new Size(162, 59);
+            lblTime.Size = new Size(1166, 63);
             lblTime.TabIndex = 11;
             lblTime.Text = "lblTime";
-            lblTime.TextAlign = ContentAlignment.MiddleRight;
+            lblTime.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // timerTime
             // 
