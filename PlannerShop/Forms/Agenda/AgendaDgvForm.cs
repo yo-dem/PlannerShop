@@ -41,8 +41,6 @@ namespace PlannerShop.Forms.Agenda
             // Aggiorna UI e contenuti per la settimana corrente
             UpdateWeekUI();
 
-            lblTime.Text = DateTime.Now.ToString("HH:mm:ss");
-
             // Eventi
             dgvData.SelectionChanged += dgvData_SelectionChanged;
             dgvData.CellPainting += dgvData_CellPainting;
@@ -176,6 +174,48 @@ namespace PlannerShop.Forms.Agenda
             UpdateGridHeaders();
             ApplyFolding(hour => true);
             RebuildGrid();
+            AddMockAppointment(new DateTime(2026, 1, 18),new TimeSpan(9, 0, 0), new Appuntamento
+            {
+                Id = 1,
+                Titolo = "Appuntamento mock",
+                Colore = Color.MediumSlateBlue
+            });
+            AddMockAppointment(new DateTime(2026, 1, 15), new TimeSpan(9, 0, 0), new Appuntamento
+            {
+                Id = 2,
+                Titolo = "Appuntamento 2 mock",
+                Colore = Color.MediumSlateBlue
+            });
+            AddMockAppointment(new DateTime(2026, 1, 15), new TimeSpan(9, 0, 0), new Appuntamento
+            {
+                Id = 2,
+                Titolo = "Appuntamento 2 mock",
+                Colore = Color.MediumSlateBlue
+            });
+            AddMockAppointment(new DateTime(2026, 1, 15), new TimeSpan(9, 0, 0), new Appuntamento
+            {
+                Id = 2,
+                Titolo = "Appuntamento 2 mock",
+                Colore = Color.MediumSlateBlue
+            });
+            AddMockAppointment(new DateTime(2026, 1, 15), new TimeSpan(9, 0, 0), new Appuntamento
+            {
+                Id = 2,
+                Titolo = "Appuntamento 2 mock",
+                Colore = Color.MediumSlateBlue
+            });
+            AddMockAppointment(new DateTime(2026, 1, 14), new TimeSpan(9, 0, 0), new Appuntamento
+            {
+                Id = 2,
+                Titolo = "Appuntamento 2 mock",
+                Colore = Color.MediumSlateBlue
+            });
+            AddMockAppointment(new DateTime(2026, 1, 14), new TimeSpan(9, 0, 0), new Appuntamento
+            {
+                Id = 0,
+                Titolo = "Appuntamento 0 mock",
+                Colore = Color.MediumSlateBlue
+            });
         }
 
         /// <summary>
@@ -470,6 +510,86 @@ namespace PlannerShop.Forms.Agenda
                 e.Handled = true;
             }
 
+            // ===============================
+            // CELLE DATI CON APPUNTAMENTI
+            // ===============================
+            if (e.RowIndex >= 0 && e.ColumnIndex > 0)
+            {
+                var cell = dgvData.Rows[e.RowIndex].Cells[e.ColumnIndex];
+
+                if (cell.Tag is List<Appuntamento> apps && apps.Count > 0)
+                {
+
+                    // Lascia disegnare background + bordi standard
+                    e.Paint(e.CellBounds, DataGridViewPaintParts.Background | DataGridViewPaintParts.Border);
+
+                    e.Handled = true;
+
+                    int padding = 0;
+                    int spacing = 3;
+                    int maxVisible = 3;
+
+                    int visibleCount = Math.Min(apps.Count, maxVisible);
+                    int blockHeight = (e.CellBounds.Height - padding * 2 - spacing * (visibleCount - 1)) / visibleCount;
+
+                    for (int i = 0; i < visibleCount; i++)
+                    {
+                        var app = apps[i];
+
+                        var rect = new Rectangle(
+                            e.CellBounds.Left + padding + 10,
+                            e.CellBounds.Top + padding + i * (blockHeight + spacing),
+                            e.CellBounds.Width - padding * 2,
+                            blockHeight
+                        );
+
+                        // Sfondo appuntamento
+                        using var appBrush = new SolidBrush(app.Colore);
+                        e.Graphics.FillRectangle(appBrush, rect);
+
+                        // Bordo
+                        using var borderPen = new Pen(Color.FromArgb(80, 80, 80));
+                        e.Graphics.DrawRectangle(borderPen, rect);
+
+                        // Titolo
+                        TextRenderer.DrawText(
+                            e.Graphics,
+                            app.Titolo,
+                            new Font(dgvData.Font.FontFamily, 8.5f, FontStyle.Bold),
+                            rect,
+                            Color.White,
+                            TextFormatFlags.Left | TextFormatFlags.VerticalCenter | TextFormatFlags.EndEllipsis
+                        );
+                    }
+
+                    // Indicatore "altri"
+                    if (apps.Count > maxVisible)
+                    {
+                        string moreText = $"+{apps.Count - maxVisible}";
+                        var moreRect = new Rectangle(
+                            e.CellBounds.Right - 28,
+                            e.CellBounds.Bottom - 18,
+                            28,
+                            17
+                        );
+
+                        using var moreBrush = new SolidBrush(Color.FromArgb(200, Color.Black));
+                        e.Graphics.FillRectangle(moreBrush, moreRect);
+
+                        TextRenderer.DrawText(
+                            e.Graphics,
+                            moreText,
+                            dgvData.Font,
+                            moreRect,
+                            Color.White,
+                            TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter
+                        );
+                    }
+
+                    return;
+                }
+            }
+
         }
 
         private bool IsSaturdayColumn(int columnIndex)
@@ -562,7 +682,44 @@ namespace PlannerShop.Forms.Agenda
 
         private void timerTime_Tick(object sender, EventArgs e)
         {
-            lblTime.Text = DateTime.Now.ToString("HH:mm:ss");
+            //lblTime.Text = DateTime.Now.ToString("HH:mm:ss");
+            btnWeek.Text = "OGGI: " + DateTime.Now.ToString("HH:mm:ss");
         }
+
+        private void AddMockAppointment(DateTime date, TimeSpan startTime, Appuntamento app)
+        {
+            // Colonna = giorno
+            string colName = date.ToString("yyyyMMdd");
+
+            int colIndex = dgvData.Columns
+                .Cast<DataGridViewColumn>()
+                .FirstOrDefault(c => c.Name == colName)?
+                .Index ?? -1;
+
+            if (colIndex == -1)
+                return;
+
+            // Riga = slot orario
+            for (int r = 0; r < dgvData.Rows.Count; r++)
+            {
+                if (TimeSpan.TryParse(dgvData.Rows[r].Cells["Ora"].Value?.ToString(), out var rowTime)
+                    && rowTime == startTime)
+                {
+                    var cell = dgvData.Rows[r].Cells[colIndex];
+
+                    if (cell.Tag is not List<Appuntamento> list)
+                    {
+                        list = new List<Appuntamento>();
+                        cell.Tag = list;
+                    }
+
+                    list.Add(app);
+
+                    dgvData.InvalidateCell(cell);
+                    break;
+                }
+            }
+        }
+
     }
 }

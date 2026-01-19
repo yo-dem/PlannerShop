@@ -34,7 +34,6 @@
             btnNextWeek = new Button();
             btnWeek = new Button();
             lblTimeSlot = new Label();
-            lblTime = new Label();
             timerTime = new System.Windows.Forms.Timer(components);
             ((System.ComponentModel.ISupportInitialize)dgvData).BeginInit();
             SuspendLayout();
@@ -45,18 +44,19 @@
             dgvData.BackgroundColor = SystemColors.Control;
             dgvData.BorderStyle = BorderStyle.None;
             dgvData.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvData.Location = new Point(13, 164);
+            dgvData.Location = new Point(13, 117);
             dgvData.Margin = new Padding(3, 2, 3, 2);
             dgvData.Name = "dgvData";
             dgvData.RowHeadersWidth = 51;
-            dgvData.Size = new Size(1159, 486);
+            dgvData.Size = new Size(1159, 533);
             dgvData.TabIndex = 6;
             // 
             // btnPrevWeek
             // 
-            btnPrevWeek.Location = new Point(12, 12);
+            btnPrevWeek.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnPrevWeek.Location = new Point(311, 12);
             btnPrevWeek.Name = "btnPrevWeek";
-            btnPrevWeek.Size = new Size(75, 36);
+            btnPrevWeek.Size = new Size(75, 38);
             btnPrevWeek.TabIndex = 7;
             btnPrevWeek.Text = "<<";
             btnPrevWeek.UseVisualStyleBackColor = true;
@@ -65,9 +65,10 @@
             // btnNextWeek
             // 
             btnNextWeek.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnNextWeek.Location = new Point(1097, 12);
+            btnNextWeek.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnNextWeek.Location = new Point(798, 13);
             btnNextWeek.Name = "btnNextWeek";
-            btnNextWeek.Size = new Size(75, 36);
+            btnNextWeek.Size = new Size(75, 38);
             btnNextWeek.TabIndex = 8;
             btnNextWeek.Text = ">>";
             btnNextWeek.UseVisualStyleBackColor = true;
@@ -76,38 +77,26 @@
             // btnWeek
             // 
             btnWeek.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            btnWeek.Location = new Point(93, 12);
+            btnWeek.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnWeek.Location = new Point(392, 12);
             btnWeek.Name = "btnWeek";
-            btnWeek.Size = new Size(998, 36);
+            btnWeek.Size = new Size(400, 38);
             btnWeek.TabIndex = 9;
-            btnWeek.Text = "Today";
+            btnWeek.Text = "OGGI";
             btnWeek.UseVisualStyleBackColor = true;
             btnWeek.Click += btnWeek_Click;
             // 
             // lblTimeSlot
             // 
             lblTimeSlot.AutoSize = true;
-            lblTimeSlot.Font = new Font("Segoe UI", 18F);
-            lblTimeSlot.ForeColor = Color.FromArgb(144, 144, 144);
-            lblTimeSlot.Location = new Point(86, 130);
+            lblTimeSlot.Font = new Font("Segoe UI", 22F);
+            lblTimeSlot.ForeColor = Color.FromArgb(64, 64, 64);
+            lblTimeSlot.Location = new Point(86, 74);
             lblTimeSlot.Name = "lblTimeSlot";
-            lblTimeSlot.Size = new Size(134, 32);
+            lblTimeSlot.Size = new Size(166, 41);
             lblTimeSlot.TabIndex = 10;
             lblTimeSlot.Text = "lblTimeSlot";
             lblTimeSlot.TextAlign = ContentAlignment.MiddleLeft;
-            // 
-            // lblTime
-            // 
-            lblTime.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            lblTime.Font = new Font("Segoe UI", 34F);
-            lblTime.ForeColor = Color.FromArgb(144, 144, 144);
-            lblTime.Location = new Point(9, 51);
-            lblTime.Margin = new Padding(0);
-            lblTime.Name = "lblTime";
-            lblTime.Size = new Size(1166, 63);
-            lblTime.TabIndex = 11;
-            lblTime.Text = "lblTime";
-            lblTime.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // timerTime
             // 
@@ -120,7 +109,6 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1184, 661);
-            Controls.Add(lblTime);
             Controls.Add(lblTimeSlot);
             Controls.Add(btnWeek);
             Controls.Add(btnNextWeek);
@@ -130,6 +118,7 @@
             Name = "AgendaDgvForm";
             StartPosition = FormStartPosition.CenterParent;
             Text = "AgendaDgvForm";
+            WindowState = FormWindowState.Maximized;
             ((System.ComponentModel.ISupportInitialize)dgvData).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -142,7 +131,6 @@
         private Button btnNextWeek;
         private Button btnWeek;
         private Label lblTimeSlot;
-        private Label lblTime;
         private System.Windows.Forms.Timer timerTime;
     }
 }
