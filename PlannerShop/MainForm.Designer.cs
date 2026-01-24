@@ -37,8 +37,6 @@
             btnInsert = new Button();
             btnProdotti = new Button();
             btnFornitori = new Button();
-            btnStatistiche = new Button();
-            btnStampa = new Button();
             btnClienti = new Button();
             btnServizi = new Button();
             pnlLine = new Panel();
@@ -169,47 +167,6 @@
             btnFornitori.UseVisualStyleBackColor = true;
             btnFornitori.Click += btnFornitori_Click;
             // 
-            // btnStatistiche
-            // 
-            btnStatistiche.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnStatistiche.FlatAppearance.BorderColor = SystemColors.Control;
-            btnStatistiche.FlatAppearance.BorderSize = 0;
-            btnStatistiche.FlatAppearance.CheckedBackColor = Color.White;
-            btnStatistiche.FlatAppearance.MouseDownBackColor = Color.Transparent;
-            btnStatistiche.FlatAppearance.MouseOverBackColor = Color.White;
-            btnStatistiche.FlatStyle = FlatStyle.Flat;
-            btnStatistiche.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
-            btnStatistiche.Image = (Image)resources.GetObject("btnStatistiche.Image");
-            btnStatistiche.Location = new Point(941, 67);
-            btnStatistiche.Margin = new Padding(3, 2, 3, 2);
-            btnStatistiche.Name = "btnStatistiche";
-            btnStatistiche.Size = new Size(28, 28);
-            btnStatistiche.TabIndex = 12;
-            btnStatistiche.TextAlign = ContentAlignment.BottomCenter;
-            btnStatistiche.TextImageRelation = TextImageRelation.ImageAboveText;
-            btnStatistiche.UseVisualStyleBackColor = true;
-            btnStatistiche.Click += btnStatistiche_Click;
-            // 
-            // btnStampa
-            // 
-            btnStampa.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnStampa.FlatAppearance.BorderColor = SystemColors.Control;
-            btnStampa.FlatAppearance.BorderSize = 0;
-            btnStampa.FlatAppearance.CheckedBackColor = Color.White;
-            btnStampa.FlatAppearance.MouseDownBackColor = Color.Transparent;
-            btnStampa.FlatAppearance.MouseOverBackColor = Color.White;
-            btnStampa.FlatStyle = FlatStyle.Flat;
-            btnStampa.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
-            btnStampa.Image = Properties.Resources.printerImage;
-            btnStampa.Location = new Point(975, 67);
-            btnStampa.Margin = new Padding(3, 2, 3, 2);
-            btnStampa.Name = "btnStampa";
-            btnStampa.Size = new Size(28, 28);
-            btnStampa.TabIndex = 13;
-            btnStampa.TextAlign = ContentAlignment.BottomCenter;
-            btnStampa.TextImageRelation = TextImageRelation.ImageAboveText;
-            btnStampa.UseVisualStyleBackColor = true;
-            // 
             // btnClienti
             // 
             btnClienti.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
@@ -286,7 +243,7 @@
             btnGift.FlatStyle = FlatStyle.Flat;
             btnGift.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             btnGift.Image = Properties.Resources.gift_black;
-            btnGift.Location = new Point(1009, 67);
+            btnGift.Location = new Point(1010, 67);
             btnGift.Margin = new Padding(3, 2, 3, 2);
             btnGift.Name = "btnGift";
             btnGift.Size = new Size(28, 28);
@@ -312,7 +269,7 @@
             btnZoomOut.FlatStyle = FlatStyle.Flat;
             btnZoomOut.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             btnZoomOut.Image = Properties.Resources.zoomOut;
-            btnZoomOut.Location = new Point(839, 67);
+            btnZoomOut.Location = new Point(908, 67);
             btnZoomOut.Margin = new Padding(3, 2, 3, 2);
             btnZoomOut.Name = "btnZoomOut";
             btnZoomOut.Size = new Size(28, 28);
@@ -332,7 +289,7 @@
             btnZoomIn.FlatStyle = FlatStyle.Flat;
             btnZoomIn.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             btnZoomIn.Image = Properties.Resources.zoomIn;
-            btnZoomIn.Location = new Point(873, 67);
+            btnZoomIn.Location = new Point(942, 67);
             btnZoomIn.Margin = new Padding(3, 2, 3, 2);
             btnZoomIn.Name = "btnZoomIn";
             btnZoomIn.Size = new Size(28, 28);
@@ -352,7 +309,7 @@
             btnAgenda.FlatStyle = FlatStyle.Flat;
             btnAgenda.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             btnAgenda.Image = (Image)resources.GetObject("btnAgenda.Image");
-            btnAgenda.Location = new Point(1043, 67);
+            btnAgenda.Location = new Point(1044, 67);
             btnAgenda.Margin = new Padding(3, 2, 3, 2);
             btnAgenda.Name = "btnAgenda";
             btnAgenda.Size = new Size(28, 28);
@@ -373,7 +330,7 @@
             btnOpzioni.FlatStyle = FlatStyle.Flat;
             btnOpzioni.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             btnOpzioni.Image = Properties.Resources.settingsImage;
-            btnOpzioni.Location = new Point(907, 67);
+            btnOpzioni.Location = new Point(976, 67);
             btnOpzioni.Margin = new Padding(3, 2, 3, 2);
             btnOpzioni.Name = "btnOpzioni";
             btnOpzioni.Size = new Size(28, 28);
@@ -430,8 +387,6 @@
             Controls.Add(btnServizi);
             Controls.Add(dgvData);
             Controls.Add(btnClienti);
-            Controls.Add(btnStatistiche);
-            Controls.Add(btnStampa);
             Controls.Add(btnProdotti);
             Controls.Add(btnFornitori);
             Controls.Add(btnDelete);
@@ -462,8 +417,6 @@
         private Button btnInsert;
         private Button btnProdotti;
         private Button btnFornitori;
-        private Button btnStatistiche;
-        private Button btnStampa;
         private Button btnClienti;
         private Button btnServizi;
         private Panel pnlLine;
