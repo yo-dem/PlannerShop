@@ -45,6 +45,7 @@ namespace PlannerShop.Forms.Agenda
             dgvData.SelectionChanged += dgvData_SelectionChanged;
             dgvData.CellPainting += dgvData_CellPainting;
             dgvData.CellClick += dgvData_CellClick;
+            dgvData.CellMouseClick += dgvData_CellMouseClick;
         }
 
         // ===============================
@@ -103,8 +104,8 @@ namespace PlannerShop.Forms.Agenda
             dgvData.AutoGenerateColumns = false;
 
             dgvData.Font = new Font("Segoe UI", 10f);
-            dgvData.RowTemplate.Height = 60;
-            dgvData.RowTemplate.MinimumHeight = 60;
+            dgvData.RowTemplate.Height = 100;
+            dgvData.RowTemplate.MinimumHeight = 100;
             dgvData.ColumnHeadersHeight = 50;
             dgvData.ColumnHeadersDefaultCellStyle.Font = new Font(dgvData.Font, FontStyle.Regular);
 
@@ -180,7 +181,7 @@ namespace PlannerShop.Forms.Agenda
                 Titolo = "Appuntamento mock",
                 Colore = Color.MediumSlateBlue
             });
-            AddMockAppointment(new DateTime(2026, 1, 15), new TimeSpan(9, 0, 0), new Appuntamento
+            AddMockAppointment(new DateTime(2026, 1, 15), new TimeSpan(9, 45, 0), new Appuntamento
             {
                 Id = 2,
                 Titolo = "Appuntamento 2 mock",
@@ -192,13 +193,13 @@ namespace PlannerShop.Forms.Agenda
                 Titolo = "Appuntamento 2 mock",
                 Colore = Color.MediumSlateBlue
             });
-            AddMockAppointment(new DateTime(2026, 1, 15), new TimeSpan(9, 0, 0), new Appuntamento
+            AddMockAppointment(new DateTime(2026, 1, 15), new TimeSpan(10, 0, 0), new Appuntamento
             {
                 Id = 2,
                 Titolo = "Appuntamento 2 mock",
                 Colore = Color.MediumSlateBlue
             });
-            AddMockAppointment(new DateTime(2026, 1, 15), new TimeSpan(9, 0, 0), new Appuntamento
+            AddMockAppointment(new DateTime(2026, 1, 15), new TimeSpan(8, 15, 0), new Appuntamento
             {
                 Id = 2,
                 Titolo = "Appuntamento 2 mock",
@@ -720,6 +721,46 @@ namespace PlannerShop.Forms.Agenda
                 }
             }
         }
+
+        private void dgvData_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+{
+    if (e.RowIndex < 0 || e.ColumnIndex <= 0)
+        return;
+
+    var cell = dgvData.Rows[e.RowIndex].Cells[e.ColumnIndex];
+
+    if (cell.Tag is not List<Appuntamento> apps || apps.Count == 0)
+        return;
+
+    // Stessi parametri del CellPainting
+    int padding = 4;
+    int spacing = 3;
+    int maxVisible = 3;
+
+    int visibleCount = Math.Min(apps.Count, maxVisible);
+    int blockHeight = (dgvData.Rows[e.RowIndex].Height - padding * 2 - spacing * (visibleCount - 1)) / visibleCount;
+
+    // Coordinate Y relative alla cella
+    int relativeY = e.Location.Y - padding;
+
+    if (relativeY < 0)
+        return;
+
+    int index = relativeY / (blockHeight + spacing);
+
+    if (index >= 0 && index < visibleCount)
+    {
+        var app = apps[index];
+
+        MessageBox.Show(
+            $"Hai cliccato l'appuntamento con ID = {app.Id}",
+            "Click appuntamento",
+            MessageBoxButtons.OK,
+            MessageBoxIcon.Information
+        );
+    }
+}
+
 
     }
 }

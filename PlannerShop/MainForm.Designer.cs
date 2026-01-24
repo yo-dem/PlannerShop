@@ -445,6 +445,7 @@
             Name = "MainForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "PlannerShop 1.0";
+            WindowState = FormWindowState.Maximized;
             FormClosing += MainForm_FormClosing;
             KeyPress += MainForm_KeyPress;
             ((System.ComponentModel.ISupportInitialize)dgvData).EndInit();
