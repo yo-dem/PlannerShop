@@ -683,14 +683,25 @@ namespace PlannerShop
                 foreach (DataGridViewRow row in dgvData.Rows)
                 {
                     if (row.Cells["QNT"].Value != null &&
-                        int.TryParse(row.Cells["QNT"].Value.ToString(), out int qnt) &&
-                        qnt == 0)
+                        int.TryParse(row.Cells["QNT"].Value.ToString(), out int qntZero) &&
+                        qntZero == 0)
                     {
                         row.DefaultCellStyle.ForeColor = Color.Red;
                         row.DefaultCellStyle.Font = new Font(dgvData.Font, FontStyle.Bold);
                         //row.DefaultCellStyle.SelectionBackColor = Color.DarkRed;
                         row.DefaultCellStyle.SelectionForeColor = Color.Red;
                     }
+
+                    if (row.Cells["QNT"].Value != null &&
+                        int.TryParse(row.Cells["QNT"].Value.ToString(), out int qntReserve) &&
+                        qntReserve != 0 && qntReserve  <= 10)
+                    {
+                        row.DefaultCellStyle.ForeColor = Color.DarkOrange;
+                        row.DefaultCellStyle.Font = new Font(dgvData.Font, FontStyle.Bold);
+                        //row.DefaultCellStyle.SelectionBackColor = Color.DarkRed;
+                        row.DefaultCellStyle.SelectionForeColor = Color.DarkOrange;
+                    }
+
                 }
             }
         }

@@ -282,12 +282,12 @@
             btnMail.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             btnMail.ForeColor = SystemColors.ControlText;
             btnMail.Image = Properties.Resources.message;
-            btnMail.Location = new Point(806, 41);
+            btnMail.Location = new Point(691, 41);
             btnMail.Margin = new Padding(3, 2, 3, 2);
             btnMail.Name = "btnMail";
-            btnMail.Size = new Size(125, 37);
+            btnMail.Size = new Size(240, 37);
             btnMail.TabIndex = 21;
-            btnMail.Text = "INVIA MAIL";
+            btnMail.Text = "COMPONI MAIL";
             btnMail.TextAlign = ContentAlignment.MiddleRight;
             btnMail.TextImageRelation = TextImageRelation.TextBeforeImage;
             btnMail.UseVisualStyleBackColor = true;

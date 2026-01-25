@@ -41,6 +41,7 @@
             btnOk = new Button();
             pnlTop = new Panel();
             groupBox2 = new GroupBox();
+            lblBackupResult = new Label();
             btnBackup = new Button();
             groupBox3 = new GroupBox();
             lblPort = new Label();
@@ -57,7 +58,6 @@
             tabPage1 = new TabPage();
             tabPage2 = new TabPage();
             tabPage3 = new TabPage();
-            lblBackupResult = new Label();
             Password.SuspendLayout();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
@@ -90,7 +90,7 @@
             Password.Margin = new Padding(3, 2, 3, 2);
             Password.Name = "Password";
             Password.Padding = new Padding(3, 2, 3, 2);
-            Password.Size = new Size(408, 298);
+            Password.Size = new Size(408, 302);
             Password.TabIndex = 0;
             Password.TabStop = false;
             // 
@@ -104,7 +104,7 @@
             // 
             // btnPasswordReset
             // 
-            btnPasswordReset.Location = new Point(6, 259);
+            btnPasswordReset.Location = new Point(6, 263);
             btnPasswordReset.Margin = new Padding(3, 2, 3, 2);
             btnPasswordReset.Name = "btnPasswordReset";
             btnPasswordReset.Size = new Size(396, 35);
@@ -115,7 +115,7 @@
             // 
             // btnPasswordChange
             // 
-            btnPasswordChange.Location = new Point(6, 219);
+            btnPasswordChange.Location = new Point(6, 224);
             btnPasswordChange.Margin = new Padding(3, 2, 3, 2);
             btnPasswordChange.Name = "btnPasswordChange";
             btnPasswordChange.Size = new Size(396, 35);
@@ -212,6 +212,14 @@
             groupBox2.Size = new Size(408, 302);
             groupBox2.TabIndex = 25;
             groupBox2.TabStop = false;
+            // 
+            // lblBackupResult
+            // 
+            lblBackupResult.Location = new Point(6, 237);
+            lblBackupResult.Name = "lblBackupResult";
+            lblBackupResult.Size = new Size(396, 24);
+            lblBackupResult.TabIndex = 6;
+            lblBackupResult.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // btnBackup
             // 
@@ -372,14 +380,6 @@
             tabPage3.TabIndex = 2;
             tabPage3.Text = "BACKUP";
             tabPage3.UseVisualStyleBackColor = true;
-            // 
-            // lblBackupResult
-            // 
-            lblBackupResult.Location = new Point(6, 237);
-            lblBackupResult.Name = "lblBackupResult";
-            lblBackupResult.Size = new Size(396, 24);
-            lblBackupResult.TabIndex = 6;
-            lblBackupResult.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // SettingsForm
             // 

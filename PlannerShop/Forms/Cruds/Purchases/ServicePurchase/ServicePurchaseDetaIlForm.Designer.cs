@@ -170,6 +170,7 @@
             nudSconto.TabIndex = 2;
             nudSconto.ValueChanged += nudSconto_ValueChanged;
             nudSconto.KeyUp += nudSconto_KeyUp;
+            nudSconto.Leave += nudSconto_Leave;
             // 
             // lblTotaleCalcolato
             // 

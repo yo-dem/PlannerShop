@@ -187,6 +187,7 @@
             nudQnt.Value = new decimal(new int[] { 1, 0, 0, 0 });
             nudQnt.ValueChanged += nudQnt_ValueChanged;
             nudQnt.KeyUp += nudQnt_KeyUp;
+            nudQnt.Leave += nudQnt_Leave;
             // 
             // nudSconto
             // 
@@ -197,6 +198,7 @@
             nudSconto.TabIndex = 2;
             nudSconto.ValueChanged += nudSconto_ValueChanged;
             nudSconto.KeyUp += nudSconto_KeyUp;
+            nudSconto.Leave += nudSconto_Leave;
             // 
             // lblTotaleCalcolato
             // 
@@ -259,7 +261,7 @@
             lblMarca.TabIndex = 0;
             lblMarca.Text = "MARCA";
             // 
-            // PurchaseDetaIlForm
+            // ProductPurchaseDetaIlForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -271,7 +273,7 @@
             Controls.Add(btnOk);
             Controls.Add(pnlTop);
             FormBorderStyle = FormBorderStyle.FixedToolWindow;
-            Name = "PurchaseDetaIlForm";
+            Name = "ProductPurchaseDetaIlForm";
             StartPosition = FormStartPosition.CenterParent;
             Text = "GESTIONE ACQUISTI - DETTAGLIO";
             grpPurchaseDetail.ResumeLayout(false);

@@ -27,6 +27,24 @@ namespace PlannerShop.Forms
             lblTotaleCalcolato.Text = lblPrezzoVendita.Text;
         }
 
+        private void nudQnt_Leave(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(nudQnt.Text))
+            {
+                nudQnt.Text = "1";
+                nudQnt.Value = 1;
+            }
+        }
+
+        private void nudSconto_Leave(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(nudSconto.Text))
+            {
+                nudSconto.Text = "0";
+                nudSconto.Value = 0;
+            }
+        }
+
         private void nudSconto_KeyUp(object sender, KeyEventArgs e)
         {
             totalCalculator();
@@ -98,5 +116,6 @@ namespace PlannerShop.Forms
             this.DialogResult = DialogResult.Cancel;
             this.Close();
         }
+
     }
 }
