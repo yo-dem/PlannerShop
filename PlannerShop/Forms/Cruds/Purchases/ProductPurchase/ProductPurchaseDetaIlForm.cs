@@ -25,6 +25,7 @@ namespace PlannerShop.Forms
             lblDescrizione.Text = row["DESCRIZIONE"].ToString();
 
             lblTotaleCalcolato.Text = lblPrezzoVendita.Text;
+
         }
 
         private void nudQnt_Leave(object sender, EventArgs e)
@@ -83,25 +84,40 @@ namespace PlannerShop.Forms
             // Rimuove simbolo € e spazi
             string prezzoText = lblPrezzoVendita.Text.Replace("€", "").Trim();
 
-            // Controlla se il campo non è vuoto e se il valore è valido
-            if (decimal.TryParse(prezzoText, out decimal prezzoVendita))
+            if (decimal.TryParse(txtCustomPrice.Text, out decimal prezzoCustom))
             {
-                decimal qnt = nudQnt.Value;
-                decimal sconto = nudSconto.Value;
+                lblTotaleCalcolato.Text = prezzoCustom.ToString("F2") + " €";
 
-                // Calcolo totale con sconto
-                decimal total = prezzoVendita * qnt * (1 - sconto / 100);
+                //decimal.TryParse(prezzoText, out decimal pVendita);
+                //decimal baseTotale = pVendita * nudQnt.Value; ;
+                //decimal sconto = (1 - prezzoCustom / baseTotale) * 100;
 
-                // Arrotondamento a 2 decimali
-                total = Math.Round(total, 2);
+                //nudSconto.Value = Math.Round(sconto, 2);
 
-                // Visualizzazione con sempre due cifre decimali
-                lblTotaleCalcolato.Text = total.ToString("F2") + " €";
+                return;
             }
             else
             {
-                // Se il campo non contiene un numero valido
-                lblTotaleCalcolato.Text = "Totale: 0.00 €";
+                // Controlla se il campo non è vuoto e se il valore è valido
+                if (decimal.TryParse(prezzoText, out decimal prezzoVendita))
+                {
+                    decimal qnt = nudQnt.Value;
+                    decimal sconto = nudSconto.Value;
+
+                    // Calcolo totale con sconto
+                    decimal total = prezzoVendita * qnt * (1 - sconto / 100);
+
+                    // Arrotondamento a 2 decimali
+                    total = Math.Round(total, 2);
+
+                    // Visualizzazione con sempre due cifre decimali
+                    lblTotaleCalcolato.Text = total.ToString("F2") + " €";
+                }
+                else
+                {
+                    // Se il campo non contiene un numero valido
+                    lblTotaleCalcolato.Text = "Totale: 0.00 €";
+                }
             }
         }
 
@@ -117,5 +133,41 @@ namespace PlannerShop.Forms
             this.Close();
         }
 
+        private void txtCustomPrice_TextChanged(object sender, EventArgs e)
+        {
+            totalCalculator();
+        }
+
+        private void rbSconto_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbSconto.Checked)
+            {
+                nudSconto.Enabled = true;
+                txtCustomPrice.Enabled = false;
+                txtCustomPrice.Text = string.Empty;
+            }
+            else if (rbPrezzoLibero.Checked)
+            {
+                nudSconto.Enabled = false;
+                txtCustomPrice.Enabled = true;
+                nudSconto.Value = 0;
+            }
+        }
+
+        private void rbPrezzoLibero_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbSconto.Checked)
+            {
+                nudSconto.Enabled = true;
+                txtCustomPrice.Enabled = false;
+                txtCustomPrice.Text = string.Empty;
+            }
+            else if (rbPrezzoLibero.Checked)
+            {
+                nudSconto.Enabled = false;
+                nudSconto.Value = 0;
+                txtCustomPrice.Enabled = true;
+            }
+        }
     }
 }

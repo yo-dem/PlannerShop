@@ -39,6 +39,10 @@
             lblIndirizzo = new Label();
             lblName = new Label();
             groupBox1 = new GroupBox();
+            rbPrezzoLibero = new RadioButton();
+            rbSconto = new RadioButton();
+            lblCustomPrice = new Label();
+            txtCustomPrice = new TextBox();
             nudQnt = new NumericUpDown();
             nudSconto = new NumericUpDown();
             lblTotaleCalcolato = new Label();
@@ -163,6 +167,10 @@
             // 
             // groupBox1
             // 
+            groupBox1.Controls.Add(rbPrezzoLibero);
+            groupBox1.Controls.Add(rbSconto);
+            groupBox1.Controls.Add(lblCustomPrice);
+            groupBox1.Controls.Add(txtCustomPrice);
             groupBox1.Controls.Add(nudQnt);
             groupBox1.Controls.Add(nudSconto);
             groupBox1.Controls.Add(lblTotaleCalcolato);
@@ -175,6 +183,46 @@
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
             // 
+            // rbPrezzoLibero
+            // 
+            rbPrezzoLibero.AutoSize = true;
+            rbPrezzoLibero.Location = new Point(188, 171);
+            rbPrezzoLibero.Name = "rbPrezzoLibero";
+            rbPrezzoLibero.Size = new Size(14, 13);
+            rbPrezzoLibero.TabIndex = 6;
+            rbPrezzoLibero.UseVisualStyleBackColor = true;
+            rbPrezzoLibero.CheckedChanged += rbPrezzoLibero_CheckedChanged;
+            // 
+            // rbSconto
+            // 
+            rbSconto.AutoSize = true;
+            rbSconto.Checked = true;
+            rbSconto.Location = new Point(188, 123);
+            rbSconto.Name = "rbSconto";
+            rbSconto.Size = new Size(14, 13);
+            rbSconto.TabIndex = 5;
+            rbSconto.TabStop = true;
+            rbSconto.UseVisualStyleBackColor = true;
+            rbSconto.CheckedChanged += rbSconto_CheckedChanged;
+            // 
+            // lblCustomPrice
+            // 
+            lblCustomPrice.AutoSize = true;
+            lblCustomPrice.Location = new Point(6, 144);
+            lblCustomPrice.Name = "lblCustomPrice";
+            lblCustomPrice.Size = new Size(74, 15);
+            lblCustomPrice.TabIndex = 4;
+            lblCustomPrice.Text = "Prezzo libero";
+            // 
+            // txtCustomPrice
+            // 
+            txtCustomPrice.Enabled = false;
+            txtCustomPrice.Location = new Point(6, 161);
+            txtCustomPrice.Name = "txtCustomPrice";
+            txtCustomPrice.Size = new Size(176, 23);
+            txtCustomPrice.TabIndex = 3;
+            txtCustomPrice.TextChanged += txtCustomPrice_TextChanged;
+            // 
             // nudQnt
             // 
             nudQnt.Font = new Font("Segoe UI", 18F);
@@ -182,7 +230,7 @@
             nudQnt.Maximum = new decimal(new int[] { 1000, 0, 0, 0 });
             nudQnt.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             nudQnt.Name = "nudQnt";
-            nudQnt.Size = new Size(204, 39);
+            nudQnt.Size = new Size(176, 39);
             nudQnt.TabIndex = 1;
             nudQnt.Value = new decimal(new int[] { 1, 0, 0, 0 });
             nudQnt.ValueChanged += nudQnt_ValueChanged;
@@ -194,7 +242,7 @@
             nudSconto.Font = new Font("Segoe UI", 18F);
             nudSconto.Location = new Point(6, 97);
             nudSconto.Name = "nudSconto";
-            nudSconto.Size = new Size(204, 39);
+            nudSconto.Size = new Size(176, 39);
             nudSconto.TabIndex = 2;
             nudSconto.ValueChanged += nudSconto_ValueChanged;
             nudSconto.KeyUp += nudSconto_KeyUp;
@@ -308,5 +356,9 @@
         private NumericUpDown nudSconto;
         public Label lblTotaleCalcolato;
         private Label lblPrezzoVendita;
+        private Label lblCustomPrice;
+        private TextBox txtCustomPrice;
+        private RadioButton rbPrezzoLibero;
+        private RadioButton rbSconto;
     }
 }
