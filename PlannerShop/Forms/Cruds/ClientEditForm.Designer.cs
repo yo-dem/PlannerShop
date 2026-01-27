@@ -227,7 +227,7 @@
             // 
             // btnProductPurchase
             // 
-            btnProductPurchase.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            btnProductPurchase.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             btnProductPurchase.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             btnProductPurchase.ForeColor = SystemColors.ControlText;
             btnProductPurchase.Image = Properties.Resources.prodotti_24;
@@ -244,7 +244,7 @@
             // 
             // btnViewPurchase
             // 
-            btnViewPurchase.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            btnViewPurchase.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             btnViewPurchase.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             btnViewPurchase.ForeColor = SystemColors.ControlText;
             btnViewPurchase.Image = Properties.Resources.calculatotImage;
@@ -261,7 +261,7 @@
             // 
             // btnServicePurchase
             // 
-            btnServicePurchase.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            btnServicePurchase.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             btnServicePurchase.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             btnServicePurchase.ForeColor = SystemColors.ControlText;
             btnServicePurchase.Image = Properties.Resources.serviziEstetici;
