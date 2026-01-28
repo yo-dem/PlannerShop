@@ -38,6 +38,8 @@
             lblIndirizzo = new Label();
             lblName = new Label();
             groupBox1 = new GroupBox();
+            lblCustomPrice = new Label();
+            txtCustomPrice = new TextBox();
             nudSconto = new NumericUpDown();
             lblTotaleCalcolato = new Label();
             lblTotale = new Label();
@@ -151,6 +153,8 @@
             // 
             // groupBox1
             // 
+            groupBox1.Controls.Add(lblCustomPrice);
+            groupBox1.Controls.Add(txtCustomPrice);
             groupBox1.Controls.Add(nudSconto);
             groupBox1.Controls.Add(lblTotaleCalcolato);
             groupBox1.Controls.Add(lblTotale);
@@ -161,6 +165,27 @@
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
             // 
+            // lblCustomPrice
+            // 
+            lblCustomPrice.AutoSize = true;
+            lblCustomPrice.Location = new Point(6, 79);
+            lblCustomPrice.Name = "lblCustomPrice";
+            lblCustomPrice.Size = new Size(74, 15);
+            lblCustomPrice.TabIndex = 6;
+            lblCustomPrice.Text = "Prezzo libero";
+            // 
+            // txtCustomPrice
+            // 
+            txtCustomPrice.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtCustomPrice.Location = new Point(6, 96);
+            txtCustomPrice.Name = "txtCustomPrice";
+            txtCustomPrice.ReadOnly = true;
+            txtCustomPrice.Size = new Size(204, 33);
+            txtCustomPrice.TabIndex = 5;
+            txtCustomPrice.Click += txtCustomPrice_Click;
+            txtCustomPrice.TextChanged += txtCustomPrice_TextChanged;
+            txtCustomPrice.KeyPress += txtCustomPrice_KeyPress;
+            // 
             // nudSconto
             // 
             nudSconto.Font = new Font("Segoe UI", 18F);
@@ -169,6 +194,7 @@
             nudSconto.Size = new Size(204, 39);
             nudSconto.TabIndex = 2;
             nudSconto.ValueChanged += nudSconto_ValueChanged;
+            nudSconto.Click += nudSconto_Click;
             nudSconto.KeyUp += nudSconto_KeyUp;
             nudSconto.Leave += nudSconto_Leave;
             // 
@@ -278,5 +304,7 @@
         private NumericUpDown nudSconto;
         public Label lblTotaleCalcolato;
         private Label lblPrezzoVendita;
+        private Label lblCustomPrice;
+        private TextBox txtCustomPrice;
     }
 }

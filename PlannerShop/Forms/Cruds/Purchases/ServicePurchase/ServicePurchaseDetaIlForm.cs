@@ -72,25 +72,40 @@ namespace PlannerShop.Forms
             // Rimuove simbolo € e spazi
             string prezzoText = lblPrezzoVendita.Text.Replace("€", "").Trim();
 
-            // Controlla se il campo non è vuoto e se il valore è valido
-            if (decimal.TryParse(prezzoText, out decimal prezzoVendita))
+            if (decimal.TryParse(txtCustomPrice.Text, out decimal prezzoCustom))
             {
-                decimal sconto = nudSconto.Value;
+                lblTotaleCalcolato.Text = prezzoCustom.ToString("F2") + " €";
 
-                // Calcolo totale con sconto
-                decimal total = prezzoVendita * (1 - sconto / 100);
+                //decimal.TryParse(prezzoText, out decimal pVendita);
+                //decimal baseTotale = pVendita * nudQnt.Value; ;
+                //decimal sconto = (1 - prezzoCustom / baseTotale) * 100;
+                //if (sconto < 0) return;
+                //nudSconto.Value = sconto;//Math.Round(sconto, 2);
 
-                // Arrotondamento a 2 decimali
-                total = Math.Round(total, 2);
-
-                // Visualizzazione con sempre due cifre decimali
-                lblTotaleCalcolato.Text = total.ToString("F2") + " €";
+                return;
             }
             else
             {
-                // Se il campo non contiene un numero valido
-                lblTotaleCalcolato.Text = "Totale: 0.00 €";
+                if (decimal.TryParse(prezzoText, out decimal prezzoVendita))
+                {
+                    decimal sconto = nudSconto.Value;
+
+                    // Calcolo totale con sconto
+                    decimal total = prezzoVendita * (1 - sconto / 100);
+
+                    // Arrotondamento a 2 decimali
+                    total = Math.Round(total, 2);
+
+                    // Visualizzazione con sempre due cifre decimali
+                    lblTotaleCalcolato.Text = total.ToString("F2") + " €";
+                }
+                else
+                {
+                    // Se il campo non contiene un numero valido
+                    lblTotaleCalcolato.Text = "Totale: 0.00 €";
+                }
             }
+
         }
 
         private void btnOk_Click(object sender, EventArgs e)
@@ -105,5 +120,31 @@ namespace PlannerShop.Forms
             this.Close();
         }
 
+        private void txtCustomPrice_TextChanged(object sender, EventArgs e)
+        {
+            totalCalculator();
+        }
+
+        private void txtCustomPrice_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != (char)Keys.Back && e.KeyChar != ',')
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void nudSconto_Click(object sender, EventArgs e)
+        {
+            nudSconto.ReadOnly = false;
+            txtCustomPrice.ReadOnly = true;
+            txtCustomPrice.Text = string.Empty;
+        }
+
+        private void txtCustomPrice_Click(object sender, EventArgs e)
+        {
+            nudSconto.ReadOnly = true;
+            txtCustomPrice.ReadOnly = false;
+            nudSconto.Value = 0;
+        }
     }
 }

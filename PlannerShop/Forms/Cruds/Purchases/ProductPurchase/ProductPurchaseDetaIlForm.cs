@@ -91,8 +91,8 @@ namespace PlannerShop.Forms
                 //decimal.TryParse(prezzoText, out decimal pVendita);
                 //decimal baseTotale = pVendita * nudQnt.Value; ;
                 //decimal sconto = (1 - prezzoCustom / baseTotale) * 100;
-
-                //nudSconto.Value = Math.Round(sconto, 2);
+                //if (sconto < 0) return;
+                //nudSconto.Value = sconto;//Math.Round(sconto, 2);
 
                 return;
             }
@@ -138,36 +138,18 @@ namespace PlannerShop.Forms
             totalCalculator();
         }
 
-        private void rbSconto_CheckedChanged(object sender, EventArgs e)
+        private void txtCustomPrice_Click(object sender, EventArgs e)
         {
-            if (rbSconto.Checked)
-            {
-                nudSconto.Enabled = true;
-                txtCustomPrice.Enabled = false;
-                txtCustomPrice.Text = string.Empty;
-            }
-            else if (rbPrezzoLibero.Checked)
-            {
-                nudSconto.Enabled = false;
-                txtCustomPrice.Enabled = true;
-                nudSconto.Value = 0;
-            }
+            nudSconto.ReadOnly = true;
+            txtCustomPrice.ReadOnly = false;
+            nudSconto.Value = 0;
         }
 
-        private void rbPrezzoLibero_CheckedChanged(object sender, EventArgs e)
+        private void nudSconto_Click(object sender, EventArgs e)
         {
-            if (rbSconto.Checked)
-            {
-                nudSconto.Enabled = true;
-                txtCustomPrice.Enabled = false;
-                txtCustomPrice.Text = string.Empty;
-            }
-            else if (rbPrezzoLibero.Checked)
-            {
-                nudSconto.Enabled = false;
-                nudSconto.Value = 0;
-                txtCustomPrice.Enabled = true;
-            }
+            nudSconto.ReadOnly = false;
+            txtCustomPrice.ReadOnly = true;
+            txtCustomPrice.Text= string.Empty;
         }
     }
 }
