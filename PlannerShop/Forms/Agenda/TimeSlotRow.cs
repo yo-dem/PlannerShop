@@ -6,6 +6,5 @@ namespace PlannerShop.Forms.Agenda
         public TimeSpan Start;
         public TimeSpan End;
         public int HourGroup;
-        public bool IsCollapsed;
     }
 }

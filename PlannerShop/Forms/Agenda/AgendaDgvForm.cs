@@ -2,67 +2,104 @@
 
 namespace PlannerShop.Forms.Agenda
 {
+    /// <summary>
+    /// Form che implementa un'agenda settimanale stile calendario.
+    /// 
+    /// STRUTTURA CONCETTUALE:
+    /// - Righe  : slot temporali da 15 minuti
+    /// - Colonne: giorni della settimana
+    /// - Celle  : contenitori grafici di appuntamenti
+    /// 
+    /// La DataGridView viene usata solo come "canvas":
+    /// tutta la logica temporale è mantenuta separata.
+    /// </summary>
     public partial class AgendaDgvForm : Form
     {
-        // ===============================
-        // STATO
-        // ===============================
+        // ============================================================
+        // STATO APPLICATIVO
+        // ============================================================
 
-        // Righe logiche della giornata (slot temporali)
+        /// <summary>
+        /// Lista degli slot temporali della giornata.
+        /// È la rappresentazione logica del tempo (non della UI).
+        /// </summary>
         private List<TimeSlotRow> TSRows;
 
-        // Lunedì della settimana visualizzata
-        private DateTime _weekStart;
+        /// <summary>
+        /// Lunedì della settimana attualmente visualizzata.
+        /// </summary>
+        private DateTime weekStart;
 
-        // Cultura italiana per giorni e mesi
-        private readonly CultureInfo _culture = new CultureInfo("it-IT");
+        /// <summary>
+        /// Cultura italiana per nomi di giorni e mesi.
+        /// </summary>
+        private readonly CultureInfo culture = new("it-IT");
 
-        // Stato di espansione delle ore (per raggruppamento)
-        private Dictionary<int, bool> _expandedHours = new();
+        private readonly Dictionary<(DateTime date, TimeSpan time), List<Appointment>> appointments = [];
 
 
-        // ===============================
-        // COSTRUTTORE
-        // ===============================
+        // ============================================================
+        // COSTRUTTORE E INIZIALIZZAZIONE
+        // ============================================================
 
         public AgendaDgvForm()
         {
             InitializeComponent();
 
-            // Inizializza la settimana corrente (lunedì)
-            _weekStart = GetStartOfWeek(DateTime.Today);
+            // Calcolo del lunedì della settimana corrente
+            weekStart = GetStartOfWeek(DateTime.Today);
 
-            // Costruisce UNA VOLTA gli slot orari
+            // Costruzione della struttura temporale (una sola volta)
             BuildDefaultRows();
 
-            // Configura UNA VOLTA la griglia (colonne + stili)
+            // Configurazione grafica e strutturale della griglia
             SetupGrid();
 
-            // Aggiorna UI e contenuti per la settimana corrente
+            // Popolamento UI iniziale
             UpdateWeekUI();
 
-            // Eventi
+            // Registrazione eventi
+            HookGridEvents();
+
+            // Dati mock (solo sviluppo)
+            AddMockAppointment(new DateTime(2026, 1, 29), new TimeSpan(8, 30, 0), new Appointment
+            {
+                Id = 1,
+                Titolo = "Appuntamento Patrizia",
+                Colore = Color.MediumSlateBlue
+            });
+            AddMockAppointment(new DateTime(2026, 1, 31), new TimeSpan(8, 15, 0), new Appointment
+            {
+                Id = 2,
+                Titolo = "Appuntamento Lucilla",
+                Colore = Color.MediumSlateBlue
+            });
+        }
+
+        private void HookGridEvents()
+        {
             dgvData.SelectionChanged += dgvData_SelectionChanged;
             dgvData.CellPainting += dgvData_CellPainting;
-            dgvData.CellClick += dgvData_CellClick;
             dgvData.CellMouseClick += dgvData_CellMouseClick;
         }
 
-        // ===============================
+
+        // ============================================================
         // LOGICA TEMPORALE
-        // ===============================
+        // ============================================================
 
         /// <summary>
-        /// Restituisce il lunedì della settimana della data fornita
+        /// Restituisce il lunedì della settimana contenente la data fornita.
         /// </summary>
-        private DateTime GetStartOfWeek(DateTime date)
+        private static DateTime GetStartOfWeek(DateTime date)
         {
             int diff = (7 + (date.DayOfWeek - DayOfWeek.Monday)) % 7;
             return date.AddDays(-diff).Date;
         }
 
         /// <summary>
-        /// Costruisce gli slot temporali della giornata (15 minuti)
+        /// Costruisce gli slot temporali giornalieri (08:00 → 21:00),
+        /// suddivisi in intervalli da 15 minuti.
         /// </summary>
         private void BuildDefaultRows()
         {
@@ -70,30 +107,29 @@ namespace PlannerShop.Forms.Agenda
 
             for (int hour = 8; hour <= 21; hour++)
             {
-                TSRows.Add(new TimeSlotRow { Start = new TimeSpan(hour, 0, 0), End = new TimeSpan(hour, 15, 0), HourGroup = hour });
-                TSRows.Add(new TimeSlotRow { Start = new TimeSpan(hour, 15, 0), End = new TimeSpan(hour, 30, 0), HourGroup = hour });
-                TSRows.Add(new TimeSlotRow { Start = new TimeSpan(hour, 30, 0), End = new TimeSpan(hour, 45, 0), HourGroup = hour });
-                TSRows.Add(new TimeSlotRow { Start = new TimeSpan(hour, 45, 0), End = new TimeSpan(hour + 1, 0, 0), HourGroup = hour });
+                TSRows.Add(new TimeSlotRow { Start = new(hour, 0, 0), End = new(hour, 15, 0), HourGroup = hour });
+                TSRows.Add(new TimeSlotRow { Start = new(hour, 15, 0), End = new(hour, 30, 0), HourGroup = hour });
+                TSRows.Add(new TimeSlotRow { Start = new(hour, 30, 0), End = new(hour, 45, 0), HourGroup = hour });
+                TSRows.Add(new TimeSlotRow { Start = new(hour, 45, 0), End = new(hour + 1, 0, 0), HourGroup = hour });
             }
         }
 
-        // ===============================
-        // SETUP GRIGLIA
-        // ===============================
+
+        // ============================================================
+        // CONFIGURAZIONE DATA GRID VIEW
+        // ============================================================
 
         /// <summary>
         /// Configura la DataGridView:
         /// - comportamento
-        /// - stili
+        /// - stile
         /// - colonne
+        /// 
+        /// Viene chiamata una sola volta.
         /// </summary>
         private void SetupGrid()
         {
             dgvData.EnableHeadersVisualStyles = false;
-
-            // Griglie sottili stile Excel
-            dgvData.CellBorderStyle = DataGridViewCellBorderStyle.Single;
-            dgvData.GridColor = Color.FromArgb(210, 210, 210);
 
             dgvData.AllowUserToAddRows = false;
             dgvData.AllowUserToDeleteRows = false;
@@ -103,21 +139,21 @@ namespace PlannerShop.Forms.Agenda
             dgvData.RowHeadersVisible = false;
             dgvData.AutoGenerateColumns = false;
 
+            dgvData.CellBorderStyle = DataGridViewCellBorderStyle.Single;
+            dgvData.GridColor = Color.FromArgb(210, 210, 210);
+
             dgvData.Font = new Font("Segoe UI", 10f);
             dgvData.RowTemplate.Height = 100;
             dgvData.RowTemplate.MinimumHeight = 100;
             dgvData.ColumnHeadersHeight = 50;
-            dgvData.ColumnHeadersDefaultCellStyle.Font = new Font(dgvData.Font, FontStyle.Regular);
 
             dgvData.DefaultCellStyle.BackColor = Color.White;
             dgvData.DefaultCellStyle.SelectionBackColor = Color.FromArgb(230, 230, 230);
 
             dgvData.Columns.Clear();
 
-            // Colonna ORA
             dgvData.Columns.Add(CreateOraColumn());
 
-            // 7 colonne dei giorni (vuote, header aggiornato dinamicamente)
             for (int i = 0; i < 7; i++)
                 dgvData.Columns.Add(CreateDayColumn());
 
@@ -128,10 +164,7 @@ namespace PlannerShop.Forms.Agenda
             }
         }
 
-        /// <summary>
-        /// Crea la colonna ORA con stili coerenti e non selezionabili
-        /// </summary>
-        private DataGridViewTextBoxColumn CreateOraColumn()
+        private static DataGridViewTextBoxColumn CreateOraColumn()
         {
             var col = new DataGridViewTextBoxColumn
             {
@@ -151,215 +184,140 @@ namespace PlannerShop.Forms.Agenda
             return col;
         }
 
-        /// <summary>
-        /// Crea una colonna giorno (header impostato successivamente)
-        /// </summary>
-        private DataGridViewTextBoxColumn CreateDayColumn()
-        {
-            return new DataGridViewTextBoxColumn
-            {
-                AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
-            };
-        }
+        private static DataGridViewTextBoxColumn CreateDayColumn() =>
+            new() { AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill };
 
-        // ===============================
-        // AGGIORNAMENTO UI
-        // ===============================
+
+        // ============================================================
+        // AGGIORNAMENTO UI SETTIMANALE
+        // ============================================================
 
         /// <summary>
-        /// Aggiorna completamente la UI in base alla settimana corrente
+        /// Aggiorna completamente l'interfaccia per la settimana corrente.
         /// </summary>
         private void UpdateWeekUI()
         {
             UpdateWeekLabelText();
             UpdateGridHeaders();
-            ApplyFolding(hour => true);
+
             RebuildGrid();
-            AddMockAppointment(new DateTime(2026, 1, 18),new TimeSpan(9, 0, 0), new Appuntamento
-            {
-                Id = 1,
-                Titolo = "Appuntamento mock",
-                Colore = Color.MediumSlateBlue
-            });
-            AddMockAppointment(new DateTime(2026, 1, 15), new TimeSpan(9, 45, 0), new Appuntamento
-            {
-                Id = 2,
-                Titolo = "Appuntamento 2 mock",
-                Colore = Color.MediumSlateBlue
-            });
-            AddMockAppointment(new DateTime(2026, 1, 15), new TimeSpan(9, 0, 0), new Appuntamento
-            {
-                Id = 2,
-                Titolo = "Appuntamento 2 mock",
-                Colore = Color.MediumSlateBlue
-            });
-            AddMockAppointment(new DateTime(2026, 1, 15), new TimeSpan(10, 0, 0), new Appuntamento
-            {
-                Id = 2,
-                Titolo = "Appuntamento 2 mock",
-                Colore = Color.MediumSlateBlue
-            });
-            AddMockAppointment(new DateTime(2026, 1, 15), new TimeSpan(8, 15, 0), new Appuntamento
-            {
-                Id = 2,
-                Titolo = "Appuntamento 2 mock",
-                Colore = Color.MediumSlateBlue
-            });
-            AddMockAppointment(new DateTime(2026, 1, 14), new TimeSpan(9, 0, 0), new Appuntamento
-            {
-                Id = 2,
-                Titolo = "Appuntamento 2 mock",
-                Colore = Color.MediumSlateBlue
-            });
-            AddMockAppointment(new DateTime(2026, 1, 14), new TimeSpan(9, 0, 0), new Appuntamento
-            {
-                Id = 0,
-                Titolo = "Appuntamento 0 mock",
-                Colore = Color.MediumSlateBlue
-            });
         }
 
-        /// <summary>
-        /// Aggiorna la label con il range settimanale
-        /// </summary>
         private void UpdateWeekLabelText()
         {
-            DateTime start = _weekStart;
-            DateTime end = _weekStart.AddDays(6);
+            DateTime end = weekStart.AddDays(6);
 
-            string text = start.Month == end.Month
-                ? $"{start.Day} – {end.Day} {start:MMMM yyyy}"
-                : $"{start:dd MMM} – {end:dd MMM yyyy}";
+            string text = weekStart.Month == end.Month
+                ? $"{weekStart.Day} – {end.Day} {weekStart:MMMM yyyy}"
+                : $"{weekStart:dd MMM} – {end:dd MMM yyyy}";
 
-            lblTimeSlot.Text = _culture.TextInfo.ToTitleCase(text);
+            lblTimeSlot.Text = culture.TextInfo.ToTitleCase(text);
         }
 
-        /// <summary>
-        /// Aggiorna SOLO gli header delle colonne giorno
-        /// Nessuna colonna viene ricreata
-        /// </summary>
         private void UpdateGridHeaders()
         {
             for (int i = 0; i < 7; i++)
             {
-                DateTime day = _weekStart.AddDays(i);
-                var col = dgvData.Columns[i + 1]; // +1 = salta "Ora"
+                DateTime day = weekStart.AddDays(i);
+                var col = dgvData.Columns[i + 1];
 
-                string dayName = _culture.DateTimeFormat.GetDayName(day.DayOfWeek);
-                dayName = _culture.TextInfo.ToTitleCase(dayName);
-
-                string dayDate = day.ToString("d MMMM", _culture);
-                dayDate = _culture.TextInfo.ToTitleCase(dayDate);
+                string dayName = culture.TextInfo.ToTitleCase(day.ToString("dddd"));
+                string dayDate = culture.TextInfo.ToTitleCase(day.ToString("d MMMM", culture));
 
                 col.Name = day.ToString("yyyyMMdd");
                 col.HeaderText = $"{dayName}\n{dayDate}";
             }
         }
 
+
+        // ============================================================
+        // RICOSTRUZIONE RIGHE
+        // ============================================================
+
         /// <summary>
-        /// Ricostruisce le righe in base agli slot temporali
+        /// Ricostruisce fisicamente le righe visibili della griglia
+        /// in base allo stato degli slot temporali.
         /// </summary>
         private void RebuildGrid()
         {
-            int firstDisplayedRow = dgvData.FirstDisplayedScrollingRowIndex;
+            int scroll = dgvData.FirstDisplayedScrollingRowIndex;
 
             dgvData.SuspendLayout();
             dgvData.Rows.Clear();
 
-            foreach (var slot in TSRows
-                .Where(r => !r.IsCollapsed)
-                .OrderBy(r => r.Start))
+            foreach (var slot in TSRows.OrderBy(r => r.Start))
             {
                 int rowIndex = dgvData.Rows.Add();
                 var row = dgvData.Rows[rowIndex];
 
                 row.Cells["Ora"].Value = slot.Start.ToString(@"hh\:mm");
 
-                if (slot.Start.Minutes == 0)
-                {
-                    row.DefaultCellStyle.Font = new Font(dgvData.Font, FontStyle.Bold);
-                    row.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
-                    row.DefaultCellStyle.Padding = new Padding(4, 0, 0, 0);
-                }
-                else
-                {
-                    row.DefaultCellStyle.Font = dgvData.Font;
-                    row.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-                }
+                bool hourStart = slot.Start.Minutes == 0;
 
-                // Ciclo sulle colonne dei giorni (1-7, skip "Ora")
-                for (int colIndex = 1; colIndex <= 7; colIndex++)
-                {
-                    var col = dgvData.Columns[colIndex];
-                    if (DateTime.TryParseExact(col.Name, "yyyyMMdd", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime colDate))
-                    {
-                        if (colDate.DayOfWeek == DayOfWeek.Saturday || colDate.DayOfWeek == DayOfWeek.Sunday)
-                        {
-                            row.Cells[colIndex].Style.BackColor = Color.FromArgb(245, 245, 245); // WEEKEND COLORI                        
-                        }
-                        else
-                        {
-                            row.Cells[colIndex].Style.BackColor = slot.HourGroup % 2 == 0
-                                ? Color.FromArgb(240, 240, 255)
-                                : Color.FromArgb(250, 250, 255);
-                        }
-                    }
-                }
+                row.DefaultCellStyle.Font = hourStart
+                    ? new Font(dgvData.Font, FontStyle.Bold)
+                    : dgvData.Font;
+
+                row.DefaultCellStyle.Alignment = hourStart
+                    ? DataGridViewContentAlignment.MiddleLeft
+                    : DataGridViewContentAlignment.MiddleRight;
             }
 
             dgvData.ResumeLayout();
 
-            if (firstDisplayedRow >= 0 && firstDisplayedRow < dgvData.Rows.Count)
-            {
-                dgvData.FirstDisplayedScrollingRowIndex = firstDisplayedRow;
-            }
+            if (scroll >= 0 && scroll < dgvData.Rows.Count)
+                dgvData.FirstDisplayedScrollingRowIndex = scroll;
+
+            RestoreAppointmentsOnGrid();
         }
 
-
-        /// <summary>
-        /// Applies folding logic to time slot rows, collapsing or expanding slots within each hour group based on event
-        /// presence and expansion state.
-        /// </summary>
-        /// <remarks>
-        /// Slots at the start of each hour are always expanded. Other slots are collapsed unless
-        /// the hour contains events or is explicitly expanded.
-        /// </remarks>
-        private void ApplyFolding(Func<int, bool> hourHasEvents)
+        private void RestoreAppointmentsOnGrid()
         {
-            foreach (var hourGroup in TSRows.GroupBy(r => r.HourGroup))
+            foreach (var kv in appointments)
             {
-                int hour = hourGroup.Key;
-
-                bool hasEvents = hourHasEvents(hour);
-                bool isExpanded = _expandedHours.ContainsKey(hour) && _expandedHours[hour];
-
-                foreach (var slot in hourGroup)
-                {
-                    // Mostra sempre hh:00
-                    if (slot.Start.Minutes == 0)
-                    {
-                        slot.IsCollapsed = false;
-                        continue;
-                    }
-
-                    // Mostra solo se necessario
-                    slot.IsCollapsed = !(hasEvents || isExpanded);
-                }
+                var (date, time) = kv.Key;
+                RepaintAppointmentCell(date, time);
             }
         }
 
+        // ============================================================
+        // EVENTI DATA GRID VIEW
+        // ============================================================
 
-        // ===============================
-        // EVENTI
-        // ===============================
-
-        /// <summary>
-        /// Impedisce la selezione della colonna ORA
-        /// </summary>
         private void dgvData_SelectionChanged(object sender, EventArgs e)
         {
             if (dgvData.CurrentCell?.OwningColumn.Name == "Ora")
                 dgvData.ClearSelection();
+        }
+
+        private bool IsSaturdayColumn(int columnIndex)
+        {
+            if (columnIndex <= 0) return false; // salta "Ora"
+
+            var col = dgvData.Columns[columnIndex];
+
+            return DateTime.TryParseExact(
+                col.Name,
+                "yyyyMMdd",
+                CultureInfo.InvariantCulture,
+                DateTimeStyles.None,
+                out var date)
+                && (date.DayOfWeek == DayOfWeek.Saturday);
+        }
+
+        private bool IsTodayColumn(int columnIndex)
+        {
+            if (columnIndex <= 0) return false;
+
+            var col = dgvData.Columns[columnIndex];
+
+            return DateTime.TryParseExact(
+                col.Name,
+                "yyyyMMdd",
+                CultureInfo.InvariantCulture,
+                DateTimeStyles.None,
+                out var date)
+                && date.Date == DateTime.Today;
         }
 
         /// <summary>
@@ -517,10 +475,10 @@ namespace PlannerShop.Forms.Agenda
             if (e.RowIndex >= 0 && e.ColumnIndex > 0)
             {
                 var cell = dgvData.Rows[e.RowIndex].Cells[e.ColumnIndex];
+                bool isSaturday = IsSaturdayColumn(e.ColumnIndex);
 
-                if (cell.Tag is List<Appuntamento> apps && apps.Count > 0)
+                if (cell.Tag is List<Appointment> apps && apps.Count > 0)
                 {
-
                     // Lascia disegnare background + bordi standard
                     e.Paint(e.CellBounds, DataGridViewPaintParts.Background | DataGridViewPaintParts.Border);
 
@@ -587,109 +545,113 @@ namespace PlannerShop.Forms.Agenda
                         );
                     }
 
+                    if (isSaturday)
+                    {
+                        using var thickPen = new Pen(Color.FromArgb(100, 100, 100), 1);
+                        e.Graphics!.DrawLine(
+                            thickPen,
+                            e.CellBounds.Left,
+                            e.CellBounds.Top,
+                            e.CellBounds.Left,
+                            e.CellBounds.Bottom
+                        );
+                    }
+
                     return;
                 }
             }
 
         }
 
-        private bool IsSaturdayColumn(int columnIndex)
+
+        // ============================================================
+        // CLICK E INTERAZIONI
+        // ============================================================
+
+        private void dgvData_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            if (columnIndex <= 0) return false; // salta "Ora"
-
-            var col = dgvData.Columns[columnIndex];
-
-            return DateTime.TryParseExact(
-                col.Name,
-                "yyyyMMdd",
-                CultureInfo.InvariantCulture,
-                DateTimeStyles.None,
-                out var date)
-                && (date.DayOfWeek == DayOfWeek.Saturday);
-        }
-
-        private bool IsTodayColumn(int columnIndex)
-        {
-            if (columnIndex <= 0) return false;
-
-            var col = dgvData.Columns[columnIndex];
-
-            return DateTime.TryParseExact(
-                col.Name,
-                "yyyyMMdd",
-                CultureInfo.InvariantCulture,
-                DateTimeStyles.None,
-                out var date)
-                && date.Date == DateTime.Today;
-        }
-
-        /// <summary>
-        /// Handles the CellClick event for the data grid, toggling the expanded or collapsed state of an hour group
-        /// when the first column of a data row is clicked.
-        /// </summary>
-        /// <remarks>
-        /// This handler only responds to clicks in the first column of data rows. Clicking a
-        /// valid cell toggles the expansion state for the corresponding hour and updates the grid display.
-        /// </remarks>
-        private void dgvData_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex < 0 || e.ColumnIndex != 0)
+            if (e.RowIndex < 0 || e.ColumnIndex <= 0)
                 return;
 
-            string? value = dgvData.Rows[e.RowIndex].Cells["Ora"].Value?.ToString();
-            if (value == null) return;
+            var cell = dgvData.Rows[e.RowIndex].Cells[e.ColumnIndex];
 
-            if (TimeSpan.TryParse(value, out var time) && time.Minutes == 0)
+            if (cell.Tag is not List<Appointment> apps || apps.Count == 0)
+                return;
+
+            int padding = 4;
+            int spacing = 3;
+            int maxVisible = 3;
+
+            int visible = Math.Min(apps.Count, maxVisible);
+            int blockHeight = (dgvData.Rows[e.RowIndex].Height - padding * 2 - spacing * (visible - 1)) / visible;
+
+            int relativeY = e.Location.Y - padding;
+            if (relativeY < 0) return;
+
+            int index = relativeY / (blockHeight + spacing);
+
+            if (index >= 0 && index < visible)
             {
-                int hour = time.Hours;
+                var app = apps[index];
 
-                // Toggle espansione di questa ora
-                bool currentlyExpanded = _expandedHours.GetValueOrDefault(hour, true); // default true
-                _expandedHours[hour] = !currentlyExpanded;
-
-                // Applica folding solo basandosi sullo stato salvato
-                ApplyFolding(hourKey =>
-                {
-                    // Se c'è stato un toggle, rispetta lo stato salvato
-                    return _expandedHours.GetValueOrDefault(hourKey, true);
-                });
-
-                RebuildGrid();
+                MessageBox.Show(
+                    $"Hai cliccato l'appuntamento con ID = {app.Id}",
+                    "Click appuntamento",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information
+                );
             }
         }
 
+        private void timerTime_Tick(object sender, EventArgs e)
+        {
+            btnWeek.Text = "OGGI: " + DateTime.Now.ToString("HH:mm:ss");
+        }
 
-        // ===============================
-        // NAVIGAZIONE SETTIMANE
-        // ===============================
+        // ============================================================
+        // NAVIGAZIONE SETTIMANA
+        // ============================================================
 
         private void btnPrevWeek_Click(object sender, EventArgs e)
         {
-            _weekStart = _weekStart.AddDays(-7);
+            weekStart = weekStart.AddDays(-7);
             UpdateWeekUI();
         }
 
         private void btnNextWeek_Click(object sender, EventArgs e)
         {
-            _weekStart = _weekStart.AddDays(7);
+            weekStart = weekStart.AddDays(7);
             UpdateWeekUI();
         }
 
         private void btnWeek_Click(object sender, EventArgs e)
         {
-            _weekStart = GetStartOfWeek(DateTime.Today);
+            weekStart = GetStartOfWeek(DateTime.Today);
             UpdateWeekUI();
         }
 
-        private void timerTime_Tick(object sender, EventArgs e)
+
+        // ============================================================
+        // MOCK DATA (SVILUPPO)
+        // ============================================================
+
+        private void AddMockAppointment(DateTime date, TimeSpan startTime, Appointment app)
         {
-            //lblTime.Text = DateTime.Now.ToString("HH:mm:ss");
-            btnWeek.Text = "OGGI: " + DateTime.Now.ToString("HH:mm:ss");
+            var key = (date.Date, startTime);
+
+            if (!appointments.TryGetValue(key, out var list))
+            {
+                list = new List<Appointment>();
+                appointments[key] = list;
+            }
+
+            list.Add(app);
+
+            RepaintAppointmentCell(date, startTime);
         }
 
-        private void AddMockAppointment(DateTime date, TimeSpan startTime, Appuntamento app)
+        private void RepaintAppointmentCell(DateTime date, TimeSpan startTime)
         {
-            // Colonna = giorno
             string colName = date.ToString("yyyyMMdd");
 
             int colIndex = dgvData.Columns
@@ -700,67 +662,25 @@ namespace PlannerShop.Forms.Agenda
             if (colIndex == -1)
                 return;
 
-            // Riga = slot orario
             for (int r = 0; r < dgvData.Rows.Count; r++)
             {
-                if (TimeSpan.TryParse(dgvData.Rows[r].Cells["Ora"].Value?.ToString(), out var rowTime)
+                if (TimeSpan.TryParse(
+                        dgvData.Rows[r].Cells["Ora"].Value?.ToString(),
+                        out var rowTime)
                     && rowTime == startTime)
                 {
                     var cell = dgvData.Rows[r].Cells[colIndex];
 
-                    if (cell.Tag is not List<Appuntamento> list)
-                    {
-                        list = new List<Appuntamento>();
-                        cell.Tag = list;
-                    }
-
-                    list.Add(app);
+                    var key = (date.Date, startTime);
+                    cell.Tag = appointments.TryGetValue(key, out var list)
+                        ? list
+                        : null;
 
                     dgvData.InvalidateCell(cell);
                     break;
                 }
             }
         }
-
-        private void dgvData_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
-{
-    if (e.RowIndex < 0 || e.ColumnIndex <= 0)
-        return;
-
-    var cell = dgvData.Rows[e.RowIndex].Cells[e.ColumnIndex];
-
-    if (cell.Tag is not List<Appuntamento> apps || apps.Count == 0)
-        return;
-
-    // Stessi parametri del CellPainting
-    int padding = 4;
-    int spacing = 3;
-    int maxVisible = 3;
-
-    int visibleCount = Math.Min(apps.Count, maxVisible);
-    int blockHeight = (dgvData.Rows[e.RowIndex].Height - padding * 2 - spacing * (visibleCount - 1)) / visibleCount;
-
-    // Coordinate Y relative alla cella
-    int relativeY = e.Location.Y - padding;
-
-    if (relativeY < 0)
-        return;
-
-    int index = relativeY / (blockHeight + spacing);
-
-    if (index >= 0 && index < visibleCount)
-    {
-        var app = apps[index];
-
-        MessageBox.Show(
-            $"Hai cliccato l'appuntamento con ID = {app.Id}",
-            "Click appuntamento",
-            MessageBoxButtons.OK,
-            MessageBoxIcon.Information
-        );
-    }
-}
-
 
     }
 }
