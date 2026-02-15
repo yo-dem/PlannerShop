@@ -210,7 +210,8 @@ namespace PlannerShop.Forms
                     idServizio,
                     row["ALIQUOTA"].ToString()!,
                     row["NOTE"].ToString()!,
-                    row["TIMESTAMP"].ToString()!
+                    row["TIMESTAMP"].ToString()!,
+                    "FALSE"
                 );
             }
         }
@@ -458,6 +459,14 @@ namespace PlannerShop.Forms
             timestampPurchaseColumn.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
             timestampPurchaseColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             timestampPurchaseColumn.DefaultCellStyle.Font = new Font("Corbel", fontSize, FontStyle.Bold);
+
+            var isDeletedPurchaseColumn = dgvDataAcquisto.Columns["ISDELETED"];
+            isDeletedPurchaseColumn.DisplayIndex = 17;
+            isDeletedPurchaseColumn.Visible = false;
+            isDeletedPurchaseColumn.HeaderText = "ISDELETED";
+            isDeletedPurchaseColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.NotSet;
+            isDeletedPurchaseColumn.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            isDeletedPurchaseColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
         }
 
         private void PurchaseEditForm_KeyPress(object sender, KeyPressEventArgs e)

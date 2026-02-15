@@ -6,7 +6,7 @@ namespace PlannerShop.Forms
     public partial class PurchaseViewForm : Form
     {
         private string idCliente;
-        
+
         public PurchaseViewForm(string idCliente)
         {
             InitializeComponent();
@@ -27,7 +27,7 @@ namespace PlannerShop.Forms
             SetPurchaseDataGridStructure();
 
             dgvDataAcquisto.DefaultCellStyle.SelectionBackColor = dgvDataAcquisto.DefaultCellStyle.BackColor;
-            
+
         }
 
         private void loadClienteData()
@@ -187,6 +187,14 @@ namespace PlannerShop.Forms
             timestampPurchaseColumn.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft;
             timestampPurchaseColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
 
+            var isDeletedPurchaseColumn = dgvDataAcquisto.Columns["ISDELETED"];
+            isDeletedPurchaseColumn.DisplayIndex = 18;
+            isDeletedPurchaseColumn.Visible = false;
+            isDeletedPurchaseColumn.HeaderText = "ISDELETED";
+            isDeletedPurchaseColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.NotSet;
+            isDeletedPurchaseColumn.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            isDeletedPurchaseColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+
         }
 
 
@@ -232,6 +240,42 @@ namespace PlannerShop.Forms
             catch
             { }
         }
-    
+
+        private void dgvDataAcquisto_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (dgvDataAcquisto.SelectedRows.Count == 0)
+            {
+                return;
+            }
+
+            int selected = dgvDataAcquisto.SelectedRows[0].Index;
+            String? selectedId = null;
+            selectedId = dgvDataAcquisto.SelectedRows[0].Cells["IDACQUISTO"].Value?.ToString();
+
+            DeleteForm deleteForm = new DeleteForm(dgvDataAcquisto.SelectedRows[0].Cells["DESCRIZIONE"].Value?.ToString());
+            deleteForm.ShowDialog();
+
+            if (deleteForm.result)
+            {
+                ModelAcquisti.deleteAcquisto(selectedId!);
+
+                try
+                {
+                    var idProdotto = dgvDataAcquisto.SelectedRows[0].Cells["IDPRODOTTO"].Value?.ToString()!;
+                    var qntAcquisto = int.Parse(dgvDataAcquisto.SelectedRows[0].Cells["QNT"].Value?.ToString()!);
+                    var qntProdotto = int.Parse(ModelProdotti.getProdottoById(idProdotto)?.Rows[0]["QNT"].ToString()!);
+
+                    dgvDataAcquisto.DataSource = ModelAcquisti.getAcquistiByIdCliente(idCliente);
+
+                    ModelProdotti.updateQuantity(
+                        idProdotto,
+                        qntAcquisto + qntProdotto);
+                }
+                catch
+                {
+                    dgvDataAcquisto.DataSource = ModelAcquisti.getAcquistiByIdCliente(idCliente);
+                }
+            }
+        }
     }
 }

@@ -3,7 +3,7 @@
     public partial class DeleteForm : Form
     {
         public bool result;
-        public DeleteForm(string text)
+        public DeleteForm(string? text)
         {
             InitializeComponent();
             lblText.Text = text;

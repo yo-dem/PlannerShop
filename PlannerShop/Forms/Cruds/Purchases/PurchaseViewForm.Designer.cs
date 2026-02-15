@@ -148,6 +148,7 @@
             dgvDataAcquisto.Size = new Size(1150, 417);
             dgvDataAcquisto.TabIndex = 7;
             dgvDataAcquisto.DataBindingComplete += dgvDataAcquisto_DataBindingComplete;
+            dgvDataAcquisto.MouseDoubleClick += dgvDataAcquisto_MouseDoubleClick;
             // 
             // txtSearch
             // 

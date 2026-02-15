@@ -18,7 +18,7 @@ namespace PlannerShop.Data
 
         public static DataTable getAcquistiByIdCliente(string idCliente)
         {
-            return DBUtility.GetDBData("SELECT * FROM TACQUISTI WHERE IDCLIENTE=@idCliente ORDER BY IDACQUISTO DESC",
+            return DBUtility.GetDBData("SELECT * FROM TACQUISTI WHERE IDCLIENTE=@idCliente AND ISDELETED='FALSE' ORDER BY IDACQUISTO DESC",
                 new Dictionary<string, object?> { { "@idCliente", idCliente } });
         }
 
@@ -58,11 +58,12 @@ namespace PlannerShop.Data
             string idServizio,
             string aliquota,
             string note,
-            string timeStamp)
+            string timeStamp,
+            string isDeleted)
         {
 
-            string sql = @"INSERT INTO TACQUISTI (MARCA,NOME,DESCRIZIONE,QNT,PREZZO_NETTO,PREZZO_IVATO,PREZZO_VENDITA,TOTALE,SCONTO,DATA,IDCLIENTE,IDPRODOTTO,IDSERVIZIO,ALIQUOTA,NOTE,TIMESTAMP)
-                           VALUES(@marca,@nome,@descr,@qnt,@pn,@pi,@pv,@pt,@sconto,@data,@idCliente,@idProd,@idServ,@aliq,@note,@ts)";
+            string sql = @"INSERT INTO TACQUISTI (MARCA,NOME,DESCRIZIONE,QNT,PREZZO_NETTO,PREZZO_IVATO,PREZZO_VENDITA,TOTALE,SCONTO,DATA,IDCLIENTE,IDPRODOTTO,IDSERVIZIO,ALIQUOTA,NOTE,TIMESTAMP,ISDELETED)
+                           VALUES(@marca,@nome,@descr,@qnt,@pn,@pi,@pv,@pt,@sconto,@data,@idCliente,@idProd,@idServ,@aliq,@note,@ts,@deleted)";
 
             object? idProdParam = string.IsNullOrWhiteSpace(idProdotto) ? DBNull.Value : int.Parse(idProdotto);
 
@@ -85,7 +86,8 @@ namespace PlannerShop.Data
                 { "@idServ", idServParam },
                 { "@aliq", aliquota },
                 { "@note", note },
-                { "@ts", timeStamp }
+                { "@ts", timeStamp },
+                { "@deleted", isDeleted }
             };
 
             DBUtility.SetDBData(sql, parameters);
@@ -97,10 +99,10 @@ namespace PlannerShop.Data
             DBUtility.SetDBData(sql, new Dictionary<string, object?> { { "@newQnt", newQnt }, { "@idProd", idProdotto }, { "@idClient", idCliente } });
         }
 
-        public static void deleteAcquisto(string? idProdotto, string? idCliente)
+        public static void deleteAcquisto(string? idAcquisto)
         {
-            string sql = @"DELETE FROM TACQUISTI WHERE IDPRODOTTO=@idProd AND IDCLIENTE=@idClient";
-            DBUtility.SetDBData(sql, new Dictionary<string, object?> { { "@idProd", idProdotto }, { "@idClient", idCliente } });
+            string sql = @"UPDATE TACQUISTI SET ISDELETED = 'TRUE' WHERE IDACQUISTO = @idAcquisto";
+            DBUtility.SetDBData(sql, new Dictionary<string, object?> { { "@idAcquisto", idAcquisto } });
         }
     }
 }
