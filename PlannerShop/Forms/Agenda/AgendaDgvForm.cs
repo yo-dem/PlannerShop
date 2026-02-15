@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using PlannerShop.Forms.Agenda.Forms.Cruds;
+using System.Globalization;
 
 namespace PlannerShop.Forms.Agenda
 {
@@ -37,6 +38,10 @@ namespace PlannerShop.Forms.Agenda
 
         private readonly Dictionary<(DateTime date, TimeSpan time), List<Appointment>> appointments = [];
 
+        private System.Windows.Forms.Timer _clickTimer;
+        private DataGridViewCellMouseEventArgs? _lastClick;
+        private bool _doubleClick;
+
 
         // ============================================================
         // COSTRUTTORE E INIZIALIZZAZIONE
@@ -65,24 +70,38 @@ namespace PlannerShop.Forms.Agenda
             AddMockAppointment(new DateTime(2026, 1, 29), new TimeSpan(8, 30, 0), new Appointment
             {
                 Id = 1,
-                Titolo = "Appuntamento Patrizia",
-                Colore = Color.MediumSlateBlue
+                Title = "Appuntamento Patrizia",
+                Color = Color.MediumSlateBlue,
+                ClientName = "Patrizia Rossi"
             });
             AddMockAppointment(new DateTime(2026, 1, 31), new TimeSpan(8, 15, 0), new Appointment
             {
                 Id = 2,
-                Titolo = "Appuntamento Lucilla",
-                Colore = Color.MediumSlateBlue
+                Title = "Appuntamento Lucilla",
+                Color = Color.MediumSlateBlue,
+                ClientName = "Lucilla Bianchi"
             });
+            AddMockAppointment(new DateTime(2026, 1, 31), new TimeSpan(8, 15, 0), new Appointment
+            {
+                Id = 3,
+                Title = "Appuntamento Marina",
+                Color = Color.DarkOrange,
+                ClientName = "Marina La Rosa"
+            });
+
         }
 
         private void HookGridEvents()
         {
             dgvData.SelectionChanged += dgvData_SelectionChanged;
             dgvData.CellPainting += dgvData_CellPainting;
-            dgvData.CellMouseClick += dgvData_CellMouseClick;
-        }
+            dgvData.CellMouseDown += dgvData_CellMouseDown;
 
+            _clickTimer = new System.Windows.Forms.Timer();
+            _clickTimer.Interval = SystemInformation.DoubleClickTime;
+            _clickTimer.Tick += ClickTimer_Tick;
+            _clickTimer.Interval = 250;
+        }
 
         // ============================================================
         // LOGICA TEMPORALE
@@ -284,7 +303,7 @@ namespace PlannerShop.Forms.Agenda
         // EVENTI DATA GRID VIEW
         // ============================================================
 
-        private void dgvData_SelectionChanged(object sender, EventArgs e)
+        private void dgvData_SelectionChanged(object? sender, EventArgs e)
         {
             if (dgvData.CurrentCell?.OwningColumn.Name == "Ora")
                 dgvData.ClearSelection();
@@ -323,7 +342,7 @@ namespace PlannerShop.Forms.Agenda
         /// <summary>
         /// Personalizza il rendering dell'header ORA
         /// </summary>
-        private void dgvData_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
+        private void dgvData_CellPainting(object? sender, DataGridViewCellPaintingEventArgs e)
         {
             if (e.RowIndex == -1) // HEADER
             {
@@ -503,7 +522,7 @@ namespace PlannerShop.Forms.Agenda
                         );
 
                         // Sfondo appuntamento
-                        using var appBrush = new SolidBrush(app.Colore);
+                        using var appBrush = new SolidBrush(app.Color);
                         e.Graphics.FillRectangle(appBrush, rect);
 
                         // Bordo
@@ -513,7 +532,7 @@ namespace PlannerShop.Forms.Agenda
                         // Titolo
                         TextRenderer.DrawText(
                             e.Graphics,
-                            app.Titolo,
+                            app.Title,
                             new Font(dgvData.Font.FontFamily, 8.5f, FontStyle.Bold),
                             rect,
                             Color.White,
@@ -568,22 +587,57 @@ namespace PlannerShop.Forms.Agenda
         // CLICK E INTERAZIONI
         // ============================================================
 
-        private void dgvData_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        private void dgvData_CellMouseDown(object? sender, DataGridViewCellMouseEventArgs e)
         {
             if (e.RowIndex < 0 || e.ColumnIndex <= 0)
                 return;
 
+            _doubleClick = e.Clicks >= 2;   // >= per sicurezza
+            _lastClick = e;
+
+            _clickTimer.Stop();
+            _clickTimer.Start();
+        }
+
+
+        private void ClickTimer_Tick(object? sender, EventArgs args)
+        {
+            _clickTimer.Stop();
+
+            if (_lastClick == null)
+                return;
+
+            // Recuperi il vero evento
+            var e = _lastClick;
+
             var cell = dgvData.Rows[e.RowIndex].Cells[e.ColumnIndex];
 
-            if (cell.Tag is not List<Appointment> apps || apps.Count == 0)
+            // ===== DOPPIO CLICK =====
+            if (_doubleClick)
+            {
+                if (cell.Tag is List<Appointment> apps && apps.Count >= 2)
+                {
+                    MessageBox.Show("Troppi appuntamenti");
+                    return;
+                }
+
+                new AppointmentInsertForm().ShowDialog();
+                return;
+            }
+
+            // ===== CLICK SINGOLO =====
+            if (cell.Tag is not List<Appointment> list || list.Count == 0)
                 return;
 
             int padding = 4;
             int spacing = 3;
             int maxVisible = 3;
 
-            int visible = Math.Min(apps.Count, maxVisible);
-            int blockHeight = (dgvData.Rows[e.RowIndex].Height - padding * 2 - spacing * (visible - 1)) / visible;
+            int visible = Math.Min(list.Count, maxVisible);
+
+            int blockHeight =
+                (dgvData.Rows[e.RowIndex].Height - padding * 2 - spacing * (visible - 1))
+                / visible;
 
             int relativeY = e.Location.Y - padding;
             if (relativeY < 0) return;
@@ -592,13 +646,10 @@ namespace PlannerShop.Forms.Agenda
 
             if (index >= 0 && index < visible)
             {
-                var app = apps[index];
+                var app = list[index];
 
                 MessageBox.Show(
-                    $"Hai cliccato l'appuntamento con ID = {app.Id}",
-                    "Click appuntamento",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Information
+                    $"Hai cliccato {app.Title} ({app.ClientName})"
                 );
             }
         }
