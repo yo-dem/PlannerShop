@@ -10,7 +10,7 @@ namespace PlannerShop.Forms.Agenda
         // Cliente
         public string ClientName { get; set; }
 
-        // Operatore / Estetista
+        // Operatore
         public string OperatorName { get; set; }
 
         // Trattamento
