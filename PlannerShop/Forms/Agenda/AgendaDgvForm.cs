@@ -79,6 +79,14 @@ namespace PlannerShop.Forms.Agenda
 
         private void SetupGrid()
         {
+            // Double buffering via reflection: elimina il flicker durante lo scroll
+            // con blocchi che sforano i bordi di cella (paint personalizzato)
+            typeof(DataGridView)
+                .GetProperty("DoubleBuffered",
+                    System.Reflection.BindingFlags.Instance |
+                    System.Reflection.BindingFlags.NonPublic)
+                ?.SetValue(dgvData, true);
+
             dgvData.EnableHeadersVisualStyles = false;
             dgvData.AllowUserToAddRows = false;
             dgvData.AllowUserToDeleteRows = false;
@@ -472,63 +480,47 @@ namespace PlannerShop.Forms.Agenda
             bool hasOperator = !string.IsNullOrWhiteSpace(app.OperatorName);
             string timeRange = $"{app.Start:HH:mm} – {app.End:HH:mm}";
 
-            var inner = new Rectangle(rect.Left + 5, rect.Top + 3, rect.Width - 10, rect.Height - 6);
+            // Il testo viene sempre confinato alla prima riga (RowH px dal top del blocco).
+            // Le righe sottostanti vengono ridisegnate dal CellPainting e sovrascrivono
+            // la parte bassa del blocco — il testo deve stare SOPRA quella zona.
+            var textRect = new Rectangle(rect.Left + 5, rect.Top + 3,
+                                         rect.Width - 10, RowH - 8);
 
-            if (inner.Height < 22)
-            {
-                // Blocco minimo: solo titolo compresso
-                TextRenderer.DrawText(g, $"{app.Start:HH:mm}  {app.Title}",
-                    new Font(dgvData.Font.FontFamily, 8f, FontStyle.Bold),
-                    inner, Color.White,
-                    TextFormatFlags.Left | TextFormatFlags.VerticalCenter | TextFormatFlags.EndEllipsis);
-                return;
-            }
+            if (textRect.Height < 14)
+                return; // spazio insufficiente anche per una riga
 
-            if (inner.Height < 48 || !hasOperator)
-            {
-                // Due righe: titolo + orari (o titolo + operatore se c'è)
-                int h1 = inner.Height / 2;
-                int h2 = inner.Height - h1;
+            // Tre zone verticali dentro textRect
+            int titleH = (int)(textRect.Height * 0.40);
+            int operH = (int)(textRect.Height * 0.32);
+            int timeH = textRect.Height - titleH - operH;
 
-                TextRenderer.DrawText(g, app.Title,
-                    new Font(dgvData.Font.FontFamily, 8.5f, FontStyle.Bold),
-                    new Rectangle(inner.Left, inner.Top, inner.Width, h1),
-                    Color.White,
-                    TextFormatFlags.Left | TextFormatFlags.Top | TextFormatFlags.EndEllipsis);
-
-                string line2 = hasOperator ? app.OperatorName : timeRange;
-                TextRenderer.DrawText(g, line2,
-                    new Font(dgvData.Font.FontFamily, 7.5f, FontStyle.Regular),
-                    new Rectangle(inner.Left, inner.Top + h1, inner.Width, h2),
-                    Color.FromArgb(220, 255, 255, 255),
-                    TextFormatFlags.Left | TextFormatFlags.Top | TextFormatFlags.EndEllipsis);
-                return;
-            }
-
-            // Tre righe: titolo / operatore (in evidenza) / orari
-            int titleH = (int)(inner.Height * 0.42);
-            int operatorH = (int)(inner.Height * 0.32);
-            int timeH = inner.Height - titleH - operatorH;
-
+            // Riga 1 — Titolo
             TextRenderer.DrawText(g, app.Title,
                 new Font(dgvData.Font.FontFamily, 8.5f, FontStyle.Bold),
-                new Rectangle(inner.Left, inner.Top, inner.Width, titleH),
+                new Rectangle(textRect.Left, textRect.Top, textRect.Width, titleH),
                 Color.White,
                 TextFormatFlags.Left | TextFormatFlags.Top | TextFormatFlags.EndEllipsis);
 
-            // Operatore: nome in maiuscolo, semi-grassetto, bianco pieno — riga più visibile
-            TextRenderer.DrawText(g, app.OperatorName,
-                new Font(dgvData.Font.FontFamily, 8f, FontStyle.Bold),
-                new Rectangle(inner.Left, inner.Top + titleH, inner.Width, operatorH),
-                Color.White,
-                TextFormatFlags.Left | TextFormatFlags.Top | TextFormatFlags.EndEllipsis);
+            if (titleH + operH < textRect.Height && hasOperator)
+            {
+                // Riga 2 — Operatore
+                TextRenderer.DrawText(g, app.OperatorName,
+                    new Font(dgvData.Font.FontFamily, 7.5f, FontStyle.Bold),
+                    new Rectangle(textRect.Left, textRect.Top + titleH, textRect.Width, operH),
+                    Color.White,
+                    TextFormatFlags.Left | TextFormatFlags.Top | TextFormatFlags.EndEllipsis);
+            }
 
-            // Orari: più piccoli e leggermente trasparenti
-            TextRenderer.DrawText(g, timeRange,
-                new Font(dgvData.Font.FontFamily, 7f, FontStyle.Regular),
-                new Rectangle(inner.Left, inner.Top + titleH + operatorH, inner.Width, timeH),
-                Color.FromArgb(200, 255, 255, 255),
-                TextFormatFlags.Left | TextFormatFlags.Top | TextFormatFlags.EndEllipsis);
+            if (timeH >= 10)
+            {
+                // Riga 3 — Orari (o riga 2 se non c'è operatore)
+                int timeTop = hasOperator ? textRect.Top + titleH + operH : textRect.Top + titleH;
+                TextRenderer.DrawText(g, timeRange,
+                    new Font(dgvData.Font.FontFamily, 7f, FontStyle.Regular),
+                    new Rectangle(textRect.Left, timeTop, textRect.Width, timeH),
+                    Color.FromArgb(210, 255, 255, 255),
+                    TextFormatFlags.Left | TextFormatFlags.Top | TextFormatFlags.EndEllipsis);
+            }
         }
 
 
