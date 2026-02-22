@@ -1,7 +1,7 @@
 ﻿
 namespace PlannerShop.Forms.Agenda
 {
-    internal class Appointment
+    public class Appointment
     {
         public int Id { get; set; }
         public string Title { get; set; } = "";
