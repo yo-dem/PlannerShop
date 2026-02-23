@@ -195,7 +195,7 @@
             // 
             lblColore.AutoSize = true;
             lblColore.Font = new Font("Segoe UI", 9F);
-            lblColore.Location = new Point(12, 24);
+            lblColore.Location = new Point(6, 24);
             lblColore.Name = "lblColore";
             lblColore.Size = new Size(52, 15);
             lblColore.TabIndex = 0;
