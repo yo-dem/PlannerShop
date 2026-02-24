@@ -60,6 +60,11 @@ namespace PlannerShop.Forms.Agenda
         private List<Appointment> _allApps = [];
         private int _scrollY = 0;
 
+        // ── Tooltip overlay (panel custom, niente flickering) ───
+        private readonly BufferedPanel _tipPanel = new() { Visible = false, BackColor = Color.FromArgb(255, 255, 225), Padding = new Padding(6) };
+        private Appointment? _tooltipApp = null;
+        private string _tooltipText = "";
+
         // ── Controlli ───────────────────────────────────────────
         private readonly BufferedPanel _header;
         private readonly BufferedPanel _timebar;
@@ -89,16 +94,22 @@ namespace PlannerShop.Forms.Agenda
             _canvas.Paint += OnCanvasPaint;
             _canvas.MouseDown += OnCanvasMouseDown;
             _canvas.MouseDoubleClick += OnCanvasDoubleClick;
+            _canvas.MouseMove += OnCanvasMouseMove;
+            _canvas.MouseLeave += OnCanvasMouseLeave;
 
             _vscroll = new VScrollBar { SmallChange = SlotH / 2, LargeChange = SlotH * 4 };
             _vscroll.Scroll += (_, e) => SetScroll(e.NewValue);
+
+            _tipPanel.Paint += OnTipPaint;
 
             Controls.Add(_canvas);
             Controls.Add(_vscroll);
             Controls.Add(_header);
             Controls.Add(_timebar);
+            Controls.Add(_tipPanel);
             _header.BringToFront();
             _timebar.BringToFront();
+            _tipPanel.BringToFront();
 
             // Propaga la rotella da tutti i controlli figli al canvas
             foreach (Control c in new Control[] { _header, _timebar, _vscroll })
@@ -233,14 +244,18 @@ namespace PlannerShop.Forms.Agenda
             var columns = ResolveColumns(dayApps);
             int maxCols = columns.Max(x => x.col) + 1;
             int colW = (DayColW - 6) / maxCols;
-            int colIdx = (canvasX - DayLeft(d) - 3) / Math.Max(1, colW);
+            const int LeftMargin = 20; // deve coincidere con il valore usato nel disegno
 
             foreach (var (app, col) in columns)
             {
-                if (col != colIdx) continue;
+                // Calcola esattamente il rettangolo disegnato per questo appuntamento
+                int xLeft = DayLeft(d) + LeftMargin + col * colW;
+                int xRight = xLeft + colW - 22;
                 int yTop = TimeToY(app.Start.TimeOfDay);
                 int yBot = TimeToY(app.End.TimeOfDay);
-                if (contentY >= yTop && contentY <= yBot)
+
+                if (canvasX >= xLeft && canvasX <= xRight &&
+                    contentY >= yTop && contentY <= yBot)
                     return app;
             }
             return null;
@@ -263,8 +278,6 @@ namespace PlannerShop.Forms.Agenda
             using var todayPen = new Pen(CTodayLine, 3);
             using var dotBrush = new SolidBrush(CTodayLine);
             using var bf = new Font("Segoe UI", 9.5f, FontStyle.Bold);
-            using var sfNorm = new Font("Segoe UI", 8f);
-            using var sfWknd = new Font("Segoe UI", 8f, FontStyle.Italic);
 
             g.DrawLine(sidePen, TimeColW - 1, 0, TimeColW - 1, HeaderH);
 
@@ -280,7 +293,7 @@ namespace PlannerShop.Forms.Agenda
                 else if (isWeekend) g.FillRectangle(new SolidBrush(CWeekendBg), x, 0, w, HeaderH);
 
                 Color tc = isWeekend ? CWeekend : CText;
-                Color dc = isWeekend ? CWeekend : CSubText;
+                Color dc = isWeekend ? CWeekend : CText;   // data sempre scura e bold
                 int half = HeaderH / 2;
 
                 TextRenderer.DrawText(g,
@@ -288,8 +301,10 @@ namespace PlannerShop.Forms.Agenda
                     new Rectangle(x + 5, 2, w - 22, half),
                     tc, TextFormatFlags.Left | TextFormatFlags.VerticalCenter);
 
+                // Data in bold
+                using var datFont = new Font("Segoe UI", 8f, FontStyle.Bold);
                 TextRenderer.DrawText(g,
-                    day.ToString("d MMM", _it), isWeekend ? sfWknd : sfNorm,
+                    day.ToString("d MMM", _it), datFont,
                     new Rectangle(x + 5, half, w - 10, half - 4),
                     dc, TextFormatFlags.Left | TextFormatFlags.VerticalCenter);
 
@@ -301,9 +316,9 @@ namespace PlannerShop.Forms.Agenda
                 }
 
                 if (isToday) g.DrawLine(todayPen, x, HeaderH - 2, x + w - 1, HeaderH - 2);
-                if (isSat) g.DrawLine(sepPen, x, 0, x, HeaderH);
-                else if (d < DayCount - 1)
-                    g.DrawLine(colPen, x + w - 1, 0, x + w - 1, HeaderH);
+                bool isSun = day.DayOfWeek == DayOfWeek.Sunday;
+                if (isSat || isSun) g.DrawLine(sepPen, x, 0, x, HeaderH);   // sinistra sab e dom
+                else g.DrawLine(colPen, x + w - 1, 0, x + w - 1, HeaderH);
             }
 
             using var hbPen = new Pen(CGridHour);
@@ -320,23 +335,43 @@ namespace PlannerShop.Forms.Agenda
             g.Clear(CSideBg);
 
             using var borderPen = new Pen(CGridHour);
-            using var font = new Font("Segoe UI", 8f, FontStyle.Bold);
-            using var linePen = new Pen(CGridHour);
+            using var fontHour = new Font("Segoe UI", 8f, FontStyle.Bold);
+            using var fontSub = new Font("Segoe UI", 6.5f, FontStyle.Bold);
+            using var linePenH = new Pen(CGridHour);
+            using var linePenS = new Pen(CGridFaint);
 
             g.DrawLine(borderPen, TimeColW - 1, 0, TimeColW - 1, _timebar.Height);
 
-            for (int s = 0; s < SlotCount; s += 4)
+            for (int s = 0; s < SlotCount; s++)
             {
                 int yPanel = s * SlotH - _scrollY;
                 if (yPanel + SlotH < 0 || yPanel > _timebar.Height) continue;
 
                 TimeSpan t = FirstSlot.Add(TimeSpan.FromMinutes(s * 15));
-                TextRenderer.DrawText(g, $"{t.Hours:D2}:{t.Minutes:D2}", font,
-                    new Rectangle(0, yPanel, TimeColW - 6, SlotH),
-                    CText,
-                    TextFormatFlags.Right | TextFormatFlags.VerticalCenter | TextFormatFlags.NoPadding);
+                bool isHour = t.Minutes == 0;
 
-                g.DrawLine(linePen, 4, yPanel, TimeColW - 8, yPanel);
+                if (isHour)
+                {
+                    // Ora intera: testo allineato a destra, font bold
+                    TextRenderer.DrawText(g, $"{t.Hours:D2}:{t.Minutes:D2}", fontHour,
+                        new Rectangle(0, yPanel, TimeColW - 6, SlotH),
+                        CText,
+                        TextFormatFlags.Right | TextFormatFlags.VerticalCenter | TextFormatFlags.NoPadding);
+
+                    // Lineetta più lunga per le ore
+                    g.DrawLine(linePenH, 4, yPanel, TimeColW - 8, yPanel);
+                }
+                else
+                {
+                    // Quarto d'ora: testo più piccolo, spostato a sinistra (right margin maggiore)
+                    TextRenderer.DrawText(g, $":{t.Minutes:D2}", fontSub,
+                        new Rectangle(0, yPanel, TimeColW - 14, SlotH),
+                        CSubText,
+                        TextFormatFlags.Right | TextFormatFlags.VerticalCenter | TextFormatFlags.NoPadding);
+
+                    // Lineetta corta
+                    g.DrawLine(linePenS, TimeColW - 20, yPanel, TimeColW - 8, yPanel);
+                }
             }
         }
 
@@ -384,7 +419,11 @@ namespace PlannerShop.Forms.Agenda
             for (int d = 0; d < DayCount; d++)
             {
                 DateTime day = _weekStart.AddDays(d);
-                if (day.DayOfWeek == DayOfWeek.Saturday)
+                bool isSat = day.DayOfWeek == DayOfWeek.Saturday;
+                bool isSun = day.DayOfWeek == DayOfWeek.Sunday;
+
+                // Linea nera spessa a sinistra di sabato e domenica
+                if (isSat || isSun)
                     g.DrawLine(sep, DayLeft(d), 0, DayLeft(d), TotalH);
                 else
                     g.DrawLine(vp, DayLeft(d) + DayColW - 1, 0, DayLeft(d) + DayColW - 1, TotalH);
@@ -421,9 +460,10 @@ namespace PlannerShop.Forms.Agenda
                     int yBot = TimeToY(app.End.TimeOfDay) - 2;
                     int hPx = Math.Max(SlotH - 4, yBot - yTop);
                     int colW = (DayColW - 6) / maxCols;
-                    int xPx = DayLeft(d) + 3 + col * colW;
+                    // Margine sinistro di 20px: zona bianca cliccabile per nuovi appuntamenti
+                    int xPx = DayLeft(d) + 20 + col * colW;
 
-                    DrawAppointment(g, app, new Rectangle(xPx, yTop, colW - 2, hPx), _scrollY);
+                    DrawAppointment(g, app, new Rectangle(xPx, yTop, colW - 22, hPx), _scrollY);
                 }
             }
             g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.Default;
@@ -433,11 +473,9 @@ namespace PlannerShop.Forms.Agenda
 
         private void DrawAppointment(Graphics g, Appointment app, Rectangle r, int scrollY)
         {
-            // Sfondo
             using var bg = new SolidBrush(app.Color);
             g.FillRectangle(bg, r);
 
-            // Bordo sinistro spesso
             Color dark = Color.FromArgb(
                 Math.Max(0, app.Color.R - 55),
                 Math.Max(0, app.Color.G - 55),
@@ -446,77 +484,169 @@ namespace PlannerShop.Forms.Agenda
             using var border = new Pen(dark);
             g.DrawRectangle(border, r);
 
-            var inner = new Rectangle(r.Left + 8, r.Top + 4, r.Width - 12, r.Height - 8);
-            if (inner.Height < 10) return;
+            // Area testo — sempre in testa al blocco, non centrata verticalmente
+            // (così su blocchi alti il testo sta in cima come in Google Calendar)
+            const int PadTop = 4;
+            const int Row1H = 18; // altezza fissa riga titolo
+            const int Row2H = 15; // altezza fissa riga operatore+orario
 
-            // TextRenderer.DrawText usa GDI e ignora TranslateTransform di GDI+.
-            // Compensiamo sottraendo scrollY dalle coordinate Y del rettangolo testo,
-            // così il testo appare esattamente sopra il rettangolo colorato.
-            var ti = new Rectangle(inner.Left, inner.Top - scrollY, inner.Width, inner.Height);
+            var ti = new Rectangle(r.Left + 8, r.Top + PadTop - scrollY, r.Width - 12, r.Height - PadTop);
+            if (ti.Height < 8) return;
 
             bool hasOp = !string.IsNullOrWhiteSpace(app.OperatorName);
-            string timeStr = $"{app.Start:HH:mm} – {app.End:HH:mm}";
+            string timeStr = $"{app.Start:HH:mm}–{app.End:HH:mm}";
+            string row2 = hasOp ? $"{app.OperatorName}  {timeStr}" : timeStr;
 
-            if (ti.Height < 28)
+            using var titleFont = new Font("Segoe UI", 8.5f, FontStyle.Bold);
+            using var row2Font = new Font("Segoe UI", 7f, FontStyle.Bold);
+
+            // Blocco 15 min (~46px disponibili): riga singola
+            if (ti.Height < Row1H + Row2H)
             {
-                using var f = new Font("Segoe UI", 7.5f, FontStyle.Bold);
-                TextRenderer.DrawText(g, $"{app.Start:HH:mm}  {app.Title}", f,
+                TextRenderer.DrawText(g, $"{app.Title}  {timeStr}", titleFont,
                     new Rectangle(ti.Left, ti.Top, ti.Width, ti.Height),
-                    Color.White, TextFormatFlags.Left | TextFormatFlags.VerticalCenter | TextFormatFlags.EndEllipsis);
+                    Color.White,
+                    TextFormatFlags.Left | TextFormatFlags.VerticalCenter | TextFormatFlags.EndEllipsis);
                 return;
             }
 
-            int titleH = Math.Min(22, (int)(ti.Height * 0.42));
-            int operH = hasOp ? Math.Min(18, (int)(ti.Height * 0.30)) : 0;
-            int timeH = Math.Min(16, ti.Height - titleH - operH);
+            // Riga 1 — Titolo, ancorata in cima
+            TextRenderer.DrawText(g, app.Title, titleFont,
+                new Rectangle(ti.Left, ti.Top, ti.Width, Row1H),
+                Color.White,
+                TextFormatFlags.Left | TextFormatFlags.Top | TextFormatFlags.EndEllipsis);
 
-            using var tf = new Font("Segoe UI", 8.5f, FontStyle.Bold);
-            TextRenderer.DrawText(g, app.Title, tf,
-                new Rectangle(ti.Left, ti.Top, ti.Width, titleH),
-                Color.White, TextFormatFlags.Left | TextFormatFlags.Top | TextFormatFlags.EndEllipsis);
-
-            if (hasOp && operH > 0)
-            {
-                using var of2 = new Font("Segoe UI", 7.5f, FontStyle.Bold);
-                TextRenderer.DrawText(g, app.OperatorName, of2,
-                    new Rectangle(ti.Left, ti.Top + titleH, ti.Width, operH),
-                    Color.White, TextFormatFlags.Left | TextFormatFlags.Top | TextFormatFlags.EndEllipsis);
-            }
-
-            if (timeH >= 10)
-            {
-                using var tmf = new Font("Segoe UI", 7f);
-                TextRenderer.DrawText(g, timeStr, tmf,
-                    new Rectangle(ti.Left, ti.Top + titleH + operH, ti.Width, timeH),
-                    Color.FromArgb(210, 255, 255, 255),
-                    TextFormatFlags.Left | TextFormatFlags.Top | TextFormatFlags.EndEllipsis);
-            }
+            // Riga 2 — Operatore + orario, subito sotto
+            TextRenderer.DrawText(g, row2, row2Font,
+                new Rectangle(ti.Left, ti.Top + Row1H, ti.Width, Row2H),
+                Color.FromArgb(220, 255, 255, 255),
+                TextFormatFlags.Left | TextFormatFlags.Top | TextFormatFlags.EndEllipsis);
         }
 
 
         // ============================================================
-        // MOUSE sul canvas
+        // MOUSE sul canvas — solo doppio click
         // ============================================================
-        private void OnCanvasMouseDown(object? sender, MouseEventArgs e)
-        {
-            if (e.Clicks == 1)
-            {
-                var app = HitTest(e.X, e.Y);
-                if (app != null) RequestEditAppointment?.Invoke(app);
-            }
-        }
+        private void OnCanvasMouseDown(object? sender, MouseEventArgs e) { }  // non usato
 
         private void OnCanvasDoubleClick(object? sender, MouseEventArgs e)
         {
-            var app = HitTest(e.X, e.Y);
-            if (app != null) { RequestEditAppointment?.Invoke(app); return; }
-
             if (e.X < TimeColW) return;
             int d = (e.X - TimeColW) / Math.Max(1, DayColW);
             if (d < 0 || d >= DayCount) return;
+
+            // Se il doppio click cade su un appuntamento → modifica
+            var app = HitTest(e.X, e.Y);
+            if (app != null)
+            {
+                RequestEditAppointment?.Invoke(app);
+                return;
+            }
+
+            // Altrimenti → nuovo appuntamento
             RequestNewAppointment?.Invoke(_weekStart.AddDays(d), YToSlot(e.Y + _scrollY));
         }
 
+
+        // ============================================================
+        // TOOLTIP CUSTOM (overlay panel, niente flickering)
+        // ============================================================
+        private void OnTipPaint(object? sender, PaintEventArgs e)
+        {
+            var g = e.Graphics;
+            g.Clear(_tipPanel.BackColor);
+
+            // Bordo
+            using var pen = new Pen(Color.FromArgb(180, 180, 120));
+            g.DrawRectangle(pen, 0, 0, _tipPanel.Width - 1, _tipPanel.Height - 1);
+
+            // Testo
+            using var font = new Font("Segoe UI", 8.5f);
+            TextRenderer.DrawText(g, _tooltipText, font,
+                new Rectangle(6, 5, _tipPanel.Width - 12, _tipPanel.Height - 10),
+                Color.FromArgb(30, 30, 30),
+                TextFormatFlags.Left | TextFormatFlags.Top | TextFormatFlags.WordBreak);
+        }
+
+        private void ShowTip(string text, Point canvasPos)
+        {
+            bool textChanged = text != _tooltipText;
+            _tooltipText = text;
+
+            if (textChanged)
+            {
+                // Calcola dimensione necessaria
+                using var font = new Font("Segoe UI", 8.5f);
+                var size = TextRenderer.MeasureText(text, font,
+                    new Size(260, 400),
+                    TextFormatFlags.Left | TextFormatFlags.Top | TextFormatFlags.WordBreak);
+                _tipPanel.Size = new Size(size.Width + 16, size.Height + 14);
+            }
+
+            // Posiziona rispetto al canvas (coordinate del parent = questo UserControl)
+            int px = _canvas.Left + canvasPos.X + 18;
+            int py = _canvas.Top + canvasPos.Y + 14;
+
+            // Evita uscita dai bordi
+            if (px + _tipPanel.Width > Width) px = _canvas.Left + canvasPos.X - _tipPanel.Width - 4;
+            if (py + _tipPanel.Height > Height) py = _canvas.Top + canvasPos.Y - _tipPanel.Height - 4;
+
+            _tipPanel.Location = new Point(px, py);
+
+            if (!_tipPanel.Visible)
+            {
+                _tipPanel.Visible = true;
+                _tipPanel.BringToFront();
+            }
+
+            if (textChanged) _tipPanel.Invalidate();
+        }
+
+        private void HideTip()
+        {
+            if (_tipPanel.Visible)
+                _tipPanel.Visible = false;
+        }
+
+        private void OnCanvasMouseMove(object? sender, MouseEventArgs e)
+        {
+            var app = HitTest(e.X, e.Y);
+
+            if (app == null)
+            {
+                if (_tooltipApp != null) { _tooltipApp = null; HideTip(); }
+                return;
+            }
+
+            string text;
+            if (app != _tooltipApp)
+            {
+                _tooltipApp = app;
+                string operatore = string.IsNullOrWhiteSpace(app.OperatorName) ? "–" : app.OperatorName;
+                string servizio = string.IsNullOrWhiteSpace(app.ServiceName) ? "–" : app.ServiceName;
+                string note = string.IsNullOrWhiteSpace(app.Notes) ? "" : $"\n    {app.Notes}";
+                text =
+                    $"{app.Title}\n" +
+                    $"    {app.Start:HH:mm} – {app.End:HH:mm}  ({app.DurataMinuti} min)\n" +
+                    $"    {app.ClientName}\n" +
+                    $"OP: {operatore}\n" +
+                    $"    {servizio}\n" +
+                    $"    {app.Status}" +
+                    note;
+            }
+            else
+            {
+                text = _tooltipText;
+            }
+
+            ShowTip(text, new Point(e.X, e.Y));
+        }
+
+        private void OnCanvasMouseLeave(object? sender, EventArgs e)
+        {
+            _tooltipApp = null;
+            HideTip();
+        }
 
         // ============================================================
         // LAYOUT HELPERS
