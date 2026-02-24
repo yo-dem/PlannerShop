@@ -60,7 +60,13 @@ namespace PlannerShop.Forms.Agenda
         private List<Appointment> _allApps = [];
         private int _scrollY = 0;
 
-        // ── Tooltip overlay (panel custom, niente flickering) ───
+        // ── Drag & Drop ─────────────────────────────────────────
+        private Appointment? _dragApp = null;   // app in corso di drag
+        private Point _dragStartPt;             // punto mousedown sul canvas
+        private int _dragOffsetY;             // offset Y dentro il blocco al momento del click
+        private bool _isDragging = false;   // soglia superata
+        private int _dragCurrentY = 0;       // Y corrente del ghost (content coords)
+        private int _dragCurrentD = 0;       // colonna giorno del ghost
         private readonly BufferedPanel _tipPanel = new() { Visible = false, BackColor = Color.FromArgb(255, 255, 225), Padding = new Padding(6) };
         private Appointment? _tooltipApp = null;
         private string _tooltipText = "";
@@ -96,6 +102,7 @@ namespace PlannerShop.Forms.Agenda
             _canvas.MouseDoubleClick += OnCanvasDoubleClick;
             _canvas.MouseMove += OnCanvasMouseMove;
             _canvas.MouseLeave += OnCanvasMouseLeave;
+            _canvas.MouseUp += OnCanvasMouseUp;
 
             _vscroll = new VScrollBar { SmallChange = SlotH / 2, LargeChange = SlotH * 4 };
             _vscroll.Scroll += (_, e) => SetScroll(e.NewValue);
@@ -317,7 +324,8 @@ namespace PlannerShop.Forms.Agenda
 
                 if (isToday) g.DrawLine(todayPen, x, HeaderH - 2, x + w - 1, HeaderH - 2);
                 bool isSun = day.DayOfWeek == DayOfWeek.Sunday;
-                if (isSat || isSun) g.DrawLine(sepPen, x, 0, x, HeaderH);   // sinistra sab e dom
+                if (isSat) g.DrawLine(sepPen, x, 0, x, HeaderH);        // nero ven→sab
+                else if (isSun) g.DrawLine(colPen, x, 0, x, HeaderH);        // grigio sab→dom
                 else g.DrawLine(colPen, x + w - 1, 0, x + w - 1, HeaderH);
             }
 
@@ -422,9 +430,15 @@ namespace PlannerShop.Forms.Agenda
                 bool isSat = day.DayOfWeek == DayOfWeek.Saturday;
                 bool isSun = day.DayOfWeek == DayOfWeek.Sunday;
 
-                // Linea nera spessa a sinistra di sabato e domenica
-                if (isSat || isSun)
-                    g.DrawLine(sep, DayLeft(d), 0, DayLeft(d), TotalH);
+                // Sab/Dom: linea grigia normale a sinistra (uguale agli altri giorni)
+                // Solo il confine feriali→sab mantiene il pen scuro (sep) già disegnato
+                // su DayLeft(sabato) nel loop precedente.
+                // Qui usiamo vp per tutti: la separazione feriali/weekend è data
+                // dalla linea a sinistra del sabato (primo weekend).
+                if (isSat)
+                    g.DrawLine(sep, DayLeft(d), 0, DayLeft(d), TotalH);        // confine ven→sab: nero
+                else if (isSun)
+                    g.DrawLine(vp, DayLeft(d), 0, DayLeft(d), TotalH);         // confine sab→dom: grigio
                 else
                     g.DrawLine(vp, DayLeft(d) + DayColW - 1, 0, DayLeft(d) + DayColW - 1, TotalH);
             }
@@ -467,6 +481,36 @@ namespace PlannerShop.Forms.Agenda
                 }
             }
             g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.Default;
+
+            // ── Ghost drag ────────────────────────────────────────
+            if (_isDragging && _dragApp != null)
+            {
+                int dur = (int)(_dragApp.End - _dragApp.Start).TotalMinutes;
+                int ghostH = Math.Max(SlotH - 4, dur / 15 * SlotH - 4);
+                int ghostX = DayLeft(_dragCurrentD) + 20;
+                int ghostW = DayColW - 30;
+
+                // Blocco ghost semitrasparente
+                using var ghostBg = new SolidBrush(Color.FromArgb(160, _dragApp.Color));
+                g.FillRectangle(ghostBg, ghostX, _dragCurrentY + 2, ghostW, ghostH);
+                using var ghostBorder = new Pen(Color.FromArgb(200, _dragApp.Color), 2);
+                g.DrawRectangle(ghostBorder, ghostX, _dragCurrentY + 2, ghostW, ghostH);
+
+                // Ora snappata
+                TimeSpan snapped = FirstSlot.Add(TimeSpan.FromMinutes(_dragCurrentY / SlotH * 15));
+                using var ghostFont = new Font("Segoe UI", 8f, FontStyle.Bold);
+                TextRenderer.DrawText(g,
+                    $"{_weekStart.AddDays(_dragCurrentD):ddd}  {snapped.Hours:D2}:{snapped.Minutes:D2}",
+                    ghostFont,
+                    new Rectangle(ghostX + 6, _dragCurrentY + 2 - _scrollY, ghostW - 8, 20),
+                    Color.White,
+                    TextFormatFlags.Left | TextFormatFlags.Top | TextFormatFlags.EndEllipsis);
+
+                // Linea orizzontale di destinazione
+                using var snapLine = new Pen(Color.FromArgb(200, _dragApp.Color), 2);
+                g.DrawLine(snapLine, DayLeft(_dragCurrentD), _dragCurrentY,
+                    DayLeft(_dragCurrentD) + DayColW, _dragCurrentY);
+            }
 
             g.ResetTransform();
         }
@@ -527,7 +571,17 @@ namespace PlannerShop.Forms.Agenda
         // ============================================================
         // MOUSE sul canvas — solo doppio click
         // ============================================================
-        private void OnCanvasMouseDown(object? sender, MouseEventArgs e) { }  // non usato
+        private void OnCanvasMouseDown(object? sender, MouseEventArgs e)
+        {
+            if (e.Button != MouseButtons.Left) return;
+            var app = HitTest(e.X, e.Y);
+            if (app == null) return;
+
+            _dragApp = app;
+            _dragStartPt = new Point(e.X, e.Y);
+            _dragOffsetY = (e.Y + _scrollY) - TimeToY(app.Start.TimeOfDay);
+            _isDragging = false;
+        }
 
         private void OnCanvasDoubleClick(object? sender, MouseEventArgs e)
         {
@@ -610,6 +664,35 @@ namespace PlannerShop.Forms.Agenda
 
         private void OnCanvasMouseMove(object? sender, MouseEventArgs e)
         {
+            // ── Drag in corso ────────────────────────────────────
+            if (_dragApp != null && e.Button == MouseButtons.Left)
+            {
+                int dx = Math.Abs(e.X - _dragStartPt.X);
+                int dy = Math.Abs(e.Y - _dragStartPt.Y);
+
+                if (!_isDragging && (dx > 5 || dy > 5))
+                {
+                    _isDragging = true;
+                    _canvas.Cursor = Cursors.SizeAll;
+                    HideTip();
+                }
+
+                if (_isDragging)
+                {
+                    // Calcola la nuova posizione arrotondata al quarto d'ora
+                    int contentY = e.Y + _scrollY - _dragOffsetY;
+                    int slot = Math.Clamp(contentY / SlotH, 0, SlotCount - 1);
+                    _dragCurrentY = slot * SlotH;
+
+                    int d = (e.X - TimeColW) / Math.Max(1, DayColW);
+                    _dragCurrentD = Math.Clamp(d, 0, DayCount - 1);
+
+                    _canvas.Invalidate();
+                }
+                return;
+            }
+
+            // ── Tooltip normale ──────────────────────────────────
             var app = HitTest(e.X, e.Y);
 
             if (app == null)
@@ -646,6 +729,76 @@ namespace PlannerShop.Forms.Agenda
         {
             _tooltipApp = null;
             HideTip();
+        }
+
+        private void OnCanvasMouseUp(object? sender, MouseEventArgs e)
+        {
+            if (_dragApp == null) return;
+
+            var app = _dragApp;
+            bool wasDrag = _isDragging;
+
+            // Reset stato drag
+            _dragApp = null;
+            _isDragging = false;
+            _canvas.Cursor = Cursors.Default;
+            _canvas.Invalidate();
+
+            if (!wasDrag) return;
+
+            // Calcola nuovi orari
+            TimeSpan newStart = FirstSlot.Add(TimeSpan.FromMinutes(_dragCurrentY / SlotH * 15));
+            TimeSpan dur = app.End - app.Start;
+            TimeSpan newEnd = newStart + dur;
+            DateTime newDay = _weekStart.AddDays(_dragCurrentD);
+
+            DateTime newStartDt = newDay.Date + newStart;
+            DateTime newEndDt = newDay.Date + newEnd;
+
+            // Nessun cambiamento?
+            if (newStartDt == app.Start) return;
+
+            string msg = $"Sposta \"{app.Title}\"\n" +
+                         $"da  {app.Start:ddd dd/MM HH:mm}\n" +
+                         $"a   {newStartDt:ddd dd/MM HH:mm}?";
+
+            if (MessageBox.Show(msg, "Conferma spostamento",
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
+                return;
+
+            try
+            {
+                // Aggiorna nel DB tramite ModelAppuntamenti
+                var updated = new Appointment
+                {
+                    Id = app.Id,
+                    Title = app.Title,
+                    ClientName = app.ClientName,
+                    OperatorName = app.OperatorName,
+                    ServiceId = app.ServiceId,
+                    ServiceName = app.ServiceName,
+                    Start = newStartDt,
+                    End = newEndDt,
+                    Status = app.Status,
+                    Notes = app.Notes,
+                    Color = app.Color,
+                    Timestamp = app.Timestamp   // preserva il timestamp originale
+                };
+
+                ModelAppuntamenti.EditAppuntamento(updated.Id, updated);
+
+                // Aggiorna la lista locale senza ricaricare dal DB
+                int idx = _allApps.FindIndex(a => a.Id == app.Id);
+                if (idx >= 0) _allApps[idx] = updated;
+
+                _header.Invalidate();
+                _canvas.Invalidate();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Errore nel salvataggio:\n{ex.Message}",
+                    "Errore", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         // ============================================================
