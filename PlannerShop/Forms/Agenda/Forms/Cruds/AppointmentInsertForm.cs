@@ -6,6 +6,7 @@ namespace PlannerShop.Forms.Agenda.Forms.Cruds
     {
         public Appointment? Result { get; private set; }
         private bool _titleManuallyEdited = false;
+        private ClienteAutocomplete? _autocomplete;
 
         // Palette fissa condivisa con EditForm
         internal static readonly Color[] Palette =
@@ -54,6 +55,7 @@ namespace PlannerShop.Forms.Agenda.Forms.Cruds
             btnColor4.Click += (s, e) => SelectColor(Palette[3]);
             btnColor5.Click += (s, e) => SelectColor(Palette[4]);
             btnColor6.Click += (s, e) => SelectColor(Palette[5]);
+            _autocomplete = new ClienteAutocomplete(txtCliente, this);
         }
 
         internal void SelectColor(Color c)
@@ -67,9 +69,9 @@ namespace PlannerShop.Forms.Agenda.Forms.Cruds
             for (int i = 0; i < buttons.Length; i++)
             {
                 buttons[i].FlatStyle = FlatStyle.Flat;
-                bool isSelected = i < Palette.Length && selected.ToArgb() == Palette[i].ToArgb();
-                buttons[i].FlatAppearance.BorderSize = isSelected ? 3 : 1;
-                buttons[i].FlatAppearance.BorderColor = isSelected ? Color.White : Color.FromArgb(80, 80, 80);
+                buttons[i].FlatAppearance.BorderSize = selected == Palette[i] ? 3 : 1;
+                buttons[i].FlatAppearance.BorderColor = selected == Palette[i]
+                    ? Color.White : Color.FromArgb(80, 80, 80);
             }
         }
 
@@ -129,6 +131,12 @@ namespace PlannerShop.Forms.Agenda.Forms.Cruds
             ModelAppuntamenti.AddAppuntamento(Result);
             DialogResult = DialogResult.OK;
             Close();
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing) _autocomplete?.Dispose();
+            base.Dispose(disposing);
         }
 
         private void btnAnnulla_Click(object sender, EventArgs e) { DialogResult = DialogResult.Cancel; Close(); }

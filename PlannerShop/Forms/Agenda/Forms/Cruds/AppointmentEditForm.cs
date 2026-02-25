@@ -9,6 +9,7 @@ namespace PlannerShop.Forms.Agenda.Forms.Cruds
 
         private readonly int _appointmentId;
         private bool _titleManuallyEdited = false;
+        private ClienteAutocomplete? _autocomplete;
 
         public AppointmentEditForm(Appointment app)
         {
@@ -39,6 +40,7 @@ namespace PlannerShop.Forms.Agenda.Forms.Cruds
             btnColor4.Click += (s, e) => SelectColor(AppointmentInsertForm.Palette[3]);
             btnColor5.Click += (s, e) => SelectColor(AppointmentInsertForm.Palette[4]);
             btnColor6.Click += (s, e) => SelectColor(AppointmentInsertForm.Palette[5]);
+            _autocomplete = new ClienteAutocomplete(txtCliente, this);
         }
 
         private void SelectColor(Color c)
@@ -136,6 +138,12 @@ namespace PlannerShop.Forms.Agenda.Forms.Cruds
             IsDeleted = true;
             DialogResult = DialogResult.OK;
             Close();
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing) _autocomplete?.Dispose();
+            base.Dispose(disposing);
         }
 
         private void btnAnnulla_Click(object sender, EventArgs e) { DialogResult = DialogResult.Cancel; Close(); }

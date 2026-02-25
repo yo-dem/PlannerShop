@@ -76,6 +76,7 @@ namespace PlannerShop.Forms.Agenda
         private readonly BufferedPanel _tipPanel = new() { Visible = false, BackColor = Color.FromArgb(255, 255, 225), Padding = new Padding(6) };
         private Appointment? _tooltipApp = null;
         private string _tooltipText = "";
+        private Appointment? _hoverApp = null;   // app sotto il cursore (per mostrare la X)
 
         // ── Controlli ───────────────────────────────────────────
         private readonly BufferedPanel _header;
@@ -483,7 +484,7 @@ namespace PlannerShop.Forms.Agenda
                     int colW = (ColW(d) - 6) / maxCols;
                     int xPx = DayLeft(d) + 20 + col * colW;
 
-                    DrawAppointment(g, app, new Rectangle(xPx, yTop, colW - 22, hPx), _scrollY, maxCols > 1);
+                    DrawAppointment(g, app, new Rectangle(xPx, yTop, colW - 22, hPx), _scrollY, maxCols > 1, app == _hoverApp);
                 }
             }
             g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.Default;
@@ -559,7 +560,7 @@ namespace PlannerShop.Forms.Agenda
             return new Rectangle(xRight - S - 2, yTop + 2, S, S);
         }
 
-        private void DrawAppointment(Graphics g, Appointment app, Rectangle r, int scrollY, bool compact = false)
+        private void DrawAppointment(Graphics g, Appointment app, Rectangle r, int scrollY, bool compact = false, bool showDelete = false)
         {
             using var bg = new SolidBrush(app.Color);
             g.FillRectangle(bg, r);
@@ -572,21 +573,25 @@ namespace PlannerShop.Forms.Agenda
             using var border = new Pen(dark);
             g.DrawRectangle(border, r);
 
-            // ── X di eliminazione (in alto a destra) ─────────────
+            // ── X di eliminazione (solo al hover) ────────────────
             const int XS = 16;
-            var xRect = new Rectangle(r.Right - XS - 2, r.Top + 2 - scrollY, XS, XS);
-            using var xBg = new SolidBrush(Color.FromArgb(70, 0, 0, 0));
-            using var xPen = new Pen(Color.FromArgb(200, 255, 255, 255), 1.5f);
-            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
-            g.FillRectangle(xBg, xRect);
-            int m = 4;
-            g.DrawLine(xPen, xRect.Left + m, xRect.Top + m, xRect.Right - m, xRect.Bottom - m);
-            g.DrawLine(xPen, xRect.Right - m, xRect.Top + m, xRect.Left + m, xRect.Bottom - m);
-            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.Default;
+            if (showDelete)
+            {
+                var xRect = new Rectangle(r.Right - XS - 2, r.Top + 2 - scrollY, XS, XS);
+                using var xBg = new SolidBrush(Color.FromArgb(70, 0, 0, 0));
+                using var xPen = new Pen(Color.FromArgb(200, 255, 255, 255), 1.5f);
+                g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+                g.FillRectangle(xBg, xRect);
+                int m = 4;
+                g.DrawLine(xPen, xRect.Left + m, xRect.Top + m, xRect.Right - m, xRect.Bottom - m);
+                g.DrawLine(xPen, xRect.Right - m, xRect.Top + m, xRect.Left + m, xRect.Bottom - m);
+                g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.Default;
+            }
 
             const int PadTop = 4;
-            // Testo: larghezza ridotta per non sovrapporsi alla X
-            var ti = new Rectangle(r.Left + 8, r.Top + PadTop - scrollY, r.Width - XS - 14, r.Height - PadTop);
+            // Riduce larghezza testo solo se la X è visibile
+            int textRightPad = showDelete ? XS + 14 : 12;
+            var ti = new Rectangle(r.Left + 8, r.Top + PadTop - scrollY, r.Width - textRightPad, r.Height - PadTop);
             if (ti.Height < 8) return;
 
             string timeStr = $"{app.Start:HH:mm}–{app.End:HH:mm}";
@@ -827,6 +832,13 @@ namespace PlannerShop.Forms.Agenda
             if (e.Button == MouseButtons.None)
             {
                 var app = HitTest(e.X, e.Y);
+
+                if (app != _hoverApp)
+                {
+                    _hoverApp = app;
+                    _canvas.Invalidate();   // ridisegna per mostrare/nascondere la X
+                }
+
                 if (app != null)
                 {
                     int yBot = TimeToY(app.End.TimeOfDay) - 2 - _scrollY;
@@ -877,6 +889,7 @@ namespace PlannerShop.Forms.Agenda
         {
             _tooltipApp = null;
             HideTip();
+            if (_hoverApp != null) { _hoverApp = null; _canvas.Invalidate(); }
         }
 
         private void OnCanvasMouseUp(object? sender, MouseEventArgs e)
