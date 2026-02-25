@@ -219,8 +219,29 @@ namespace PlannerShop.Forms.Agenda
             Invalidate(true);
         }
 
-        private int DayColW => Math.Max(1, (_canvas.Width - TimeColW) / DayCount);
-        private int DayLeft(int d) => TimeColW + d * DayColW;
+        // Larghezze colonne: feriali più larghi, weekend più stretti
+        // Peso feriale = 1.0, peso weekend = 0.45  →  5 + 2*0.45 = 5.9 unità
+        private const double WeekdayWeight = 1.0;
+        private const double WeekendWeight = 0.40;
+        private const double TotalWeights = 5 * WeekdayWeight + 2 * WeekendWeight;
+
+        private int ColW(int d)
+        {
+            DateTime day = _weekStart.AddDays(d);
+            bool isWeekend = day.DayOfWeek is DayOfWeek.Saturday or DayOfWeek.Sunday;
+            int available = Math.Max(1, _canvas.Width - TimeColW);
+            double unit = available / TotalWeights;
+            return Math.Max(1, (int)(isWeekend ? unit * WeekendWeight : unit * WeekdayWeight));
+        }
+
+        private int DayLeft(int d)
+        {
+            int x = TimeColW;
+            for (int i = 0; i < d; i++) x += ColW(i);
+            return x;
+        }
+
+        private int DayColW => ColW(0); // larghezza di un giorno feriale (per compatibilità HitTest griglia)
         private int TotalH => SlotCount * SlotH;
 
         private int TimeToY(TimeSpan t) =>
@@ -241,8 +262,14 @@ namespace PlannerShop.Forms.Agenda
             int contentY = canvasY + _scrollY;
             if (canvasX < TimeColW) return null;
 
-            int d = (canvasX - TimeColW) / DayColW;
-            if (d < 0 || d >= DayCount) return null;
+            // Trova la colonna giorno in base alle larghezze variabili
+            int d = -1;
+            for (int i = 0; i < DayCount; i++)
+            {
+                int x0 = DayLeft(i), x1 = x0 + ColW(i);
+                if (canvasX >= x0 && canvasX < x1) { d = i; break; }
+            }
+            if (d < 0) return null;
 
             DateTime day = _weekStart.AddDays(d);
             var dayApps = _allApps.Where(a => a.Start.Date == day.Date).OrderBy(a => a.Start).ToList();
@@ -250,12 +277,11 @@ namespace PlannerShop.Forms.Agenda
 
             var columns = ResolveColumns(dayApps);
             int maxCols = columns.Max(x => x.col) + 1;
-            int colW = (DayColW - 6) / maxCols;
-            const int LeftMargin = 20; // deve coincidere con il valore usato nel disegno
+            int colW = (ColW(d) - 6) / maxCols;
+            const int LeftMargin = 20;
 
             foreach (var (app, col) in columns)
             {
-                // Calcola esattamente il rettangolo disegnato per questo appuntamento
                 int xLeft = DayLeft(d) + LeftMargin + col * colW;
                 int xRight = xLeft + colW - 22;
                 int yTop = TimeToY(app.Start.TimeOfDay);
@@ -284,7 +310,8 @@ namespace PlannerShop.Forms.Agenda
             using var colPen = new Pen(Color.FromArgb(200, 200, 200));
             using var todayPen = new Pen(CTodayLine, 3);
             using var dotBrush = new SolidBrush(CTodayLine);
-            using var bf = new Font("Segoe UI", 9.5f, FontStyle.Bold);
+            using var dayFont = new Font("Segoe UI", 11.5f, FontStyle.Bold);    // Lunedì, Martedì…
+            using var datFont = new Font("Segoe UI", 10f, FontStyle.Regular); // 23 feb — no bold
 
             g.DrawLine(sidePen, TimeColW - 1, 0, TimeColW - 1, HeaderH);
 
@@ -294,22 +321,20 @@ namespace PlannerShop.Forms.Agenda
                 bool isToday = day.Date == DateTime.Today;
                 bool isWeekend = day.DayOfWeek is DayOfWeek.Saturday or DayOfWeek.Sunday;
                 bool isSat = day.DayOfWeek == DayOfWeek.Saturday;
-                int x = DayLeft(d), w = DayColW;
+                int x = DayLeft(d), w = ColW(d);   // usa ColW(d) per larghezza reale
 
                 if (isToday) g.FillRectangle(new SolidBrush(CTodayBg), x, 0, w, HeaderH);
                 else if (isWeekend) g.FillRectangle(new SolidBrush(CWeekendBg), x, 0, w, HeaderH);
 
                 Color tc = isWeekend ? CWeekend : CText;
-                Color dc = isWeekend ? CWeekend : CText;   // data sempre scura e bold
+                Color dc = isWeekend ? CWeekend : CSubText;
                 int half = HeaderH / 2;
 
                 TextRenderer.DrawText(g,
-                    _it.TextInfo.ToTitleCase(day.ToString("dddd", _it)), bf,
+                    _it.TextInfo.ToTitleCase(day.ToString("dddd", _it)), dayFont,
                     new Rectangle(x + 5, 2, w - 22, half),
                     tc, TextFormatFlags.Left | TextFormatFlags.VerticalCenter);
 
-                // Data in bold
-                using var datFont = new Font("Segoe UI", 8f, FontStyle.Bold);
                 TextRenderer.DrawText(g,
                     day.ToString("d MMM", _it), datFont,
                     new Rectangle(x + 5, half, w - 10, half - 4),
@@ -324,8 +349,8 @@ namespace PlannerShop.Forms.Agenda
 
                 if (isToday) g.DrawLine(todayPen, x, HeaderH - 2, x + w - 1, HeaderH - 2);
                 bool isSun = day.DayOfWeek == DayOfWeek.Sunday;
-                if (isSat) g.DrawLine(sepPen, x, 0, x, HeaderH);        // nero ven→sab
-                else if (isSun) g.DrawLine(colPen, x, 0, x, HeaderH);        // grigio sab→dom
+                if (isSat) g.DrawLine(sepPen, x, 0, x, HeaderH);
+                else if (isSun) g.DrawLine(colPen, x, 0, x, HeaderH);
                 else g.DrawLine(colPen, x + w - 1, 0, x + w - 1, HeaderH);
             }
 
@@ -343,8 +368,8 @@ namespace PlannerShop.Forms.Agenda
             g.Clear(CSideBg);
 
             using var borderPen = new Pen(CGridHour);
-            using var fontHour = new Font("Segoe UI", 10f, FontStyle.Bold);
-            using var fontSub = new Font("Segoe UI", 8.5f, FontStyle.Bold);
+            using var fontHour = new Font("Segoe UI", 11f, FontStyle.Bold);
+            using var fontSub = new Font("Segoe UI", 11f, FontStyle.Bold);
             using var linePenH = new Pen(CGridHour);
             using var linePenS = new Pen(CGridFaint);
 
@@ -473,7 +498,7 @@ namespace PlannerShop.Forms.Agenda
                     int yTop = TimeToY(app.Start.TimeOfDay) + 2;
                     int yBot = TimeToY(app.End.TimeOfDay) - 2;
                     int hPx = Math.Max(SlotH - 4, yBot - yTop);
-                    int colW = (DayColW - 6) / maxCols;
+                    int colW = (ColW(d) - 6) / maxCols;
                     int xPx = DayLeft(d) + 20 + col * colW;
 
                     DrawAppointment(g, app, new Rectangle(xPx, yTop, colW - 22, hPx), _scrollY, maxCols > 1);
