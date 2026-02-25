@@ -546,6 +546,19 @@ namespace PlannerShop.Forms.Agenda
             g.ResetTransform();
         }
 
+        // Rettangolo del pulsante X in coordinate CANVAS (tiene conto dello scroll)
+        private Rectangle GetDeleteRect(Appointment app, int d)
+        {
+            var columns = ResolveColumns(
+                _allApps.Where(a => a.Start.Date == app.Start.Date).OrderBy(a => a.Start).ToList());
+            int maxCols = columns.Max(x => x.col) + 1;
+            int colW = (ColW(d) - 6) / maxCols;
+            int xRight = DayLeft(d) + 20 + (columns.First(c => c.app == app).col + 1) * colW - 22;
+            int yTop = TimeToY(app.Start.TimeOfDay) + 2 - _scrollY;
+            const int S = 16;
+            return new Rectangle(xRight - S - 2, yTop + 2, S, S);
+        }
+
         private void DrawAppointment(Graphics g, Appointment app, Rectangle r, int scrollY, bool compact = false)
         {
             using var bg = new SolidBrush(app.Color);
@@ -559,8 +572,21 @@ namespace PlannerShop.Forms.Agenda
             using var border = new Pen(dark);
             g.DrawRectangle(border, r);
 
+            // ── X di eliminazione (in alto a destra) ─────────────
+            const int XS = 16;
+            var xRect = new Rectangle(r.Right - XS - 2, r.Top + 2 - scrollY, XS, XS);
+            using var xBg = new SolidBrush(Color.FromArgb(70, 0, 0, 0));
+            using var xPen = new Pen(Color.FromArgb(200, 255, 255, 255), 1.5f);
+            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+            g.FillRectangle(xBg, xRect);
+            int m = 4;
+            g.DrawLine(xPen, xRect.Left + m, xRect.Top + m, xRect.Right - m, xRect.Bottom - m);
+            g.DrawLine(xPen, xRect.Right - m, xRect.Top + m, xRect.Left + m, xRect.Bottom - m);
+            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.Default;
+
             const int PadTop = 4;
-            var ti = new Rectangle(r.Left + 8, r.Top + PadTop - scrollY, r.Width - 12, r.Height - PadTop);
+            // Testo: larghezza ridotta per non sovrapporsi alla X
+            var ti = new Rectangle(r.Left + 8, r.Top + PadTop - scrollY, r.Width - XS - 14, r.Height - PadTop);
             if (ti.Height < 8) return;
 
             string timeStr = $"{app.Start:HH:mm}–{app.End:HH:mm}";
@@ -568,7 +594,6 @@ namespace PlannerShop.Forms.Agenda
 
             if (compact)
             {
-                // Modalità sovrapposto: ora di partenza + operatore su 2 righe compatte
                 const int Row1H = 20;
                 const int Row2H = 17;
                 using var tf = new Font("Segoe UI", 9.5f, FontStyle.Bold);
@@ -593,7 +618,6 @@ namespace PlannerShop.Forms.Agenda
             }
             else
             {
-                // Modalità normale: titolo + operatore/orario
                 const int Row1H = 22;
                 const int Row2H = 18;
                 string row2 = hasOp ? $"{app.OperatorName}  {timeStr}" : timeStr;
@@ -630,12 +654,28 @@ namespace PlannerShop.Forms.Agenda
             var app = HitTest(e.X, e.Y);
             if (app == null) return;
 
+            // ── Click sulla X di eliminazione? ───────────────────
+            int d = (e.X - TimeColW) / Math.Max(1, DayColW);
+            d = Math.Clamp(d, 0, DayCount - 1);
+            var xRect = GetDeleteRect(app, d);
+            if (xRect.Contains(e.X, e.Y))
+            {
+                if (MessageBox.Show($"Eliminare \"{app.Title}\"?", "Conferma",
+                        MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                {
+                    ModelAppuntamenti.DeleteAppuntamento(app.Id);
+                    _allApps.RemoveAll(a => a.Id == app.Id);
+                    _header.Invalidate();
+                    _canvas.Invalidate();
+                }
+                return;
+            }
+
             // Bordo inferiore del blocco in coordinate canvas
             int yBot = TimeToY(app.End.TimeOfDay) - 2 - _scrollY;
 
             if (e.Y >= yBot - ResizeGripH && e.Y <= yBot + ResizeGripH / 2)
             {
-                // Modalità resize
                 _resizeApp = app;
                 _isResizing = false;
                 _resizeEndY = TimeToY(app.End.TimeOfDay);
@@ -643,7 +683,6 @@ namespace PlannerShop.Forms.Agenda
             }
             else
             {
-                // Modalità drag
                 _dragApp = app;
                 _dragStartPt = new Point(e.X, e.Y);
                 _dragOffsetY = (e.Y + _scrollY) - TimeToY(app.Start.TimeOfDay);
