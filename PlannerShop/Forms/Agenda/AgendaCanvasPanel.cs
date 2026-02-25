@@ -219,20 +219,7 @@ namespace PlannerShop.Forms.Agenda
             Invalidate(true);
         }
 
-        // Larghezze colonne: feriali più larghi, weekend più stretti
-        // Peso feriale = 1.0, peso weekend = 0.45  →  5 + 2*0.45 = 5.9 unità
-        private const double WeekdayWeight = 1.0;
-        private const double WeekendWeight = 0.40;
-        private const double TotalWeights = 5 * WeekdayWeight + 2 * WeekendWeight;
-
-        private int ColW(int d)
-        {
-            DateTime day = _weekStart.AddDays(d);
-            bool isWeekend = day.DayOfWeek is DayOfWeek.Saturday or DayOfWeek.Sunday;
-            int available = Math.Max(1, _canvas.Width - TimeColW);
-            double unit = available / TotalWeights;
-            return Math.Max(1, (int)(isWeekend ? unit * WeekendWeight : unit * WeekdayWeight));
-        }
+        private int ColW(int d) => Math.Max(1, (_canvas.Width - TimeColW) / DayCount);
 
         private int DayLeft(int d)
         {
@@ -355,7 +342,7 @@ namespace PlannerShop.Forms.Agenda
             }
 
             using var hbPen = new Pen(CGridHour);
-            g.DrawLine(hbPen, 0, HeaderH - 1, _header.Width, HeaderH - 1);
+            g.DrawLine(hbPen, TimeColW, HeaderH - 1, _header.Width, HeaderH - 1);
         }
 
 
@@ -369,42 +356,31 @@ namespace PlannerShop.Forms.Agenda
 
             using var borderPen = new Pen(CGridHour);
             using var fontHour = new Font("Segoe UI", 11f, FontStyle.Bold);
-            using var fontSub = new Font("Segoe UI", 11f, FontStyle.Bold);
-            using var linePenH = new Pen(CGridHour);
-            using var linePenS = new Pen(CGridFaint);
+            using var fontSub = new Font("Segoe UI", 9f, FontStyle.Regular);
 
             g.DrawLine(borderPen, TimeColW - 1, 0, TimeColW - 1, _timebar.Height);
 
+            using var sfHour = new StringFormat { Alignment = StringAlignment.Far, LineAlignment = StringAlignment.Near };
+            using var sfSub = new StringFormat { Alignment = StringAlignment.Far, LineAlignment = StringAlignment.Near };
+            using var brText = new SolidBrush(CText);
+            using var brSub = new SolidBrush(CSubText);
+
             for (int s = 0; s < SlotCount; s++)
             {
-                int yPanel = s * SlotH - _scrollY;
-                if (yPanel + SlotH < 0 || yPanel > _timebar.Height) continue;
+                float yLine = s * SlotH - _scrollY;
+                if (yLine + SlotH < 0 || yLine > _timebar.Height) continue;
 
                 TimeSpan t = FirstSlot.Add(TimeSpan.FromMinutes(s * 15));
                 bool isHour = t.Minutes == 0;
 
+                // Testo parte da yLine+2 verso il basso (Near = Top).
+                // Non sborda mai sopra, visibile sempre, segue lo scroll.
                 if (isHour)
-                {
-                    // Ora intera: testo allineato a destra, font bold
-                    TextRenderer.DrawText(g, $"{t.Hours:D2}:{t.Minutes:D2}", fontHour,
-                        new Rectangle(0, yPanel, TimeColW - 6, SlotH),
-                        CText,
-                        TextFormatFlags.Right | TextFormatFlags.VerticalCenter | TextFormatFlags.NoPadding);
-
-                    // Lineetta più lunga per le ore
-                    g.DrawLine(linePenH, 4, yPanel, TimeColW - 8, yPanel);
-                }
+                    g.DrawString($"{t.Hours:D2}:{t.Minutes:D2}", fontHour, brText,
+                        new RectangleF(0, yLine + 2, TimeColW - 4, SlotH - 2), sfHour);
                 else
-                {
-                    // Quarto d'ora: testo più piccolo, spostato a sinistra (right margin maggiore)
-                    TextRenderer.DrawText(g, $":{t.Minutes:D2}", fontSub,
-                        new Rectangle(0, yPanel, TimeColW - 14, SlotH),
-                        CSubText,
-                        TextFormatFlags.Right | TextFormatFlags.VerticalCenter | TextFormatFlags.NoPadding);
-
-                    // Lineetta corta
-                    g.DrawLine(linePenS, TimeColW - 20, yPanel, TimeColW - 8, yPanel);
-                }
+                    g.DrawString($"{t.Hours:D2}:{t.Minutes:D2}", fontSub, brSub,
+                        new RectangleF(0, yLine + 2, TimeColW - 12, SlotH - 2), sfSub);
             }
         }
 
@@ -437,7 +413,7 @@ namespace PlannerShop.Forms.Agenda
             }
 
             // ── Righe orizzontali ─────────────────────────────────
-            for (int s = 0; s <= SlotCount; s++)
+            for (int s = 1; s <= SlotCount; s++)   // parte da 1: salta la linea a y=0
             {
                 int y = s * SlotH;
                 bool isHour = s % 4 == 0;
