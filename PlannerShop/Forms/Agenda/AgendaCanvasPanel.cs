@@ -343,8 +343,8 @@ namespace PlannerShop.Forms.Agenda
             g.Clear(CSideBg);
 
             using var borderPen = new Pen(CGridHour);
-            using var fontHour = new Font("Segoe UI", 8f, FontStyle.Bold);
-            using var fontSub = new Font("Segoe UI", 6.5f, FontStyle.Bold);
+            using var fontHour = new Font("Segoe UI", 10f, FontStyle.Bold);
+            using var fontSub = new Font("Segoe UI", 8.5f, FontStyle.Bold);
             using var linePenH = new Pen(CGridHour);
             using var linePenS = new Pen(CGridFaint);
 
@@ -474,10 +474,9 @@ namespace PlannerShop.Forms.Agenda
                     int yBot = TimeToY(app.End.TimeOfDay) - 2;
                     int hPx = Math.Max(SlotH - 4, yBot - yTop);
                     int colW = (DayColW - 6) / maxCols;
-                    // Margine sinistro di 20px: zona bianca cliccabile per nuovi appuntamenti
                     int xPx = DayLeft(d) + 20 + col * colW;
 
-                    DrawAppointment(g, app, new Rectangle(xPx, yTop, colW - 22, hPx), _scrollY);
+                    DrawAppointment(g, app, new Rectangle(xPx, yTop, colW - 22, hPx), _scrollY, maxCols > 1);
                 }
             }
             g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.Default;
@@ -515,7 +514,7 @@ namespace PlannerShop.Forms.Agenda
             g.ResetTransform();
         }
 
-        private void DrawAppointment(Graphics g, Appointment app, Rectangle r, int scrollY)
+        private void DrawAppointment(Graphics g, Appointment app, Rectangle r, int scrollY, bool compact = false)
         {
             using var bg = new SolidBrush(app.Color);
             g.FillRectangle(bg, r);
@@ -528,43 +527,65 @@ namespace PlannerShop.Forms.Agenda
             using var border = new Pen(dark);
             g.DrawRectangle(border, r);
 
-            // Area testo — sempre in testa al blocco, non centrata verticalmente
-            // (così su blocchi alti il testo sta in cima come in Google Calendar)
             const int PadTop = 4;
-            const int Row1H = 18; // altezza fissa riga titolo
-            const int Row2H = 15; // altezza fissa riga operatore+orario
-
             var ti = new Rectangle(r.Left + 8, r.Top + PadTop - scrollY, r.Width - 12, r.Height - PadTop);
             if (ti.Height < 8) return;
 
-            bool hasOp = !string.IsNullOrWhiteSpace(app.OperatorName);
             string timeStr = $"{app.Start:HH:mm}–{app.End:HH:mm}";
-            string row2 = hasOp ? $"{app.OperatorName}  {timeStr}" : timeStr;
+            bool hasOp = !string.IsNullOrWhiteSpace(app.OperatorName);
 
-            using var titleFont = new Font("Segoe UI", 8.5f, FontStyle.Bold);
-            using var row2Font = new Font("Segoe UI", 7f, FontStyle.Bold);
-
-            // Blocco 15 min (~46px disponibili): riga singola
-            if (ti.Height < Row1H + Row2H)
+            if (compact)
             {
-                TextRenderer.DrawText(g, $"{app.Title}  {timeStr}", titleFont,
-                    new Rectangle(ti.Left, ti.Top, ti.Width, ti.Height),
-                    Color.White,
-                    TextFormatFlags.Left | TextFormatFlags.VerticalCenter | TextFormatFlags.EndEllipsis);
-                return;
+                // Modalità sovrapposto: ora di partenza + operatore su 2 righe compatte
+                const int Row1H = 20;
+                const int Row2H = 17;
+                using var tf = new Font("Segoe UI", 9.5f, FontStyle.Bold);
+                using var of = new Font("Segoe UI", 8.5f, FontStyle.Bold);
+
+                if (ti.Height < Row1H)
+                {
+                    TextRenderer.DrawText(g, $"{app.Start:HH:mm}", tf,
+                        new Rectangle(ti.Left, ti.Top, ti.Width, ti.Height),
+                        Color.White, TextFormatFlags.Left | TextFormatFlags.VerticalCenter | TextFormatFlags.EndEllipsis);
+                    return;
+                }
+
+                TextRenderer.DrawText(g, $"{app.Start:HH:mm}", tf,
+                    new Rectangle(ti.Left, ti.Top, ti.Width, Row1H),
+                    Color.White, TextFormatFlags.Left | TextFormatFlags.Top | TextFormatFlags.EndEllipsis);
+
+                if (hasOp && ti.Height >= Row1H + Row2H)
+                    TextRenderer.DrawText(g, app.OperatorName, of,
+                        new Rectangle(ti.Left, ti.Top + Row1H, ti.Width, Row2H),
+                        Color.FromArgb(220, 255, 255, 255), TextFormatFlags.Left | TextFormatFlags.Top | TextFormatFlags.EndEllipsis);
             }
+            else
+            {
+                // Modalità normale: titolo + operatore/orario
+                const int Row1H = 22;
+                const int Row2H = 18;
+                string row2 = hasOp ? $"{app.OperatorName}  {timeStr}" : timeStr;
 
-            // Riga 1 — Titolo, ancorata in cima
-            TextRenderer.DrawText(g, app.Title, titleFont,
-                new Rectangle(ti.Left, ti.Top, ti.Width, Row1H),
-                Color.White,
-                TextFormatFlags.Left | TextFormatFlags.Top | TextFormatFlags.EndEllipsis);
+                using var titleFont = new Font("Segoe UI", 10f, FontStyle.Bold);
+                using var row2Font = new Font("Segoe UI", 8.5f, FontStyle.Bold);
 
-            // Riga 2 — Operatore + orario, subito sotto
-            TextRenderer.DrawText(g, row2, row2Font,
-                new Rectangle(ti.Left, ti.Top + Row1H, ti.Width, Row2H),
-                Color.FromArgb(220, 255, 255, 255),
-                TextFormatFlags.Left | TextFormatFlags.Top | TextFormatFlags.EndEllipsis);
+                if (ti.Height < Row1H)
+                {
+                    TextRenderer.DrawText(g, $"{app.Title}  {timeStr}", titleFont,
+                        new Rectangle(ti.Left, ti.Top, ti.Width, ti.Height),
+                        Color.White, TextFormatFlags.Left | TextFormatFlags.VerticalCenter | TextFormatFlags.EndEllipsis);
+                    return;
+                }
+
+                TextRenderer.DrawText(g, app.Title, titleFont,
+                    new Rectangle(ti.Left, ti.Top, ti.Width, Row1H),
+                    Color.White, TextFormatFlags.Left | TextFormatFlags.Top | TextFormatFlags.EndEllipsis);
+
+                if (ti.Height >= Row1H + Row2H)
+                    TextRenderer.DrawText(g, row2, row2Font,
+                        new Rectangle(ti.Left, ti.Top + Row1H, ti.Width, Row2H),
+                        Color.FromArgb(220, 255, 255, 255), TextFormatFlags.Left | TextFormatFlags.Top | TextFormatFlags.EndEllipsis);
+            }
         }
 
 
@@ -757,14 +778,6 @@ namespace PlannerShop.Forms.Agenda
 
             // Nessun cambiamento?
             if (newStartDt == app.Start) return;
-
-            string msg = $"Sposta \"{app.Title}\"\n" +
-                         $"da  {app.Start:ddd dd/MM HH:mm}\n" +
-                         $"a   {newStartDt:ddd dd/MM HH:mm}?";
-
-            if (MessageBox.Show(msg, "Conferma spostamento",
-                    MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
-                return;
 
             try
             {
