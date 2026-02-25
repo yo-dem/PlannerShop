@@ -10,10 +10,12 @@ namespace PlannerShop.Forms.Agenda.Forms.Cruds
         // Palette fissa condivisa con EditForm
         internal static readonly Color[] Palette =
         [
-            Color.FromArgb(0x7B, 0x68, 0xEE),   // viola    #7B68EE
-            Color.FromArgb(0x1A, 0x23, 0x7E),   // blu navy #1A237E
-            Color.FromArgb(0xFF, 0x8C, 0x00),   // arancio  #FF8C00
-            Color.FromArgb(0x2E, 0x8B, 0x57),   // verde    #2E8B57
+            Color.FromArgb(0x7B, 0x68, 0xEE),   // viola       #7B68EE
+            Color.FromArgb(0x1A, 0x23, 0x7E),   // blu navy    #1A237E
+            Color.FromArgb(0xFF, 0x8C, 0x00),   // arancio     #FF8C00
+            Color.FromArgb(0x2E, 0x8B, 0x57),   // verde       #2E8B57
+            Color.FromArgb(0xB2, 0x22, 0x22),   // rosso       #B22222
+            Color.FromArgb(0xB8, 0x86, 0x0B),   // oro scuro   #B8860B
         ];
 
         public AppointmentInsertForm()
@@ -50,6 +52,8 @@ namespace PlannerShop.Forms.Agenda.Forms.Cruds
             btnColor2.Click += (s, e) => SelectColor(Palette[1]);
             btnColor3.Click += (s, e) => SelectColor(Palette[2]);
             btnColor4.Click += (s, e) => SelectColor(Palette[3]);
+            btnColor5.Click += (s, e) => SelectColor(Palette[4]);
+            btnColor6.Click += (s, e) => SelectColor(Palette[5]);
         }
 
         internal void SelectColor(Color c)
@@ -63,9 +67,9 @@ namespace PlannerShop.Forms.Agenda.Forms.Cruds
             for (int i = 0; i < buttons.Length; i++)
             {
                 buttons[i].FlatStyle = FlatStyle.Flat;
-                buttons[i].FlatAppearance.BorderSize = selected == Palette[i] ? 3 : 1;
-                buttons[i].FlatAppearance.BorderColor = selected == Palette[i]
-                    ? Color.White : Color.FromArgb(80, 80, 80);
+                bool isSelected = i < Palette.Length && selected.ToArgb() == Palette[i].ToArgb();
+                buttons[i].FlatAppearance.BorderSize = isSelected ? 3 : 1;
+                buttons[i].FlatAppearance.BorderColor = isSelected ? Color.White : Color.FromArgb(80, 80, 80);
             }
         }
 

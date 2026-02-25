@@ -37,6 +37,8 @@ namespace PlannerShop.Forms.Agenda.Forms.Cruds
             btnColor2.Click += (s, e) => SelectColor(AppointmentInsertForm.Palette[1]);
             btnColor3.Click += (s, e) => SelectColor(AppointmentInsertForm.Palette[2]);
             btnColor4.Click += (s, e) => SelectColor(AppointmentInsertForm.Palette[3]);
+            btnColor5.Click += (s, e) => SelectColor(AppointmentInsertForm.Palette[4]);
+            btnColor6.Click += (s, e) => SelectColor(AppointmentInsertForm.Palette[5]);
         }
 
         private void SelectColor(Color c)

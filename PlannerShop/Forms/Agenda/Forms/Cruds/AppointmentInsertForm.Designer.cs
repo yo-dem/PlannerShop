@@ -34,6 +34,8 @@
             btnColor2 = new Button();
             btnColor3 = new Button();
             btnColor4 = new Button();
+            btnColor5 = new Button();
+            btnColor6 = new Button();
             lblNote = new Label();
             txtNote = new TextBox();
             btnOk = new Button();
@@ -214,7 +216,7 @@
             btnColor1.FlatStyle = FlatStyle.Flat;
             btnColor1.Location = new Point(36, 42);
             btnColor1.Name = "btnColor1";
-            btnColor1.Size = new Size(54, 26);
+            btnColor1.Size = new Size(46, 26);
             btnColor1.TabIndex = 2;
             btnColor1.TabStop = false;
             btnColor1.UseVisualStyleBackColor = false;
@@ -223,9 +225,9 @@
             // 
             btnColor2.BackColor = Color.FromArgb(26, 35, 126);
             btnColor2.FlatStyle = FlatStyle.Flat;
-            btnColor2.Location = new Point(96, 42);
+            btnColor2.Location = new Point(84, 42);
             btnColor2.Name = "btnColor2";
-            btnColor2.Size = new Size(54, 26);
+            btnColor2.Size = new Size(46, 26);
             btnColor2.TabIndex = 3;
             btnColor2.TabStop = false;
             btnColor2.UseVisualStyleBackColor = false;
@@ -234,9 +236,9 @@
             // 
             btnColor3.BackColor = Color.DarkOrange;
             btnColor3.FlatStyle = FlatStyle.Flat;
-            btnColor3.Location = new Point(156, 42);
+            btnColor3.Location = new Point(132, 42);
             btnColor3.Name = "btnColor3";
-            btnColor3.Size = new Size(54, 26);
+            btnColor3.Size = new Size(46, 26);
             btnColor3.TabIndex = 4;
             btnColor3.TabStop = false;
             btnColor3.UseVisualStyleBackColor = false;
@@ -245,12 +247,34 @@
             // 
             btnColor4.BackColor = Color.SeaGreen;
             btnColor4.FlatStyle = FlatStyle.Flat;
-            btnColor4.Location = new Point(216, 42);
+            btnColor4.Location = new Point(180, 42);
             btnColor4.Name = "btnColor4";
-            btnColor4.Size = new Size(54, 26);
+            btnColor4.Size = new Size(46, 26);
             btnColor4.TabIndex = 5;
             btnColor4.TabStop = false;
             btnColor4.UseVisualStyleBackColor = false;
+            // 
+            // btnColor5
+            // 
+            btnColor5.BackColor = Color.FromArgb(178, 34, 34);
+            btnColor5.FlatStyle = FlatStyle.Flat;
+            btnColor5.Location = new Point(228, 42);
+            btnColor5.Name = "btnColor5";
+            btnColor5.Size = new Size(46, 26);
+            btnColor5.TabIndex = 6;
+            btnColor5.TabStop = false;
+            btnColor5.UseVisualStyleBackColor = false;
+            // 
+            // btnColor6
+            // 
+            btnColor6.BackColor = Color.FromArgb(184, 134, 11);
+            btnColor6.FlatStyle = FlatStyle.Flat;
+            btnColor6.Location = new Point(276, 42);
+            btnColor6.Name = "btnColor6";
+            btnColor6.Size = new Size(46, 26);
+            btnColor6.TabIndex = 7;
+            btnColor6.TabStop = false;
+            btnColor6.UseVisualStyleBackColor = false;
             // 
             // lblNote
             // 
@@ -340,6 +364,8 @@
             grpAltro.Controls.Add(btnColor2);
             grpAltro.Controls.Add(btnColor3);
             grpAltro.Controls.Add(btnColor4);
+            grpAltro.Controls.Add(btnColor5);
+            grpAltro.Controls.Add(btnColor6);
             grpAltro.Controls.Add(lblNote);
             grpAltro.Controls.Add(txtNote);
             grpAltro.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
@@ -385,7 +411,7 @@
         private DateTimePicker dtpData, dtpOraInizio, dtpOraFine;
         private Label lblColore, lblNote;
         private Panel pnlColore;
-        private Button btnColor1, btnColor2, btnColor3, btnColor4;
+        private Button btnColor1, btnColor2, btnColor3, btnColor4, btnColor5, btnColor6;
         private TextBox txtNote;
         private Button btnOk, btnAnnulla;
     }

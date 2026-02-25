@@ -61,12 +61,18 @@ namespace PlannerShop.Forms.Agenda
         private int _scrollY = 0;
 
         // ── Drag & Drop ─────────────────────────────────────────
-        private Appointment? _dragApp = null;   // app in corso di drag
-        private Point _dragStartPt;             // punto mousedown sul canvas
-        private int _dragOffsetY;             // offset Y dentro il blocco al momento del click
-        private bool _isDragging = false;   // soglia superata
-        private int _dragCurrentY = 0;       // Y corrente del ghost (content coords)
-        private int _dragCurrentD = 0;       // colonna giorno del ghost
+        private Appointment? _dragApp = null;
+        private Point _dragStartPt;
+        private int _dragOffsetY;
+        private bool _isDragging = false;
+        private int _dragCurrentY = 0;
+        private int _dragCurrentD = 0;
+
+        // ── Resize (bordo inferiore) ─────────────────────────────
+        private Appointment? _resizeApp = null;   // app in corso di resize
+        private bool _isResizing = false;
+        private int _resizeEndY = 0;      // Y fine slot corrente (content coords)
+        private const int ResizeGripH = 8;      // pixel dal bordo basso sensibili al resize
         private readonly BufferedPanel _tipPanel = new() { Visible = false, BackColor = Color.FromArgb(255, 255, 225), Padding = new Padding(6) };
         private Appointment? _tooltipApp = null;
         private string _tooltipText = "";
@@ -482,6 +488,31 @@ namespace PlannerShop.Forms.Agenda
             }
             g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.Default;
 
+            // ── Ghost resize ──────────────────────────────────────
+            if (_isResizing && _resizeApp != null)
+            {
+                int yTop = TimeToY(_resizeApp.Start.TimeOfDay) + 2;
+                int ghostX = DayLeft((int)(_resizeApp.Start.Date - _weekStart).TotalDays) + 20;
+                int ghostW = DayColW - 30;
+                int ghostH = _resizeEndY - yTop - 2;
+
+                using var ghostBg = new SolidBrush(Color.FromArgb(160, _resizeApp.Color));
+                g.FillRectangle(ghostBg, ghostX, yTop, ghostW, ghostH);
+                using var ghostBorder = new Pen(Color.FromArgb(220, _resizeApp.Color), 2);
+                g.DrawRectangle(ghostBorder, ghostX, yTop, ghostW, ghostH);
+
+                // Etichetta ora di fine
+                TimeSpan newEnd = FirstSlot.Add(TimeSpan.FromMinutes(_resizeEndY / SlotH * 15));
+                using var lf = new Font("Segoe UI", 8f, FontStyle.Bold);
+                TextRenderer.DrawText(g, $"Fine: {newEnd.Hours:D2}:{newEnd.Minutes:D2}", lf,
+                    new Rectangle(ghostX + 4, _resizeEndY - 20 - _scrollY, ghostW - 8, 18),
+                    Color.White, TextFormatFlags.Left | TextFormatFlags.Top | TextFormatFlags.EndEllipsis);
+
+                // Linea di snap
+                using var snapLine = new Pen(Color.FromArgb(200, _resizeApp.Color), 2);
+                g.DrawLine(snapLine, ghostX, _resizeEndY, ghostX + ghostW, _resizeEndY);
+            }
+
             // ── Ghost drag ────────────────────────────────────────
             if (_isDragging && _dragApp != null)
             {
@@ -599,10 +630,26 @@ namespace PlannerShop.Forms.Agenda
             var app = HitTest(e.X, e.Y);
             if (app == null) return;
 
-            _dragApp = app;
-            _dragStartPt = new Point(e.X, e.Y);
-            _dragOffsetY = (e.Y + _scrollY) - TimeToY(app.Start.TimeOfDay);
-            _isDragging = false;
+            // Bordo inferiore del blocco in coordinate canvas
+            int yBot = TimeToY(app.End.TimeOfDay) - 2 - _scrollY;
+
+            if (e.Y >= yBot - ResizeGripH && e.Y <= yBot + ResizeGripH / 2)
+            {
+                // Modalità resize
+                _resizeApp = app;
+                _isResizing = false;
+                _resizeEndY = TimeToY(app.End.TimeOfDay);
+                _dragApp = null;
+            }
+            else
+            {
+                // Modalità drag
+                _dragApp = app;
+                _dragStartPt = new Point(e.X, e.Y);
+                _dragOffsetY = (e.Y + _scrollY) - TimeToY(app.Start.TimeOfDay);
+                _isDragging = false;
+                _resizeApp = null;
+            }
         }
 
         private void OnCanvasDoubleClick(object? sender, MouseEventArgs e)
@@ -686,6 +733,30 @@ namespace PlannerShop.Forms.Agenda
 
         private void OnCanvasMouseMove(object? sender, MouseEventArgs e)
         {
+            // ── Resize in corso ──────────────────────────────────
+            if (_resizeApp != null && e.Button == MouseButtons.Left)
+            {
+                if (!_isResizing && Math.Abs(e.Y - TimeToY(_resizeApp.End.TimeOfDay) + _scrollY) > 3)
+                {
+                    _isResizing = true;
+                    _canvas.Cursor = Cursors.SizeNS;
+                    HideTip();
+                }
+
+                if (_isResizing)
+                {
+                    int contentY = e.Y + _scrollY;
+                    // Almeno 1 slot dopo l'inizio
+                    int minEnd = TimeToY(_resizeApp.Start.TimeOfDay) + SlotH;
+                    int slot = Math.Max(contentY, minEnd);
+                    // Snap al quarto d'ora
+                    int snapped = (int)Math.Round((double)slot / SlotH) * SlotH;
+                    _resizeEndY = Math.Clamp(snapped, minEnd, SlotCount * SlotH);
+                    _canvas.Invalidate();
+                }
+                return;
+            }
+
             // ── Drag in corso ────────────────────────────────────
             if (_dragApp != null && e.Button == MouseButtons.Left)
             {
@@ -701,7 +772,6 @@ namespace PlannerShop.Forms.Agenda
 
                 if (_isDragging)
                 {
-                    // Calcola la nuova posizione arrotondata al quarto d'ora
                     int contentY = e.Y + _scrollY - _dragOffsetY;
                     int slot = Math.Clamp(contentY / SlotH, 0, SlotCount - 1);
                     _dragCurrentY = slot * SlotH;
@@ -714,29 +784,46 @@ namespace PlannerShop.Forms.Agenda
                 return;
             }
 
-            // ── Tooltip normale ──────────────────────────────────
-            var app = HitTest(e.X, e.Y);
+            // ── Cursore hover (nessun pulsante premuto) ───────────
+            if (e.Button == MouseButtons.None)
+            {
+                var app = HitTest(e.X, e.Y);
+                if (app != null)
+                {
+                    int yBot = TimeToY(app.End.TimeOfDay) - 2 - _scrollY;
+                    _canvas.Cursor = (e.Y >= yBot - ResizeGripH && e.Y <= yBot + ResizeGripH / 2)
+                        ? Cursors.SizeNS
+                        : Cursors.Default;
+                }
+                else
+                {
+                    _canvas.Cursor = Cursors.Default;
+                }
+            }
 
-            if (app == null)
+            // ── Tooltip normale ──────────────────────────────────
+            var hovApp = HitTest(e.X, e.Y);
+
+            if (hovApp == null)
             {
                 if (_tooltipApp != null) { _tooltipApp = null; HideTip(); }
                 return;
             }
 
             string text;
-            if (app != _tooltipApp)
+            if (hovApp != _tooltipApp)
             {
-                _tooltipApp = app;
-                string operatore = string.IsNullOrWhiteSpace(app.OperatorName) ? "–" : app.OperatorName;
-                string servizio = string.IsNullOrWhiteSpace(app.ServiceName) ? "–" : app.ServiceName;
-                string note = string.IsNullOrWhiteSpace(app.Notes) ? "" : $"\n    {app.Notes}";
+                _tooltipApp = hovApp;
+                string operatore = string.IsNullOrWhiteSpace(hovApp.OperatorName) ? "–" : hovApp.OperatorName;
+                string servizio = string.IsNullOrWhiteSpace(hovApp.ServiceName) ? "–" : hovApp.ServiceName;
+                string note = string.IsNullOrWhiteSpace(hovApp.Notes) ? "" : $"\n    {hovApp.Notes}";
                 text =
-                    $"{app.Title}\n" +
-                    $"    {app.Start:HH:mm} – {app.End:HH:mm}  ({app.DurataMinuti} min)\n" +
-                    $"    {app.ClientName}\n" +
+                    $"{hovApp.Title}\n" +
+                    $"    {hovApp.Start:HH:mm} – {hovApp.End:HH:mm}  ({hovApp.DurataMinuti} min)\n" +
+                    $"    {hovApp.ClientName}\n" +
                     $"OP: {operatore}\n" +
                     $"    {servizio}\n" +
-                    $"    {app.Status}" +
+                    $"    {hovApp.Status}" +
                     note;
             }
             else
@@ -755,6 +842,55 @@ namespace PlannerShop.Forms.Agenda
 
         private void OnCanvasMouseUp(object? sender, MouseEventArgs e)
         {
+            // ── Fine resize ──────────────────────────────────────
+            if (_resizeApp != null)
+            {
+                var resizedApp = _resizeApp;
+                bool wasResize = _isResizing;
+
+                _resizeApp = null;
+                _isResizing = false;
+                _canvas.Cursor = Cursors.Default;
+                _canvas.Invalidate();
+
+                if (!wasResize) return;
+
+                TimeSpan resizedEnd = FirstSlot.Add(TimeSpan.FromMinutes(_resizeEndY / SlotH * 15));
+                DateTime resizedEndDt = resizedApp.Start.Date + resizedEnd;
+
+                if (resizedEndDt == resizedApp.End) return;
+
+                try
+                {
+                    var updated = new Appointment
+                    {
+                        Id = resizedApp.Id,
+                        Title = resizedApp.Title,
+                        ClientName = resizedApp.ClientName,
+                        OperatorName = resizedApp.OperatorName,
+                        ServiceId = resizedApp.ServiceId,
+                        ServiceName = resizedApp.ServiceName,
+                        Start = resizedApp.Start,
+                        End = resizedEndDt,
+                        Status = resizedApp.Status,
+                        Notes = resizedApp.Notes,
+                        Color = resizedApp.Color,
+                        Timestamp = resizedApp.Timestamp
+                    };
+                    ModelAppuntamenti.EditAppuntamento(updated.Id, updated);
+                    int idx = _allApps.FindIndex(a => a.Id == resizedApp.Id);
+                    if (idx >= 0) _allApps[idx] = updated;
+                    _canvas.Invalidate();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Errore nel salvataggio:\n{ex.Message}", "Errore",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                return;
+            }
+
+            // ── Fine drag ────────────────────────────────────────
             if (_dragApp == null) return;
 
             var app = _dragApp;
