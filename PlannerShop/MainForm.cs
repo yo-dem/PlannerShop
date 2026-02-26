@@ -1,9 +1,9 @@
 ﻿
 using PlannerShop.Data;
 using PlannerShop.Forms;
-using PlannerShop.Forms.Agenda;
 using PlannerShop.Forms.Utility;
 using System.Data;
+using System.Diagnostics;
 
 namespace PlannerShop
 {
@@ -940,14 +940,15 @@ namespace PlannerShop
 
         private void btnAgenda_Click(object sender, EventArgs e)
         {
-            //AgendaForm agendaForm = new AgendaForm();
-            AgendaDgvForm agendaForm = new AgendaDgvForm();
-            agendaForm.ShowDialog();
-        }
+            string agendaPath = Path.Combine(
+                AppDomain.CurrentDomain.BaseDirectory,
+                "NextPlanner.exe");
 
-        private void clientiToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
+            if (File.Exists(agendaPath))
+                Process.Start(new ProcessStartInfo { FileName = agendaPath, UseShellExecute = true });
+            else
+                MessageBox.Show("NextPlanner.exe non trovato nella cartella dell'applicazione.",
+                    "Agenda non disponibile", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
     }
 }

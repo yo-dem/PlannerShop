@@ -1,68 +1,74 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <OutputType>WinExe</OutputType>
-    <TargetFramework>net8.0-windows</TargetFramework>
-    <Nullable>enable</Nullable>
-    <UseWindowsForms>true</UseWindowsForms>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <ApplicationIcon>Resources\easyPlannerImage.ico</ApplicationIcon>
-  </PropertyGroup>
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+		<TargetFramework>net8.0-windows</TargetFramework>
+		<Nullable>enable</Nullable>
+		<UseWindowsForms>true</UseWindowsForms>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<ApplicationIcon>Resources\easyPlannerImage.ico</ApplicationIcon>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <Content Include="Resources\easyPlannerImage.ico" />
-  </ItemGroup>
+	<ItemGroup>
+		<Content Include="Resources\easyPlannerImage.ico" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <Compile Update="Forms\Cruds\ClientEditForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Forms\Cruds\ClientInsertForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Forms\Cruds\Purchases\ServicePurchase\ServicePurchaseDetaIlForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Forms\Cruds\ServiceEditForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Forms\Cruds\ServiceInsertForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Forms\Cruds\SupplierEditForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Forms\Cruds\SupplierInsertForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Forms\Utility\SendMailForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Properties\Resources.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-  </ItemGroup>
+	<ItemGroup>
+		<Compile Update="Forms\Cruds\ClientEditForm.cs">
+			<SubType>Form</SubType>
+		</Compile>
+		<Compile Update="Forms\Cruds\ClientInsertForm.cs">
+			<SubType>Form</SubType>
+		</Compile>
+		<Compile Update="Forms\Cruds\Purchases\ServicePurchase\ServicePurchaseDetaIlForm.cs">
+			<SubType>Form</SubType>
+		</Compile>
+		<Compile Update="Forms\Cruds\ServiceEditForm.cs">
+			<SubType>Form</SubType>
+		</Compile>
+		<Compile Update="Forms\Cruds\ServiceInsertForm.cs">
+			<SubType>Form</SubType>
+		</Compile>
+		<Compile Update="Forms\Cruds\SupplierEditForm.cs">
+			<SubType>Form</SubType>
+		</Compile>
+		<Compile Update="Forms\Cruds\SupplierInsertForm.cs">
+			<SubType>Form</SubType>
+		</Compile>
+		<Compile Update="Forms\Utility\SendMailForm.cs">
+			<SubType>Form</SubType>
+		</Compile>
+		<Compile Update="Properties\Resources.Designer.cs">
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+			<DependentUpon>Resources.resx</DependentUpon>
+		</Compile>
+	</ItemGroup>
 
-  <ItemGroup>
-    <EmbeddedResource Update="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-  </ItemGroup>
+	<ItemGroup>
+		<EmbeddedResource Update="Properties\Resources.resx">
+			<Generator>ResXFileCodeGenerator</Generator>
+			<LastGenOutput>Resources.Designer.cs</LastGenOutput>
+		</EmbeddedResource>
+	</ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="System.Data.SQLite.Core" Version="1.0.119" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="System.Data.SQLite.Core" Version="1.0.119" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <None Update="Data\PSDB.db">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Data\PSDB_Agenda.db">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
+	<ItemGroup>
+		<None Update="Data\PSDB.db">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Update="Data\PSDB_Agenda.db">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
+
+	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
+		<Exec Command="xcopy /Y &quot;$(SolutionDir)NextPlanner\bin\$(ConfigurationName)\net8.0-windows7.0\NextPlanner.exe&quot; &quot;$(TargetDir)&quot;&#xD;&#xA;" />
+		<Exec Command="xcopy /Y &quot;$(SolutionDir)NextPlanner\bin\$(ConfigurationName)\net8.0-windows7.0\NextPlanner.dll&quot; &quot;$(TargetDir)&quot;&#xD;&#xA;" />
+		<Exec Command="xcopy /Y &quot;$(SolutionDir)NextPlanner\bin\$(ConfigurationName)\net8.0-windows7.0\NextPlanner.runtimeconfig.json&quot; &quot;$(TargetDir)&quot;&#xD;&#xA;" />
+	</Target>
 
 </Project>

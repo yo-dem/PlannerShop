@@ -1,0 +1,36 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows7.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Data.SQLite.Core" Version="1.0.119" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="AgendaCanvasPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="AgendaDgvForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\Cruds\AppointmentEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\Cruds\AppointmentInsertForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Data\PSDB_Agenda.db">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>
