@@ -227,6 +227,7 @@ namespace PlannerShop.Forms.Agenda
         }
 
         private int ColW(int d) => Math.Max(1, (_canvas.Width - TimeColW) / DayCount);
+        private const int AppMargin = 13;   // margine sinistro = destro per ogni blocco appuntamento
 
         private int DayLeft(int d)
         {
@@ -271,13 +272,12 @@ namespace PlannerShop.Forms.Agenda
 
             var columns = ResolveColumns(dayApps);
             int maxCols = columns.Max(x => x.col) + 1;
-            int colW = (ColW(d) - 6) / maxCols;
-            const int LeftMargin = 20;
+            int colW = ColW(d) / maxCols;
 
             foreach (var (app, col) in columns)
             {
-                int xLeft = DayLeft(d) + LeftMargin + col * colW;
-                int xRight = xLeft + colW - 22;
+                int xLeft = DayLeft(d) + col * colW + AppMargin + 1;
+                int xRight = xLeft + colW - AppMargin * 2 - 1;
                 int yTop = TimeToY(app.Start.TimeOfDay);
                 int yBot = TimeToY(app.End.TimeOfDay);
 
@@ -481,10 +481,11 @@ namespace PlannerShop.Forms.Agenda
                     int yTop = TimeToY(app.Start.TimeOfDay) + 2;
                     int yBot = TimeToY(app.End.TimeOfDay) - 2;
                     int hPx = Math.Max(SlotH - 4, yBot - yTop);
-                    int colW = (ColW(d) - 6) / maxCols;
-                    int xPx = DayLeft(d) + 20 + col * colW;
+                    int colW = ColW(d) / maxCols;
+                    int xPx = DayLeft(d) + col * colW + AppMargin + 1;   // +1 compensa la linea verticale sinistra
+                    int wPx = colW - AppMargin * 2 - 1;
 
-                    DrawAppointment(g, app, new Rectangle(xPx, yTop, colW - 22, hPx), _scrollY, maxCols > 1, app == _hoverApp);
+                    DrawAppointment(g, app, new Rectangle(xPx, yTop, wPx, hPx), maxCols > 1, app == _hoverApp);
                 }
             }
             g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.Default;
@@ -547,20 +548,7 @@ namespace PlannerShop.Forms.Agenda
             g.ResetTransform();
         }
 
-        // Rettangolo del pulsante X in coordinate CANVAS (tiene conto dello scroll)
-        private Rectangle GetDeleteRect(Appointment app, int d)
-        {
-            var columns = ResolveColumns(
-                _allApps.Where(a => a.Start.Date == app.Start.Date).OrderBy(a => a.Start).ToList());
-            int maxCols = columns.Max(x => x.col) + 1;
-            int colW = (ColW(d) - 6) / maxCols;
-            int xRight = DayLeft(d) + 20 + (columns.First(c => c.app == app).col + 1) * colW - 22;
-            int yTop = TimeToY(app.Start.TimeOfDay) + 2 - _scrollY;
-            const int S = 16;
-            return new Rectangle(xRight - S - 2, yTop + 2, S, S);
-        }
-
-        private void DrawAppointment(Graphics g, Appointment app, Rectangle r, int scrollY, bool compact = false, bool showDelete = false)
+        private void DrawAppointment(Graphics g, Appointment app, Rectangle r, bool compact = false, bool showDelete = false)
         {
             using var bg = new SolidBrush(app.Color);
             g.FillRectangle(bg, r);
@@ -573,80 +561,74 @@ namespace PlannerShop.Forms.Agenda
             using var border = new Pen(dark);
             g.DrawRectangle(border, r);
 
-            // ── X di eliminazione (solo al hover) ────────────────
+            // ── X di eliminazione (solo al hover, niente sfondo) ──
             const int XS = 16;
             if (showDelete)
             {
-                var xRect = new Rectangle(r.Right - XS - 2, r.Top + 2 - scrollY, XS, XS);
-                using var xBg = new SolidBrush(Color.FromArgb(70, 0, 0, 0));
-                using var xPen = new Pen(Color.FromArgb(200, 255, 255, 255), 1.5f);
+                var xRect = new Rectangle(r.Right - XS - 2, r.Top + 2, XS, XS);
+                using var xPen = new Pen(Color.White, 2f);
                 g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
-                g.FillRectangle(xBg, xRect);
-                int m = 4;
+                int m = 3;
                 g.DrawLine(xPen, xRect.Left + m, xRect.Top + m, xRect.Right - m, xRect.Bottom - m);
                 g.DrawLine(xPen, xRect.Right - m, xRect.Top + m, xRect.Left + m, xRect.Bottom - m);
                 g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.Default;
             }
 
             const int PadTop = 4;
-            // Riduce larghezza testo solo se la X è visibile
-            int textRightPad = showDelete ? XS + 14 : 12;
-            var ti = new Rectangle(r.Left + 8, r.Top + PadTop - scrollY, r.Width - textRightPad, r.Height - PadTop);
-            if (ti.Height < 8) return;
+            const int PadLeft = 8;
+            int textRightPad = showDelete ? XS + 10 : 6;
+
+            // Usa DrawString (GDI+) che rispetta TranslateTransform, a differenza di TextRenderer (GDI)
+            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
 
             string timeStr = $"{app.Start:HH:mm}–{app.End:HH:mm}";
             bool hasOp = !string.IsNullOrWhiteSpace(app.OperatorName);
 
+            float textX = r.Left + PadLeft;
+            float textY = r.Top + PadTop;
+            float textW = r.Width - PadLeft - textRightPad;
+
             if (compact)
             {
-                const int Row1H = 20;
-                const int Row2H = 17;
                 using var tf = new Font("Segoe UI", 9.5f, FontStyle.Bold);
                 using var of = new Font("Segoe UI", 8.5f, FontStyle.Bold);
+                using var wBrush = new SolidBrush(Color.White);
+                using var w2Brush = new SolidBrush(Color.FromArgb(220, 255, 255, 255));
+                using var sf = new StringFormat { Trimming = StringTrimming.EllipsisCharacter, FormatFlags = StringFormatFlags.NoWrap };
 
-                if (ti.Height < Row1H)
-                {
-                    TextRenderer.DrawText(g, $"{app.Start:HH:mm}", tf,
-                        new Rectangle(ti.Left, ti.Top, ti.Width, ti.Height),
-                        Color.White, TextFormatFlags.Left | TextFormatFlags.VerticalCenter | TextFormatFlags.EndEllipsis);
-                    return;
-                }
+                if (r.Height - PadTop >= 20)
+                    g.DrawString($"{app.Start:HH:mm}", tf, wBrush, new RectangleF(textX, textY, textW, 20), sf);
 
-                TextRenderer.DrawText(g, $"{app.Start:HH:mm}", tf,
-                    new Rectangle(ti.Left, ti.Top, ti.Width, Row1H),
-                    Color.White, TextFormatFlags.Left | TextFormatFlags.Top | TextFormatFlags.EndEllipsis);
-
-                if (hasOp && ti.Height >= Row1H + Row2H)
-                    TextRenderer.DrawText(g, app.OperatorName, of,
-                        new Rectangle(ti.Left, ti.Top + Row1H, ti.Width, Row2H),
-                        Color.FromArgb(220, 255, 255, 255), TextFormatFlags.Left | TextFormatFlags.Top | TextFormatFlags.EndEllipsis);
+                if (hasOp && r.Height - PadTop >= 37)
+                    g.DrawString(app.OperatorName, of, w2Brush, new RectangleF(textX, textY + 20, textW, 17), sf);
             }
             else
             {
-                const int Row1H = 22;
-                const int Row2H = 18;
-                string row2 = hasOp ? $"{app.OperatorName}  {timeStr}" : timeStr;
-
                 using var titleFont = new Font("Segoe UI", 10f, FontStyle.Bold);
                 using var row2Font = new Font("Segoe UI", 8.5f, FontStyle.Bold);
+                using var wBrush = new SolidBrush(Color.White);
+                using var w2Brush = new SolidBrush(Color.FromArgb(220, 255, 255, 255));
+                using var sf = new StringFormat { Trimming = StringTrimming.EllipsisCharacter, FormatFlags = StringFormatFlags.NoWrap };
 
-                if (ti.Height < Row1H)
+                string row2 = hasOp ? $"{app.OperatorName}  {timeStr}" : timeStr;
+
+                if (r.Height - PadTop < 22)
                 {
-                    TextRenderer.DrawText(g, $"{app.Title}  {timeStr}", titleFont,
-                        new Rectangle(ti.Left, ti.Top, ti.Width, ti.Height),
-                        Color.White, TextFormatFlags.Left | TextFormatFlags.VerticalCenter | TextFormatFlags.EndEllipsis);
-                    return;
+                    // Blocco molto piccolo: titolo + orario su riga unica
+                    using var sfC = new StringFormat { Trimming = StringTrimming.EllipsisCharacter, FormatFlags = StringFormatFlags.NoWrap, LineAlignment = StringAlignment.Center };
+                    g.DrawString($"{app.Title}  {timeStr}", titleFont, wBrush,
+                        new RectangleF(textX, r.Top, textW, r.Height), sfC);
                 }
+                else
+                {
+                    g.DrawString(app.Title, titleFont, wBrush, new RectangleF(textX, textY, textW, 22), sf);
 
-                TextRenderer.DrawText(g, app.Title, titleFont,
-                    new Rectangle(ti.Left, ti.Top, ti.Width, Row1H),
-                    Color.White, TextFormatFlags.Left | TextFormatFlags.Top | TextFormatFlags.EndEllipsis);
-
-                if (ti.Height >= Row1H + Row2H)
-                    TextRenderer.DrawText(g, row2, row2Font,
-                        new Rectangle(ti.Left, ti.Top + Row1H, ti.Width, Row2H),
-                        Color.FromArgb(220, 255, 255, 255), TextFormatFlags.Left | TextFormatFlags.Top | TextFormatFlags.EndEllipsis);
+                    if (r.Height - PadTop >= 40)
+                        g.DrawString(row2, row2Font, w2Brush, new RectangleF(textX, textY + 22, textW, 18), sf);
+                }
             }
+
+            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.Default;
         }
 
 
@@ -660,20 +642,42 @@ namespace PlannerShop.Forms.Agenda
             if (app == null) return;
 
             // ── Click sulla X di eliminazione? ───────────────────
-            int d = (e.X - TimeColW) / Math.Max(1, DayColW);
-            d = Math.Clamp(d, 0, DayCount - 1);
-            var xRect = GetDeleteRect(app, d);
-            if (xRect.Contains(e.X, e.Y))
+            // Calcola la rect della X nelle stesse coordinate content usate nel paint
+            // (il canvas usa TranslateTransform(0,-scrollY), quindi content = canvas + scrollY)
+            int d = -1;
+            for (int i = 0; i < DayCount; i++)
             {
-                if (MessageBox.Show($"Eliminare \"{app.Title}\"?", "Conferma",
-                        MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                int x0 = DayLeft(i), x1 = x0 + ColW(i);
+                if (e.X >= x0 && e.X < x1) { d = i; break; }
+            }
+            if (d >= 0)
+            {
+                var dayApps = _allApps.Where(a => a.Start.Date == _weekStart.AddDays(d).Date).OrderBy(a => a.Start).ToList();
+                var columns = ResolveColumns(dayApps);
+                int maxCols = columns.Max(x => x.col) + 1;
+                int colW = ColW(d) / maxCols;
+                var entry = columns.FirstOrDefault(c => c.app == app);
+                int xPx = DayLeft(d) + entry.col * colW + AppMargin + 1;
+                int wPx = colW - AppMargin * 2 - 1;
+                int yTop = TimeToY(app.Start.TimeOfDay) + 2;   // content coords
+
+                const int XS = 16;
+                // Converti click canvas → content coords
+                int contentClickY = e.Y + _scrollY;
+                var xRect = new Rectangle(xPx + wPx - XS - 2, yTop + 2, XS, XS);
+                if (e.X >= xRect.Left && e.X <= xRect.Right &&
+                    contentClickY >= xRect.Top && contentClickY <= xRect.Bottom)
                 {
-                    ModelAppuntamenti.DeleteAppuntamento(app.Id);
-                    _allApps.RemoveAll(a => a.Id == app.Id);
-                    _header.Invalidate();
-                    _canvas.Invalidate();
+                    if (MessageBox.Show($"Eliminare \"{app.Title}\"?", "Conferma",
+                            MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                    {
+                        ModelAppuntamenti.DeleteAppuntamento(app.Id);
+                        _allApps.RemoveAll(a => a.Id == app.Id);
+                        _header.Invalidate();
+                        _canvas.Invalidate();
+                    }
+                    return;
                 }
-                return;
             }
 
             // Bordo inferiore del blocco in coordinate canvas
