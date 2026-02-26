@@ -493,22 +493,24 @@ namespace PlannerShop.Forms.Agenda
             // ── Ghost resize ──────────────────────────────────────
             if (_isResizing && _resizeApp != null)
             {
+                int resizeD = (int)(_resizeApp.Start.Date - _weekStart).TotalDays;
                 int yTop = TimeToY(_resizeApp.Start.TimeOfDay) + 2;
-                int ghostX = DayLeft((int)(_resizeApp.Start.Date - _weekStart).TotalDays) + 20;
-                int ghostW = DayColW - 30;
+                int ghostX = DayLeft(resizeD) + AppMargin + 1;
+                int ghostW = DayColW - AppMargin * 2 - 1;
                 int ghostH = _resizeEndY - yTop - 2;
 
                 using var ghostBg = new SolidBrush(Color.FromArgb(160, _resizeApp.Color));
-                g.FillRectangle(ghostBg, ghostX, yTop, ghostW, ghostH);
                 using var ghostBorder = new Pen(Color.FromArgb(220, _resizeApp.Color), 2);
+                g.FillRectangle(ghostBg, ghostX, yTop, ghostW, ghostH);
                 g.DrawRectangle(ghostBorder, ghostX, yTop, ghostW, ghostH);
 
-                // Etichetta ora di fine
+                // Etichetta ora di fine (DrawString rispetta TranslateTransform)
                 TimeSpan newEnd = FirstSlot.Add(TimeSpan.FromMinutes(_resizeEndY / SlotH * 15));
                 using var lf = new Font("Segoe UI", 8f, FontStyle.Bold);
-                TextRenderer.DrawText(g, $"Fine: {newEnd.Hours:D2}:{newEnd.Minutes:D2}", lf,
-                    new Rectangle(ghostX + 4, _resizeEndY - 20 - _scrollY, ghostW - 8, 18),
-                    Color.White, TextFormatFlags.Left | TextFormatFlags.Top | TextFormatFlags.EndEllipsis);
+                using var wBrush = new SolidBrush(Color.White);
+                using var sf = new StringFormat { Trimming = StringTrimming.EllipsisCharacter, FormatFlags = StringFormatFlags.NoWrap };
+                g.DrawString($"Fine: {newEnd.Hours:D2}:{newEnd.Minutes:D2}", lf, wBrush,
+                    new RectangleF(ghostX + 5, _resizeEndY - 20, ghostW - 10, 18), sf);
 
                 // Linea di snap
                 using var snapLine = new Pen(Color.FromArgb(200, _resizeApp.Color), 2);
@@ -520,24 +522,24 @@ namespace PlannerShop.Forms.Agenda
             {
                 int dur = (int)(_dragApp.End - _dragApp.Start).TotalMinutes;
                 int ghostH = Math.Max(SlotH - 4, dur / 15 * SlotH - 4);
-                int ghostX = DayLeft(_dragCurrentD) + 20;
-                int ghostW = DayColW - 30;
+                int ghostX = DayLeft(_dragCurrentD) + AppMargin + 1;
+                int ghostW = DayColW - AppMargin * 2 - 1;
+                int ghostY = _dragCurrentY + 2;
 
-                // Blocco ghost semitrasparente
                 using var ghostBg = new SolidBrush(Color.FromArgb(160, _dragApp.Color));
-                g.FillRectangle(ghostBg, ghostX, _dragCurrentY + 2, ghostW, ghostH);
                 using var ghostBorder = new Pen(Color.FromArgb(200, _dragApp.Color), 2);
-                g.DrawRectangle(ghostBorder, ghostX, _dragCurrentY + 2, ghostW, ghostH);
+                g.FillRectangle(ghostBg, ghostX, ghostY, ghostW, ghostH);
+                g.DrawRectangle(ghostBorder, ghostX, ghostY, ghostW, ghostH);
 
-                // Ora snappata
+                // Ora snappata (DrawString rispetta TranslateTransform)
                 TimeSpan snapped = FirstSlot.Add(TimeSpan.FromMinutes(_dragCurrentY / SlotH * 15));
                 using var ghostFont = new Font("Segoe UI", 8f, FontStyle.Bold);
-                TextRenderer.DrawText(g,
+                using var wBrush = new SolidBrush(Color.White);
+                using var sf = new StringFormat { Trimming = StringTrimming.EllipsisCharacter, FormatFlags = StringFormatFlags.NoWrap };
+                g.DrawString(
                     $"{_weekStart.AddDays(_dragCurrentD):ddd}  {snapped.Hours:D2}:{snapped.Minutes:D2}",
-                    ghostFont,
-                    new Rectangle(ghostX + 6, _dragCurrentY + 2 - _scrollY, ghostW - 8, 20),
-                    Color.White,
-                    TextFormatFlags.Left | TextFormatFlags.Top | TextFormatFlags.EndEllipsis);
+                    ghostFont, wBrush,
+                    new RectangleF(ghostX + 5, ghostY + 4, ghostW - 10, 20), sf);
 
                 // Linea orizzontale di destinazione
                 using var snapLine = new Pen(Color.FromArgb(200, _dragApp.Color), 2);
@@ -557,7 +559,8 @@ namespace PlannerShop.Forms.Agenda
                 Math.Max(0, app.Color.R - 55),
                 Math.Max(0, app.Color.G - 55),
                 Math.Max(0, app.Color.B - 55));
-            g.FillRectangle(new SolidBrush(dark), r.Left, r.Top, 4, r.Height);
+            // Barra scura: disegnata a sinistra del blocco, nel margine, non dentro
+            g.FillRectangle(new SolidBrush(dark), r.Left - 4, r.Top, 4, r.Height);
             using var border = new Pen(dark);
             g.DrawRectangle(border, r);
 
@@ -575,8 +578,8 @@ namespace PlannerShop.Forms.Agenda
             }
 
             const int PadTop = 4;
-            const int PadLeft = 8;
-            int textRightPad = showDelete ? XS + 10 : 6;
+            const int PadLeft = 5;
+            int textRightPad = showDelete ? XS + 8 : 5;
 
             // Usa DrawString (GDI+) che rispetta TranslateTransform, a differenza di TextRenderer (GDI)
             g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
