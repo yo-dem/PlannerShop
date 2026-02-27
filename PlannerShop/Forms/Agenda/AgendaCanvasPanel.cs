@@ -271,11 +271,14 @@ namespace PlannerShop.Forms.Agenda
             if (dayApps.Count == 0) return null;
 
             var columns = ResolveColumns(dayApps);
-            int maxCols = columns.Max(x => x.col) + 1;
-            int colW = ColW(d) / maxCols;
 
             foreach (var (app, col) in columns)
             {
+                int localMax = columns
+                    .Where(c => c.app.Start < app.End && c.app.End > app.Start)
+                    .Max(c => c.col) + 1;
+
+                int colW = ColW(d) / localMax;
                 int xLeft = DayLeft(d) + col * colW + AppMargin + 1;
                 int xRight = xLeft + colW - AppMargin * 2 - 1;
                 int yTop = TimeToY(app.Start.TimeOfDay);
@@ -474,18 +477,22 @@ namespace PlannerShop.Forms.Agenda
                 if (dayApps.Count == 0) continue;
 
                 var columns = ResolveColumns(dayApps);
-                int maxCols = columns.Max(x => x.col) + 1;
 
                 foreach (var (app, col) in columns)
                 {
+                    // maxCols = quante colonne servono nel "gruppo" sovrapposto a questo app
+                    int localMax = columns
+                        .Where(c => c.app.Start < app.End && c.app.End > app.Start)
+                        .Max(c => c.col) + 1;
+
                     int yTop = TimeToY(app.Start.TimeOfDay) + 2;
                     int yBot = TimeToY(app.End.TimeOfDay) - 2;
                     int hPx = Math.Max(SlotH - 4, yBot - yTop);
-                    int colW = ColW(d) / maxCols;
-                    int xPx = DayLeft(d) + col * colW + AppMargin + 1;   // +1 compensa la linea verticale sinistra
+                    int colW = ColW(d) / localMax;
+                    int xPx = DayLeft(d) + col * colW + AppMargin + 1;
                     int wPx = colW - AppMargin * 2 - 1;
 
-                    DrawAppointment(g, app, new Rectangle(xPx, yTop, wPx, hPx), maxCols > 1, app == _hoverApp);
+                    DrawAppointment(g, app, new Rectangle(xPx, yTop, wPx, hPx), localMax > 1, app == _hoverApp);
                 }
             }
             g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.Default;
@@ -657,9 +664,11 @@ namespace PlannerShop.Forms.Agenda
             {
                 var dayApps = _allApps.Where(a => a.Start.Date == _weekStart.AddDays(d).Date).OrderBy(a => a.Start).ToList();
                 var columns = ResolveColumns(dayApps);
-                int maxCols = columns.Max(x => x.col) + 1;
-                int colW = ColW(d) / maxCols;
                 var entry = columns.FirstOrDefault(c => c.app == app);
+                int localMax = columns
+                    .Where(c => c.app.Start < app.End && c.app.End > app.Start)
+                    .Max(c => c.col) + 1;
+                int colW = ColW(d) / localMax;
                 int xPx = DayLeft(d) + entry.col * colW + AppMargin + 1;
                 int wPx = colW - AppMargin * 2 - 1;
                 int yTop = TimeToY(app.Start.TimeOfDay) + 2;   // content coords
