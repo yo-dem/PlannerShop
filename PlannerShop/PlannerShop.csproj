@@ -60,7 +60,7 @@
     <None Update="Data\PSDB.db">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Data\PSDB_Agenda.db">
+    <None Update="Forms\Agenda\Data\PSDB_Agenda.db">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>

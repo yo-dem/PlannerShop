@@ -13,29 +13,9 @@ namespace PlannerShop.Data
         public static void DiagnosticaDB()
         {
             string connString = GetConnectionString();
-            System.Diagnostics.Debug.WriteLine($"[Agenda] ConnString: {connString}");
-
+           
             using var conn = new SQLiteConnection(connString);
             conn.Open();
-
-            // Stampa il path del file che SQLite ha DAVVERO aperto
-            using var cmdPath = new SQLiteCommand("PRAGMA database_list", conn);
-            using var rPath = cmdPath.ExecuteReader();
-            while (rPath.Read())
-                System.Diagnostics.Debug.WriteLine($"[Agenda] DB aperto: {rPath["file"]}");
-
-            // Lista tabelle
-            using var cmd = new SQLiteCommand(
-                "SELECT name FROM sqlite_master WHERE type='table'", conn);
-            using var reader = cmd.ExecuteReader();
-            bool found = false;
-            while (reader.Read())
-            {
-                System.Diagnostics.Debug.WriteLine($"[Agenda] Tabella: {reader.GetString(0)}");
-                found = true;
-            }
-            if (!found)
-                System.Diagnostics.Debug.WriteLine("[Agenda] NESSUNA TABELLA TROVATA");
         }
         private static string GetConnectionString()
         {
@@ -44,7 +24,7 @@ namespace PlannerShop.Data
 
             string path = Path.Combine(
                 Path.GetDirectoryName(location.Location)!,
-                "Data",
+                "Forms/Agenda/Data",
                 "PSDB_Agenda.db");
 
             var builder = new SQLiteConnectionStringBuilder
