@@ -9,7 +9,7 @@ namespace PlannerShop.Forms.Agenda.Forms.Cruds
 
         private readonly int _appointmentId;
         private bool _titleManuallyEdited = false;
-        private ClienteAutocomplete? _autocomplete;
+        private bool _loadingComplete = false;
 
         public AppointmentEditForm(Appointment app)
         {
@@ -32,15 +32,12 @@ namespace PlannerShop.Forms.Agenda.Forms.Cruds
         {
             txtCliente.TextChanged += (s, e) => AutoGenerateTitle();
             txtServizio.TextChanged += (s, e) => AutoGenerateTitle();
-            txtTitolo.TextChanged += (s, e) => { _titleManuallyEdited = true; };
+            txtTitolo.TextChanged += (s, e) => { if (_loadingComplete) _titleManuallyEdited = true; };
             dtpOraInizio.ValueChanged += (s, e) => UpdateOraFine();
             btnColor1.Click += (s, e) => SelectColor(AppointmentInsertForm.Palette[0]);
             btnColor2.Click += (s, e) => SelectColor(AppointmentInsertForm.Palette[1]);
             btnColor3.Click += (s, e) => SelectColor(AppointmentInsertForm.Palette[2]);
             btnColor4.Click += (s, e) => SelectColor(AppointmentInsertForm.Palette[3]);
-            btnColor5.Click += (s, e) => SelectColor(AppointmentInsertForm.Palette[4]);
-            btnColor6.Click += (s, e) => SelectColor(AppointmentInsertForm.Palette[5]);
-            _autocomplete = new ClienteAutocomplete(txtCliente, this);
         }
 
         private void SelectColor(Color c)
@@ -51,7 +48,6 @@ namespace PlannerShop.Forms.Agenda.Forms.Cruds
 
         private void LoadAppointment(Appointment app)
         {
-            _titleManuallyEdited = true;
             txtTitolo.Text = app.Title;
             txtCliente.Text = app.ClientName;
             txtOperatore.Text = app.OperatorName;
@@ -66,10 +62,13 @@ namespace PlannerShop.Forms.Agenda.Forms.Cruds
             var match = AppointmentInsertForm.Palette
                 .FirstOrDefault(c => c.ToArgb() == app.Color.ToArgb());
             SelectColor(match == default ? AppointmentInsertForm.Palette[0] : match);
+            _titleManuallyEdited = false;
+            _loadingComplete = true;
         }
 
         private void AutoGenerateTitle()
         {
+            if (!_loadingComplete) return;
             if (_titleManuallyEdited) return;
             string cliente = txtCliente.Text.Trim();
             string servizio = txtServizio.Text.Trim();
@@ -138,12 +137,6 @@ namespace PlannerShop.Forms.Agenda.Forms.Cruds
             IsDeleted = true;
             DialogResult = DialogResult.OK;
             Close();
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing) _autocomplete?.Dispose();
-            base.Dispose(disposing);
         }
 
         private void btnAnnulla_Click(object sender, EventArgs e) { DialogResult = DialogResult.Cancel; Close(); }
