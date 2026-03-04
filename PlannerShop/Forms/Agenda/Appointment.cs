@@ -5,14 +5,23 @@
         public int Id { get; set; }
         public string Title { get; set; } = "";
         public Color Color { get; set; } = Color.SteelBlue;
+
         public string ClientName { get; set; } = "";
+        public string Phone { get; set; } = "";
+        public string Email { get; set; } = "";
+
         public string OperatorName { get; set; } = "";
+
         public int ServiceId { get; set; }
         public string ServiceName { get; set; } = "";
+
         public DateTime Start { get; set; }
         public DateTime End { get; set; }
+
         public AppointmentStatus Status { get; set; }
+
         public string Notes { get; set; } = "";
+
         public DateTime Timestamp { get; set; }
 
         public Appointment()
@@ -23,6 +32,16 @@
 
         // Fix: era (Start - End) che dava valore negativo
         public int DurataMinuti => (int)(End - Start).TotalMinutes;
+
+        /// <summary>
+        /// True per Completato, Annullato, Assente.
+        /// Il canvas disegna grigio (Annullato/Assente) o verde pallido (Completato).
+        /// L'EditForm blocca tutti i campi tranne cmbStato.
+        /// </summary>
+        public bool IsTerminal =>
+            Status == AppointmentStatus.Completato ||
+            Status == AppointmentStatus.Annullato ||
+            Status == AppointmentStatus.Assente;
     }
 
     public enum AppointmentStatus

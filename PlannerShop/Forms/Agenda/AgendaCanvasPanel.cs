@@ -24,13 +24,6 @@ namespace PlannerShop.Forms.Agenda
 
     // ============================================================
     // CANVAS PRINCIPALE AGENDA
-    // Architettura:
-    //   _header  : strip fissa in cima (nomi giorni)
-    //   _timebar : strip fissa a sinistra (ore)
-    //   _canvas  : area centrale con griglia + appuntamenti disegnati via GDI+
-    //   _vscroll : scrollbar verticale esplicita
-    // Lo scroll è gestito da _scrollY; la rotella viene intercettata
-    // sia qui che da tutti i figli tramite override WndProc.
     // ============================================================
     internal class AgendaCanvasPanel : UserControl
     {
@@ -48,7 +41,6 @@ namespace PlannerShop.Forms.Agenda
         private static readonly Color CSideBg = Color.FromArgb(250, 250, 250);
         private static readonly Color CTodayBg = Color.FromArgb(240, 246, 255);
         private static readonly Color CTodayLine = Color.FromArgb(60, 120, 215);
-        private static readonly Color CWeekendBg = Color.FromArgb(255, 248, 248);
         private static readonly Color CText = Color.FromArgb(40, 40, 40);
         private static readonly Color CSubText = Color.FromArgb(120, 120, 120);
         private static readonly Color CWeekend = Color.FromArgb(185, 40, 40);
@@ -69,14 +61,16 @@ namespace PlannerShop.Forms.Agenda
         private int _dragCurrentD = 0;
 
         // ── Resize (bordo inferiore) ─────────────────────────────
-        private Appointment? _resizeApp = null;   // app in corso di resize
+        private Appointment? _resizeApp = null;
         private bool _isResizing = false;
-        private int _resizeEndY = 0;      // Y fine slot corrente (content coords)
-        private const int ResizeGripH = 8;      // pixel dal bordo basso sensibili al resize
-        private readonly BufferedPanel _tipPanel = new() { Visible = false, BackColor = Color.FromArgb(255, 255, 225), Padding = new Padding(6) };
+        private int _resizeEndY = 0;
+        private const int ResizeGripH = 8;
+
+        private readonly BufferedPanel _tipPanel = new()
+        { Visible = false, BackColor = Color.FromArgb(255, 255, 225), Padding = new Padding(6) };
         private Appointment? _tooltipApp = null;
         private string _tooltipText = "";
-        private Appointment? _hoverApp = null;   // app sotto il cursore (per mostrare la X)
+        private Appointment? _hoverApp = null;
 
         // ── Controlli ───────────────────────────────────────────
         private readonly BufferedPanel _header;
@@ -125,7 +119,6 @@ namespace PlannerShop.Forms.Agenda
             _timebar.BringToFront();
             _tipPanel.BringToFront();
 
-            // Propaga la rotella da tutti i controlli figli al canvas
             foreach (Control c in new Control[] { _header, _timebar, _vscroll })
                 c.MouseWheel += (_, e) => HandleWheel(e.Delta);
 
@@ -171,10 +164,7 @@ namespace PlannerShop.Forms.Agenda
             HandleWheel(e.Delta);
         }
 
-        private void HandleWheel(int delta)
-        {
-            SetScroll(_scrollY - delta / 120 * SlotH);
-        }
+        private void HandleWheel(int delta) => SetScroll(_scrollY - delta / 120 * SlotH);
 
         private void SetScroll(int newY)
         {
@@ -185,7 +175,6 @@ namespace PlannerShop.Forms.Agenda
             _timebar.Invalidate();
         }
 
-        // Intercetta WM_MOUSEWHEEL anche quando il focus è su controlli figli
         protected override void WndProc(ref Message m)
         {
             const int WM_MOUSEWHEEL = 0x020A;
@@ -227,7 +216,7 @@ namespace PlannerShop.Forms.Agenda
         }
 
         private int ColW(int d) => Math.Max(1, (_canvas.Width - TimeColW) / DayCount);
-        private const int AppMargin = 13;   // margine sinistro = destro per ogni blocco appuntamento
+        private const int AppMargin = 13;
 
         private int DayLeft(int d)
         {
@@ -236,7 +225,7 @@ namespace PlannerShop.Forms.Agenda
             return x;
         }
 
-        private int DayColW => ColW(0); // larghezza di un giorno feriale (per compatibilità HitTest griglia)
+        private int DayColW => ColW(0);
         private int TotalH => SlotCount * SlotH;
 
         private int TimeToY(TimeSpan t) =>
@@ -250,14 +239,13 @@ namespace PlannerShop.Forms.Agenda
 
 
         // ============================================================
-        // HIT TEST appuntamenti (coordinate relative al canvas)
+        // HIT TEST
         // ============================================================
         private Appointment? HitTest(int canvasX, int canvasY)
         {
             int contentY = canvasY + _scrollY;
             if (canvasX < TimeColW) return null;
 
-            // Trova la colonna giorno in base alle larghezze variabili
             int d = -1;
             for (int i = 0; i < DayCount; i++)
             {
@@ -307,8 +295,8 @@ namespace PlannerShop.Forms.Agenda
             using var colPen = new Pen(Color.FromArgb(200, 200, 200));
             using var todayPen = new Pen(CTodayLine, 3);
             using var dotBrush = new SolidBrush(CTodayLine);
-            using var dayFont = new Font("Segoe UI", 11.5f, FontStyle.Bold);    // Lunedì, Martedì…
-            using var datFont = new Font("Segoe UI", 10f, FontStyle.Regular); // 23 feb — no bold
+            using var dayFont = new Font("Segoe UI", 11.5f, FontStyle.Bold);
+            using var datFont = new Font("Segoe UI", 10f, FontStyle.Regular);
 
             g.DrawLine(sidePen, TimeColW - 1, 0, TimeColW - 1, HeaderH);
 
@@ -318,10 +306,10 @@ namespace PlannerShop.Forms.Agenda
                 bool isToday = day.Date == DateTime.Today;
                 bool isWeekend = day.DayOfWeek is DayOfWeek.Saturday or DayOfWeek.Sunday;
                 bool isSat = day.DayOfWeek == DayOfWeek.Saturday;
-                int x = DayLeft(d), w = ColW(d);   // usa ColW(d) per larghezza reale
+                int x = DayLeft(d), w = ColW(d);
 
                 if (isToday) g.FillRectangle(new SolidBrush(CTodayBg), x, 0, w, HeaderH);
-                else if (isWeekend) g.FillRectangle(new SolidBrush(CWeekendBg), x, 0, w, HeaderH);
+                else if (isWeekend) g.FillRectangle(new SolidBrush(Color.FromArgb(255, 248, 248)), x, 0, w, HeaderH);
 
                 Color tc = isWeekend ? CWeekend : CText;
                 Color dc = isWeekend ? CWeekend : CSubText;
@@ -383,8 +371,6 @@ namespace PlannerShop.Forms.Agenda
                 TimeSpan t = FirstSlot.Add(TimeSpan.FromMinutes(s * 15));
                 bool isHour = t.Minutes == 0;
 
-                // Testo parte da yLine+2 verso il basso (Near = Top).
-                // Non sborda mai sopra, visibile sempre, segue lo scroll.
                 if (isHour)
                     g.DrawString($"{t.Hours:D2}:{t.Minutes:D2}", fontHour, brText,
                         new RectangleF(0, yLine + 2, TimeColW - 4, SlotH - 2), sfHour);
@@ -403,8 +389,6 @@ namespace PlannerShop.Forms.Agenda
             var g = e.Graphics;
             g.Clear(Color.White);
 
-            // Tutto viene disegnato nello spazio "contenuto" (0..TotalH),
-            // poi traslato di -_scrollY per mostrare la porzione corretta
             g.TranslateTransform(0, -_scrollY);
 
             int w = _canvas.Width;
@@ -423,7 +407,7 @@ namespace PlannerShop.Forms.Agenda
             }
 
             // ── Righe orizzontali ─────────────────────────────────
-            for (int s = 1; s <= SlotCount; s++)   // parte da 1: salta la linea a y=0
+            for (int s = 1; s <= SlotCount; s++)
             {
                 int y = s * SlotH;
                 bool isHour = s % 4 == 0;
@@ -441,17 +425,9 @@ namespace PlannerShop.Forms.Agenda
                 bool isSat = day.DayOfWeek == DayOfWeek.Saturday;
                 bool isSun = day.DayOfWeek == DayOfWeek.Sunday;
 
-                // Sab/Dom: linea grigia normale a sinistra (uguale agli altri giorni)
-                // Solo il confine feriali→sab mantiene il pen scuro (sep) già disegnato
-                // su DayLeft(sabato) nel loop precedente.
-                // Qui usiamo vp per tutti: la separazione feriali/weekend è data
-                // dalla linea a sinistra del sabato (primo weekend).
-                if (isSat)
-                    g.DrawLine(sep, DayLeft(d), 0, DayLeft(d), TotalH);        // confine ven→sab: nero
-                else if (isSun)
-                    g.DrawLine(vp, DayLeft(d), 0, DayLeft(d), TotalH);         // confine sab→dom: grigio
-                else
-                    g.DrawLine(vp, DayLeft(d) + DayColW - 1, 0, DayLeft(d) + DayColW - 1, TotalH);
+                if (isSat) g.DrawLine(sep, DayLeft(d), 0, DayLeft(d), TotalH);
+                else if (isSun) g.DrawLine(vp, DayLeft(d), 0, DayLeft(d), TotalH);
+                else g.DrawLine(vp, DayLeft(d) + DayColW - 1, 0, DayLeft(d) + DayColW - 1, TotalH);
             }
 
             // ── Linea ora corrente ────────────────────────────────
@@ -473,14 +449,13 @@ namespace PlannerShop.Forms.Agenda
             {
                 DateTime day = _weekStart.AddDays(d);
                 var dayApps = _allApps.Where(a => a.Start.Date == day.Date)
-                                          .OrderBy(a => a.Start).ToList();
+                                           .OrderBy(a => a.Start).ToList();
                 if (dayApps.Count == 0) continue;
 
                 var columns = ResolveColumns(dayApps);
 
                 foreach (var (app, col) in columns)
                 {
-                    // maxCols = quante colonne servono nel "gruppo" sovrapposto a questo app
                     int localMax = columns
                         .Where(c => c.app.Start < app.End && c.app.End > app.Start)
                         .Max(c => c.col) + 1;
@@ -492,7 +467,8 @@ namespace PlannerShop.Forms.Agenda
                     int xPx = DayLeft(d) + col * colW + AppMargin + 1;
                     int wPx = colW - AppMargin * 2 - 1;
 
-                    DrawAppointment(g, app, new Rectangle(xPx, yTop, wPx, hPx), localMax > 1, app == _hoverApp);
+                    DrawAppointment(g, app, new Rectangle(xPx, yTop, wPx, hPx),
+                        localMax > 1, app == _hoverApp);
                 }
             }
             g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.Default;
@@ -511,15 +487,14 @@ namespace PlannerShop.Forms.Agenda
                 g.FillRectangle(ghostBg, ghostX, yTop, ghostW, ghostH);
                 g.DrawRectangle(ghostBorder, ghostX, yTop, ghostW, ghostH);
 
-                // Etichetta ora di fine (DrawString rispetta TranslateTransform)
                 TimeSpan newEnd = FirstSlot.Add(TimeSpan.FromMinutes(_resizeEndY / SlotH * 15));
                 using var lf = new Font("Segoe UI", 8f, FontStyle.Bold);
                 using var wBrush = new SolidBrush(Color.White);
-                using var sf = new StringFormat { Trimming = StringTrimming.EllipsisCharacter, FormatFlags = StringFormatFlags.NoWrap };
+                using var sf = new StringFormat
+                { Trimming = StringTrimming.EllipsisCharacter, FormatFlags = StringFormatFlags.NoWrap };
                 g.DrawString($"Fine: {newEnd.Hours:D2}:{newEnd.Minutes:D2}", lf, wBrush,
                     new RectangleF(ghostX + 5, _resizeEndY - 20, ghostW - 10, 18), sf);
 
-                // Linea di snap
                 using var snapLine = new Pen(Color.FromArgb(200, _resizeApp.Color), 2);
                 g.DrawLine(snapLine, ghostX, _resizeEndY, ghostX + ghostW, _resizeEndY);
             }
@@ -538,17 +513,16 @@ namespace PlannerShop.Forms.Agenda
                 g.FillRectangle(ghostBg, ghostX, ghostY, ghostW, ghostH);
                 g.DrawRectangle(ghostBorder, ghostX, ghostY, ghostW, ghostH);
 
-                // Ora snappata (DrawString rispetta TranslateTransform)
                 TimeSpan snapped = FirstSlot.Add(TimeSpan.FromMinutes(_dragCurrentY / SlotH * 15));
                 using var ghostFont = new Font("Segoe UI", 8f, FontStyle.Bold);
                 using var wBrush = new SolidBrush(Color.White);
-                using var sf = new StringFormat { Trimming = StringTrimming.EllipsisCharacter, FormatFlags = StringFormatFlags.NoWrap };
+                using var sf = new StringFormat
+                { Trimming = StringTrimming.EllipsisCharacter, FormatFlags = StringFormatFlags.NoWrap };
                 g.DrawString(
                     $"{_weekStart.AddDays(_dragCurrentD):ddd}  {snapped.Hours:D2}:{snapped.Minutes:D2}",
                     ghostFont, wBrush,
                     new RectangleF(ghostX + 5, ghostY + 4, ghostW - 10, 20), sf);
 
-                // Linea orizzontale di destinazione
                 using var snapLine = new Pen(Color.FromArgb(200, _dragApp.Color), 2);
                 g.DrawLine(snapLine, DayLeft(_dragCurrentD), _dragCurrentY,
                     DayLeft(_dragCurrentD) + DayColW, _dragCurrentY);
@@ -557,26 +531,61 @@ namespace PlannerShop.Forms.Agenda
             g.ResetTransform();
         }
 
-        private void DrawAppointment(Graphics g, Appointment app, Rectangle r, bool compact = false, bool showDelete = false)
-        {
-            using var bg = new SolidBrush(app.Color);
-            g.FillRectangle(bg, r);
 
-            Color dark = Color.FromArgb(
-                Math.Max(0, app.Color.R - 55),
-                Math.Max(0, app.Color.G - 55),
-                Math.Max(0, app.Color.B - 55));
-            // Barra scura: disegnata a sinistra del blocco, nel margine, non dentro
-            g.FillRectangle(new SolidBrush(dark), r.Left - 4, r.Top, 4, r.Height);
-            using var border = new Pen(dark);
+        // ============================================================
+        // DRAW APPOINTMENT
+        // ============================================================
+        private void DrawAppointment(Graphics g, Appointment app, Rectangle r,
+                                     bool compact = false, bool showDelete = false)
+        {
+            // ── Colore base in base allo stato ───────────────────
+            // Annullato / Assente  → grigio
+            // Completato           → verde pallido
+            // altri                → colore scelto dall'utente
+            Color fillColor;
+            Color darkColor;
+            Color textColor;
+            Color text2Color;
+
+            if (app.Status == AppointmentStatus.Annullato ||
+                app.Status == AppointmentStatus.Assente)
+            {
+                fillColor = Color.FromArgb(170, 170, 170);
+                darkColor = Color.FromArgb(110, 110, 110);
+                textColor = Color.FromArgb(60, 60, 60);
+                text2Color = Color.FromArgb(90, 90, 90);
+            }
+            else if (app.Status == AppointmentStatus.Completato)
+            {
+                fillColor = Color.FromArgb(180, 220, 180);
+                darkColor = Color.FromArgb(100, 160, 100);
+                textColor = Color.FromArgb(30, 80, 30);
+                text2Color = Color.FromArgb(50, 110, 50);
+            }
+            else
+            {
+                fillColor = app.Color;
+                darkColor = Color.FromArgb(
+                    Math.Max(0, app.Color.R - 55),
+                    Math.Max(0, app.Color.G - 55),
+                    Math.Max(0, app.Color.B - 55));
+                textColor = Color.White;
+                text2Color = Color.FromArgb(220, 255, 255, 255);
+            }
+
+            // ── Sfondo + bordo ───────────────────────────────────
+            using var bg = new SolidBrush(fillColor);
+            using var border = new Pen(darkColor);
+            g.FillRectangle(bg, r);
+            g.FillRectangle(new SolidBrush(darkColor), r.Left - 4, r.Top, 4, r.Height);
             g.DrawRectangle(border, r);
 
-            // ── X di eliminazione (solo al hover, niente sfondo) ──
+            // ── Al hover: X di eliminazione (sempre, per tutti gli stati) ──
             const int XS = 16;
             if (showDelete)
             {
                 var xRect = new Rectangle(r.Right - XS - 2, r.Top + 2, XS, XS);
-                using var xPen = new Pen(Color.White, 2f);
+                using var xPen = new Pen(app.IsTerminal ? darkColor : Color.White, 2f);
                 g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
                 int m = 3;
                 g.DrawLine(xPen, xRect.Left + m, xRect.Top + m, xRect.Right - m, xRect.Bottom - m);
@@ -584,11 +593,25 @@ namespace PlannerShop.Forms.Agenda
                 g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.Default;
             }
 
+            // ── Label stato in basso a destra (sempre visibile per terminali) ──
+            if (app.IsTerminal && r.Height >= 20)
+            {
+                string label = app.Status.ToString().ToUpper();
+                using var stFont = new Font("Segoe UI", 7f, FontStyle.Bold);
+                using var stBrush = new SolidBrush(darkColor);
+                SizeF stSize = g.MeasureString(label, stFont);
+                g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+                g.DrawString(label, stFont, stBrush,
+                    r.Right - stSize.Width - 3, r.Bottom - stSize.Height - 2);
+                g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.Default;
+            }
+
+            // ── Testo ────────────────────────────────────────────
             const int PadTop = 4;
             const int PadLeft = 5;
-            int textRightPad = showDelete ? XS + 8 : 5;
+            // La X è in overlay: non altera mai la larghezza del testo
+            const int textRightPad = 5;
 
-            // Usa DrawString (GDI+) che rispetta TranslateTransform, a differenza di TextRenderer (GDI)
             g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
 
             string timeStr = $"{app.Start:HH:mm}–{app.End:HH:mm}";
@@ -602,39 +625,49 @@ namespace PlannerShop.Forms.Agenda
             {
                 using var tf = new Font("Segoe UI", 9.5f, FontStyle.Bold);
                 using var of = new Font("Segoe UI", 8.5f, FontStyle.Bold);
-                using var wBrush = new SolidBrush(Color.White);
-                using var w2Brush = new SolidBrush(Color.FromArgb(220, 255, 255, 255));
-                using var sf = new StringFormat { Trimming = StringTrimming.EllipsisCharacter, FormatFlags = StringFormatFlags.NoWrap };
+                using var wBrush = new SolidBrush(textColor);
+                using var w2Brush = new SolidBrush(text2Color);
+                using var sf = new StringFormat
+                { Trimming = StringTrimming.EllipsisCharacter, FormatFlags = StringFormatFlags.NoWrap };
 
                 if (r.Height - PadTop >= 20)
-                    g.DrawString($"{app.Start:HH:mm}", tf, wBrush, new RectangleF(textX, textY, textW, 20), sf);
+                    g.DrawString($"{app.Start:HH:mm}", tf, wBrush,
+                        new RectangleF(textX, textY, textW, 20), sf);
 
                 if (hasOp && r.Height - PadTop >= 37)
-                    g.DrawString(app.OperatorName, of, w2Brush, new RectangleF(textX, textY + 20, textW, 17), sf);
+                    g.DrawString(app.OperatorName, of, w2Brush,
+                        new RectangleF(textX, textY + 20, textW, 17), sf);
             }
             else
             {
                 using var titleFont = new Font("Segoe UI", 10f, FontStyle.Bold);
                 using var row2Font = new Font("Segoe UI", 8.5f, FontStyle.Bold);
-                using var wBrush = new SolidBrush(Color.White);
-                using var w2Brush = new SolidBrush(Color.FromArgb(220, 255, 255, 255));
-                using var sf = new StringFormat { Trimming = StringTrimming.EllipsisCharacter, FormatFlags = StringFormatFlags.NoWrap };
+                using var wBrush = new SolidBrush(textColor);
+                using var w2Brush = new SolidBrush(text2Color);
+                using var sf = new StringFormat
+                { Trimming = StringTrimming.EllipsisCharacter, FormatFlags = StringFormatFlags.NoWrap };
 
                 string row2 = hasOp ? $"{app.OperatorName}  {timeStr}" : timeStr;
 
                 if (r.Height - PadTop < 22)
                 {
-                    // Blocco molto piccolo: titolo + orario su riga unica
-                    using var sfC = new StringFormat { Trimming = StringTrimming.EllipsisCharacter, FormatFlags = StringFormatFlags.NoWrap, LineAlignment = StringAlignment.Center };
+                    using var sfC = new StringFormat
+                    {
+                        Trimming = StringTrimming.EllipsisCharacter,
+                        FormatFlags = StringFormatFlags.NoWrap,
+                        LineAlignment = StringAlignment.Center
+                    };
                     g.DrawString($"{app.Title}  {timeStr}", titleFont, wBrush,
                         new RectangleF(textX, r.Top, textW, r.Height), sfC);
                 }
                 else
                 {
-                    g.DrawString(app.Title, titleFont, wBrush, new RectangleF(textX, textY, textW, 22), sf);
+                    g.DrawString(app.Title, titleFont, wBrush,
+                        new RectangleF(textX, textY, textW, 22), sf);
 
                     if (r.Height - PadTop >= 40)
-                        g.DrawString(row2, row2Font, w2Brush, new RectangleF(textX, textY + 22, textW, 18), sf);
+                        g.DrawString(row2, row2Font, w2Brush,
+                            new RectangleF(textX, textY + 22, textW, 18), sf);
                 }
             }
 
@@ -643,7 +676,7 @@ namespace PlannerShop.Forms.Agenda
 
 
         // ============================================================
-        // MOUSE sul canvas — solo doppio click
+        // MOUSE sul canvas
         // ============================================================
         private void OnCanvasMouseDown(object? sender, MouseEventArgs e)
         {
@@ -651,9 +684,7 @@ namespace PlannerShop.Forms.Agenda
             var app = HitTest(e.X, e.Y);
             if (app == null) return;
 
-            // ── Click sulla X di eliminazione? ───────────────────
-            // Calcola la rect della X nelle stesse coordinate content usate nel paint
-            // (il canvas usa TranslateTransform(0,-scrollY), quindi content = canvas + scrollY)
+            // ── Click sulla X di eliminazione (solo app non terminali) ──
             int d = -1;
             for (int i = 0; i < DayCount; i++)
             {
@@ -662,7 +693,9 @@ namespace PlannerShop.Forms.Agenda
             }
             if (d >= 0)
             {
-                var dayApps = _allApps.Where(a => a.Start.Date == _weekStart.AddDays(d).Date).OrderBy(a => a.Start).ToList();
+                var dayApps = _allApps
+                    .Where(a => a.Start.Date == _weekStart.AddDays(d).Date)
+                    .OrderBy(a => a.Start).ToList();
                 var columns = ResolveColumns(dayApps);
                 var entry = columns.FirstOrDefault(c => c.app == app);
                 int localMax = columns
@@ -671,10 +704,9 @@ namespace PlannerShop.Forms.Agenda
                 int colW = ColW(d) / localMax;
                 int xPx = DayLeft(d) + entry.col * colW + AppMargin + 1;
                 int wPx = colW - AppMargin * 2 - 1;
-                int yTop = TimeToY(app.Start.TimeOfDay) + 2;   // content coords
+                int yTop = TimeToY(app.Start.TimeOfDay) + 2;
 
                 const int XS = 16;
-                // Converti click canvas → content coords
                 int contentClickY = e.Y + _scrollY;
                 var xRect = new Rectangle(xPx + wPx - XS - 2, yTop + 2, XS, XS);
                 if (e.X >= xRect.Left && e.X <= xRect.Right &&
@@ -692,7 +724,9 @@ namespace PlannerShop.Forms.Agenda
                 }
             }
 
-            // Bordo inferiore del blocco in coordinate canvas
+            // Drag e resize disabilitati per appuntamenti terminali
+            if (app.IsTerminal) return;
+
             int yBot = TimeToY(app.End.TimeOfDay) - 2 - _scrollY;
 
             if (e.Y >= yBot - ResizeGripH && e.Y <= yBot + ResizeGripH / 2)
@@ -718,7 +752,6 @@ namespace PlannerShop.Forms.Agenda
             int d = (e.X - TimeColW) / Math.Max(1, DayColW);
             if (d < 0 || d >= DayCount) return;
 
-            // Se il doppio click cade su un appuntamento → modifica
             var app = HitTest(e.X, e.Y);
             if (app != null)
             {
@@ -726,24 +759,21 @@ namespace PlannerShop.Forms.Agenda
                 return;
             }
 
-            // Altrimenti → nuovo appuntamento
             RequestNewAppointment?.Invoke(_weekStart.AddDays(d), YToSlot(e.Y + _scrollY));
         }
 
 
         // ============================================================
-        // TOOLTIP CUSTOM (overlay panel, niente flickering)
+        // TOOLTIP
         // ============================================================
         private void OnTipPaint(object? sender, PaintEventArgs e)
         {
             var g = e.Graphics;
             g.Clear(_tipPanel.BackColor);
 
-            // Bordo
             using var pen = new Pen(Color.FromArgb(180, 180, 120));
             g.DrawRectangle(pen, 0, 0, _tipPanel.Width - 1, _tipPanel.Height - 1);
 
-            // Testo
             using var font = new Font("Segoe UI", 8.5f);
             TextRenderer.DrawText(g, _tooltipText, font,
                 new Rectangle(6, 5, _tipPanel.Width - 12, _tipPanel.Height - 10),
@@ -758,7 +788,6 @@ namespace PlannerShop.Forms.Agenda
 
             if (textChanged)
             {
-                // Calcola dimensione necessaria
                 using var font = new Font("Segoe UI", 8.5f);
                 var size = TextRenderer.MeasureText(text, font,
                     new Size(260, 400),
@@ -766,11 +795,9 @@ namespace PlannerShop.Forms.Agenda
                 _tipPanel.Size = new Size(size.Width + 16, size.Height + 14);
             }
 
-            // Posiziona rispetto al canvas (coordinate del parent = questo UserControl)
             int px = _canvas.Left + canvasPos.X + 18;
             int py = _canvas.Top + canvasPos.Y + 14;
 
-            // Evita uscita dai bordi
             if (px + _tipPanel.Width > Width) px = _canvas.Left + canvasPos.X - _tipPanel.Width - 4;
             if (py + _tipPanel.Height > Height) py = _canvas.Top + canvasPos.Y - _tipPanel.Height - 4;
 
@@ -787,16 +814,20 @@ namespace PlannerShop.Forms.Agenda
 
         private void HideTip()
         {
-            if (_tipPanel.Visible)
-                _tipPanel.Visible = false;
+            if (_tipPanel.Visible) _tipPanel.Visible = false;
         }
 
+
+        // ============================================================
+        // MOUSE MOVE
+        // ============================================================
         private void OnCanvasMouseMove(object? sender, MouseEventArgs e)
         {
             // ── Resize in corso ──────────────────────────────────
             if (_resizeApp != null && e.Button == MouseButtons.Left)
             {
-                if (!_isResizing && Math.Abs(e.Y - TimeToY(_resizeApp.End.TimeOfDay) + _scrollY) > 3)
+                if (!_isResizing &&
+                    Math.Abs(e.Y - TimeToY(_resizeApp.End.TimeOfDay) + _scrollY) > 3)
                 {
                     _isResizing = true;
                     _canvas.Cursor = Cursors.SizeNS;
@@ -806,10 +837,8 @@ namespace PlannerShop.Forms.Agenda
                 if (_isResizing)
                 {
                     int contentY = e.Y + _scrollY;
-                    // Almeno 1 slot dopo l'inizio
                     int minEnd = TimeToY(_resizeApp.Start.TimeOfDay) + SlotH;
                     int slot = Math.Max(contentY, minEnd);
-                    // Snap al quarto d'ora
                     int snapped = (int)Math.Round((double)slot / SlotH) * SlotH;
                     _resizeEndY = Math.Clamp(snapped, minEnd, SlotCount * SlotH);
                     _canvas.Invalidate();
@@ -836,15 +865,15 @@ namespace PlannerShop.Forms.Agenda
                     int slot = Math.Clamp(contentY / SlotH, 0, SlotCount - 1);
                     _dragCurrentY = slot * SlotH;
 
-                    int d = (e.X - TimeColW) / Math.Max(1, DayColW);
-                    _dragCurrentD = Math.Clamp(d, 0, DayCount - 1);
+                    int dd = (e.X - TimeColW) / Math.Max(1, DayColW);
+                    _dragCurrentD = Math.Clamp(dd, 0, DayCount - 1);
 
                     _canvas.Invalidate();
                 }
                 return;
             }
 
-            // ── Cursore hover (nessun pulsante premuto) ───────────
+            // ── Cursore hover ────────────────────────────────────
             if (e.Button == MouseButtons.None)
             {
                 var app = HitTest(e.X, e.Y);
@@ -852,10 +881,10 @@ namespace PlannerShop.Forms.Agenda
                 if (app != _hoverApp)
                 {
                     _hoverApp = app;
-                    _canvas.Invalidate();   // ridisegna per mostrare/nascondere la X
+                    _canvas.Invalidate();
                 }
 
-                if (app != null)
+                if (app != null && !app.IsTerminal)
                 {
                     int yBot = TimeToY(app.End.TimeOfDay) - 2 - _scrollY;
                     _canvas.Cursor = (e.Y >= yBot - ResizeGripH && e.Y <= yBot + ResizeGripH / 2)
@@ -868,7 +897,7 @@ namespace PlannerShop.Forms.Agenda
                 }
             }
 
-            // ── Tooltip normale ──────────────────────────────────
+            // ── Tooltip ──────────────────────────────────────────
             var hovApp = HitTest(e.X, e.Y);
 
             if (hovApp == null)
@@ -908,6 +937,10 @@ namespace PlannerShop.Forms.Agenda
             if (_hoverApp != null) { _hoverApp = null; _canvas.Invalidate(); }
         }
 
+
+        // ============================================================
+        // MOUSE UP
+        // ============================================================
         private void OnCanvasMouseUp(object? sender, MouseEventArgs e)
         {
             // ── Fine resize ──────────────────────────────────────
@@ -961,10 +994,9 @@ namespace PlannerShop.Forms.Agenda
             // ── Fine drag ────────────────────────────────────────
             if (_dragApp == null) return;
 
-            var app = _dragApp;
+            var app2 = _dragApp;
             bool wasDrag = _isDragging;
 
-            // Reset stato drag
             _dragApp = null;
             _isDragging = false;
             _canvas.Cursor = Cursors.Default;
@@ -972,41 +1004,37 @@ namespace PlannerShop.Forms.Agenda
 
             if (!wasDrag) return;
 
-            // Calcola nuovi orari
             TimeSpan newStart = FirstSlot.Add(TimeSpan.FromMinutes(_dragCurrentY / SlotH * 15));
-            TimeSpan dur = app.End - app.Start;
+            TimeSpan dur = app2.End - app2.Start;
             TimeSpan newEnd = newStart + dur;
             DateTime newDay = _weekStart.AddDays(_dragCurrentD);
 
             DateTime newStartDt = newDay.Date + newStart;
             DateTime newEndDt = newDay.Date + newEnd;
 
-            // Nessun cambiamento?
-            if (newStartDt == app.Start) return;
+            if (newStartDt == app2.Start) return;
 
             try
             {
-                // Aggiorna nel DB tramite ModelAppuntamenti
                 var updated = new Appointment
                 {
-                    Id = app.Id,
-                    Title = app.Title,
-                    ClientName = app.ClientName,
-                    OperatorName = app.OperatorName,
-                    ServiceId = app.ServiceId,
-                    ServiceName = app.ServiceName,
+                    Id = app2.Id,
+                    Title = app2.Title,
+                    ClientName = app2.ClientName,
+                    OperatorName = app2.OperatorName,
+                    ServiceId = app2.ServiceId,
+                    ServiceName = app2.ServiceName,
                     Start = newStartDt,
                     End = newEndDt,
-                    Status = app.Status,
-                    Notes = app.Notes,
-                    Color = app.Color,
-                    Timestamp = app.Timestamp   // preserva il timestamp originale
+                    Status = app2.Status,
+                    Notes = app2.Notes,
+                    Color = app2.Color,
+                    Timestamp = app2.Timestamp
                 };
 
                 ModelAppuntamenti.EditAppuntamento(updated.Id, updated);
 
-                // Aggiorna la lista locale senza ricaricare dal DB
-                int idx = _allApps.FindIndex(a => a.Id == app.Id);
+                int idx = _allApps.FindIndex(a => a.Id == app2.Id);
                 if (idx >= 0) _allApps[idx] = updated;
 
                 _header.Invalidate();
@@ -1019,8 +1047,9 @@ namespace PlannerShop.Forms.Agenda
             }
         }
 
+
         // ============================================================
-        // LAYOUT HELPERS
+        // HELPERS
         // ============================================================
         private static List<(Appointment app, int col)> ResolveColumns(List<Appointment> apps)
         {

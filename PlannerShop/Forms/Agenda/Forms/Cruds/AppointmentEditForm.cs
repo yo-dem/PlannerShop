@@ -9,7 +9,6 @@ namespace PlannerShop.Forms.Agenda.Forms.Cruds
 
         private readonly int _appointmentId;
         private bool _titleManuallyEdited = false;
-        private bool _loadingComplete = false;
 
         public AppointmentEditForm(Appointment app)
         {
@@ -32,7 +31,7 @@ namespace PlannerShop.Forms.Agenda.Forms.Cruds
         {
             txtCliente.TextChanged += (s, e) => AutoGenerateTitle();
             txtServizio.TextChanged += (s, e) => AutoGenerateTitle();
-            txtTitolo.TextChanged += (s, e) => { if (_loadingComplete) _titleManuallyEdited = true; };
+            txtTitolo.TextChanged += (s, e) => { _titleManuallyEdited = true; };
             dtpOraInizio.ValueChanged += (s, e) => UpdateOraFine();
             btnColor1.Click += (s, e) => SelectColor(AppointmentInsertForm.Palette[0]);
             btnColor2.Click += (s, e) => SelectColor(AppointmentInsertForm.Palette[1]);
@@ -48,6 +47,7 @@ namespace PlannerShop.Forms.Agenda.Forms.Cruds
 
         private void LoadAppointment(Appointment app)
         {
+            _titleManuallyEdited = true;
             txtTitolo.Text = app.Title;
             txtCliente.Text = app.ClientName;
             txtOperatore.Text = app.OperatorName;
@@ -58,17 +58,43 @@ namespace PlannerShop.Forms.Agenda.Forms.Cruds
             cmbStato.SelectedItem = app.Status;
             txtNote.Text = app.Notes;
 
-            // Cerca il colore nella palette; se non trovato usa il primo
             var match = AppointmentInsertForm.Palette
                 .FirstOrDefault(c => c.ToArgb() == app.Color.ToArgb());
             SelectColor(match == default ? AppointmentInsertForm.Palette[0] : match);
-            _titleManuallyEdited = false;
-            _loadingComplete = true;
+
+            // Se lo stato è terminale blocca tutto tranne cmbStato
+            if (app.IsTerminal)
+                LockForTerminalState();
+        }
+
+        /// <summary>
+        /// Chiamato quando l'appuntamento è in stato terminale (Completato/Annullato/Assente).
+        /// Rende tutti i campi ReadOnly tranne il combo Stato, e cambia il testo del bottone OK.
+        /// </summary>
+        private void LockForTerminalState()
+        {
+            txtTitolo.ReadOnly = true;
+            txtCliente.ReadOnly = true;
+            txtOperatore.ReadOnly = true;
+            txtServizio.ReadOnly = true;
+            txtNote.ReadOnly = true;
+
+            dtpData.Enabled = false;
+            dtpOraInizio.Enabled = false;
+            dtpOraFine.Enabled = false;
+
+            btnColor1.Enabled = false;
+            btnColor2.Enabled = false;
+            btnColor3.Enabled = false;
+            btnColor4.Enabled = false;
+
+            // cmbStato rimane abilitato: unico campo modificabile
+
+            btnOk.Text = "SALVA STATO";
         }
 
         private void AutoGenerateTitle()
         {
-            if (!_loadingComplete) return;
             if (_titleManuallyEdited) return;
             string cliente = txtCliente.Text.Trim();
             string servizio = txtServizio.Text.Trim();
