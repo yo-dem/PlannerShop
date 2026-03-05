@@ -9,6 +9,7 @@ namespace PlannerShop.Forms.Agenda.Forms.Cruds
 
         private readonly int _appointmentId;
         private bool _titleManuallyEdited = false;
+        private ClienteAutocomplete? _autocomplete;
 
         public AppointmentEditForm(Appointment app)
         {
@@ -37,6 +38,8 @@ namespace PlannerShop.Forms.Agenda.Forms.Cruds
             btnColor2.Click += (s, e) => SelectColor(AppointmentInsertForm.Palette[1]);
             btnColor3.Click += (s, e) => SelectColor(AppointmentInsertForm.Palette[2]);
             btnColor4.Click += (s, e) => SelectColor(AppointmentInsertForm.Palette[3]);
+
+            _autocomplete = new ClienteAutocomplete(txtCliente, this);
         }
 
         private void SelectColor(Color c)
@@ -91,6 +94,9 @@ namespace PlannerShop.Forms.Agenda.Forms.Cruds
             // cmbStato rimane abilitato: unico campo modificabile
 
             btnOk.Text = "SALVA STATO";
+
+            _autocomplete?.Dispose();
+            _autocomplete = null;
         }
 
         private void AutoGenerateTitle()
@@ -163,6 +169,12 @@ namespace PlannerShop.Forms.Agenda.Forms.Cruds
             IsDeleted = true;
             DialogResult = DialogResult.OK;
             Close();
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing) _autocomplete?.Dispose();
+            base.Dispose(disposing);
         }
 
         private void btnAnnulla_Click(object sender, EventArgs e) { DialogResult = DialogResult.Cancel; Close(); }
