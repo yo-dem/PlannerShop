@@ -25,7 +25,7 @@ namespace PlannerShop.Forms.Agenda.Forms.Cruds
             cmbStato.DataSource = Enum.GetValues(typeof(AppointmentStatus));
             cmbStato.SelectedItem = AppointmentStatus.Prenotato;
             AppointmentInsertForm.HighlightColorButtons(
-                AppointmentInsertForm.Palette[0], btnColor1, btnColor2, btnColor3, btnColor4);
+                AppointmentInsertForm.Palette[0], btnColor1, btnColor2, btnColor3, btnColor4, btnColor5, btnColor6);
         }
 
         private void HookEvents()
@@ -38,6 +38,8 @@ namespace PlannerShop.Forms.Agenda.Forms.Cruds
             btnColor2.Click += (s, e) => SelectColor(AppointmentInsertForm.Palette[1]);
             btnColor3.Click += (s, e) => SelectColor(AppointmentInsertForm.Palette[2]);
             btnColor4.Click += (s, e) => SelectColor(AppointmentInsertForm.Palette[3]);
+            btnColor5.Click += (s, e) => SelectColor(AppointmentInsertForm.Palette[4]);
+            btnColor6.Click += (s, e) => SelectColor(AppointmentInsertForm.Palette[5]);
 
             _autocomplete = new ClienteAutocomplete(txtCliente, this);
         }
@@ -45,7 +47,7 @@ namespace PlannerShop.Forms.Agenda.Forms.Cruds
         private void SelectColor(Color c)
         {
             pnlColore.BackColor = c;
-            AppointmentInsertForm.HighlightColorButtons(c, btnColor1, btnColor2, btnColor3, btnColor4);
+            AppointmentInsertForm.HighlightColorButtons(c, btnColor1, btnColor2, btnColor3, btnColor4, btnColor5, btnColor6);
         }
 
         private void LoadAppointment(Appointment app)
@@ -64,6 +66,9 @@ namespace PlannerShop.Forms.Agenda.Forms.Cruds
             var match = AppointmentInsertForm.Palette
                 .FirstOrDefault(c => c.ToArgb() == app.Color.ToArgb());
             SelectColor(match == default ? AppointmentInsertForm.Palette[0] : match);
+
+            // Riabilita la generazione automatica del titolo dopo il caricamento
+            _titleManuallyEdited = false;
 
             // Se lo stato è terminale blocca tutto tranne cmbStato
             if (app.IsTerminal)
@@ -90,6 +95,8 @@ namespace PlannerShop.Forms.Agenda.Forms.Cruds
             btnColor2.Enabled = false;
             btnColor3.Enabled = false;
             btnColor4.Enabled = false;
+            btnColor5.Enabled = false;
+            btnColor6.Enabled = false;
 
             // cmbStato rimane abilitato: unico campo modificabile
 

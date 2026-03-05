@@ -61,17 +61,17 @@ namespace PlannerShop.Forms.Agenda.Forms.Cruds
         internal void SelectColor(Color c)
         {
             pnlColore.BackColor = c;
-            HighlightColorButtons(c, btnColor1, btnColor2, btnColor3, btnColor4);
+            HighlightColorButtons(c, btnColor1, btnColor2, btnColor3, btnColor4, btnColor5, btnColor6);
         }
 
         internal static void HighlightColorButtons(Color selected, params Button[] buttons)
         {
-            for (int i = 0; i < buttons.Length; i++)
+            foreach (var btn in buttons)
             {
-                buttons[i].FlatStyle = FlatStyle.Flat;
-                buttons[i].FlatAppearance.BorderSize = selected == Palette[i] ? 3 : 1;
-                buttons[i].FlatAppearance.BorderColor = selected == Palette[i]
-                    ? Color.White : Color.FromArgb(80, 80, 80);
+                bool active = btn.BackColor.ToArgb() == selected.ToArgb();
+                btn.FlatStyle = FlatStyle.Flat;
+                btn.FlatAppearance.BorderSize = active ? 3 : 1;
+                btn.FlatAppearance.BorderColor = active ? Color.White : Color.FromArgb(80, 80, 80);
             }
         }
 
