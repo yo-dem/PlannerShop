@@ -468,6 +468,12 @@ namespace PlannerShop
             EnableDisableEditAndInsert();
         }
 
+        private void btnStatistiche_Click(object sender, EventArgs e)
+        {
+            StatsForm statsForm = new StatsForm();
+            statsForm.ShowDialog(this);
+        }
+
         private void btnOpzioni_Click(object sender, EventArgs e)
         {
             SettingsForm settingsForm = new SettingsForm();
