@@ -108,7 +108,7 @@ namespace PlannerShop.Forms
             pnlAccent.Location = new Point(0, 0);
             pnlAccent.Margin = new Padding(3, 4, 3, 4);
             pnlAccent.Name = "pnlAccent";
-            pnlAccent.Size = new Size(1166, 11);
+            pnlAccent.Size = new Size(1203, 11);
             pnlAccent.TabIndex = 4;
             // 
             // pnlHeader
@@ -120,7 +120,7 @@ namespace PlannerShop.Forms
             pnlHeader.Margin = new Padding(3, 4, 3, 4);
             pnlHeader.Name = "pnlHeader";
             pnlHeader.Padding = new Padding(16, 13, 16, 0);
-            pnlHeader.Size = new Size(1166, 69);
+            pnlHeader.Size = new Size(1203, 69);
             pnlHeader.TabIndex = 3;
             // 
             // lblTitolo
@@ -151,7 +151,7 @@ namespace PlannerShop.Forms
             pnlFiltri.Location = new Point(0, 80);
             pnlFiltri.Margin = new Padding(3, 4, 3, 4);
             pnlFiltri.Name = "pnlFiltri";
-            pnlFiltri.Size = new Size(1166, 117);
+            pnlFiltri.Size = new Size(1203, 117);
             pnlFiltri.TabIndex = 2;
             // 
             // lblPeriodo
@@ -262,7 +262,7 @@ namespace PlannerShop.Forms
             btnAggiorna.FlatAppearance.BorderSize = 0;
             btnAggiorna.FlatStyle = FlatStyle.Flat;
             btnAggiorna.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
-            btnAggiorna.Location = new Point(994, 37);
+            btnAggiorna.Location = new Point(1031, 37);
             btnAggiorna.Margin = new Padding(3, 4, 3, 4);
             btnAggiorna.Name = "btnAggiorna";
             btnAggiorna.Size = new Size(149, 40);
@@ -278,7 +278,7 @@ namespace PlannerShop.Forms
             pnlSepFiltri.Location = new Point(0, 197);
             pnlSepFiltri.Margin = new Padding(3, 4, 3, 4);
             pnlSepFiltri.Name = "pnlSepFiltri";
-            pnlSepFiltri.Size = new Size(1166, 1);
+            pnlSepFiltri.Size = new Size(1203, 1);
             pnlSepFiltri.TabIndex = 1;
             // 
             // tabControl
@@ -292,7 +292,7 @@ namespace PlannerShop.Forms
             tabControl.Name = "tabControl";
             tabControl.Padding = new Point(12, 4);
             tabControl.SelectedIndex = 0;
-            tabControl.Size = new Size(1166, 655);
+            tabControl.Size = new Size(1203, 655);
             tabControl.TabIndex = 0;
             // 
             // tabDati
@@ -302,7 +302,7 @@ namespace PlannerShop.Forms
             tabDati.Location = new Point(4, 31);
             tabDati.Margin = new Padding(3, 4, 3, 4);
             tabDati.Name = "tabDati";
-            tabDati.Size = new Size(1158, 620);
+            tabDati.Size = new Size(1195, 620);
             tabDati.TabIndex = 0;
             tabDati.Text = "  DATI  ";
             // 
@@ -319,7 +319,7 @@ namespace PlannerShop.Forms
             pnlBody.Margin = new Padding(3, 4, 3, 4);
             pnlBody.Name = "pnlBody";
             pnlBody.Padding = new Padding(11);
-            pnlBody.Size = new Size(1158, 620);
+            pnlBody.Size = new Size(1195, 620);
             pnlBody.TabIndex = 0;
             // 
             // grpTopClienti
@@ -331,7 +331,7 @@ namespace PlannerShop.Forms
             grpTopClienti.Margin = new Padding(3, 4, 3, 4);
             grpTopClienti.Name = "grpTopClienti";
             grpTopClienti.Padding = new Padding(7, 5, 7, 8);
-            grpTopClienti.Size = new Size(1115, 309);
+            grpTopClienti.Size = new Size(1152, 309);
             grpTopClienti.TabIndex = 0;
             grpTopClienti.TabStop = false;
             grpTopClienti.Text = "CLASSIFICA CLIENTI PIÙ FREQUENTI (TOP 10)";
@@ -344,7 +344,7 @@ namespace PlannerShop.Forms
             dgvTopClienti.Margin = new Padding(3, 4, 3, 4);
             dgvTopClienti.Name = "dgvTopClienti";
             dgvTopClienti.RowHeadersWidth = 51;
-            dgvTopClienti.Size = new Size(1101, 277);
+            dgvTopClienti.Size = new Size(1138, 277);
             dgvTopClienti.TabIndex = 0;
             // 
             // pnlSpacerBottom
@@ -353,7 +353,7 @@ namespace PlannerShop.Forms
             pnlSpacerBottom.Location = new Point(11, 544);
             pnlSpacerBottom.Margin = new Padding(3, 4, 3, 4);
             pnlSpacerBottom.Name = "pnlSpacerBottom";
-            pnlSpacerBottom.Size = new Size(1115, 13);
+            pnlSpacerBottom.Size = new Size(1152, 13);
             pnlSpacerBottom.TabIndex = 1;
             // 
             // grpTopProdotti
@@ -365,7 +365,7 @@ namespace PlannerShop.Forms
             grpTopProdotti.Margin = new Padding(3, 4, 3, 4);
             grpTopProdotti.Name = "grpTopProdotti";
             grpTopProdotti.Padding = new Padding(7, 5, 7, 8);
-            grpTopProdotti.Size = new Size(1115, 309);
+            grpTopProdotti.Size = new Size(1152, 309);
             grpTopProdotti.TabIndex = 2;
             grpTopProdotti.TabStop = false;
             grpTopProdotti.Text = "CLASSIFICA PRODOTTI PIÙ VENDUTI (TOP 10)";
@@ -378,7 +378,7 @@ namespace PlannerShop.Forms
             dgvTopProdotti.Margin = new Padding(3, 4, 3, 4);
             dgvTopProdotti.Name = "dgvTopProdotti";
             dgvTopProdotti.RowHeadersWidth = 51;
-            dgvTopProdotti.Size = new Size(1101, 277);
+            dgvTopProdotti.Size = new Size(1138, 277);
             dgvTopProdotti.TabIndex = 0;
             // 
             // pnlSpacerMid
@@ -387,7 +387,7 @@ namespace PlannerShop.Forms
             pnlSpacerMid.Location = new Point(11, 222);
             pnlSpacerMid.Margin = new Padding(3, 4, 3, 4);
             pnlSpacerMid.Name = "pnlSpacerMid";
-            pnlSpacerMid.Size = new Size(1115, 13);
+            pnlSpacerMid.Size = new Size(1152, 13);
             pnlSpacerMid.TabIndex = 3;
             // 
             // pnlCards
@@ -399,7 +399,7 @@ namespace PlannerShop.Forms
             pnlCards.Location = new Point(11, 11);
             pnlCards.Margin = new Padding(3, 4, 3, 4);
             pnlCards.Name = "pnlCards";
-            pnlCards.Size = new Size(1115, 211);
+            pnlCards.Size = new Size(1152, 211);
             pnlCards.TabIndex = 4;
             pnlCards.WrapContents = false;
             // 
@@ -813,7 +813,7 @@ namespace PlannerShop.Forms
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1166, 853);
+            ClientSize = new Size(1203, 853);
             Controls.Add(tabControl);
             Controls.Add(pnlSepFiltri);
             Controls.Add(pnlFiltri);
