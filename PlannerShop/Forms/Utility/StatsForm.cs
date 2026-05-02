@@ -28,7 +28,7 @@ namespace PlannerShop.Forms
         // ── Palette colori per grafici a torta ────────────────────────────────
         private static readonly Color[] Palette = new[]
         {
-            Color.FromArgb(90,  192, 192, 255),
+            Color.FromArgb(255, 192, 192, 255),
             Color.FromArgb(255, 140, 100, 180),
             Color.FromArgb(255, 100, 200, 150),
             Color.FromArgb(255, 230, 160,  60),
@@ -128,21 +128,23 @@ namespace PlannerShop.Forms
 
         private void AggiornaValoreInventario(DataTable dtProdotti)
         {
-            decimal netto = 0m, ivato = 0m;
+            decimal netto = 0m;
             foreach (DataRow r in dtProdotti.Rows)
             {
                 if (!int.TryParse(r["QNT"]?.ToString(), out int qnt)) qnt = 0;
                 netto += ModelStatistiche.ParseEuro(r["PREZZO_NETTO"]) * qnt;
-                ivato += ModelStatistiche.ParseEuro(r["PREZZO_IVATO"]) * qnt;
             }
             var it = new CultureInfo("it-IT");
-            lblInvNetto.Text = $"Netto:       {netto.ToString("N2", it)} €";
-            lblInvIvato.Text = $"IVA incl.:  {ivato.ToString("N2", it)} €";
+            lblInvNetto.Text = netto.ToString("N2", it) + " €";
         }
 
         private void AggiornaBilancio(List<DataRow> acquistiPeriodo, List<DataRow> prodottiPeriodo)
         {
-            _entrate = acquistiPeriodo.Sum(r => ModelStatistiche.ParseEuro(r["TOTALE"]));
+            _entrate = acquistiPeriodo.Sum(r =>
+            {
+                if (!int.TryParse(r["QNT"]?.ToString(), out int q)) q = 0;
+                return ModelStatistiche.ParseEuro(r["PREZZO_NETTO"]) * q;
+            });
             _uscite  = prodottiPeriodo.Sum(r =>
             {
                 if (!int.TryParse(r["QNT"]?.ToString(), out int q)) q = 0;
@@ -170,7 +172,10 @@ namespace PlannerShop.Forms
                     string marca = (g.First()["MARCA"]?.ToString() ?? "").ToUpper();
                     string lbl   = string.IsNullOrWhiteSpace(marca) ? nome : $"{nome} ({marca})";
                     int    qnt   = g.Sum(r => int.TryParse(r["QNT"]?.ToString(), out int q) ? q : 0);
-                    decimal imp  = g.Sum(r => ModelStatistiche.ParseEuro(r["TOTALE"]));
+                    decimal imp  = g.Sum(r => {
+                        if (!int.TryParse(r["QNT"]?.ToString(), out int q)) q = 0;
+                        return ModelStatistiche.ParseEuro(r["PREZZO_NETTO"]) * q;
+                    });
                     return new TopProdottoItem(lbl, qnt, imp);
                 })
                 .OrderByDescending(x => x.QntTot)
@@ -180,15 +185,15 @@ namespace PlannerShop.Forms
             var dt = new DataTable();
             dt.Columns.Add("#",          typeof(int));
             dt.Columns.Add("PRODOTTO",   typeof(string));
-            dt.Columns.Add("QNT VENDUTA",typeof(int));
-            dt.Columns.Add("INCASSATO",  typeof(string));
+            dt.Columns.Add("QNT VENDUTA",  typeof(int));
+            dt.Columns.Add("NETTO (€)",    typeof(string));
             var it = new CultureInfo("it-IT");
             for (int i = 0; i < _topProdotti.Count; i++)
                 dt.Rows.Add(i + 1, _topProdotti[i].Label, _topProdotti[i].QntTot,
                     _topProdotti[i].Importo.ToString("N2", it) + " €");
             dgvTopProdotti.DataSource = dt;
             ApplicaStileDgv(dgvTopProdotti);
-            ImpostaColonneDgv(dgvTopProdotti, new[] { "QNT VENDUTA", "INCASSATO" });
+            ImpostaColonneDgv(dgvTopProdotti, new[] { "QNT VENDUTA", "NETTO (€)" });
         }
 
         private void AggiornaTopClienti(List<DataRow> acquistiPeriodo)
@@ -200,7 +205,10 @@ namespace PlannerShop.Forms
                     Cliente: ((g.First()["NOME_CLIENTE"]?.ToString()    ?? "?").ToUpper() + " " +
                               (g.First()["COGNOME_CLIENTE"]?.ToString() ?? "?").ToUpper()).Trim(),
                     NAcquisti: g.Count(),
-                    Speso: g.Sum(r => ModelStatistiche.ParseEuro(r["TOTALE"]))))
+                    Speso: g.Sum(r => {
+                        if (!int.TryParse(r["QNT"]?.ToString(), out int q)) q = 0;
+                        return ModelStatistiche.ParseEuro(r["PREZZO_NETTO"]) * q;
+                    })))
                 .OrderByDescending(x => x.NAcquisti)
                 .Take(10)
                 .ToList();
@@ -208,15 +216,15 @@ namespace PlannerShop.Forms
             var dt = new DataTable();
             dt.Columns.Add("#",           typeof(int));
             dt.Columns.Add("CLIENTE",     typeof(string));
-            dt.Columns.Add("N. ACQUISTI", typeof(int));
-            dt.Columns.Add("TOTALE SPESO",typeof(string));
+            dt.Columns.Add("N. ACQUISTI",   typeof(int));
+            dt.Columns.Add("SPESO NETTO",   typeof(string));
             var it = new CultureInfo("it-IT");
             for (int i = 0; i < _topClienti.Count; i++)
                 dt.Rows.Add(i + 1, _topClienti[i].Cliente, _topClienti[i].NAcquisti,
                     _topClienti[i].Speso.ToString("N2", it) + " €");
             dgvTopClienti.DataSource = dt;
             ApplicaStileDgv(dgvTopClienti);
-            ImpostaColonneDgv(dgvTopClienti, new[] { "N. ACQUISTI", "TOTALE SPESO" });
+            ImpostaColonneDgv(dgvTopClienti, new[] { "N. ACQUISTI", "SPESO NETTO" });
         }
 
         // ── Helpers UI ────────────────────────────────────────────────────────
@@ -327,9 +335,8 @@ namespace PlannerShop.Forms
                 area.Visible = true;
                 area.AxisX.Interval = 1;
                 var s = new Series("prodotti") { ChartType = SeriesChartType.Bar };
-                s.Color = Color.FromArgb(90, 192, 192, 255);
+                s.Color = Color.FromArgb(192, 192, 255);
                 s.Font  = new Font("Segoe UI", 7.5f);
-                s["DrawingStyle"] = "Cylinder";
                 for (int i = _topProdotti.Count - 1; i >= 0; i--)
                 {
                     s.Points.AddXY(_topProdotti[i].Label, _topProdotti[i].QntTot);
@@ -376,9 +383,8 @@ namespace PlannerShop.Forms
                 area.Visible = true;
                 area.AxisX.Interval = 1;
                 var s = new Series("clienti") { ChartType = SeriesChartType.Bar };
-                s.Color = Color.FromArgb(140, 192, 140, 255);
+                s.Color = Color.FromArgb(192, 140, 255);
                 s.Font  = new Font("Segoe UI", 7.5f);
-                s["DrawingStyle"] = "Cylinder";
                 for (int i = _topClienti.Count - 1; i >= 0; i--)
                 {
                     s.Points.AddXY(_topClienti[i].Cliente, _topClienti[i].NAcquisti);
@@ -404,7 +410,6 @@ namespace PlannerShop.Forms
                 Color     = Color.FromArgb(80, 180, 80),
                 Font      = new Font("Segoe UI", 8f, FontStyle.Bold),
             };
-            sEntrate["DrawingStyle"] = "Cylinder";
             sEntrate.Points.AddXY("ENTRATE", (double)_entrate);
             sEntrate.Points[0].Label = _entrate.ToString("N2", new CultureInfo("it-IT")) + " €";
 
@@ -414,7 +419,6 @@ namespace PlannerShop.Forms
                 Color     = Color.FromArgb(210, 80, 80),
                 Font      = new Font("Segoe UI", 8f, FontStyle.Bold),
             };
-            sUscite["DrawingStyle"] = "Cylinder";
             sUscite.Points.AddXY("USCITE", (double)_uscite);
             sUscite.Points[0].Label = _uscite.ToString("N2", new CultureInfo("it-IT")) + " €";
 
@@ -425,7 +429,6 @@ namespace PlannerShop.Forms
                 Color     = saldo >= 0 ? Color.FromArgb(60, 130, 200) : Color.FromArgb(200, 130, 60),
                 Font      = new Font("Segoe UI", 8f, FontStyle.Bold),
             };
-            sSaldo["DrawingStyle"] = "Cylinder";
             sSaldo.Points.AddXY("SALDO", (double)saldo);
             sSaldo.Points[0].Label = saldo.ToString("N2", new CultureInfo("it-IT")) + " €";
 

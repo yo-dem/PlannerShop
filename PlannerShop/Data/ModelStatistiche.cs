@@ -28,11 +28,16 @@ namespace PlannerShop.Data
                 .Replace("€", "")
                 .Replace(" ", "")
                 .Trim();
-            if (decimal.TryParse(s, NumberStyles.Any, CultureInfo.InvariantCulture, out decimal r))
-                return r;
-            // virgola italiana
-            if (decimal.TryParse(s.Replace(",", "."), NumberStyles.Any, CultureInfo.InvariantCulture, out r))
-                return r;
+            // Formato italiano: virgola = decimale, punto = migliaia (es. "1.500,50").
+            // Rimuovere i punti (migliaia) e sostituire la virgola con il punto prima del parse.
+            if (s.Contains(','))
+            {
+                string normalized = s.Replace(".", "").Replace(",", ".");
+                if (decimal.TryParse(normalized, NumberStyles.Any, CultureInfo.InvariantCulture, out decimal r))
+                    return r;
+            }
+            if (decimal.TryParse(s, NumberStyles.Any, CultureInfo.InvariantCulture, out decimal r2))
+                return r2;
             return 0m;
         }
 
