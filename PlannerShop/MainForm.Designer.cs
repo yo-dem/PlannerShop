@@ -49,6 +49,7 @@
             btnZoomIn = new Button();
             btnAgenda = new Button();
             btnOpzioni = new Button();
+            btnStatistiche = new Button();
             txtSearch = new TextBox();
             searchImage = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)dgvData).BeginInit();
@@ -339,7 +340,27 @@
             btnOpzioni.TextImageRelation = TextImageRelation.ImageAboveText;
             btnOpzioni.UseVisualStyleBackColor = true;
             btnOpzioni.Click += btnOpzioni_Click;
-            // 
+            //
+            // btnStatistiche
+            //
+            btnStatistiche.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnStatistiche.FlatAppearance.BorderColor = SystemColors.Control;
+            btnStatistiche.FlatAppearance.BorderSize = 0;
+            btnStatistiche.FlatAppearance.MouseDownBackColor = Color.Transparent;
+            btnStatistiche.FlatAppearance.MouseOverBackColor = Color.White;
+            btnStatistiche.FlatStyle = FlatStyle.Flat;
+            btnStatistiche.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
+            btnStatistiche.Image = Properties.Resources.statistiche_24;
+            btnStatistiche.Location = new Point(874, 67);
+            btnStatistiche.Margin = new Padding(3, 2, 3, 2);
+            btnStatistiche.Name = "btnStatistiche";
+            btnStatistiche.Size = new Size(28, 28);
+            btnStatistiche.TabIndex = 16;
+            btnStatistiche.TextAlign = ContentAlignment.BottomCenter;
+            btnStatistiche.TextImageRelation = TextImageRelation.ImageAboveText;
+            btnStatistiche.UseVisualStyleBackColor = true;
+            btnStatistiche.Click += btnStatistiche_Click;
+            //
             // txtSearch
             // 
             txtSearch.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
@@ -376,6 +397,7 @@
             Controls.Add(searchImage);
             Controls.Add(txtSearch);
             Controls.Add(btnOpzioni);
+            Controls.Add(btnStatistiche);
             Controls.Add(btnAgenda);
             Controls.Add(btnZoomIn);
             Controls.Add(btnZoomOut);
@@ -429,6 +451,7 @@
         private Button btnZoomIn;
         private Button btnAgenda;
         private Button btnOpzioni;
+        private Button btnStatistiche;
         private TextBox txtSearch;
         private PictureBox searchImage;
     }
