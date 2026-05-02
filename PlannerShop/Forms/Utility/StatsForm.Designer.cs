@@ -30,6 +30,11 @@ namespace PlannerShop.Forms
             rdbDaSempre = new RadioButton();
             lblPeriodo = new Label();
             pnlSepFiltri = new Panel();
+            tabControl = new TabControl();
+            tabDati = new TabPage();
+            tabGrafici = new TabPage();
+
+            // ── Tab Dati ──
             pnlBody = new Panel();
             grpTopClienti = new GroupBox();
             dgvTopClienti = new DataGridView();
@@ -59,9 +64,27 @@ namespace PlannerShop.Forms
             lblNumProdottiSub = new Label();
             lblNumProdotti = new Label();
 
+            // ── Tab Grafici ──
+            pnlGrafici = new Panel();
+            grpGrBilancio = new GroupBox();
+            pnlGrBilancioToggle = new Panel();
+            grpGrClienti = new GroupBox();
+            pnlGrClientiToggle = new Panel();
+            btnGrClientiTorta = new Button();
+            btnGrClientiBarre = new Button();
+            grpGrProdotti = new GroupBox();
+            pnlGrProdottiToggle = new Panel();
+            btnGrProdottiTorta = new Button();
+            btnGrProdottiBarre = new Button();
+            pnlGrSpacerC = new Panel();
+            pnlGrSpacerP = new Panel();
+
             pnlAccent.SuspendLayout();
             pnlHeader.SuspendLayout();
             pnlFiltri.SuspendLayout();
+            tabControl.SuspendLayout();
+            tabDati.SuspendLayout();
+            tabGrafici.SuspendLayout();
             pnlBody.SuspendLayout();
             grpTopClienti.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvTopClienti).BeginInit();
@@ -77,127 +100,100 @@ namespace PlannerShop.Forms
             pnlInvContent.SuspendLayout();
             grpProdotti.SuspendLayout();
             pnlProdContent.SuspendLayout();
+            pnlGrafici.SuspendLayout();
+            grpGrBilancio.SuspendLayout();
+            grpGrClienti.SuspendLayout();
+            grpGrProdotti.SuspendLayout();
             SuspendLayout();
 
-            // pnlAccent
+            // ── pnlAccent ──────────────────────────────────────────────────────
             pnlAccent.BackColor = Color.FromArgb(192, 192, 255);
             pnlAccent.Dock = DockStyle.Top;
-            pnlAccent.Location = new Point(0, 0);
             pnlAccent.Name = "pnlAccent";
             pnlAccent.Size = new Size(1020, 8);
-            pnlAccent.TabIndex = 0;
 
-            // pnlHeader
+            // ── pnlHeader ──────────────────────────────────────────────────────
             pnlHeader.BackColor = Color.White;
             pnlHeader.Dock = DockStyle.Top;
-            pnlHeader.Location = new Point(0, 8);
             pnlHeader.Name = "pnlHeader";
             pnlHeader.Padding = new Padding(14, 10, 14, 0);
             pnlHeader.Size = new Size(1020, 52);
-            pnlHeader.TabIndex = 1;
             pnlHeader.Controls.Add(lblTitolo);
 
-            // lblTitolo
             lblTitolo.AutoSize = true;
             lblTitolo.Font = new Font("Segoe UI Semibold", 18F, FontStyle.Bold);
             lblTitolo.ForeColor = Color.FromArgb(90, 192, 192, 255);
             lblTitolo.Location = new Point(14, 10);
             lblTitolo.Name = "lblTitolo";
-            lblTitolo.TabIndex = 0;
             lblTitolo.Text = "STATISTICHE";
 
-            // pnlFiltri
+            // ── pnlFiltri ──────────────────────────────────────────────────────
             pnlFiltri.BackColor = Color.White;
             pnlFiltri.Dock = DockStyle.Top;
-            pnlFiltri.Location = new Point(0, 60);
             pnlFiltri.Name = "pnlFiltri";
             pnlFiltri.Size = new Size(1020, 88);
-            pnlFiltri.TabIndex = 2;
 
-            // lblPeriodo
             lblPeriodo.AutoSize = true;
             lblPeriodo.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             lblPeriodo.Location = new Point(14, 14);
             lblPeriodo.Name = "lblPeriodo";
-            lblPeriodo.TabIndex = 0;
             lblPeriodo.Text = "PERIODO:";
 
-            // rdbDaSempre
             rdbDaSempre.AutoSize = true;
             rdbDaSempre.Font = new Font("Segoe UI", 9F);
             rdbDaSempre.Location = new Point(98, 12);
             rdbDaSempre.Name = "rdbDaSempre";
-            rdbDaSempre.Size = new Size(85, 19);
-            rdbDaSempre.TabIndex = 1;
             rdbDaSempre.Text = "Da sempre";
             rdbDaSempre.UseVisualStyleBackColor = true;
 
-            // rdbUltimoAnno
             rdbUltimoAnno.AutoSize = true;
             rdbUltimoAnno.Font = new Font("Segoe UI", 9F);
             rdbUltimoAnno.Location = new Point(200, 12);
             rdbUltimoAnno.Name = "rdbUltimoAnno";
-            rdbUltimoAnno.Size = new Size(90, 19);
-            rdbUltimoAnno.TabIndex = 2;
             rdbUltimoAnno.Text = "Ultimo anno";
             rdbUltimoAnno.UseVisualStyleBackColor = true;
 
-            // rdbUltimaSettimana
             rdbUltimaSettimana.AutoSize = true;
             rdbUltimaSettimana.Font = new Font("Segoe UI", 9F);
             rdbUltimaSettimana.Location = new Point(310, 12);
             rdbUltimaSettimana.Name = "rdbUltimaSettimana";
-            rdbUltimaSettimana.Size = new Size(111, 19);
-            rdbUltimaSettimana.TabIndex = 3;
             rdbUltimaSettimana.Text = "Ultima settimana";
             rdbUltimaSettimana.UseVisualStyleBackColor = true;
 
-            // rdbPersonalizzato
             rdbPersonalizzato.AutoSize = true;
             rdbPersonalizzato.Font = new Font("Segoe UI", 9F);
             rdbPersonalizzato.Location = new Point(440, 12);
             rdbPersonalizzato.Name = "rdbPersonalizzato";
-            rdbPersonalizzato.Size = new Size(105, 19);
-            rdbPersonalizzato.TabIndex = 4;
             rdbPersonalizzato.Text = "Personalizzato";
             rdbPersonalizzato.UseVisualStyleBackColor = true;
             rdbPersonalizzato.CheckedChanged += rdbPersonalizzato_CheckedChanged;
 
-            // lblDa
             lblDa.AutoSize = true;
             lblDa.Font = new Font("Segoe UI", 9F);
             lblDa.Location = new Point(98, 48);
             lblDa.Name = "lblDa";
-            lblDa.TabIndex = 5;
             lblDa.Text = "Da:";
             lblDa.Visible = false;
 
-            // dtpDa
             dtpDa.Format = DateTimePickerFormat.Short;
             dtpDa.Location = new Point(118, 44);
             dtpDa.Name = "dtpDa";
             dtpDa.Size = new Size(140, 23);
-            dtpDa.TabIndex = 6;
             dtpDa.Visible = false;
 
-            // lblA
             lblA.AutoSize = true;
             lblA.Font = new Font("Segoe UI", 9F);
             lblA.Location = new Point(274, 48);
             lblA.Name = "lblA";
-            lblA.TabIndex = 7;
             lblA.Text = "A:";
             lblA.Visible = false;
 
-            // dtpA
             dtpA.Format = DateTimePickerFormat.Short;
             dtpA.Location = new Point(294, 44);
             dtpA.Name = "dtpA";
             dtpA.Size = new Size(140, 23);
-            dtpA.TabIndex = 8;
             dtpA.Visible = false;
 
-            // btnAggiorna
             btnAggiorna.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btnAggiorna.BackColor = Color.FromArgb(90, 192, 192, 255);
             btnAggiorna.FlatAppearance.BorderSize = 0;
@@ -206,7 +202,6 @@ namespace PlannerShop.Forms
             btnAggiorna.Location = new Point(870, 28);
             btnAggiorna.Name = "btnAggiorna";
             btnAggiorna.Size = new Size(130, 30);
-            btnAggiorna.TabIndex = 9;
             btnAggiorna.Text = "AGGIORNA";
             btnAggiorna.UseVisualStyleBackColor = false;
             btnAggiorna.Click += btnAggiorna_Click;
@@ -222,25 +217,21 @@ namespace PlannerShop.Forms
             pnlFiltri.Controls.Add(dtpA);
             pnlFiltri.Controls.Add(btnAggiorna);
 
-            // pnlSepFiltri
+            // ── pnlSepFiltri ───────────────────────────────────────────────────
             pnlSepFiltri.BackColor = Color.DarkGray;
             pnlSepFiltri.Dock = DockStyle.Top;
-            pnlSepFiltri.Location = new Point(0, 148);
             pnlSepFiltri.Name = "pnlSepFiltri";
             pnlSepFiltri.Size = new Size(1020, 1);
-            pnlSepFiltri.TabIndex = 3;
 
-            // ---- CARDS ----
+            // ══════════════════════════════════════════════════════════════════
+            // TAB DATI
+            // ══════════════════════════════════════════════════════════════════
 
-            // grpProdotti
             grpProdotti.Font = new Font("Segoe UI Semibold", 8.5F, FontStyle.Bold);
-            grpProdotti.Location = new Point(4, 4);
             grpProdotti.Margin = new Padding(4);
             grpProdotti.Name = "grpProdotti";
             grpProdotti.Padding = new Padding(8);
             grpProdotti.Size = new Size(310, 148);
-            grpProdotti.TabIndex = 0;
-            grpProdotti.TabStop = false;
             grpProdotti.Text = "PRODOTTI A CATALOGO";
             grpProdotti.Controls.Add(pnlProdContent);
 
@@ -255,7 +246,6 @@ namespace PlannerShop.Forms
             lblNumProdotti.Font = new Font("Segoe UI Semibold", 38F, FontStyle.Bold);
             lblNumProdotti.ForeColor = Color.FromArgb(90, 192, 192, 255);
             lblNumProdotti.Name = "lblNumProdotti";
-            lblNumProdotti.TabIndex = 0;
             lblNumProdotti.Text = "0";
             lblNumProdotti.TextAlign = ContentAlignment.MiddleCenter;
 
@@ -265,19 +255,14 @@ namespace PlannerShop.Forms
             lblNumProdottiSub.ForeColor = Color.Gray;
             lblNumProdottiSub.Height = 20;
             lblNumProdottiSub.Name = "lblNumProdottiSub";
-            lblNumProdottiSub.TabIndex = 1;
             lblNumProdottiSub.Text = "prodotti in catalogo";
             lblNumProdottiSub.TextAlign = ContentAlignment.MiddleCenter;
 
-            // grpInventario
             grpInventario.Font = new Font("Segoe UI Semibold", 8.5F, FontStyle.Bold);
-            grpInventario.Location = new Point(322, 4);
             grpInventario.Margin = new Padding(4);
             grpInventario.Name = "grpInventario";
             grpInventario.Padding = new Padding(8);
             grpInventario.Size = new Size(340, 148);
-            grpInventario.TabIndex = 1;
-            grpInventario.TabStop = false;
             grpInventario.Text = "VALORE INVENTARIO (snapshot attuale)";
             grpInventario.Controls.Add(pnlInvContent);
 
@@ -293,7 +278,6 @@ namespace PlannerShop.Forms
             lblInvNetto.ForeColor = Color.FromArgb(40, 120, 40);
             lblInvNetto.Height = 40;
             lblInvNetto.Name = "lblInvNetto";
-            lblInvNetto.TabIndex = 0;
             lblInvNetto.Text = "Netto: 0,00 €";
             lblInvNetto.TextAlign = ContentAlignment.MiddleLeft;
 
@@ -303,19 +287,14 @@ namespace PlannerShop.Forms
             lblInvIvato.ForeColor = Color.FromArgb(70, 70, 70);
             lblInvIvato.Height = 40;
             lblInvIvato.Name = "lblInvIvato";
-            lblInvIvato.TabIndex = 1;
             lblInvIvato.Text = "IVA incl.: 0,00 €";
             lblInvIvato.TextAlign = ContentAlignment.MiddleLeft;
 
-            // grpBilancio
             grpBilancio.Font = new Font("Segoe UI Semibold", 8.5F, FontStyle.Bold);
-            grpBilancio.Location = new Point(670, 4);
             grpBilancio.Margin = new Padding(4);
             grpBilancio.Name = "grpBilancio";
             grpBilancio.Padding = new Padding(8);
             grpBilancio.Size = new Size(330, 148);
-            grpBilancio.TabIndex = 2;
-            grpBilancio.TabStop = false;
             grpBilancio.Text = "BILANCIO PERIODO";
             grpBilancio.Controls.Add(pnlBilancioContent);
 
@@ -327,7 +306,6 @@ namespace PlannerShop.Forms
             pnlBilancioContent.Controls.Add(pnlUsciteRow);
             pnlBilancioContent.Controls.Add(pnlEntrateRow);
 
-            // Entrate row
             pnlEntrateRow.Dock = DockStyle.Top;
             pnlEntrateRow.Height = 30;
             pnlEntrateRow.Name = "pnlEntrateRow";
@@ -339,7 +317,6 @@ namespace PlannerShop.Forms
             lblEntrate.ForeColor = Color.FromArgb(40, 130, 40);
             lblEntrate.Location = new Point(0, 7);
             lblEntrate.Name = "lblEntrate";
-            lblEntrate.TabIndex = 0;
             lblEntrate.Text = "ENTRATE";
 
             lblEntrateVal.AutoSize = true;
@@ -348,10 +325,8 @@ namespace PlannerShop.Forms
             lblEntrateVal.ForeColor = Color.FromArgb(40, 130, 40);
             lblEntrateVal.Location = new Point(190, 7);
             lblEntrateVal.Name = "lblEntrateVal";
-            lblEntrateVal.TabIndex = 1;
             lblEntrateVal.Text = "0,00 €";
 
-            // Uscite row
             pnlUsciteRow.Dock = DockStyle.Top;
             pnlUsciteRow.Height = 30;
             pnlUsciteRow.Name = "pnlUsciteRow";
@@ -363,7 +338,6 @@ namespace PlannerShop.Forms
             lblUscite.ForeColor = Color.FromArgb(180, 60, 60);
             lblUscite.Location = new Point(0, 7);
             lblUscite.Name = "lblUscite";
-            lblUscite.TabIndex = 0;
             lblUscite.Text = "USCITE";
 
             lblUsciteVal.AutoSize = true;
@@ -372,17 +346,13 @@ namespace PlannerShop.Forms
             lblUsciteVal.ForeColor = Color.FromArgb(180, 60, 60);
             lblUsciteVal.Location = new Point(190, 7);
             lblUsciteVal.Name = "lblUsciteVal";
-            lblUsciteVal.TabIndex = 1;
             lblUsciteVal.Text = "0,00 €";
 
-            // Separatore utile
             pnlSepUtile.BackColor = Color.DarkGray;
             pnlSepUtile.Dock = DockStyle.Top;
             pnlSepUtile.Height = 1;
-            pnlSepUtile.Margin = new Padding(0, 2, 0, 2);
             pnlSepUtile.Name = "pnlSepUtile";
 
-            // Utile row
             pnlUtileRow.Dock = DockStyle.Top;
             pnlUtileRow.Height = 34;
             pnlUtileRow.Name = "pnlUtileRow";
@@ -393,7 +363,6 @@ namespace PlannerShop.Forms
             lblUtile.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
             lblUtile.Location = new Point(0, 8);
             lblUtile.Name = "lblUtile";
-            lblUtile.TabIndex = 0;
             lblUtile.Text = "SALDO";
 
             lblUtileVal.AutoSize = true;
@@ -401,76 +370,195 @@ namespace PlannerShop.Forms
             lblUtileVal.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
             lblUtileVal.Location = new Point(190, 8);
             lblUtileVal.Name = "lblUtileVal";
-            lblUtileVal.TabIndex = 1;
             lblUtileVal.Text = "0,00 €";
 
-            // pnlCards (FlowLayoutPanel)
             pnlCards.AutoSize = false;
             pnlCards.Dock = DockStyle.Top;
             pnlCards.FlowDirection = FlowDirection.LeftToRight;
             pnlCards.Height = 158;
             pnlCards.Name = "pnlCards";
-            pnlCards.Padding = new Padding(0);
             pnlCards.WrapContents = false;
             pnlCards.Controls.Add(grpProdotti);
             pnlCards.Controls.Add(grpInventario);
             pnlCards.Controls.Add(grpBilancio);
 
-            // pnlSpacerMid
             pnlSpacerMid.Dock = DockStyle.Top;
             pnlSpacerMid.Height = 10;
             pnlSpacerMid.Name = "pnlSpacerMid";
 
-            // grpTopProdotti
             grpTopProdotti.Dock = DockStyle.Top;
             grpTopProdotti.Font = new Font("Segoe UI Semibold", 8.5F, FontStyle.Bold);
             grpTopProdotti.Height = 232;
             grpTopProdotti.Name = "grpTopProdotti";
             grpTopProdotti.Padding = new Padding(6, 4, 6, 6);
-            grpTopProdotti.TabIndex = 1;
-            grpTopProdotti.TabStop = false;
             grpTopProdotti.Text = "CLASSIFICA PRODOTTI PIÙ VENDUTI (TOP 10)";
             grpTopProdotti.Controls.Add(dgvTopProdotti);
 
             dgvTopProdotti.Dock = DockStyle.Fill;
             dgvTopProdotti.Name = "dgvTopProdotti";
-            dgvTopProdotti.TabIndex = 0;
 
-            // pnlSpacerBottom
             pnlSpacerBottom.Dock = DockStyle.Top;
             pnlSpacerBottom.Height = 10;
             pnlSpacerBottom.Name = "pnlSpacerBottom";
 
-            // grpTopClienti
             grpTopClienti.Dock = DockStyle.Top;
             grpTopClienti.Font = new Font("Segoe UI Semibold", 8.5F, FontStyle.Bold);
             grpTopClienti.Height = 232;
             grpTopClienti.Name = "grpTopClienti";
             grpTopClienti.Padding = new Padding(6, 4, 6, 6);
-            grpTopClienti.TabIndex = 2;
-            grpTopClienti.TabStop = false;
             grpTopClienti.Text = "CLASSIFICA CLIENTI PIÙ FREQUENTI (TOP 10)";
             grpTopClienti.Controls.Add(dgvTopClienti);
 
             dgvTopClienti.Dock = DockStyle.Fill;
             dgvTopClienti.Name = "dgvTopClienti";
-            dgvTopClienti.TabIndex = 0;
 
-            // pnlBody – aggiungo i figli in ordine INVERSO per il Dock=Top
+            // ordine inverso per Dock=Top
             pnlBody.AutoScroll = true;
             pnlBody.Dock = DockStyle.Fill;
             pnlBody.Name = "pnlBody";
             pnlBody.Padding = new Padding(10, 8, 10, 8);
-            pnlBody.TabIndex = 4;
-
-            // L'ordine di Controls.Add con Dock=Top: l'ULTIMO aggiunto sta IN CIMA
             pnlBody.Controls.Add(grpTopClienti);
             pnlBody.Controls.Add(pnlSpacerBottom);
             pnlBody.Controls.Add(grpTopProdotti);
             pnlBody.Controls.Add(pnlSpacerMid);
             pnlBody.Controls.Add(pnlCards);
 
-            // Form
+            // ══════════════════════════════════════════════════════════════════
+            // TAB GRAFICI
+            // ══════════════════════════════════════════════════════════════════
+
+            // grpGrBilancio (solo barre, nessun toggle)
+            grpGrBilancio.Dock = DockStyle.Top;
+            grpGrBilancio.Font = new Font("Segoe UI Semibold", 8.5F, FontStyle.Bold);
+            grpGrBilancio.Height = 270;
+            grpGrBilancio.Name = "grpGrBilancio";
+            grpGrBilancio.Padding = new Padding(8, 6, 8, 8);
+            grpGrBilancio.Text = "BILANCIO ENTRATE / USCITE";
+            pnlGrBilancioToggle.Dock = DockStyle.Top;
+            pnlGrBilancioToggle.Height = 0;
+            pnlGrBilancioToggle.Name = "pnlGrBilancioToggle";
+            grpGrBilancio.Controls.Add(pnlGrBilancioToggle);
+
+            // grpGrProdotti
+            btnGrProdottiBarre.Name = "btnGrProdottiBarre";
+            btnGrProdottiBarre.Text = "■  BARRE";
+            btnGrProdottiBarre.Size = new Size(90, 26);
+            btnGrProdottiBarre.Font = new Font("Segoe UI Semibold", 8.5F, FontStyle.Bold);
+            btnGrProdottiBarre.FlatStyle = FlatStyle.Flat;
+            btnGrProdottiBarre.BackColor = Color.FromArgb(90, 192, 192, 255);
+            btnGrProdottiBarre.ForeColor = Color.White;
+            btnGrProdottiBarre.FlatAppearance.BorderColor = Color.FromArgb(180, 180, 200);
+            btnGrProdottiBarre.UseVisualStyleBackColor = false;
+            btnGrProdottiBarre.Margin = new Padding(0, 0, 6, 0);
+            btnGrProdottiBarre.Click += btnGrProdottiBarre_Click;
+
+            btnGrProdottiTorta.Name = "btnGrProdottiTorta";
+            btnGrProdottiTorta.Text = "◎  TORTA";
+            btnGrProdottiTorta.Size = new Size(90, 26);
+            btnGrProdottiTorta.Font = new Font("Segoe UI Semibold", 8.5F, FontStyle.Bold);
+            btnGrProdottiTorta.FlatStyle = FlatStyle.Flat;
+            btnGrProdottiTorta.BackColor = Color.White;
+            btnGrProdottiTorta.ForeColor = Color.Black;
+            btnGrProdottiTorta.FlatAppearance.BorderColor = Color.FromArgb(180, 180, 200);
+            btnGrProdottiTorta.UseVisualStyleBackColor = false;
+            btnGrProdottiTorta.Margin = new Padding(0, 0, 6, 0);
+            btnGrProdottiTorta.Click += btnGrProdottiTorta_Click;
+
+            pnlGrProdottiToggle.Dock = DockStyle.Top;
+            pnlGrProdottiToggle.Height = 34;
+            pnlGrProdottiToggle.Name = "pnlGrProdottiToggle";
+            pnlGrProdottiToggle.Padding = new Padding(0, 4, 0, 0);
+            pnlGrProdottiToggle.Controls.Add(btnGrProdottiBarre);
+            pnlGrProdottiToggle.Controls.Add(btnGrProdottiTorta);
+
+            grpGrProdotti.Dock = DockStyle.Top;
+            grpGrProdotti.Font = new Font("Segoe UI Semibold", 8.5F, FontStyle.Bold);
+            grpGrProdotti.Height = 310;
+            grpGrProdotti.Name = "grpGrProdotti";
+            grpGrProdotti.Padding = new Padding(8, 6, 8, 8);
+            grpGrProdotti.Text = "PRODOTTI PIÙ VENDUTI";
+            grpGrProdotti.Controls.Add(pnlGrProdottiToggle);
+
+            pnlGrSpacerP.Dock = DockStyle.Top;
+            pnlGrSpacerP.Height = 10;
+            pnlGrSpacerP.Name = "pnlGrSpacerP";
+
+            // grpGrClienti
+            btnGrClientiBarre.Name = "btnGrClientiBarre";
+            btnGrClientiBarre.Text = "■  BARRE";
+            btnGrClientiBarre.Size = new Size(90, 26);
+            btnGrClientiBarre.Font = new Font("Segoe UI Semibold", 8.5F, FontStyle.Bold);
+            btnGrClientiBarre.FlatStyle = FlatStyle.Flat;
+            btnGrClientiBarre.BackColor = Color.FromArgb(90, 192, 192, 255);
+            btnGrClientiBarre.ForeColor = Color.White;
+            btnGrClientiBarre.FlatAppearance.BorderColor = Color.FromArgb(180, 180, 200);
+            btnGrClientiBarre.UseVisualStyleBackColor = false;
+            btnGrClientiBarre.Margin = new Padding(0, 0, 6, 0);
+            btnGrClientiBarre.Click += btnGrClientiBarre_Click;
+
+            btnGrClientiTorta.Name = "btnGrClientiTorta";
+            btnGrClientiTorta.Text = "◎  TORTA";
+            btnGrClientiTorta.Size = new Size(90, 26);
+            btnGrClientiTorta.Font = new Font("Segoe UI Semibold", 8.5F, FontStyle.Bold);
+            btnGrClientiTorta.FlatStyle = FlatStyle.Flat;
+            btnGrClientiTorta.BackColor = Color.White;
+            btnGrClientiTorta.ForeColor = Color.Black;
+            btnGrClientiTorta.FlatAppearance.BorderColor = Color.FromArgb(180, 180, 200);
+            btnGrClientiTorta.UseVisualStyleBackColor = false;
+            btnGrClientiTorta.Margin = new Padding(0, 0, 6, 0);
+            btnGrClientiTorta.Click += btnGrClientiTorta_Click;
+
+            pnlGrClientiToggle.Dock = DockStyle.Top;
+            pnlGrClientiToggle.Height = 34;
+            pnlGrClientiToggle.Name = "pnlGrClientiToggle";
+            pnlGrClientiToggle.Padding = new Padding(0, 4, 0, 0);
+            pnlGrClientiToggle.Controls.Add(btnGrClientiBarre);
+            pnlGrClientiToggle.Controls.Add(btnGrClientiTorta);
+
+            grpGrClienti.Dock = DockStyle.Top;
+            grpGrClienti.Font = new Font("Segoe UI Semibold", 8.5F, FontStyle.Bold);
+            grpGrClienti.Height = 310;
+            grpGrClienti.Name = "grpGrClienti";
+            grpGrClienti.Padding = new Padding(8, 6, 8, 8);
+            grpGrClienti.Text = "CLIENTI PIÙ FREQUENTI";
+            grpGrClienti.Controls.Add(pnlGrClientiToggle);
+
+            pnlGrSpacerC.Dock = DockStyle.Top;
+            pnlGrSpacerC.Height = 10;
+            pnlGrSpacerC.Name = "pnlGrSpacerC";
+
+            // pnlGrafici – ordine inverso per Dock=Top
+            pnlGrafici.AutoScroll = true;
+            pnlGrafici.Dock = DockStyle.Fill;
+            pnlGrafici.Name = "pnlGrafici";
+            pnlGrafici.Padding = new Padding(10, 8, 10, 8);
+            pnlGrafici.Controls.Add(grpGrClienti);
+            pnlGrafici.Controls.Add(pnlGrSpacerC);
+            pnlGrafici.Controls.Add(grpGrProdotti);
+            pnlGrafici.Controls.Add(pnlGrSpacerP);
+            pnlGrafici.Controls.Add(grpGrBilancio);
+
+            // ── TabControl ─────────────────────────────────────────────────────
+            tabDati.BackColor = SystemColors.Control;
+            tabDati.Name = "tabDati";
+            tabDati.Padding = new Padding(0);
+            tabDati.Text = "  DATI  ";
+            tabDati.Controls.Add(pnlBody);
+
+            tabGrafici.BackColor = SystemColors.Control;
+            tabGrafici.Name = "tabGrafici";
+            tabGrafici.Padding = new Padding(0);
+            tabGrafici.Text = "  GRAFICI  ";
+            tabGrafici.Controls.Add(pnlGrafici);
+
+            tabControl.Dock = DockStyle.Fill;
+            tabControl.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
+            tabControl.Name = "tabControl";
+            tabControl.Padding = new Point(12, 4);
+            tabControl.Controls.Add(tabDati);
+            tabControl.Controls.Add(tabGrafici);
+
+            // ── Form ───────────────────────────────────────────────────────────
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1020, 790);
@@ -481,7 +569,7 @@ namespace PlannerShop.Forms
             Text = "Statistiche";
             Load += StatsForm_Load;
 
-            Controls.Add(pnlBody);
+            Controls.Add(tabControl);
             Controls.Add(pnlSepFiltri);
             Controls.Add(pnlFiltri);
             Controls.Add(pnlHeader);
@@ -492,6 +580,9 @@ namespace PlannerShop.Forms
             pnlHeader.PerformLayout();
             pnlFiltri.ResumeLayout(false);
             pnlFiltri.PerformLayout();
+            tabControl.ResumeLayout(false);
+            tabDati.ResumeLayout(false);
+            tabGrafici.ResumeLayout(false);
             pnlBody.ResumeLayout(false);
             grpTopClienti.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dgvTopClienti).EndInit();
@@ -510,11 +601,16 @@ namespace PlannerShop.Forms
             pnlInvContent.ResumeLayout(false);
             grpProdotti.ResumeLayout(false);
             pnlProdContent.ResumeLayout(false);
+            pnlGrafici.ResumeLayout(false);
+            grpGrBilancio.ResumeLayout(false);
+            grpGrClienti.ResumeLayout(false);
+            grpGrProdotti.ResumeLayout(false);
             ResumeLayout(false);
         }
 
         #endregion
 
+        // ── Tab Dati ──────────────────────────────────────────────────────────
         private Panel pnlAccent;
         private Panel pnlHeader;
         private Label lblTitolo;
@@ -530,6 +626,9 @@ namespace PlannerShop.Forms
         private DateTimePicker dtpA;
         private Button btnAggiorna;
         private Panel pnlSepFiltri;
+        private TabControl tabControl;
+        private TabPage tabDati;
+        private TabPage tabGrafici;
         private Panel pnlBody;
         private FlowLayoutPanel pnlCards;
         private GroupBox grpProdotti;
@@ -558,5 +657,20 @@ namespace PlannerShop.Forms
         private Panel pnlSpacerBottom;
         private GroupBox grpTopClienti;
         private DataGridView dgvTopClienti;
+
+        // ── Tab Grafici ───────────────────────────────────────────────────────
+        private Panel pnlGrafici;
+        private GroupBox grpGrBilancio;
+        private Panel pnlGrBilancioToggle;
+        private GroupBox grpGrClienti;
+        private Panel pnlGrClientiToggle;
+        private Button btnGrClientiTorta;
+        private Button btnGrClientiBarre;
+        private GroupBox grpGrProdotti;
+        private Panel pnlGrProdottiToggle;
+        private Button btnGrProdottiTorta;
+        private Button btnGrProdottiBarre;
+        private Panel pnlGrSpacerC;
+        private Panel pnlGrSpacerP;
     }
 }
